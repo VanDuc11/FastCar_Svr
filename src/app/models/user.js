@@ -23,18 +23,6 @@ const User = new Schema({
         DiaChi: { type: String },
         HinhAnhCCCD: { type: [String] },
     },
-    MaGiaGia: [
-        {
-            TieuDe: { type: String },
-            MaGiaGia: { type: String },
-            GiaTri: { type: Number },
-            ThongTin: { type: String },
-            HSD: { type: Date },
-            HinhAnhCCCD: { type: [String] },
-        }
-    ]
-    ,
-
     NgayThamGia: { type: Date }
 }, { timestamps: true });
 
