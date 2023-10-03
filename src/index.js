@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-const DB = require('./src/db');
-const route = require('./src/routes');
+const DB = require('./db');
+const route = require('./routes');
 require('dotenv').config()
 
 app.use(bodyParser.urlencoded({ extended: false }))
