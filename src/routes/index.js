@@ -1,4 +1,5 @@
 const user = require('./User');
+const Xe = require('./Xe');
 
 let bodyparser = require('body-parser');
 
@@ -8,6 +9,7 @@ const router = (app) =>{
     }))
      
     app.use('/user',user);
+    app.use('/danhsachxe',Xe);
 
 }
 
