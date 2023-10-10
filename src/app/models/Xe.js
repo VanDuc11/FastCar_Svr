@@ -6,15 +6,11 @@ const Xe = new Schema({
     HangXe: { type: String },
     MauXe: { type: String },
     NSX: { type: String },
-    ChuSH: {
-        HoTen: String,
-        NgaySinh: Date,
-        DiaChi: String
-    },
+    SoGhe: { type: String },
     ChuyenDong: { type: String },
     LoaiNhienLieu: { type: String },
+    TieuHao: { type: String },
     MoTa: { type: String },
-    TinhNang: { type: [String] },
     HinhAnh: { type: [String] },
     FeedBack: [
         {
@@ -23,6 +19,7 @@ const Xe = new Schema({
             Sao: { type: Number },
         }
     ],
-    TrangThai: { type: Boolean }
-},{timestamps: true});
-module.exports = mongoose.model("Xe",Xe);
+    TrangThai: { type: Boolean },
+    SoChuyen: { type: String }
+}, { timestamps: true });
+module.exports = mongoose.model("Xe", Xe);
