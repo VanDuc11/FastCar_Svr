@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const User = new Schema({
     UserName: { type: String },
     SDT: { type: String },
-    NgaySinh: { type: String },
+    NgaySinh: { type: Date },
     GioiTinh: { type: String },
     Email: { type: String },
     UID: { type: String },
@@ -13,17 +13,17 @@ const User = new Schema({
         SoGPLX: { type: String },
         NgayCap: { type: Date },
         DiaChi: { type: String },
-        HinhAnhGPLX: { type: [String] },
+        HinhAnhGPLX: { type: Array },
     },
     CCCD: {
         HoTen: { type: String },
         SoCCCD: { type: String },
-        NgaySinh: { type: Date },
         NgayCap: { type: Date },
         DiaChi: { type: String },
-        HinhAnhCCCD: { type: [String] },
-    },
-    NgayThamGia: { type: Date }
+        NoiCap: { type: String },
+        HinhAnhCCCD: { type: Array },
+    }
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', User);

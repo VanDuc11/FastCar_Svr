@@ -11,7 +11,7 @@ const Xe = new Schema({
     LoaiNhienLieu: { type: String },
     TieuHao: { type: String },
     MoTa: { type: String },
-    HinhAnh: { type: [String] },
+    HinhAnh: { type: Array },
     FeedBack: [
         {
             UserName: { type: String },
@@ -19,7 +19,7 @@ const Xe = new Schema({
             Sao: { type: Number },
         }
     ],
-    TrangThai: { type: Boolean },
+    TrangThai: { type: Number },
     SoChuyen: { type: String }
 }, { timestamps: true });
 module.exports = mongoose.model("Xe", Xe);
