@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 router.get('/',XeControlles.index);
 router.get('/listXe',XeControlles.findXe);
 router.post('/createXe',upload.array('HinhAnh',4),XeControlles.CreateXe);
-router.post('/updateXe',upload.array('HinhAnh',4),XeControlles.UpdateXe);
+router.post('/updateXe/:id',upload.array('HinhAnh',4),XeControlles.UpdateXe);
 router.post('/danhgiaXe',XeControlles.pushDanhGiaXe);
 router.post('/delete/:id',XeControlles.DeleteXe);
 

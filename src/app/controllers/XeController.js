@@ -1,6 +1,7 @@
 const { log } = require('console');
 const Xe = require('../models/Xe');
 var path = require('path');
+
 class XeController {
     index(req, res) {
         res.render('danhsachxe')
@@ -9,11 +10,9 @@ class XeController {
         try {
             await Xe.find().sort({_id: -1})
                 .then((result) => {
-                    console.log(result);
-                    res.status(200).json({
-                        success: true,
-                        data: result.length == 0 ? 'Không có bản ghi' : result
-                    })
+                    res.status(200).json(
+                        result.length == 0 ? 'Không có dữ liệu' : result
+                    )
                 })
                 .catch((error) => {
                     res.status(400).json({
@@ -46,6 +45,7 @@ class XeController {
             MoTa: req.body.MoTa,
             HinhAnh: img,
             TrangThai: req.body.TrangThai,
+            SoChuyen: req.body.SoChuyen
         });
         try {
             await xe.save()
@@ -71,12 +71,13 @@ class XeController {
         }
     }
     async UpdateXe(req, res) {
+        const id = req.params.id;
         const img = [];
         for (var i = 0; i < req.files.length; i++) {
             img.push(path.basename(req.files[i].path));
         }
         try {
-            await Xe.updateOne({ _id: req.body.id },
+            await Xe.findByIdAndUpdate({ _id: id },
                 {
                     $set: {
                         BKS: req.body.BKS,
@@ -90,6 +91,7 @@ class XeController {
                         MoTa: req.body.MoTa,
                         HinhAnh: img,
                         TrangThai: req.body.TrangThai,
+                        SoChuyen: req.body.SoChuyen
                     }
                 }
             )
