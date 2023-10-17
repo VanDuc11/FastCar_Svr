@@ -29,4 +29,4 @@ DB.connect();
 
 route(app);
 
-app.listen(process.env.PORT, () => { console.log("locohost:" + process.env.PORT) })
+app.listen(process.env.PORT, () => { console.log("localhost:" + process.env.PORT) })

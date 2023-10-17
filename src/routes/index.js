@@ -2,6 +2,8 @@ const user = require('./User');
 const Xe = require('./Xe');
 const MaGiaGia = require('./MaGiamGia');
 const ThongBao = require('./ThongBao');
+const Hoadon_ = require('./Hoadon_');
+
 let bodyparser = require('body-parser');
 
 const router = (app) =>{
@@ -13,6 +15,7 @@ const router = (app) =>{
     app.use('/quanlyxe',Xe);
     app.use('/quanlyvoucher',MaGiaGia);
     app.use('/thongbao',ThongBao);
+    app.use('/quanlyhoadon',Hoadon_);
 
 }
 

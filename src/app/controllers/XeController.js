@@ -1,4 +1,3 @@
-const { log } = require('console');
 const Xe = require('../models/Xe');
 var path = require('path');
 
@@ -17,7 +16,7 @@ class XeController {
                 .catch((error) => {
                     res.status(400).json({
                         success: true,
-                        message: err.message,
+                        message: error.message,
                     })
                 })
         } catch (error) {
@@ -28,10 +27,41 @@ class XeController {
         }
 
     }
+    async find_Xe_User(req,res){
+        try {
+            await Xe.find({
+                "ChuSH.Email_ChuXe": req.body.Email_ChuXe
+                
+              }).sort({_id: -1})
+                .then((result) => {
+                    res.status(200).json(
+                        result.length == 0 ? 'Không có dữ liệu' : result
+                    )
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: true,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+
     async CreateXe(req, res) {
         const img = [];
         for (var i = 0; i < req.files.length; i++) {
             img.push(path.basename(req.files[i].path));
+        }
+        const ChuSH = {
+            HoTen_ChuXe: req.body.HoTen_ChuXe,
+            Email_ChuXe: req.body.Email_ChuXe,
+            HinhAnh_ChuXe: req.body.HinhAnh_ChuXe,
+            SDT_ChuXe: req.body.SDT_ChuXe
         }
         const xe = new Xe({
             BKS: req.body.BKS,
@@ -44,8 +74,9 @@ class XeController {
             TieuHao: req.body.TieuHao,
             MoTa: req.body.MoTa,
             HinhAnh: img,
+            ChuSH: ChuSH,
             TrangThai: req.body.TrangThai,
-            SoChuyen: req.body.SoChuyen
+            
         });
         try {
             await xe.save()
