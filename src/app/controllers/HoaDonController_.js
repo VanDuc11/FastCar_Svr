@@ -115,7 +115,7 @@ class HoaDonController_ {
     }
     async update_trangthaiDH(req,res){
         await HoaDon.updateOne({_id: req.body.id},{
-            $push:{
+            $set:{
                 TrangThaiDH: req.body.TrangThaiDH
             }
         })

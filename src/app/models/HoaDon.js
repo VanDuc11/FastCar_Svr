@@ -29,11 +29,11 @@ const HoaDon = new Schema({
     TienCoc: { type: Number },
     PhuPhi: { type: Number },
     ThanhToan: { type: Number },
-    TrangThaiDH: { type: [Number] },
+    TrangThaiDH: { type: Number},
     TinVat: {
         Loai: { type: String },
         HinhAnh: { type: [String] },
-        TrangThai: { type: [Number] }
+        TrangThai: { type: Number }
     }
 
 }, { timestamps: true });
