@@ -27,7 +27,9 @@ class HoaDonController_ {
     }
     async find_HoaDon_User(req, res) {
         try {
-            await Xe.find().sort({ _id: -1 })
+            await HoaDon.find({
+                "User.Email": req.body.Email
+            }).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(
                         result.length == 0 ? 'Không có dữ liệu' : result
@@ -110,6 +112,13 @@ class HoaDonController_ {
             })
         }
 
+    }
+    async update_trangthaiDH(req,res){
+        await HoaDon.updateOne({_id: req.body.id},{
+            $push:{
+                TrangThaiDH: req.body.TrangThaiDH
+            }
+        })
     }
 }
 module.exports = new HoaDonController_;

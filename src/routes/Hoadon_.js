@@ -15,6 +15,8 @@ const upload = multer({ storage: storage });
 
 router.get('/listhoadon',HoaDonController_.find_hoadon);
 router.post('/createhoadon',HoaDonController_.create_Hoadon);
+router.post('/find_user_hoadon',HoaDonController_.find_HoaDon_User);
+router.post('/update_trangthaiDH',HoaDonController_.update_trangthaiDH);
  
 
 
