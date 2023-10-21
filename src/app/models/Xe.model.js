@@ -12,21 +12,11 @@ const Xe = new Schema({
     TieuHao: { type: Number },
     MoTa: { type: String },
     HinhAnh: { type: Array },
-    ChuSH: {
-        HoTen_ChuXe: { type: String },
-        Email_ChuXe: { type: String },
-        HinhAnh_ChuXe: { type: String },
-        SDT_ChuXe: { type: String }
-    },
+    DiaChiXe: { type: String },
+    GiaThue1Ngay: { type: Number },
+    ChuSH: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     TrangThai: { type: Number },
     SoChuyen: { type: Number },
-    FeedBack: [
-        {
-            UserName: { type: String },
-            NoiDung: { type: String },
-            Sao: { type: Number },
-        }
-    ],
 }, { timestamps: true });
 
 

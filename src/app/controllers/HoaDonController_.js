@@ -1,11 +1,40 @@
-const HoaDon = require('../models/HoaDon');
+const { message } = require('statuses');
+const HoaDon = require('../models/HoaDon.model');
 var path = require('path');
+const { log } = require('console');
 
 class HoaDonController_ {
 
     async find_hoadon(req, res) {
+        let check = null;
+        let trangThaiValues = [];
+
+        if (typeof (req.query.Xe) != 'undefined') {
+            check = { Xe: req.query.Xe };
+        }
+
+        if (typeof (req.query.User) != 'undefined') {
+            check = { User: req.query.User };
+        }
+
+        if (typeof (req.query.TrangThaiHD) !== 'undefined') {
+            trangThaiValues = req.query.TrangThaiHD.split(',').map(item => parseInt(item));
+        }
+
+        if (trangThaiValues.length > 0) {
+            check = { TrangThaiHD: { $in: trangThaiValues } };
+        }
+
+        if (trangThaiValues.length > 0 && typeof (req.query.User) != 'undefined') {
+            check = { TrangThaiHD: { $in: trangThaiValues }, User: req.query.User };
+        }
         try {
-            await HoaDon.find().sort({ _id: -1 })
+            await HoaDon.find(check).populate('Xe')
+                .populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', model: 'User' }
+                })
+                .populate('User').sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(
                         result.length == 0 ? 'Không có dữ liệu' : result
@@ -13,13 +42,13 @@ class HoaDonController_ {
                 })
                 .catch((error) => {
                     res.status(400).json({
-                        success: true,
+                        success: false,
                         message: error.message,
                     })
                 })
         } catch (error) {
             res.status(500).json({
-                success: true,
+                success: false,
                 message: error.message,
             })
         }
@@ -50,46 +79,22 @@ class HoaDonController_ {
     }
 
     async create_Hoadon(req, res) {
-        
-        const user = {
-            UserName: req.body.UserName,
-            Email: req.body.Email,
-            UID: req.body.UID,
-            HoTen: req.body.HoTen,
-            SoCCCD: req.body.SoCCCD,
-            SDT: req.body.SDT,
-        }
-        const xe = {
-            BKS: req.body.BKS,
-            HangXe: req.body.HangXe,
-            MauXe: req.body.MauXe,
-            ChuSH: req.body.ChuSH,
-            SoGhe: req.body.SoGhe,
-            HinhAnh: req.body.HinhAnh,
-            Gia: req.body.Gia,
-        }
-        const tinvat = {
-            Loai: req.body.Loai,
-            TrangThai: req.body.TrangThai
-        }
-
-
         const hoadon = new HoaDon({
             MaHD: req.body.MaHD,
-            User: user,
-            Xe: xe,
+            User: req.body.User,
+            Xe: req.body.Xe,
             NgayThue: req.body.NgayThue,
             NgayTra: req.body.NgayTra,
+            TongSoNgayThue: req.body.TongSoNgayThue,
+            PhiDV: req.body.PhiDV,
             MaGiamGia: req.body.MaGiamGia,
             GiamGia: req.body.GiamGia,
-            TongTien:req.body.TongTien,
-            PhiDV:req.body.PhiDV,
-            TienCoc: req.body.TienCoc,
             PhuPhi: req.body.PhuPhi,
+            TongTien: req.body.TongTien,
+            TienCoc: req.body.TienCoc,
             ThanhToan: req.body.ThanhToan,
-            TrangThaiDH: req.body.TrangThaiDH,
-            // TrangThaiDH: { type: [Number] },
-            TinVat: tinvat
+            GioTaoHD: req.body.GioTaoHD,
+            TrangThaiHD: req.body.TrangThaiHD,
         })
         try {
             await hoadon.save().then((result) => {
@@ -97,28 +102,35 @@ class HoaDonController_ {
                     success: true,
                     messages: "Yêu cầu tạo mới thành công"
                 });
-                console.log(result);
             })
-            .catch((err) => {
-                res.status(400).json({
-                    success: false,
-                    messages: err.messages
-                });
-            })
+                .catch((err) => {
+                    res.status(400).json( err );
+                    log(err);
+                })
         } catch (error) {
-            res.status(500).json({
-                success: false,
-                message: error.message,
-            })
+            res.status(500).json( message )
         }
 
     }
-    async update_trangthaiDH(req,res){
-        await HoaDon.updateOne({_id: req.body.id},{
-            $set:{
-                TrangThaiDH: req.body.TrangThaiDH
+    
+    async update_trangthaiDH(req, res) {
+        const id = req.params.id;
+        await HoaDon.updateOne({ _id: id }, {
+            $set: {
+                TrangThaiHD: req.body.TrangThaiHD
             }
+        }).then((result) => {
+            res.status(200).json({
+                success: true,
+                messages: "Sửa trạng thái HD thành công"
+            });
         })
+            .catch((err) => {
+                res.status(400).json( err );
+                log(err);
+            })
     }
 }
+
+
 module.exports = new HoaDonController_;

@@ -1,4 +1,4 @@
-const Xe = require('../models/Xe');
+const Xe = require('../models/Xe.model');
 var path = require('path');
 
 class XeController {
@@ -6,8 +6,12 @@ class XeController {
         res.render('danhsachxe')
     }
     async findXe(req, res) {
+        let check = null;
+        if (typeof (req.query.ChuSH) != 'undefined') {
+            check = { User: req.query.ChuSH };
+        }
         try {
-            await Xe.find().sort({_id: -1})
+            await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({_id: -1})
                 .then((result) => {
                     res.status(200).json(
                         result.length == 0 ? 'Không có dữ liệu' : result
@@ -57,12 +61,7 @@ class XeController {
         for (var i = 0; i < req.files.length; i++) {
             img.push(path.basename(req.files[i].path));
         }
-        const ChuSH = {
-            HoTen_ChuXe: req.body.HoTen_ChuXe,
-            Email_ChuXe: req.body.Email_ChuXe,
-            HinhAnh_ChuXe: req.body.HinhAnh_ChuXe,
-            SDT_ChuXe: req.body.SDT_ChuXe
-        }
+        
         const xe = new Xe({
             BKS: req.body.BKS,
             HangXe: req.body.HangXe,
@@ -74,9 +73,10 @@ class XeController {
             TieuHao: req.body.TieuHao,
             MoTa: req.body.MoTa,
             HinhAnh: img,
-            ChuSH: ChuSH,
+            DiaChiXe: req.body.DiaChiXe,
+            GiaThue1Ngay: req.body.GiaThue1Ngay,
+            ChuSH: req.body.ChuSH,
             TrangThai: req.body.TrangThai,
-            
         });
         try {
             await xe.save()
@@ -101,6 +101,7 @@ class XeController {
             });
         }
     }
+
     async UpdateXe(req, res) {
         const id = req.params.id;
         const img = [];
@@ -121,6 +122,8 @@ class XeController {
                         TieuHao: req.body.TieuHao,
                         MoTa: req.body.MoTa,
                         HinhAnh: img,
+                        DiaChiXe: req.body.DiaChiXe,
+                        GiaThue1Ngay: req.body.GiaThue1Ngay,
                         TrangThai: req.body.TrangThai,
                         SoChuyen: req.body.SoChuyen
                     }
@@ -131,7 +134,6 @@ class XeController {
                         success: true,
                         messages: "Yêu cầu cập nhât thành công"
                     });
-                    console.log(result);
                 })
                 .catch((err) => {
                     res.status(400).json({
@@ -147,6 +149,7 @@ class XeController {
             });
         }
     }
+
     async DeleteXe(req,res){
         const id = req.params.id;
 
@@ -164,6 +167,7 @@ class XeController {
 
         }
     }
+    
     async pushDanhGiaXe(req, res) {
         const DanhGia = {
             UserName: req.body.UserName,
