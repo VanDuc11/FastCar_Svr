@@ -23,8 +23,8 @@ class HoaDonController_ {
                 message: error.message,
             })
         }
-
     }
+
     async find_HoaDon_User(req, res) {
         try {
             await HoaDon.find({
@@ -50,7 +50,7 @@ class HoaDonController_ {
     }
 
     async create_Hoadon(req, res) {
-        
+
         const user = {
             UserName: req.body.UserName,
             Email: req.body.Email,
@@ -72,18 +72,26 @@ class HoaDonController_ {
             Loai: req.body.Loai,
             TrangThai: req.body.TrangThai
         }
-
+        const randomString = () => {
+            const CHARS = "0123456789";
+            const result = [];
+            for (let i = 0; i < 10; i++) {
+                const index = Math.floor(Math.random() * CHARS.length);
+                result.push(CHARS[index]);
+            }
+            return "FCR_" + result.join("");
+        };
 
         const hoadon = new HoaDon({
-            MaHD: req.body.MaHD,
+            MaHD: randomString(),
             User: user,
             Xe: xe,
             NgayThue: req.body.NgayThue,
             NgayTra: req.body.NgayTra,
             MaGiamGia: req.body.MaGiamGia,
             GiamGia: req.body.GiamGia,
-            TongTien:req.body.TongTien,
-            PhiDV:req.body.PhiDV,
+            TongTien: req.body.TongTien,
+            PhiDV: req.body.PhiDV,
             TienCoc: req.body.TienCoc,
             PhuPhi: req.body.PhuPhi,
             ThanhToan: req.body.ThanhToan,
@@ -91,6 +99,7 @@ class HoaDonController_ {
             // TrangThaiDH: { type: [Number] },
             TinVat: tinvat
         })
+
         try {
             await hoadon.save().then((result) => {
                 res.status(201).json({
@@ -99,12 +108,12 @@ class HoaDonController_ {
                 });
                 console.log(result);
             })
-            .catch((err) => {
-                res.status(400).json({
-                    success: false,
-                    messages: err.messages
-                });
-            })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: err.messages
+                    });
+                })
         } catch (error) {
             res.status(500).json({
                 success: false,
@@ -113,9 +122,9 @@ class HoaDonController_ {
         }
 
     }
-    async update_trangthaiDH(req,res){
-        await HoaDon.updateOne({_id: req.body.id},{
-            $set:{
+    async update_trangthaiDH(req, res) {
+        await HoaDon.updateOne({ _id: req.body.id }, {
+            $set: {
                 TrangThaiDH: req.body.TrangThaiDH
             }
         })

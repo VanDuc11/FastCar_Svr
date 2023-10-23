@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const HoaDon = new Schema({
-    MaHD: { type: String },
+    MaHD: { type: String, unique: true },
     User: {
         UserName: { type: String },
         Email: { type: String },
@@ -34,8 +34,10 @@ const HoaDon = new Schema({
         Loai: { type: String },
         HinhAnh: { type: [String] },
         TrangThai: { type: Number }
-    }
+    },
+    
 
 }, { timestamps: true });
 
 module.exports = mongoose.model("HoaDon", HoaDon);
+
