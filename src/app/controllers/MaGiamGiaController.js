@@ -1,4 +1,4 @@
-const MaGiamGia = require('../models/MaGiamGia');
+const MaGiamGia = require('../models/MaGiamGia.model');
 var path = require('path');
 const crypto = require('crypto');
 const dateNow = new Date();
@@ -6,19 +6,22 @@ const dateNow = new Date();
 class MaGiamGiaController {
 
     async findMaGiaGia(req, res) {
+        let check = null;
+        if (typeof (req.query.MaGiamGia) != 'undefined') {
+            check = { MaGiamGia: req.query.MaGiamGia };
+        }
         try {
-            await MaGiamGia.find().sort({ _id: -1 })
+            await MaGiamGia.find(check).sort({ _id: -1 })
                 .then((result) => {
                     // console.log(result);
-                    res.status(200).json({
-                        success: true,
-                        data: result.length == 0 ? 'Không có bảng ghi' : result
-                    });
-                    
+                    res.status(200).json(
+                        result.length == 0 ? 'Không có bảng ghi' : result
+                    );
+
                 }).catch((error) => {
                     res.status(400).json({
                         success: false,
-                        messagess: 'Không thành công',
+                        message: 'Không thành công',
                     })
                 })
         } catch (error) {
@@ -38,10 +41,11 @@ class MaGiamGiaController {
 
         const maGiamGia = new MaGiamGia({
             TieuDe: req.body.TieuDe,
-            MaGiaGia: req.body.MaGiaGia,
+            MaGiamGia: req.body.MaGiamGia,
             Code: randomString,
             GiaTri: req.body.GiaTri,
-            ThongTin: req.body.ThongTin,
+            GiaTriMax: req.body.GiaTriMax,
+            NoiDung: req.body.NoiDung,
             HinhAnh: img,
             HSD: req.body.HSD,
             TrangThai: dateNow > new Date(req.body.HSD) ? false : true
@@ -56,7 +60,6 @@ class MaGiamGiaController {
                         success: true,
                         messages: "Yêu cầu tạo mới thành công"
                     });
-                    console.log(result);
                 })
                 .catch((err) => {
                     res.status(400).json({
@@ -81,9 +84,10 @@ class MaGiamGiaController {
                 {
                     $set: {
                         TieuDe: req.body.TieuDe,
-                        MaGiaGia: req.body.MaGiaGia,
+                        MaGiamGia: req.body.MaGiamGia,
                         GiaTri: req.body.GiaTri,
-                        ThongTin: req.body.ThongTin,
+                        GiaTriMax: req.body.GiaTriMax,
+                        NoiDung: req.body.NoiDung,
                         HinhAnh: img,
                         HSD: req.body.HSD,
                         TrangThai: dateNow > new Date(req.body.HSD) ? false : true
@@ -94,7 +98,6 @@ class MaGiamGiaController {
                         success: true,
                         messages: "Yêu cầu cập nhật thành công"
                     });
-                    console.log(result);
                 })
                 .catch((err) => {
                     res.status(400).json({
@@ -109,21 +112,21 @@ class MaGiamGiaController {
             });
         }
     }
-    async UpdateTrangThai(req,res){
+    async UpdateTrangThai(req, res) {
         try {
-            MaGiamGia.updateOne({_id: req.body.id},{
-                $set:{
-                    TrangThai:req.body.TrangThai,
+            MaGiamGia.updateOne({ _id: req.body.id }, {
+                $set: {
+                    TrangThai: req.body.TrangThai,
                 }
-            }).then((result)=>{
+            }).then((result) => {
                 res.status(201).json({
                     success: true,
                     messages: 'Yêu cầu thành công'
                 })
-            }).catch((error)=>{
+            }).catch((error) => {
                 res.status(400).json({
                     success: false,
-                    messages:'Yêu cầu không thành công'
+                    messages: 'Yêu cầu không thành công'
                 })
             })
         } catch (error) {
@@ -131,7 +134,7 @@ class MaGiamGiaController {
                 success: false
             })
         }
-       
+
 
     }
 

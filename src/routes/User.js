@@ -15,10 +15,10 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get('/',UserControlles.user);
-router.post('/creater_user',UserControlles.createrUser);
+router.get('/list', UserControlles.user);
+router.post('/create',UserControlles.createrUser);
 router.post('/findUserEmail',UserControlles.findUserEmail);
-router.post('/updateProfile',UserControlles.updateProfile);
+router.post('/update_Profile',UserControlles.updateProfile);
 router.post('/upCccd',upload.array('HinhAnh',2),UserControlles.UpCCCD);
 router.post('/upGplx',upload.array('HinhAnh',2),UserControlles.UpGPLX);
 

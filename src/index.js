@@ -6,7 +6,7 @@ const route = require('./routes');
 const expressHbs = require('express-handlebars');
 const path = require('path');
 const mongo_watch = require('./mongodb_watch');
-const { events } = require('./app/models/user');
+const { events } = require('./app/models/user.model');
 require('dotenv').config()
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -29,4 +29,4 @@ DB.connect();
 
 route(app);
 
-app.listen(process.env.PORT, () => { console.log("locohost:" + process.env.PORT) })
+app.listen(process.env.PORT, () => { console.log("localhost:" + process.env.PORT) })

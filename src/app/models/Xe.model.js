@@ -12,14 +12,12 @@ const Xe = new Schema({
     TieuHao: { type: Number },
     MoTa: { type: String },
     HinhAnh: { type: Array },
-    FeedBack: [
-        {
-            UserName: { type: String },
-            NoiDung: { type: String },
-            Sao: { type: Number },
-        }
-    ],
+    DiaChiXe: { type: String },
+    GiaThue1Ngay: { type: Number },
+    ChuSH: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     TrangThai: { type: Number },
-    SoChuyen: { type: Number }
+    SoChuyen: { type: Number },
 }, { timestamps: true });
+
+
 module.exports = mongoose.model("Xe", Xe);
