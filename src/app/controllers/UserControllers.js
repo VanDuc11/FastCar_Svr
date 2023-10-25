@@ -60,7 +60,35 @@ class UserControlles {
             })
 
     }
+    async updateUser(req, res) {
 
+        try {
+            await User.updateOne({ Email: req.body.email },
+                {
+                    $set: {
+                        UserName: req.body.UserName
+                    }
+                })
+                .then((result) => {
+                    res.status(201).json({
+                        success: true,
+                        messages: "Yêu cầu cập nhật thành công"
+                    });
+                    console.log(result);
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: 'Không thành công'
+                    });
+                })
+
+        } catch (error) {
+            res.status(500).send({
+                success: false,
+            });
+        }
+    }
     async updateProfile(req, res) {
 
         try {
