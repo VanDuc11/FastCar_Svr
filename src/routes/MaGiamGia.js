@@ -13,11 +13,11 @@ var storage = multer.diskStorage({
 
 
 const upload = multer({ storage: storage });
-
-router.get('/list',MaGiamGiaController.findMaGiaGia);
-router.post('/create',upload.single('HinhAnh'),MaGiamGiaController.CreateMaGiamGia);
-router.post('/update:id',upload.single('HinhAnh'),MaGiamGiaController.updateMaGiamGia);
-router.post('/update_TrangThai',MaGiamGiaController.UpdateTrangThai);
+router.use('/',MaGiamGiaController.index)
+// router.get('/list',MaGiamGiaController.findMaGiaGia);
+// router.post('/create',upload.single('HinhAnh'),MaGiamGiaController.CreateMaGiamGia);
+// router.post('/update:id',upload.single('HinhAnh'),MaGiamGiaController.updateMaGiamGia);
+// router.post('/update_TrangThai',MaGiamGiaController.UpdateTrangThai);
 
 
 module.exports = router;

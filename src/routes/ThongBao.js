@@ -3,7 +3,8 @@ const router = express.Router();
 const ThongBaoController = require('../app/controllers/ThongBaoCotroller');
  
 
-router.get('/',ThongBaoController.findNotifi);
+// router.get('/',ThongBaoController.findNotifi);
+router.use('/',ThongBaoController.index);
  
 
 

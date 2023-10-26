@@ -12,15 +12,16 @@ var storage = multer.diskStorage({
     }
 });
 
+router.use('/',UserControlles.index);
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
-router.get('/list', UserControlles.user);
-router.post('/create',UserControlles.createrUser);
-router.post('/findUserEmail',UserControlles.findUserEmail);
-router.post('/updateUser',UserControlles.updateUser);
-router.post('/update_Profile',UserControlles.updateProfile);
-router.post('/upCccd',upload.array('HinhAnh',2),UserControlles.UpCCCD);
-router.post('/upGplx',upload.array('HinhAnh',2),UserControlles.UpGPLX);
+// router.get('/list', UserControlles.user);
+// router.post('/create',UserControlles.createrUser);
+// router.post('/findUserEmail',UserControlles.findUserEmail);
+// router.post('/updateUser',UserControlles.updateUser);
+// router.post('/update_Profile',UserControlles.updateProfile);
+// router.post('/upCccd',upload.array('HinhAnh',2),UserControlles.UpCCCD);
+// router.post('/upGplx',upload.array('HinhAnh',2),UserControlles.UpGPLX);
 
 module.exports = router;
