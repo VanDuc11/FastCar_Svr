@@ -3,6 +3,10 @@ var path = require('path');
 
 class XeController {
     index(req, res) {
+        res.render('Quanlyxe')
+    }
+
+    show(req, res) {
         res.render('danhsachxe')
     }
     async findXe(req, res) {

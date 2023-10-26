@@ -4,7 +4,9 @@ const crypto = require('crypto');
 const dateNow = new Date();
 
 class MaGiamGiaController {
-
+    index(req, res) {
+        res.render('KhuyenMai')
+    }
     async findMaGiaGia(req, res) {
         let check = null;
         if (typeof (req.query.MaGiamGia) != 'undefined') {

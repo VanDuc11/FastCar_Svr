@@ -3,6 +3,9 @@ const User = require('../models/user.model');
 const path = require('path');
 
 class UserControlles {
+    index(req, res) {
+        res.render('Khachhang')
+    }
     async user(req, res, next) {
         let check = null;
 
