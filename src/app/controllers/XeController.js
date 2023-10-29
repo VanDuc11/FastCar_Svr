@@ -3,6 +3,10 @@ var path = require('path');
 
 class XeController {
     index(req, res) {
+        res.render('Quanlyxe')
+    }
+
+    show(req, res) {
         res.render('danhsachxe')
     }
     async findXe(req, res) {
@@ -60,6 +64,31 @@ class XeController {
                 message: error.message,
             })
         }
+    }
+    async find_top_5(req, res) {
+        try {
+            await Xe.find({})
+                .sort({ SoChuyen: -1 })
+                .limit(5)
+                .exec()
+                .then((result) => {
+                    res.status(200).json(
+                        result.length == 0 ? 'Không có dữ liệu' : result
+                    )
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: true,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+
     }
 
     async CreateXe(req, res) {

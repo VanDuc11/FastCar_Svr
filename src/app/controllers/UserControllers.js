@@ -3,6 +3,9 @@ const User = require('../models/user.model');
 const path = require('path');
 
 class UserControlles {
+    index(req, res) {
+        res.render('Khachhang')
+    }
     async user(req, res, next) {
         let check = null;
 
@@ -64,16 +67,6 @@ class UserControlles {
                 }
             })
 
-    }
-
-    async login(req, res) {
-        const {email, pass} = req.body;
-        const user = await User.findOne({Email: email, MatKhau: pass});
-        if(user) {
-            return res.status(200).json('Đăng nhập thành công');
-        } else {
-            return res.status(500).json('Đăng nhập thất bại');
-        }
     }
 
     async updateProfile(req, res) {

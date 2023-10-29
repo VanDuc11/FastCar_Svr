@@ -12,14 +12,22 @@ const router = (app) =>{
     app.use(bodyparser.urlencoded({
         extended:true
     }))
-     
-    app.use('/api/user',user);
-    app.use('/api/xe',Xe);
-    app.use('/api/voucher',MaGiaGia);
-    app.use('/api/thongbao',ThongBao);
-    app.use('/api/hoadon',Hoadon_);
-    app.use('/api/feedback', FeedBack);
-    app.use('/api/favoriteCar', FavoriteCar);
+
+     // app.use('/index', Index);  
+app.use('/quanlyxe', Xe);
+// app.use('/chuyenxe',Chuyenxe);
+app.use('/thongbao', ThongBao);
+app.use('/khuyenmai',MaGiaGia);
+// app.use('/thongke', Thongke);
+app.use('/khachhang', user);
+
+    // app.use('/api/user',user);
+    // app.use('/api/xe',Xe);
+    // app.use('/api/voucher',MaGiaGia);
+    // app.use('/api/thongbao',ThongBao);
+    // app.use('/api/hoadon',Hoadon_);
+    // app.use('/api/feedback', FeedBack);
+    // app.use('/api/favoriteCar', FavoriteCar);
 }
 
 module.exports = router;

@@ -12,8 +12,9 @@ var storage = multer.diskStorage({
     }
 });
 
+router.use('/',UserControlles.index);
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
 router.get('/list', UserControlles.user);
 
