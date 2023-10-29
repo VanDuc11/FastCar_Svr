@@ -10,8 +10,14 @@ class XeController {
         if (typeof (req.query.ChuSH) != 'undefined') {
             check = { User: req.query.ChuSH };
         }
+
+        if (typeof req.query.DiaChiXe !== 'undefined') {
+            const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
+            check = { DiaChiXe: regex };
+          }
+
         try {
-            await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({_id: -1})
+            await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(
                         result.length == 0 ? 'Không có dữ liệu' : result
@@ -31,12 +37,12 @@ class XeController {
         }
 
     }
-    async find_Xe_User(req,res){
+    async find_Xe_User(req, res) {
         try {
             await Xe.find({
                 "ChuSH.Email_ChuXe": req.body.Email_ChuXe
-                
-              }).sort({_id: -1})
+
+            }).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(
                         result.length == 0 ? 'Không có dữ liệu' : result
@@ -61,7 +67,7 @@ class XeController {
         for (var i = 0; i < req.files.length; i++) {
             img.push(path.basename(req.files[i].path));
         }
-        
+
         const xe = new Xe({
             BKS: req.body.BKS,
             HangXe: req.body.HangXe,
@@ -150,7 +156,7 @@ class XeController {
         }
     }
 
-    async DeleteXe(req,res){
+    async DeleteXe(req, res) {
         const id = req.params.id;
 
         try {
@@ -167,7 +173,7 @@ class XeController {
 
         }
     }
-    
+
     async pushDanhGiaXe(req, res) {
         const DanhGia = {
             UserName: req.body.UserName,

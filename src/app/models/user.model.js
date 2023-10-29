@@ -10,7 +10,9 @@ const User = new Schema({
     UID: { type: String },
     GPLX: { type: Array },
     CCCD: {type: Array },
-    MatKhau: { type: String }
+    MatKhau: { type: String },
+    Avatar: { type: String },
+    NgayThamGia: { type: Date }
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', User);

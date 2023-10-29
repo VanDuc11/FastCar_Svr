@@ -17,22 +17,27 @@ class UserControlles {
 
     }
 
-    async findUserEmail(req, res) {
-        await User.find({ Email: req.body.email })
-            .then((result) => {
-                res.status(200).json(result.length == 0 ? 'Không có dữ liệu' : result);
-            });
-    }
+    // async findUserEmail(req, res) {
+    //     const email = req.params.email;
+    //     await User.find({ Email: email })
+    //         .then((result) => {
+    //             res.status(200).json(result.length == 0 ? 'Không có dữ liệu' : result);
+    //         });
+    // }
 
     async createrUser(req, res, next) {
         var UserName = req.body.userName;
         var Email = req.body.email;
         var UID = req.body.UID;
+        var Pass = req.body.MatKhau;
+        var NgayThamGia = req.body.NgayThamGia;
 
         const user = new User({
             UserName: UserName,
             Email: Email,
             UID: UID,
+            MatKhau: Pass,
+            NgayThamGia: NgayThamGia
         });
 
         User.findOne({ Email: Email })
@@ -59,6 +64,16 @@ class UserControlles {
                 }
             })
 
+    }
+
+    async login(req, res) {
+        const {email, pass} = req.body;
+        const user = await User.findOne({Email: email, MatKhau: pass});
+        if(user) {
+            return res.status(200).json('Đăng nhập thành công');
+        } else {
+            return res.status(500).json('Đăng nhập thất bại');
+        }
     }
 
     async updateProfile(req, res) {
@@ -173,52 +188,5 @@ class UserControlles {
         }
     }
 
-    async addNewFavoriteCar(req, res) {
-        try {
-            const userId = req.params.userId;
-            const newCar = req.body;
-
-            const user = await User.findById(userId);
-
-            if (user) {
-                user.FavoriteCar.push(newCar);
-                await user.save();
-
-                res.status(200).json({ message: "Thêm xe yêu thích thành công" });
-            } else {
-                res.status(404).json({ message: "Không tìm thấy người dùng" });
-            }
-
-        } catch (error) {
-            log(error);
-        }
-    }
-
-    async deleteFavoriteCar(req, res) {
-        try {
-            const userId = req.params.userId;
-            const carId = req.params.carId; 
-
-            // Tìm và cập nhật User
-            const user = await User.findById(userId);
-
-            if (user) {
-                const index = user.FavoriteCar.findIndex(car => car.id === carId); // Tìm vị trí của xe yêu thích cần xóa trong mảng
-                if (index !== -1) {
-                    user.FavoriteCar.splice(index, 1);
-                    await user.save();
-
-                    res.status(200).json({ message: "Xóa xe yêu thích thành công"});
-                } else {
-                    res.status(404).json({ message: "Không tìm thấy xe yêu thích" });
-                }
-            } else {
-                res.status(404).json({ message: "Không tìm thấy người dùng" });
-            }
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: "Đã xảy ra lỗi khi xóa xe yêu thích", error: error.message });
-        }
-    }
 }
 module.exports = new UserControlles;
