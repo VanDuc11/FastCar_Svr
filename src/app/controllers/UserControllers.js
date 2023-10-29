@@ -69,6 +69,44 @@ class UserControlles {
 
     }
 
+    async login(req, res) {
+        const {email, pass} = req.body;
+        const user = await User.findOne({Email: email, MatKhau: pass});
+        if(user) {
+            return res.status(200).json('Đăng nhập thành công');
+        } else {
+            return res.status(500).json('Đăng nhập thất bại');
+        }
+    }
+
+    async updateUser(req, res) {
+        try {
+            await User.updateOne({ Email: req.body.email },
+                {
+                    $set: {
+                        UserName: req.body.UserName
+                    }
+                })
+                .then((result) => {
+                    res.status(201).json({
+                        success: true,
+                        messages: "Yêu cầu cập nhật thành công"
+                    });
+                    console.log(result);
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: 'Không thành công'
+                    });
+                })
+        } catch (error) {
+            res.status(500).send({
+                success: false,
+            });
+        }
+    }
+
     async updateProfile(req, res) {
 
         try {

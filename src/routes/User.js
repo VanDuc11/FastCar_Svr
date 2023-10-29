@@ -12,9 +12,9 @@ var storage = multer.diskStorage({
     }
 });
 
-router.use('/',UserControlles.index);
+// router.use('/',UserControlles.index);
 
-// const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 router.get('/list', UserControlles.user);
 
@@ -25,6 +25,8 @@ router.post('/login', UserControlles.login);
 // router.get('/findUserEmail/:email',UserControlles.findUserEmail);
 
 router.post('/update_Profile',UserControlles.updateProfile);
+
+router.post('/updateUser',UserControlles.updateUser);
 
 router.post('/upCccd',upload.array('HinhAnh',2),UserControlles.UpCCCD);
 

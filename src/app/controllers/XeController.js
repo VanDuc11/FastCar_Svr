@@ -65,9 +65,10 @@ class XeController {
             })
         }
     }
+
     async find_top_5(req, res) {
         try {
-            await Xe.find({})
+            await Xe.find({}).populate({ path: 'ChuSH', model: 'User' })
                 .sort({ SoChuyen: -1 })
                 .limit(5)
                 .exec()

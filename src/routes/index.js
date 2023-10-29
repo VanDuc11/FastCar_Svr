@@ -21,13 +21,13 @@ app.use('/khuyenmai',MaGiaGia);
 // app.use('/thongke', Thongke);
 app.use('/khachhang', user);
 
-    // app.use('/api/user',user);
-    // app.use('/api/xe',Xe);
-    // app.use('/api/voucher',MaGiaGia);
-    // app.use('/api/thongbao',ThongBao);
-    // app.use('/api/hoadon',Hoadon_);
-    // app.use('/api/feedback', FeedBack);
-    // app.use('/api/favoriteCar', FavoriteCar);
+    app.use('/api/user',user);
+    app.use('/api/xe',Xe);
+    app.use('/api/voucher',MaGiaGia);
+    app.use('/api/thongbao',ThongBao);
+    app.use('/api/hoadon',Hoadon_);
+    app.use('/api/feedback', FeedBack);
+    app.use('/api/favoriteCar', FavoriteCar);
 }
 
 module.exports = router;
