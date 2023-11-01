@@ -18,7 +18,7 @@ class XeController {
         if (typeof req.query.DiaChiXe !== 'undefined') {
             const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
             check = { DiaChiXe: regex };
-          }
+        }
 
         try {
             await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
@@ -41,23 +41,54 @@ class XeController {
         }
 
     }
-    async find_Xe_User(req, res) {
-        try {
-            await Xe.find({
-                "ChuSH.Email_ChuXe": req.body.Email_ChuXe
 
-            }).sort({ _id: -1 })
-                .then((result) => {
-                    res.status(200).json(
-                        result.length == 0 ? 'Không có dữ liệu' : result
-                    )
+    async find_Xe_Not_User(req, res) {
+        // get list xe không thuộc user login
+        const emailUser = req.params.email;
+        let check = null;
+        if (typeof req.query.DiaChiXe !== 'undefined') {
+            const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
+            check = { DiaChiXe: regex };
+        }
+
+        try {
+            const list = await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).exec();
+
+            const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
+
+            if (filteredList.length !== 0) {
+                return res.status(200).json(filteredList);
+            } else {
+                return res.status(400).json({
+                    success: true,
+                    message: "Không có dữ liệu",
                 })
-                .catch((error) => {
-                    res.status(400).json({
-                        success: true,
-                        message: error.message,
-                    })
+            }
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+
+    async find_Xe_User(req, res) {
+        const emailUser = req.params.email;
+
+        try {
+            const list = await Xe.find({}).populate({ path: 'ChuSH', model: 'User' }).exec();
+
+            const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() === emailUser);
+
+            if (filteredList.length !== 0) {
+                return res.status(200).json(filteredList);
+            } else {
+                return res.status(400).json({
+                    success: true,
+                    message: "Không có dữ liệu",
                 })
+            }
+
         } catch (error) {
             res.status(500).json({
                 success: false,
@@ -67,22 +98,23 @@ class XeController {
     }
 
     async find_top_5(req, res) {
+        const emailUser = req.params.email;
+
         try {
-            await Xe.find({}).populate({ path: 'ChuSH', model: 'User' })
-                .sort({ SoChuyen: -1 })
-                .limit(5)
-                .exec()
-                .then((result) => {
-                    res.status(200).json(
-                        result.length == 0 ? 'Không có dữ liệu' : result
-                    )
+            // giới hạn 5 xe
+            const list = await Xe.find({}).populate({ path: 'ChuSH', model: 'User' }).sort({ SoChuyen: -1 }).limit(5).exec();
+
+            // nếu trong 5 xe, user login có 2 xe thì list = 3
+            const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
+
+            if (filteredList.length !== 0) {
+                return res.status(200).json(filteredList);
+            } else {
+                return res.status(400).json({
+                    success: true,
+                    message: "Không có dữ liệu",
                 })
-                .catch((error) => {
-                    res.status(400).json({
-                        success: true,
-                        message: error.message,
-                    })
-                })
+            }
         } catch (error) {
             res.status(500).json({
                 success: false,
