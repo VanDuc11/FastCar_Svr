@@ -1,10 +1,38 @@
 const { log } = require('console');
 const User = require('../models/user.model');
 const path = require('path');
+const moment = require('moment');
 
 class UserControlles {
-    index(req, res) {
-        res.render('Khachhang')
+    async index(req, res) {
+        const data = [];
+
+        await User.find().sort({ _id: -1 })
+            .then((result) => {
+                result.forEach(item => {
+                    const NgayThamGia = moment(item.NgayThamGia).format('DD/MM/YYYY', { locale: 'vi' });
+                    const NgaySinh = moment(item.NgaySinh).format('DD/MM/YYYY', { locale: 'vi' });
+                    
+                    const arr = {
+                        _id: item._id,
+                        UserName: item.UserName,
+                        SDT: item.SDT,
+                        NgaySinh: NgaySinh,
+                        GioiTinh: item.GioiTinh,
+                        Email: item.Email,
+                        UID: item.UID,
+                        DiaChi_GPLX: item.DiaChi_GPLX,
+                        Avatar: item.Avatar,
+                        NgayThamGia: NgayThamGia,
+                        __v: item.__v,
+                    }
+                    console.log(item);
+                    data.push(arr)
+                });
+                res.status(200).render('Khachhang', {
+                    data: data
+                })
+            });
     }
     async user(req, res, next) {
         let check = null;
@@ -34,15 +62,16 @@ class UserControlles {
         var UID = req.body.UID;
         var Pass = req.body.MatKhau;
         var NgayThamGia = req.body.NgayThamGia;
-
+        var Avatar = req.body.Avatar;
         const user = new User({
             UserName: UserName,
             Email: Email,
             UID: UID,
             MatKhau: Pass,
+            Avatar: Avatar,
             NgayThamGia: NgayThamGia
         });
-
+        console.log(user);
         User.findOne({ Email: Email })
             .then(async (resoult) => {
                 if (resoult == null) {
@@ -70,9 +99,9 @@ class UserControlles {
     }
 
     async login(req, res) {
-        const {email, pass} = req.body;
-        const user = await User.findOne({Email: email, MatKhau: pass});
-        if(user) {
+        const { email, pass } = req.body;
+        const user = await User.findOne({ Email: email, MatKhau: pass });
+        if (user) {
             return res.status(200).json('Đăng nhập thành công');
         } else {
             return res.status(500).json('Đăng nhập thất bại');
@@ -139,63 +168,22 @@ class UserControlles {
             });
         }
     }
-    async UpCCCD(req, res) {
-        const img = [];
-        for (var i = 0; i < req.files.length; i++) {
-            img.push(path.basename(req.files[i].path));
-        }
-        const CCCD = {
-            HoTen: req.body.HoTen,
-            SoCCCD: req.body.SoCCCD,
-            NgayCap: req.body.NgayCap,
-            NoiCap: req.body.NoiCap,
-            DiaChi: req.body.DiaChi,
-            HinhAnhCCCD: img,
-        }
-        console.log(CCCD);
-        try {
-            await User.updateOne({ Email: req.body.email }, {
-                $set: {
-                    CCCD: CCCD
-                }
-
-            }, { new: true }).then((result) => {
-                res.status(201).json({
-                    success: true,
-                    messages: "Update thành công"
-                });
-                console.log(result);
-            })
-                .catch((err) => {
-                    res.status(400).json({
-                        success: false,
-                        messages: 'Không thành công'
-                    });
-                })
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                messages: error.messages
-            });
-        }
-    }
+    
     async UpGPLX(req, res) {
         const img = [];
         for (var i = 0; i < req.files.length; i++) {
             img.push(path.basename(req.files[i].path));
         }
-        const GPLX = {
-            HoTen: req.body.HoTen,
-            SoGPLX: req.body.SoGPLX,
-            NgayCap: req.body.NgayCap,
-            DiaChi: req.body.DiaChi,
-            HinhAnhGPLX: img,
-        }
+
         console.log(GPLX);
         try {
             await User.updateOne({ Email: req.body.email }, {
                 $set: {
-                    GPLX: GPLX
+                    HoTen_GPLX: req.body.HoTen_GPLX,
+                    So_GPLX: req.body.So_GPLX,
+                    NgayCap_GPLX: req.body.NgayCap_GPLX,
+                    DiaChi_GPLX: req.body.DiaChi_GPLX,
+                    HinhAnh_GPLX: img,
                 }
 
             }, { new: true }).then((result) => {

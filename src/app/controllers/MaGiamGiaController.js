@@ -2,10 +2,58 @@ const MaGiamGia = require('../models/MaGiamGia.model');
 var path = require('path');
 const crypto = require('crypto');
 const dateNow = new Date();
+const moment = require('moment');
 
 class MaGiamGiaController {
-    index(req, res) {
-        res.render('KhuyenMai')
+    async index(req, res) {
+        let check = null;
+        const data = [];
+        if (typeof (req.query.MaGiamGia) != 'undefined') {
+            check = { MaGiamGia: req.query.MaGiamGia };
+        }
+        try {
+            await MaGiamGia.find(check).sort({ _id: -1 })
+                .then((result) => {
+                    // console.log(result);
+                    result.forEach(item => {
+                        const  NgayBD = moment(item.HSD).format('DD/MM/YYYY', { locale: 'vi' });
+                        const HSD = moment(item.NgayBD).format('DD/MM/YYYY', { locale: 'vi' });
+                        
+                        const arr = {
+                            _id: item._id,
+                            MaGiamGia: item.MaGiamGia,
+                            TieuDe: item.TieuDe,
+                            Code: item.Code,
+                            GiaTri: item.GiaTri,
+                            GiaTriMax: item.GiaTriMax,
+                            NoiDung: item.NoiDung,
+                            HinhAnh: item.HinhAnh,
+                            NgayBD: NgayBD,
+                            HSD: HSD,
+                            TrangThai: item.TrangThai,
+                            createdAt: item.createdAt,
+                            updatedAt: item.updatedAt,
+                            __v: item.__v,
+                        }
+                        data.push(arr)
+                    });
+                    res.status(200).render('KhuyenMai', {
+                        data: data
+                    });
+
+
+                }).catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: 'Không thành công',
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
     }
     async findMaGiaGia(req, res) {
         let check = null;
@@ -15,7 +63,6 @@ class MaGiamGiaController {
         try {
             await MaGiamGia.find(check).sort({ _id: -1 })
                 .then((result) => {
-                    // console.log(result);
                     res.status(200).json(
                         result.length == 0 ? 'Không có bảng ghi' : result
                     );

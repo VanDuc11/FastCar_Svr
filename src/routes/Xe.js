@@ -15,10 +15,10 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// router.use('/danhsachxe',XeControlles.show);
-// router.use('/',XeControlles.index);
+router.get('/danhsachxe',XeControlles.show);
+router.get('/',XeControlles.index);
+router.get('/ChiTietXe/:id',XeControlles.chitietxe);
 
-// router.get('/',XeControlles.index);
 router.get('/list',XeControlles.findXe);
 router.get('/top5xe',XeControlles.find_top_5);
 router.post('/listXe_user',XeControlles.find_Xe_User);
