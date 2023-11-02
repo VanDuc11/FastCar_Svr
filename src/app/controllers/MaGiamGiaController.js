@@ -55,6 +55,7 @@ class MaGiamGiaController {
             })
         }
     }
+    
     async findMaGiaGia(req, res) {
         let check = null;
         if (typeof (req.query.MaGiamGia) != 'undefined') {
@@ -64,7 +65,7 @@ class MaGiamGiaController {
             await MaGiamGia.find(check).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(
-                        result.length == 0 ? 'Không có bảng ghi' : result
+                        result.length == 0 ? 'Không có dữ liệu' : result
                     );
 
                 }).catch((error) => {
@@ -96,6 +97,7 @@ class MaGiamGiaController {
             GiaTriMax: req.body.GiaTriMax,
             NoiDung: req.body.NoiDung,
             HinhAnh: img,
+            NgayBD: req.body.NgayBD,
             HSD: req.body.HSD,
             TrangThai: dateNow > new Date(req.body.HSD) ? false : true
         });
@@ -138,6 +140,7 @@ class MaGiamGiaController {
                         GiaTriMax: req.body.GiaTriMax,
                         NoiDung: req.body.NoiDung,
                         HinhAnh: img,
+                        NgayBD: req.body.NgayBD,
                         HSD: req.body.HSD,
                         TrangThai: dateNow > new Date(req.body.HSD) ? false : true
                     }

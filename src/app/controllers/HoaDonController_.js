@@ -95,6 +95,7 @@ class HoaDonController_ {
             TongTien: req.body.TongTien,
             TienCoc: req.body.TienCoc,
             ThanhToan: req.body.ThanhToan,
+            LoiNhan: req.body.LoiNhan,
             GioTaoHD: req.body.GioTaoHD,
             TrangThaiHD: req.body.TrangThaiHD,
             LyDo: ""
