@@ -16,10 +16,10 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// router.use('/danhsachxe',XeControlles.show);
-// router.use('/',XeControlles.index);
+router.get('/danhsachxe',XeControlles.show);
+router.get('/',XeControlles.index);
+router.get('/ChiTietXe/:id',XeControlles.chitietxe);
 
-// router.get('/',XeControlles.index);
 router.get('/list',XeControlles.findXe);
 
 // get top 5 xe, trừ xe của user login

@@ -8,8 +8,11 @@ const User = new Schema({
     GioiTinh: { type: String },
     Email: { type: String },
     UID: { type: String },
-    GPLX: { type: Array },
-    CCCD: {type: Array },
+    HoTen_GPLX: { type: String },
+    So_GPLX: { type: String },
+    NgayCap_GPLX: { type: Date },
+    DiaChi_GPLX: { type: String },
+    HinhAnh_GPLX: { type: Array },
     MatKhau: { type: String },
     Avatar: { type: String },
     NgayThamGia: { type: Date }
