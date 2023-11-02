@@ -13,13 +13,12 @@ const router = (app) =>{
         extended:true
     }))
 
-     // app.use('/index', Index);  
-// app.use('/quanlyxe', Xe);
+app.use('/quanlyxe', Xe);
 // // app.use('/chuyenxe',Chuyenxe);
-// app.use('/thongbao', ThongBao);
-// app.use('/khuyenmai',MaGiaGia);
+app.use('/thongbao', ThongBao);
+app.use('/khuyenmai',MaGiaGia);
 // // app.use('/thongke', Thongke);
-// app.use('/khachhang', user);
+app.use('/khachhang', user);
 
     app.use('/api/user',user);
     app.use('/api/xe',Xe);
