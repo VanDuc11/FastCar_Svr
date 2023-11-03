@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
  
 router.get('/',MaGiamGiaController.index)
- 
+router.get('/DanhSachVoucher',MaGiamGiaController.show)
 router.get('/list',MaGiamGiaController.findMaGiaGia);
 router.post('/create',upload.single('HinhAnh'),MaGiamGiaController.CreateMaGiamGia);
 router.post('/update:id',upload.single('HinhAnh'),MaGiamGiaController.updateMaGiamGia);

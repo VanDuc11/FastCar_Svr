@@ -161,6 +161,7 @@ class XeController {
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
             TrangThai: 0,
+            SoChuyen: 0
         });
         try {
             await xe.save()
