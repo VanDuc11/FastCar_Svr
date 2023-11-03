@@ -14,10 +14,10 @@ const router = (app) =>{
     }))
 
 app.use('/quanlyxe', Xe);
-// // app.use('/chuyenxe',Chuyenxe);
+// app.use('/chuyenxe',Chuyenxe);
 app.use('/thongbao', ThongBao);
 app.use('/khuyenmai',MaGiaGia);
-// // app.use('/thongke', Thongke);
+// app.use('/thongke', Thongke);
 app.use('/khachhang', user);
 
     app.use('/api/user',user);
