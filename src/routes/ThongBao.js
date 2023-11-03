@@ -4,8 +4,8 @@ const ThongBaoController = require('../app/controllers/ThongBaoCotroller');
  
 
 // router.get('/',ThongBaoController.findNotifi);
-router.use('/',ThongBaoController.index);
- 
+// router.use('/list',ThongBaoController.index);
+router.get('/',ThongBaoController.index);
 
 
 module.exports = router; 

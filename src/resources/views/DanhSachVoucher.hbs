@@ -1,54 +1,4 @@
- <header class="app-header">
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-      aria-label="Hide Sidebar"></a>
-    <!-- Navbar Right Menu-->
-    <ul class="app-nav">
-
-
-      <!-- User Menu-->
-      <li><a class="app-nav__item" href="/src/resources/views/index1.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-      </li>
-    </ul>
-  </header>
-  
-  <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-  <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/public/images/images/FastCar.jpg" width="50px"
-      alt="User Image">
-    <div>
-      <p class="app-sidebar__user-name"><b>FastCar</b></p>
-      <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-    </div>
-    </div>
-    <hr>
-    <ul class="app-menu">
-   <li><a class="app-menu__item " href="/index"><i class='app-menu__icon bx bx-home-alt'></i><span
-        class="app-menu__label">Trang chủ</span></a></li>
-  
-
-  <li><a class="app-menu__item" href="/quanlyxe"><i
-        class='app-menu__icon bx bxs-car'></i><span class="app-menu__label">Quản lý xe</span></a>
-  </li>
-  <li><a class="app-menu__item" href="/chuyenXe"><i
-    class='app-menu__icon bx bxs-cart-download'></i><span class="app-menu__label">Chuyến</span></a>
-</li>
-  <li><a class="app-menu__item" href="/thongbao"><i   
-    class='app-menu__icon bx bxs-bell'></i><span class="app-menu__label">Thông báo</span></a>
-</li>
-  <li><a class="app-menu__item" href="/khuyenmai"><i
-    class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Khuyến mãi</span></a>
-</li>
-
-  <li><a class="app-menu__item" href="/thongke"><i class='app-menu__icon bx bx-task'></i><span
-        class="app-menu__label">Thống kê</span></a></li>
  
-  
-
-  <li><a class="app-menu__item " href="/khachhang"><i class='app-menu__icon bx bx-id-card'></i> <span
-    class="app-menu__label">Quản lý khách hàng</span></a></li>
-  </aside>
     <main class="app-content">
       <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
@@ -63,12 +13,12 @@
               <div class="row element-button"  >
                 <div class="col-sm-2">
   
-                  <a class="btn btn-add btn-sm" href="KhuyenMai.html" title="Thêm"><i class="fas fa-plus"></i>
+                  <a class="btn btn-add btn-sm" href="/khuyenmai" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo Mã</a>
                 </div>
                  
               
-                <div class="end" style="margin-left: 760px;  " >
+                <div class="end" style="margin-left: 700px;  " >
                 <div class="row">
                   <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;" >
                     <label class="control-label1">Từ ngày</label>
@@ -218,19 +168,19 @@
 
    
   <!-- Essential javascripts for application to work-->
-  <script src="/src/doc/js/jquery-3.2.1.min.js"></script>
-  <script src="/src/doc/js/popper.min.js"></script>
-  <script src="/src/doc/js/bootstrap.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="src/jquery.table2excel.js"></script>
-  <script src="/src/doc/js/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="js/plugins/pace.min.js"></script>
-  <!-- Page specific javascripts-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-  <!-- Data table plugin-->
-  <script type="text/javascript" src="/src/doc/js/plugins/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="/src/doc/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/public/js/jquery-3.2.1.min.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="src/jquery.table2excel.js"></script>
+    <script src="/publicjs/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="/public/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript">$('#sampleTable').DataTable();</script>
   <script>
     function deleteRow(r) {
