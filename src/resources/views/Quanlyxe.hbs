@@ -38,7 +38,7 @@
               <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
                   <h4>Xe đã duyệt</h4>
-                  <p><b>68 xe </b></p>
+                  <p><b id="daduyen"></b></p>
                 </div>
               </div>
             </div>
@@ -197,15 +197,20 @@ MODAL
   async function load_data() {
     const response = await fetch('/api/xe/list').then(response => response.json());
     var stt = 0;
-    var tt = 0;
+    var tt0 = 0;
+    var tt1 = 0;
 
     var STT = document.querySelector('.Stt');
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
 
     response.forEach(xe => {
       stt += 1;
+      // xe chờ duyệt
       if (xe.TrangThai == 0) {
-        tt += 1;
+        tt0 += 1;
+      }
+      if(xe.TrangThai == 1){
+        tt1 +=1;
       }
       const formattedPrice = new Intl.NumberFormat('vi-VN').format(xe.GiaThue1Ngay, {
         minimumFractionDigits: 2,
@@ -226,8 +231,9 @@ MODAL
                 <td> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/${xe._id}"> Xem chi tiết</a></td>`;
       document.querySelector('#sampleTable').appendChild(row);
     });
-  console.log(tt)
-    document.getElementById('choduyen').innerText = tt +" Xe";
+    console.log("abc",tt1)
+    document.getElementById('choduyen').innerText = tt0 +" Xe";
+    document.getElementById('daduyen').innerText = tt1 +" Xe";
   }
 </script>
 <style>
