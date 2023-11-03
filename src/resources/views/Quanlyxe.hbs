@@ -1,7 +1,8 @@
+
 <main class="app-content">
   <div class="app-title">
     <ul class="app-breadcrumb breadcrumb side">
-      <li class="breadcrumb-item active"><a href="#"><b>Quản lý xe</b></a></li>
+      <li class="breadcrumb-item active"><a href="#"><b>Thông báo</b></a></li>
     </ul>
     <div id="clock"></div>
   </div>
@@ -10,18 +11,31 @@
       <div class="tile">
         <div class="tile-body">
           <div class="row element-button">
-            <div class="col-sm-2">
 
+            
+            <div class="col-sm-2">
+               
               <a class="btn btn-add btn-sm" href="/quanlyxe/danhsachxe">
                 Danh sách xe</a>
             </div>
-
-
-
-            <div class="col-sm-2">
-              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
+    <div class="end" style="margin-left: 790px;  ">
+              <div class="row">
+                <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
+                  <label class="control-label1">Từ ngày</label>
+                  <input class="form-control1" type="date" required>
+                </div>
+                <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+                  <label class="control-label1">Đến ngày</label>
+                  <input class="form-control1" type="date" required>
+                </div>
+                <div class="col-sm-22" style="margin-left: 20px;  ">
+                  <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
+                    align-items: center;">Tìm kiếm</a>
+                </div>
+              </div>
             </div>
+
+
           </div>
 
 
@@ -30,7 +44,7 @@
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
                   <h4>Tổng xe</h4>
-                  <p><b id="info_tong_xe"></b></p>
+                  <p><b>100 xe</b></p>
                 </div>
               </div>
             </div>
@@ -46,7 +60,7 @@
               <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
                 <div class="info">
                   <h4>Xe chờ duyệt</h4>
-                  <p><b id="choduyen"></b></p>
+                  <p><b>20 xe</b></p>
                 </div>
               </div>
             </div>
@@ -57,19 +71,41 @@
           <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
               <tr>
-                <th width="10">STT</th>
-                <th width="100">Biển số xe</th>
-                <th width="100">Tên xe</th>
+                <th width="10"><input type="checkbox" id="all"></th>
+                <th width="110">Tên chủ xe</th>
+                <th width="100">Số điện thoại</th>
                 <th width="100">Ảnh</th>
-                <th width="100">Số ghế</th>
+                <th width="100">Mẫu xe</th>
                 <th width="100">Năm sản xuất</th>
+                <th width="100">Số ghế</th>
+                <th width="100">Truyền động</th>
                 <th width="100">Loại nhiêu liệu</th>
                 <th width="100">Giá </th>
-                <th width="110">Tên chủ xe</th>
                 <th width="120">Chi tiết</th>
+                <th width="120">Trạng thái</th>
               </tr>
             </thead>
             <tbody>
+              {{#each data}}
+                <tr>
+                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td>{{this.ChuSH.UserName}}</td>
+                  <td>{{this.ChuSH.SDT}}</td>
+                  <td><img class="img-card-person1" src="/images/{{this.HinhAnh.[0]}}" alt="" width="300px;"></td>
+                  <td>{{this.MauXe}}</td>
+                  <td>{{this.NSX}} </td>
+                  <td>{{this.SoGhe}} </td>
+                  <td>{{this.ChuyenDong}} </td>
+                  <td>{{this.LoaiNhienLieu}} </td>
+                  <td>{{this.GiaThue1Ngay}}</td>
+                  <td> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem chi tiết</a></td>
+                  <td>
+                    <a class="btn btn-success" href="#" id="button-duyet1" data-status="Chưa duyệt">Duyệt</a>
+                  </td>
+
+                </tr>
+
+              {{/each}}
 
             </tbody>
           </table>
@@ -193,50 +229,138 @@
 MODAL
 -->
 <script>
-  load_data()
-  async function load_data() {
-    const response = await fetch('/api/xe/list').then(response => response.json());
-    var stt = 0;
-    var tt = 0;
+  let buttonStatus = "Chưa duyệt";
 
-    var STT = document.querySelector('.Stt');
-    var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
+  // Tạo một hàm để xử lý sự kiện click của nút
+  function handleClick() {
+    // Thay đổi trạng thái của nút
+    buttonStatus = "Đã duyệt";
 
-    response.forEach(xe => {
-      stt += 1;
-      if (xe.TrangThai == 0) {
-        tt += 1;
-      }
-      const formattedPrice = new Intl.NumberFormat('vi-VN').format(xe.GiaThue1Ngay, {
-        minimumFractionDigits: 2,
-        decimal: ',',
-        thousandsSeparator: '.',
-      });
-      const row = document.createElement('tr');
-      row.innerHTML = `
-                <td >${stt}</td>
-                <td>${xe.BKS} </td>
-                <td>${xe.MauXe}</td>
-                <td><img src="/images/${xe.HinhAnh[0]}" alt="" width="100px;" class="img-card-person1"></td>
-                <td>${xe.SoGhe} </td>
-                <td>${xe.NSX}</td>
-                <td>${xe.LoaiNhienLieu} </td >
-                <td>${formattedPrice} đ</td>
-                <td>${xe.ChuSH.UserName}</td>
-                <td> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/${xe._id}"> Xem chi tiết</a></td>`;
-      document.querySelector('#sampleTable').appendChild(row);
-    });
-  console.log(tt)
-    document.getElementById('choduyen').innerText = tt +" Xe";
+    // Thay đổi văn bản của nút
+    this.textContent = buttonStatus;
   }
+
+  // Thêm sự kiện click cho tất cả các nút
+  for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
+    document.querySelectorAll(".btn-success")[i].addEventListener("click", handleClick);
+  }
+
 </script>
-<style>
-  th {
-    text-align: center;
-  }
+<script>
+  const input = document.querySelector("#uploadfile");
+  const boxChoice = document.querySelector("#boxchoice");
 
-  td {
-    text-align: center;
+  boxChoice.addEventListener("click", function () {
+    input.click();
+  });
 
-  }
-</style>
+  input.addEventListener("change", function () {
+    const files = input.files;
+
+    // Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
+    if (files.length !== 4) {
+      alert("Bạn phải chọn 4 ảnh.");
+      return;
+    }
+
+    // Đọc các tệp đã chọn và hiển thị chúng.
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        const imageUrl = reader.result;
+
+        // Hiển thị ảnh đã chọn.
+        const img = document.createElement("img");
+        img.src = imageUrl;
+        boxChoice.appendChild(img);
+      }
+
+      reader.readAsDataURL(files[i]);
+    }
+  });
+</script>
+    <!-- Essential javascripts for application to work-->
+    <script src="/public/js/jquery-3.2.1.min.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="src/jquery.table2excel.js"></script>
+    <script src="/publicjs/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="/public/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('#sampleTable').DataTable();
+        //Thời Gian
+    function time() {
+      var today = new Date();
+      var weekday = new Array(7);
+      weekday[0] = "Chủ Nhật";
+      weekday[1] = "Thứ Hai";
+      weekday[2] = "Thứ Ba";
+      weekday[3] = "Thứ Tư";
+      weekday[4] = "Thứ Năm";
+      weekday[5] = "Thứ Sáu";
+      weekday[6] = "Thứ Bảy";
+      var day = weekday[today.getDay()];
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      nowTime = h + " giờ " + m + " phút " + s + " giây";
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+        '</span>';
+      document.getElementById("clock").innerHTML = tmp;
+      clocktime = setTimeout("time()", "1000", "Javascript");
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
+    </script>
+    <script>
+        function deleteRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("myTable").deleteRow(i);
+        }
+        jQuery(function () {
+            jQuery(".trash").click(function () {
+                swal({
+                    title: "Cảnh báo",
+                    text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                    buttons: ["Hủy bỏ", "Đồng ý"],
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Đã xóa thành công.!", {
+
+                            });
+                        }
+                    });
+            });
+        });
+        oTable = $('#sampleTable').dataTable();
+        $('#all').click(function (e) {
+            $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
+            e.stopImmediatePropagation();
+        });
+    </script>
