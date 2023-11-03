@@ -15,8 +15,10 @@ const HoaDon = new Schema({
     TongTien: { type: Number },
     TienCoc: { type: Number },
     ThanhToan: { type: Number },
+    LoiNhan: { type: String},
     GioTaoHD: { type: Date },
     TrangThaiHD: { type: Number},
+    LyDo: { type: String }
 }, { timestamps: true });
 
 module.exports = mongoose.model("HoaDon", HoaDon);

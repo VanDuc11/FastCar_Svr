@@ -9,6 +9,7 @@ const MaGiaGia = new Schema({
     GiaTriMax: { type: Number},
     NoiDung: { type: String },
     HinhAnh: { type: String },
+    NgayBD: { type: Date},
     HSD: { type: Date },
     TrangThai:{ type: Boolean}
 }, { timestamps: true });
