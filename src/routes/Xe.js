@@ -16,6 +16,7 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 router.get('/danhsachxe',XeControlles.show);
 router.get('/',XeControlles.index);
 router.get('/ChiTietXe/:id',XeControlles.chitietxe);

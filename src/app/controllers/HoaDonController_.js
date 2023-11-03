@@ -4,6 +4,9 @@ var path = require('path');
 const { log } = require('console');
 
 class HoaDonController_ {
+    index(req, res) {
+        res.render('ChuyenXe')
+    }
 
     async find_hoadon(req, res) {
         let check = null;
