@@ -1,46 +1,33 @@
-
- <main class="app-content">
-    <div class="app-title">
-      <ul class="app-breadcrumb breadcrumb">Quản lý xe/</li>
-        <li class="breadcrumb-item"><a href="#">Danh sách xe</a></li>
-      </ul>
-    </div>
-    <div class="row">
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb">Quản lý xe/</li>
+      <li class="breadcrumb-item"><a href="#">Danh sách xe</a></li>
+    </ul>
+  </div>
+  <div class="row">
     <div class="col-md-12">
       <div class="tile">
+        <h3 class="tile-title">Danh sách xe </h3>
         <div class="tile-body">
-          <div class="row element-button">
 
-           
-            <div class="col-sm-2">
-               
-              <a class="btn btn-add btn-sm" href="/quanlyxe">
-             Quản lý xe</a>
+          <div class="row">
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
+                <div class="info">
+                  <h4>Tổng xe</h4>
+                  <p><b>100 xe</b></p>
+                </div>
+              </div>
             </div>
 
 
-
-          </div>
-          <div class="tile-body">
-          
-            <div class="row">
-              <div class="col-md-6 col-lg-3">
-                  <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
-                      <div class="info">
-                          <h4>Tổng xe</h4>
-                          <p><b>100 xe</b></p>
-                      </div>
-                  </div>
-              </div>
-         
-           
-              <div class="col-md-6 col-lg-3">
-                <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-chart'></i>
-                    <div class="info">
-                        <h4>Xe đang hoạt động</h4>
-                        <p><b>168 xe</b></p>
-                    </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-chart'></i>
+                <div class="info">
+                  <h4>Xe đang hoạt động</h4>
+                  <p><b>168 xe</b></p>
                 </div>
+              </div>
             </div>
               <div class="col-md-6 col-lg-3">
                 <div class="widget-small info coloured-icon"><i
@@ -61,57 +48,144 @@
               </div>
           </div>
           </div>
-      
-      </div>
-      <div class="row element-button">
-      </div>
-          <table class="table table-hover table-bordered" id="sampleTable">
-              <thead>
-                  <tr>
-                      <th width="10"><input type="checkbox" id="all"></th>
-                      <th width="80" >Tên chủ xe</th>
-                      <th width="80">Biển số</th>
-                      <th width="80">Ảnh</th>
-                      <th width="80">Mẫu xe</th>
-                      <th width="100">Năm sản xuất</th>
-                      <th width="60">Số ghế</th>
-                      <th width="80">Truyền động</th>
-                      <th width="100">Loại nhiêu liệu</th>
-                    
-                      <th width="80" >Giá </th>
-                 <th width="80" >Trạng thái </th>
-                      <th width="80">Chức năng</th>
-                  </tr>
-              </thead>
-              <tbody>
-                   {{#each data}}
-                  <tr >
-                
 
-                      <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
-                      <td style="vertical-align: middle;">{{this.ChuSH.UserName}}</td>
-                      <td style="vertical-align: middle;"> {{this.BKS}}</td>
-                      <td style="vertical-align: middle;"><img class="img-card-person" src="/images/{{this.HinhAnh.[0]}}" alt="" width="100px;"></td>
-                      <td style="vertical-align: middle;">{{this.MauXe}} </td>
-                      <td style="vertical-align: middle;">{{this.NSX}}</td>
-                      <td style="vertical-align: middle;">{{this.SoGhe}} </td>
-                      <td style="vertical-align: middle;">{{this.ChuyenDong}}</td>
-                      <td style="vertical-align: middle;">{{this.LoaiNhienLieu}}</td>
-                     
-                      <td style="vertical-align: middle;">{{this.GiaThue1Ngay}}</td>
-                         <td style="vertical-align: middle;"><span class="badge bg-warning">Đang hoạt động</span></td>
-                      <td style="vertical-align: middle;"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                              onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                          </button>
-                          <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                         
-                      </td>
-                  </tr>
-              
-                   {{/each}}
-              </tbody>
-          </table>
+        </div>
+        <div class="row element-button">
+        </div>
+        <table class="table table-hover table-bordered" id="sampleTable">
+          <thead>
+            <tr>
+              <th width="10"><input type="checkbox" id="all"></th>
+              <th width="80">Tên chủ xe</th>
+              <th width="80">Biển số</th>
+              <th width="80">Ảnh</th>
+              <th width="80">Mẫu xe</th>
+              <th width="100">Năm sản xuất</th>
+              <th width="60">Số ghế</th>
+              <th width="80">Truyền động</th>
+              <th width="100">Loại nhiêu liệu</th>
+
+              <th width="80">Giá </th>
+              <th width="80">Hiện thị</th>
+              <th width="80">Đã thuê</th>
+              <th width="80">Bảo trì</th>
+              <th width="80">Chức năng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
+              <td style="vertical-align: middle;">Nguyễn Văn A</td>
+              <td style="vertical-align: middle;">88A1-68686</td>
+              <td style="vertical-align: middle;"><img
+                  src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg?width=700"
+                  alt="" width="100px;"></td>
+              <td style="vertical-align: middle;">VinFast F8 </td>
+              <td style="vertical-align: middle;">2022 </td>
+              <td style="vertical-align: middle;">4 </td>
+              <td style="vertical-align: middle;">Số Tự động </td>
+              <td style="vertical-align: middle;">Xăng </td>
+
+              <td style="vertical-align: middle;">5.600.000 đ</td>
+              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
+                  id="check1" value="something" checked></td>
+              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
+                  id="check2" value="something" checked></td>
+              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
+                  id="check3" value="something" checked></td>
+
+              <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
+                    class="fas fa-trash-alt"></i>
+                </button>
+                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
+              <td style="vertical-align: middle;">Nguyễn Văn A</td>
+              <td style="vertical-align: middle;">88A1-68686</td>
+              <td><img
+                  src="https://ichef.bbci.co.uk/news/976/cpsprodpb/136F1/production/_130810697_gettyimages-1443361504.jpg"
+                  alt="" width="100px;"></td>
+              <td style="vertical-align: middle;">VinFast F8 </td>
+              <td style="vertical-align: middle;">2022 </td>
+              <td style="vertical-align: middle;">4 </td>
+              <td style="vertical-align: middle;">Số Tự động </td>
+              <td style="vertical-align: middle;">Xăng </td>
+              <td style="vertical-align: middle;">5.600.000 đ</td>
+              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
+                  id="check1" value="something" checked></td>
+              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
+                  id="check2" value="something" checked></td>
+              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
+                  id="check3" value="something" checked></td>
+              <td style="vertical-align: middle;"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
+              <td style="vertical-align: middle;">Nguyễn Văn A</td>
+              <td style="vertical-align: middle;">88A1-68686</td>
+              <td style="vertical-align: middle;"><img
+                  src="https://vcdn-vnexpress.vnecdn.net/2020/08/04/VinFast-President-1-9915-1596526753.jpg" alt=""
+                  width="100px;"></td>
+              <td style="vertical-align: middle;">VinFast F8 </td>
+              <td style="vertical-align: middle;">2022 </td>
+              <td style="vertical-align: middle;">4 </td>
+              <td style="vertical-align: middle;">Số Tự động </td>
+              <td style="vertical-align: middle;">Xăng </td>
+              <td style="vertical-align: middle;">5.600.000 đ</td>
+              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
+                  id="check1" value="something" checked></td>
+              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
+                  id="check2" value="something" checked></td>
+              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
+                  id="check3" value="something" checked></td>
+              <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
+                    class="fas fa-trash-alt"></i>
+                </button>
+                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
+              <td style="vertical-align: middle;">Nguyễn Văn A</td>
+              <td style="vertical-align: middle;">88A1-68686</td>
+              <td style="vertical-align: middle;"><img
+                  src="https://tiki.vn/blog/wp-content/uploads/2023/07/xe-dien-vinfast-thumb-1.jpg" alt=""
+                  width="100px;"></td>
+              <td style="vertical-align: middle;">VinFast F8 </td>
+              <td style="vertical-align: middle;">2022 </td>
+              <td style="vertical-align: middle;">4 </td>
+              <td style="vertical-align: middle;">Số Tự động </td>
+              <td style="vertical-align: middle;">Xăng </td>
+              <td style="vertical-align: middle;">5.600.000 đ</td>
+              <td style="vertical-align: middle;"><input style=" display: block; margin: auto; " type="checkbox"
+                  id="check1" value="something" checked></td>
+              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
+                  id="check2" value="something" checked></td>
+              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
+                  id="check3" value="something" checked></td>
+              <td style="vertical-align: middle;"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
       </div>
   </div>
 </div>
@@ -259,90 +333,8 @@ reader.readAsDataURL(files[i]);
 }
 });
 </script>
-<!-- Essential javascripts for application to work-->
-   <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript">
-$('#sampleTable').DataTable();
-//Thời Gian
-function time() {
-var today = new Date();
-var weekday = new Array(7);
-weekday[0] = "Chủ Nhật";
-weekday[1] = "Thứ Hai";
-weekday[2] = "Thứ Ba";
-weekday[3] = "Thứ Tư";
-weekday[4] = "Thứ Năm";
-weekday[5] = "Thứ Sáu";
-weekday[6] = "Thứ Bảy";
-var day = weekday[today.getDay()];
-var dd = today.getDate();
-var mm = today.getMonth() + 1;
-var yyyy = today.getFullYear();
-var h = today.getHours();
-var m = today.getMinutes();
-var s = today.getSeconds();
-m = checkTime(m);
-s = checkTime(s);
-nowTime = h + " giờ " + m + " phút " + s + " giây";
-if (dd < 10) {
-dd = '0' + dd
-}
-if (mm < 10) {
-mm = '0' + mm
-}
-today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-'</span>';
-document.getElementById("clock").innerHTML = tmp;
-clocktime = setTimeout("time()", "1000", "Javascript");
 
-function checkTime(i) {
-if (i < 10) {
-i = "0" + i;
-}
-return i;
-}
-}
-</script>
-<script>
-function deleteRow(r) {
-var i = r.parentNode.parentNode.rowIndex;
-document.getElementById("myTable").deleteRow(i);
-}
-jQuery(function () {
-jQuery(".trash").click(function () {
-  swal({
-      title: "Cảnh báo",
-      text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
-      buttons: ["Hủy bỏ", "Đồng ý"],
-  })
-      .then((willDelete) => {
-          if (willDelete) {
-              swal("Đã xóa thành công.!", {
-
-              });
-          }
-      });
-});
-});
-oTable = $('#sampleTable').dataTable();
-$('#all').click(function (e) {
-$('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-e.stopImmediatePropagation();
-});
-</script>
+ 
 </body>
 
 </html>

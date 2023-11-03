@@ -4,7 +4,7 @@ const ThongBaoController = require('../app/controllers/ThongBaoCotroller');
  
 
 // router.get('/',ThongBaoController.findNotifi);
-router.get('/',ThongBaoController.index);
+router.use('/',ThongBaoController.index);
  
 
 

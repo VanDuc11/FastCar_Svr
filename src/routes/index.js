@@ -22,6 +22,7 @@ const router = (app) =>{
     app.use('/khuyenmai',MaGiaGia);
     app.use('/thongke', ThongKe);
     app.use('/khachhang', user);
+ 
 
     app.use('/api/user',user);
     app.use('/api/xe',Xe);

@@ -14159,8 +14159,8 @@ be a descendant of the grid when it is being dragged.
   display: block;
   margin-left: auto;
   margin-right:  auto;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 75px;
   border-radius: .357rem;
     object-fit: cover;
 }

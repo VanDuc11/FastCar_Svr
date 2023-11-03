@@ -1,63 +1,54 @@
- 
-  <main class="app-content">
-    <div class="app-title">
-      <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách Khách hàng</b></a></li>
-      </ul>
-      <div id="clock"></div>
-    </div>
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active"><a href="#"><b>Danh sách Khách hàng</b></a></li>
+    </ul>
+    <div id="clock"></div>
+  </div>
 
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
           <div class="tile-body">
 
-            <div class="row element-button">
-             
-             
-             
-           
-              <div class="col-sm-2" style="margin-left: 92%;">
-                <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-              </div>
+          <div class="row element-button">
+            <div class="col-sm-2" style="margin-left: 92%;">
+              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
             </div>
-            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-              id="sampleTable">
-              <thead>
-                <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
-            
-                  <th width="150">Họ và tên</th>
-                  <th width="30">Ảnh </th>
-                  
-                  <th width="300">Địa chỉ</th>
-                  
-                  <th width="150">SĐT</th>
-                  <th width="150">Email</th>
-                  <th width="170">Ngày tham gia</th>
-                  <th width="140">Chi tiết</th>
-              
-                 
-                </tr>
-              </thead>
-              <tbody>
-                {{#each data}}
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                 
-                  <td>{{this.UserName}}</td>
-                  <td><img class="img-card-person" src="/src/doc/img-anhthe/1.jpg" alt=""></td>
-                  <td>155-157 Trần Quốc Thảo, Quận 3, Hồ Chí Minh </td>
-                  <td>{{this.SDT}}</td>
-                  <td>{{this.Email}}</td>
-                  <td>{{this.createdAt}}</td>
-                    <td> <a class="btn btn-info " href="/khachhang/ChiTietKhachHang/{{this._id}}"> Xem chi tiết</a></td>
-             
-                
-                </tr>
-                {{/each}}
-                 
+          </div>
+          <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+            id="sampleTable">
+            <thead>
+              <tr>
+                <th width="10"><input type="checkbox" id="all"></th>
+                <th width="150">User Name</th>
+                <th width="20">Ảnh </th>
+                <th width="300">Địa chỉ</th>
+                <th width="80">Giới tính</th>
+                <th width="80">Ngày sinh</th>
+                <th>SĐT</th>
+                <th width="100">Ngày tham gia</th>
+                <th>Chức năng</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {{#each data}}
+              <tr>
+                <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                <td>{{this.UserName}}</td>
+                <td><img class="img-card-person" src="{{this.Avatar}}" alt=""></td>
+                <td>{{this.DiaChi_GPLX}}</td>
+                <td>{{this.GioiTinh}}</td>
+                <td>{{this.NgaySinh}}</td>
+                <td>{{this.SDT}}</td>
+                <td>{{this.NgayThamGia}}</td>
+                <td> <a class="btn btn-info " href="#"> Xem chi tiết</a></td>
+
+
+              </tr>
+              {{/each}}
 
               </tbody>
             </table>
@@ -72,49 +63,11 @@
 -->
  
 
-
-  <!-- Essential javascripts for application to work-->
-   <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
-  <script>
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-      jQuery(".trash").click(function () {
-        swal({
-          title: "Cảnh báo",
-         
-          text: "Bạn có chắc chắn là muốn xóa nhân viên này?",
-          buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Đã xóa thành công.!", {
-                
-              });
-            }
-          });
-      });
-    });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-      $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-      e.stopImmediatePropagation();
-    });
+ 
+ 
+<script>
+ 
+ 
 
     //EXCEL
     // $(document).ready(function () {
