@@ -8,6 +8,9 @@ class MaGiamGiaController {
     index(req, res) {
         res.render('KhuyenMai')
     }
+    show(req, res) {
+        res.render('DanhSachVoucher')
+    }
     async findMaGiaGia(req, res) {
         let check = null;
         if (typeof (req.query.MaGiamGia) != 'undefined') {

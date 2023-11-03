@@ -12,7 +12,6 @@ var storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-router.get('/',HoaDonController_.index);
 
 router.get('/list',HoaDonController_.find_hoadon);
 router.post('/create',HoaDonController_.create_Hoadon);

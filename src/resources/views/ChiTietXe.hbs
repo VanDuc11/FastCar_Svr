@@ -1,195 +1,183 @@
- <header class="app-header">
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-      aria-label="Hide Sidebar"></a>
-    <!-- Navbar Right Menu-->
-    <ul class="app-nav">
-
-
-      <!-- User Menu-->
-      <li><a class="app-nav__item" href="/src/resources/views/index1.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-      </li>
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active"><a href="#"><b>Chi tiết xe</b></a></li>
     </ul>
-  </header>
-  
-  <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-  <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/public/images/images/FastCar.jpg" width="50px"
-      alt="User Image">
-    <div>
-      <p class="app-sidebar__user-name"><b>FastCar</b></p>
-      <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-    </div>
-    </div>
-    <hr>
-    <ul class="app-menu">
-   <li><a class="app-menu__item " href="/index"><i class='app-menu__icon bx bx-home-alt'></i><span
-        class="app-menu__label">Trang chủ</span></a></li>
-  
+    <div id="clock"></div>
+  </div>
+  <div class="row element-button">
+  </div>
+  <div class="tile">
+    <form class="row">
 
-  <li><a class="app-menu__item" href="/quanlyxe"><i
-        class='app-menu__icon bx bxs-car'></i><span class="app-menu__label">Quản lý xe</span></a>
-  </li>
-  <li><a class="app-menu__item" href="/chuyenXe"><i
-    class='app-menu__icon bx bxs-cart-download'></i><span class="app-menu__label">Chuyến</span></a>
-</li>
-  <li><a class="app-menu__item" href="/thongbao"><i   
-    class='app-menu__icon bx bxs-bell'></i><span class="app-menu__label">Thông báo</span></a>
-</li>
-  <li><a class="app-menu__item" href="/khuyenmai"><i
-    class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Khuyến mãi</span></a>
-</li>
-
-  <li><a class="app-menu__item" href="/thongke"><i class='app-menu__icon bx bx-task'></i><span
-        class="app-menu__label">Thống kê</span></a></li>
- 
-  
-
-  <li><a class="app-menu__item " href="/khachhang"><i class='app-menu__icon bx bx-id-card'></i> <span
-    class="app-menu__label">Quản lý khách hàng</span></a></li>
-  </aside>
-    <main class="app-content">
-        <div class="app-title">
-            <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Chi tiết  xe</b></a></li>
-            </ul>
-            <div id="clock"></div>
+      {{#each data}}
+      <div class="form-group col-md-3">
+        <label class="control-label">Biển số xe</label>
+        <div class="form-control">
+          <p><b>{{this.BKS}}</b></p>
         </div>
-        <div class="row element-button">
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Hãng xe</label>
+        <div class="form-control">
+          <p><b>{{this.HangXe}}</b></p>
         </div>
-        <div class="tile">
-        <form class="row">
-            <form class="row">
-               
-                <div class="form-group col-md-3">
-                    <label class="control-label">Tên chủ xe</label>
-                    <div  class="form-control">    
-                      <p><b>Nguyễn Văn A</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Số điện thoại</label>
-                    <div  class="form-control">    
-                      <p><b>092663623</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Tên xe</label>
-                    <div  class="form-control">    
-                      <p><b>Vinfast F8</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Biển số xe</label>
-                    <div  class="form-control">    
-                      <p><b>88A-68686</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Hãng xe</label>
-                    <div  class="form-control">    
-                      <p><b>19/09/2023</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Mẫu xe</label>
-                    <div  class="form-control">    
-                      <p><b>21/09/2023</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Năm sản xuất</label>
-                    <div  class="form-control">    
-                      <p><b>2020</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Số ghế</label>
-                    <div  class="form-control">    
-                      <p><b>4</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Truyền động</label>
-                    <div  class="form-control">    
-                      <p><b>Số tự động</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Loại nhiêu liệu</label>
-                    <div  class="form-control">    
-                      <p><b>Xăng</b></p>
-                  </div> 
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Giá thuê</label>
-                    <div  class="form-control">    
-                      <p><b>900.000vnđ</b></p>
-                  </div> 
-                  </div>
-                
-                 
-              <div class="row"> 
-                <div class="form-group col-md-3" style="margin-left:20px;">
-                    <label class="control-label">Ảnh xe</label>    <BR>                                   
-       <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
-       alt="" height="100px" width="150px" type="button"  id="show-emp" data-toggle="modal"
-       data-target="#ModalUP">
-                  </div>
-
-                  <div class="form-group col-md-3" style="margin-left:50px;" >
-                    <label class="control-label">Giấy tờ xe</label>
-                    <BR>
-                    <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg"
-       alt="" height="100px" width="150px">
-                  </div>
-                  <div class="form-group col-md-3" style="margin-left:50px;">
-                    <label class="control-label">Bảo hiểm</label>
-                    <BR>
-                        <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg"
-                        alt="" height="100px" width="150px">
-                  </div>
-                </div>
-           
-                  <div class="form-group col-md-12">
-                
-  
-                  </div>
-                <div class="form-group col-md-12">
-                    <a class="btn btn-success" href="#" id="button-duyet4" data-status="Chưa duyệt">Duyệt</a>
-                    <a class="btn btn-cancel" href="Quanlyxe.html">Hủy bỏ</a>
-                </div>
-  
-  
-  
-             
-          
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Tên xe</label>
+        <div class="form-control">
+          <p><b>{{this.MauXe}}</b></p>
         </div>
-          </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Năm sản xuất</label>
+        <div class="form-control">
+          <p><b>{{this.NSX}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Loại nhiêu liệu</label>
+        <div class="form-control">
+          <p><b>{{this.LoaiNhienLieu}}</b></p>
+        </div>
+      </div>
 
-    </main>
+      <div class="form-group col-md-3">
+        <label class="control-label">Truyền động</label>
+        <div class="form-control">
+          <p><b>{{this.ChuyenDong}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Số ghế</label>
+        <div class="form-control">
+          <p><b>{{this.SoGhe}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Giá thuê</label>
+        <div class="form-control">
+          <p><b id="giathue">{{this.GiaThue1Ngay}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Tiêu hao</label>
+        <div class="form-control">
+          <p><b id="tieuhao">{{this.TieuHao}}</b></p>
+        </div>
+      </div>
 
-    <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="form-group col-md-3">
+        <label class="control-label">Số chuyến</label>
+        <div class="form-control">
+          <p><b>{{this.SoChuyen}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Trạng Thái</label>
+        <div class="form-control">
+          <p><b>{{this.TrangThai}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Tên chủ xe</label>
+        <div class="form-control">
+          <p><b>{{this.ChuSH.UserName}}</b></p>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label class="control-label">Số điện thoại</label>
+        <div class="form-control">
+          <p><b>{{this.ChuSH.SDT}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Email</label>
+        <div class="form-control">
+          <p><b>{{this.ChuSH.Email}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Ngày Đăng</label>
+        <div class="form-control">
+          <p><b id="ngaydang">{{this.createdAt}}</b></p>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+
+      </div>
+      <div class="form-group col-md-3">
+        <label class="control-label">Địa chỉ Xe</label>
+        <textarea class="form-control">{{this.DiaChiXe}}</textarea>
+      </div>
+      <div class="form-group col-md-4">
+        <label class="control-label">Mô tả</label>
+        <textarea class="form-control" style=" width: 550px;">{{this.MoTa}}</textarea>
+      </div>
+      <div class="form-group col-md-3">
+
+      </div>
+
+      <div class="row" style="">
+        <div class="form-group col-md-3" style="margin-left:20px;">
+          <label class="control-label">Ảnh xe</label> <BR>
+          <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="100px" width="150px" type="button" id="show-emp"
+            data-toggle="modal" data-target="#ModalUP">
+        </div>
+
+        <div class="form-group col-md-3" style="margin-left:50px;">
+          <label class="control-label">Giấy tờ xe</label>
+          <BR>
+          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px"
+            width="150px">
+        </div>
+        <div class="form-group col-md-3" style="margin-left:50px;">
+          <label class="control-label">Bảo hiểm</label>
+          <BR>
+          <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="100px"
+            width="150px">
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+
+
+      </div>
+      <div class="form-group col-md-12">
+        <a class="btn btn-success" href="#" id="button-duyet4" data-status="Chưa duyệt">Duyệt</a>
+        <a class="btn btn-cancel" href="Quanlyxe.html">Hủy bỏ</a>
+      </div>
+      {{/each}}
+
+    </form>
+  </div>
+</main>
+
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-    
-    <div class="modal-body">
-    <div class="row">
-    <div class="form-group  col-md-12">
-    <span class="thong-tin-thanh-toan">
-    <h5>Hình ảnh xe</h5>
-    </span>
-    </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6" style=" display: flex;
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Hình ảnh xe</h5>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
             <div class="images" style=" display: flex;">
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt="" height="100px" width="150px">
-          
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt="" height="100px" width="150px" style="margin-left:100px;">
+              <img
+                src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
+                alt="" height="100px" width="150px">
+
+              <img
+                src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
+                alt="" height="100px" width="150px" style="margin-left:100px;">
             </div>
             <BR>
           
@@ -223,129 +211,156 @@
         <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
             <div class="images" style=" display: flex;">
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt="" height="100px" width="150px">
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt="" height="100px" width="150px"style="margin-left:100px;">
+              <img
+                src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
+                alt="" height="100px" width="150px">
+              <img
+                src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
+                alt="" height="100px" width="150px" style="margin-left:100px;">
             </div>
             <BR>
           
           </div>
+        </div>
+        <BR>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:180px;">Đóng</a>
+        <BR>
+      </div>
+      <div class="modal-footer">
+      </div>
     </div>
-    <BR>
-    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:180px;">Đóng</a>
-    <BR>
-    </div>
-    <div class="modal-footer">
-    </div>
-    </div>
-    </div>
-    </div>
-    <!-- Essential javascripts for application to work-->
+  </div>
+</div>
+<!-- Essential javascripts for application to work-->
 
-    <script>
-        let buttonStatus = "Chưa duyệt";
-      
-        // Tạo một hàm để xử lý sự kiện click của nút
-        function handleClick() {
-          // Thay đổi trạng thái của nút
-          buttonStatus = "Đã duyệt";
-        
-          // Thay đổi văn bản của nút
-          this.textContent = buttonStatus;
-        }
-        
-        // Thêm sự kiện click cho tất cả các nút
-        for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
-          document.querySelectorAll(".btn-success")[i].addEventListener("click", handleClick);
-        }
-      
-      </script>
-    <script src="/src/doc/js/jquery-3.2.1.min.js"></script>
-    <script src="/src/doc/js/popper.min.js"></script>
-    <script src="/src/doc/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/src/doc/js/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/src/doc/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/src/doc/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">$('#sampleTable').DataTable();</script>
-    <script>
-        function deleteRow(r) {
-            var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("myTable").deleteRow(i);
-        }
-        jQuery(function () {
-            jQuery(".trash").click(function () {
-                swal({
-                    title: "Cảnh báo",
+<script>
+  let buttonStatus = "Chưa duyệt";
 
-                    text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
-                    buttons: ["Hủy bỏ", "Đồng ý"],
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("Đã xóa thành công.!", {
+  // Tạo một hàm để xử lý sự kiện click của nút
+  function handleClick() {
+    // Thay đổi trạng thái của nút
+    buttonStatus = "Đã duyệt";
 
-                            });
-                        }
-                    });
-            });
-        });
-        oTable = $('#sampleTable').dataTable();
-        $('#all').click(function (e) {
-            $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-            e.stopImmediatePropagation();
-        });
-
-  //EXCEL
-  // $(document).ready(function () {
-  //   $('#').DataTable({
-
-  //     dom: 'Bfrtip',
-  //     "buttons": [
-  //       'excel'
-  //     ]
-  //   });
-  // });
-
-
-  //In dữ liệu
-  var myApp = new function () {
-    this.printTable = function () {
-      var tab = document.getElementById('sampleTable');
-      var win = window.open('', '', 'height=700,width=700');
-      win.document.write(tab.outerHTML);
-      win.document.close();
-      win.print();
-    }
+    // Thay đổi văn bản của nút
+    this.textContent = buttonStatus;
   }
-  //     //Sao chép dữ liệu
-  //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
 
-  // copyTextareaBtn.addEventListener('click', function(event) {
-  //   var copyTextarea = document.querySelector('.js-copytextarea');
-  //   copyTextarea.focus();
-  //   copyTextarea.select();
+  // Thêm sự kiện click cho tất cả các nút
+  for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
+    document.querySelectorAll(".btn-success")[i].addEventListener("click", handleClick);
+  }
 
-  //   try {
-  //     var successful = document.execCommand('copy');
-  //     var msg = successful ? 'successful' : 'unsuccessful';
-  //     console.log('Copying text command was ' + msg);
-  //   } catch (err) {
-  //     console.log('Oops, unable to copy');
-  //   }
-  // });
-
-
-  //Modal
-  $("#show-emp").on("click", function () {
-    $("#ModalUP").modal({ backdrop: false, keyboard: false })
-  });
 </script>
+
+<script>
+  function validatePrice() {
+    var GiaThue = document.querySelector('#giathue');
+    var TieuHao = document.querySelector('#tieuhao');
+    var NgayDang = document.querySelector('#ngaydang');
+
+    const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
+      minimumFractionDigits: 2,
+      decimal: ',',
+      thousandsSeparator: '.',
+    });
+    const date = new Date(NgayDang.innerHTML);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = day +'/'+month+'/'+year
+
+    NgayDang.innerHTML  = formattedDate;
+    GiaThue.innerHTML = formattedPrice + " đ"
+    TieuHao.innerHTML = TieuHao.innerHTML + " Lít/100Km"
+  }
+  validatePrice()
+
+
+        //EXCEL
+        // $(document).ready(function () {
+        //   $('#').DataTable({
+
+        //     dom: 'Bfrtip',
+        //     "buttons": [
+        //       'excel'
+        //     ]
+        //   });
+        // });
+
+
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " giờ " + m + " phút " + s + " giây";
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+        }
+        //In dữ liệu
+        var myApp = new function () {
+            this.printTable = function () {
+                var tab = document.getElementById('sampleTable');
+                var win = window.open('', '', 'height=700,width=700');
+                win.document.write(tab.outerHTML);
+                win.document.close();
+                win.print();
+            }
+        }
+        //     //Sao chép dữ liệu
+        //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+        // copyTextareaBtn.addEventListener('click', function(event) {
+        //   var copyTextarea = document.querySelector('.js-copytextarea');
+        //   copyTextarea.focus();
+        //   copyTextarea.select();
+
+        //   try {
+        //     var successful = document.execCommand('copy');
+        //     var msg = successful ? 'successful' : 'unsuccessful';
+        //     console.log('Copying text command was ' + msg);
+        //   } catch (err) {
+        //     console.log('Oops, unable to copy');
+        //   }
+        // });
+
+
+        //Modal
+        $("#show-emp").on("click", function () {
+            $("#ModalUP").modal({ backdrop: false, keyboard: false })
+        });
+    </script>
 </body>
 
 </html>
