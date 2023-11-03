@@ -3,29 +3,7 @@ var path = require('path');
 
 class XeController {
     async index(req, res) {
-        let check = null;
-        if (typeof (req.query.ChuSH) != 'undefined') {
-            check = { User: req.query.ChuSH };
-        }
-        try {
-            await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
-                .then((result) => {
-                    res.render('Quanlyxe', {
-                        data: result.map(res => res.toJSON())
-                    })
-                })
-                .catch((error) => {
-                    res.status(400).json({
-                        success: true,
-                        message: error.message,
-                    })
-                })
-        } catch (error) {
-            res.status(500).json({
-                success: true,
-                message: err.message,
-            })
-        }
+        res.render('Quanlyxe')
     }
 
     async chitietxe(req, res) {
@@ -182,7 +160,7 @@ class XeController {
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
-            TrangThai: req.body.TrangThai,
+            TrangThai: 0,
         });
         try {
             await xe.save()

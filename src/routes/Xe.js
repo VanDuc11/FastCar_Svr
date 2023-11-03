@@ -20,9 +20,10 @@ router.get('/danhsachxe',XeControlles.show);
 router.get('/',XeControlles.index);
 router.get('/ChiTietXe/:id',XeControlles.chitietxe);
 
-router.get('/list',XeControlles.findXe);
 
 // get top 5 xe, trừ xe của user login
+router.get('/list',XeControlles.findXe);
+
 router.get('/top5xe/:email',XeControlles.find_top_5);
 
 // get xe không thuộc user
