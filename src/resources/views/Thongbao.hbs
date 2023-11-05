@@ -81,190 +81,114 @@
                   <div class="col-sm-22" style="margin-left: 20px;  ">
                     <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
                     align-items: center;">Tìm kiếm</a>
-                  </div>
+                </div>
               </div>
             </div>
           </div>
-              <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label">Mã</label>
-                    <input class="form-control" type="text">
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Tiêu đề</label>
-                    <input class="form-control" type="text">
-                  </div>
-                  <div class="form-group col-md-3 ">
-                    <label for="exampleSelect1" class="control-label">Giá trị giảm</label>
-                    <select class="form-control" id="exampleSelect1" style=" padding-left: 210px;">
-                      <option>50.000vnđ</option>
-                      <option>100.000vnđ</option>
-                      <option>150.000vnđ</option>
-                      <option>250.000vnđ</option>
-                      <option>300.000vnđ</option>
-                      <option>350.000vnđ</option>
-                    </select>
-                  </div>
-                  
-               
-                 
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Thông tin</label>
-                    <textarea class="form-control" name="mota" id="mota" style=" height: 20px; width: 300px; "></textarea>
-                    <script>CKEDITOR.replace('mota');</script>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label class="control-label">Ảnh </label>
-                    <div id="myfileupload">
-                      <input   type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
-                    </div>
-                    <div id="boxchoice">
-                      <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                      <p style="clear:both"></p>
-                      
-                    </div>
-    
-                  </div>
+          <div class="row">
+          
+            <div class="form-group col-md-3">
+              <label class="control-label">Tiêu đề</label>
+              <input class="form-control" type="text">
             </div>
-            <button class="btn btn-save" type="button">Lưu lại</button>
-            <a class="btn btn-cancel" href="/khuyenmai">Hủy bỏ</a>
+         
+
+
+          
+            <div class="form-group col-md-3" style="margin-left: 50px;">
+              <label class="control-label">Ảnh </label>
+              <div id="myfileupload">
+                <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+              </div>
+              <div id="boxchoice">
+                <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                <p style="clear:both"></p>
+
+              </div>
+
+            </div>
+           
           </div>
+           <div class="row">
+             <div class="form-group col-md-3">
+              <label class="control-label">Thông tin</label>
+              <textarea class="form-control" name="mota" id="mota" style=" height: 20px; width: 1400px;; "></textarea>
+              <script>CKEDITOR.replace('mota');</script>
             </div>
-            <div class="row element-button">
             </div>
-              <table class="table table-hover table-bordered" id="sampleTable">
-                <thead>
-                  <tr>
-                    <th width="10"><input type="checkbox" id="all"></th>
-                    <th>Mã</th>
-                    <th>Tiêu đề</th>
-                    <th>Ảnh</th>
-                    <th>Giá trị giảm</th>
-                    <th>Thông tin</th>
-                    <th width="100">Chức năng</th>
-                 
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>
-                    <td><img src="/public/images/images/khuyenmai.jpg" alt="" width="100px;"height="60px"></td>
-                    <td>50.000vnđ</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td> 
-                  
-                   
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                    data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                   
-                </td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>
-                    <td><img src="/public/images/images/khuyenmai.jpg" alt="" width="100px;"height="60px"></td>
-                    <td>200.000vnđ</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td> 
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                    data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                   
-                   
-                  </tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>
-                    <td><img src="/public/images/images/khuyenmai.jpg" alt="" width="100px;"height="60px"></td>
-                    <td>100.000vnđ</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>               
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                    data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                   
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>
-                    <td><img src="/public/images/images/khuyenmai.jpg" alt="" width="100px;"height="60px"></td>
-                    <td>150.000vnđ</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>               
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                    data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                   
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>
-                    <td><img src="/public/images/images/khuyenmai.jpg" alt="" width="100px;"height="60px"></td>
-                    <td>100.000vnđ</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>                 
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                    data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                   
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>
-                    <td><img src="/public/images/images/khuyenmai.jpg" alt="" width="100px;"height="60px"></td>
-                    <td>100.000vnđ</td>
-                    <td>Quốc tế phụ nữ 20/10 khuyến mãi đặc biệt</td>                 
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                    data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                   
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <button class="btn btn-save" type="button">Lưu lại</button>
+          <a class="btn btn-cancel" href="/khuyenmai">Hủy bỏ</a>
         </div>
       </div>
-    </main>
-    <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-    
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Chỉnh sửa thông tin Voucher</h5>
-              </span>
-            </div>
+      <div class="row element-button">
+      </div>
+      <table class="table table-hover table-bordered" id="sampleTable">
+        <thead>
+          <tr>
+            <th width="10"><input type="checkbox" id="all"></th>
+        
+            <th>Tiêu đề</th>
+            <th>Ảnh</th>
+
+            <th>Thông tin</th>
+            <th width="100">Chức năng</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data}}
+          <tr>
+            <td width="10"><input type="checkbox" name="check1" value="1"></td>
+     
+            <td>{{this.TieuDe}}</td>
+            <td><img src="/images/{{this.HinhAnh}}" alt="" width="100px;" height="60px"></td>
+        
+            <td>{{this.ThongTin}}</td>
+
+
+            <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
+                  class="fas fa-trash-alt"></i>
+              </button>
+              <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+
+            </td>
+          </tr>
+          {{/each }}
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  </div>
+</main>
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Chỉnh sửa thông tin Voucher</h5>
+            </span>
           </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label class="control-label">MÃ</label>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label class="control-label">MÃ</label>
             <input class="form-control" type="text" required value="">
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Tiêu đề</label>
-          <input class="form-control" type="text" required value="">
-        </div>
+            <input class="form-control" type="text" required value="">
+          </div>
           <div class="form-group col-md-6 ">
-            <label  class="control-label">GIÁ TRỊ giảm</label>
+            <label class="control-label">GIÁ TRỊ giảm</label>
             <select class="form-control" id="exampleSelect1" style=" padding-left: 100px;">
               <option>50.000vnđ</option>
               <option>100.000vnđ</option>
@@ -272,9 +196,9 @@
               <option>250.000vnđ</option>
               <option>300.000vnđ</option>
               <option>350.000vnđ</option>
-              </select>
+            </select>
           </div>
-    
+
           <div class="form-group col-md-6">
             <label class="control-label">Ngày bắt đầu</label>
             <input class="form-control" type="date" required>
@@ -288,49 +212,49 @@
             <textarea class="form-control" name="mota" id="mota" style=" height: 20px; width: 200px; "></textarea>
             <script>CKEDITOR.replace('mota');</script>
           </div>
-       
+
           <div class="form-group col-md-12">
             <label class="control-label">Ảnh xe</label>
             <div id="myfileupload">
               <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
             </div>
-           
+
             <div id="boxchoice">
               <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
               <p style="clear:both"></p>
-              
+
             </div>
 
           </div>
-        
-          
-              
-            </div>
-            <div class="row element-button">
-            </div>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
+
+
+
         </div>
-        <div class="modal-footer">
+        <div class="row element-button">
         </div>
+        <button class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        <BR>
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
-    </div>
+  </div>
+</div>
   <!-- Essential javascripts for application to work-->
-  <script src="/src/doc/js/jquery-3.2.1.min.js"></script>
-  <script src="/src/doc/js/popper.min.js"></script>
-  <script src="/src/doc/js/bootstrap.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="src/jquery.table2excel.js"></script>
-  <script src="/src/doc/js/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="js/plugins/pace.min.js"></script>
-  <!-- Page specific javascripts-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-  <!-- Data table plugin-->
-  <script type="text/javascript" src="/src/doc/js/plugins/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="/src/doc/js/plugins/dataTables.bootstrap.min.js"></script>
+   <script src="/public/js/jquery-3.2.1.min.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="src/jquery.table2excel.js"></script>
+    <script src="/publicjs/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="/public/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript">$('#sampleTable').DataTable();</script>
   <script>
     function deleteRow(r) {

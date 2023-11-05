@@ -5711,7 +5711,9 @@ button.close {
   pointer-events: none;
 }
 
+
 .modal.fade .modal-dialog {
+
   -webkit-transition: -webkit-transform 0.3s ease-out;
   transition: -webkit-transform 0.3s ease-out;
   -o-transition: transform 0.3s ease-out;
@@ -5846,14 +5848,15 @@ button.close {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 900px;
+  
     margin: 1.75rem auto;
   }
   .modal-dialog-centered {
     min-height: calc(100% - (1.75rem * 2));
   }
   .modal-sm {
-    max-width: 300px;
+    max-width: 900px;
   }
 }
 

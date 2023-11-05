@@ -5,57 +5,12 @@ const dateNow = new Date();
 const moment = require('moment');
 
 class MaGiamGiaController {
-    async index(req, res) {
-        let check = null;
-        const data = [];
-        if (typeof (req.query.MaGiamGia) != 'undefined') {
-            check = { MaGiamGia: req.query.MaGiamGia };
-        }
-        try {
-            await MaGiamGia.find(check).sort({ _id: -1 })
-                .then((result) => {
-                    // console.log(result);
-                    result.forEach(item => {
-                        const  NgayBD = moment(item.HSD).format('DD/MM/YYYY', { locale: 'vi' });
-                        const HSD = moment(item.NgayBD).format('DD/MM/YYYY', { locale: 'vi' });
-                        
-                        const arr = {
-                            _id: item._id,
-                            MaGiamGia: item.MaGiamGia,
-                            TieuDe: item.TieuDe,
-                            Code: item.Code,
-                            GiaTri: item.GiaTri,
-                            GiaTriMax: item.GiaTriMax,
-                            NoiDung: item.NoiDung,
-                            HinhAnh: item.HinhAnh,
-                            NgayBD: NgayBD,
-                            HSD: HSD,
-                            TrangThai: item.TrangThai,
-                            createdAt: item.createdAt,
-                            updatedAt: item.updatedAt,
-                            __v: item.__v,
-                        }
-                        data.push(arr)
-                    });
-                    res.status(200).render('KhuyenMai', {
-                        data: data
-                    });
-
-
-                }).catch((error) => {
-                    res.status(400).json({
-                        success: false,
-                        message: 'Không thành công',
-                    })
-                })
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                message: error.message,
-            })
-        }
+    index(req, res) {
+        res.render('KhuyenMai')
     }
-    
+    show(req, res) {
+        res.render('DanhSachVoucher')
+    }
     async findMaGiaGia(req, res) {
         let check = null;
         if (typeof (req.query.MaGiamGia) != 'undefined') {

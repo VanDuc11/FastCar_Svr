@@ -36,10 +36,10 @@
                                     <div class="col-sm-22" style="margin-left: 20px;  ">
                                         <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
                     align-items: center;">Tìm kiếm</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  </div>
+              </div>
+        
+            </div>
                        
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
@@ -114,6 +114,7 @@
                                 <th>Ngày thuê</th>
                                 <th>Ngày trả</th>
                                 <th>Tình trạng</th>
+                                <th>Chức năng</th>
                                
                             </tr>
                         </thead>
@@ -121,7 +122,7 @@
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                               
-                                <td><a href="ChiTietChuyen.html">8799-4737589 </a></td>
+                                <td>8799-4737589 </td>
                                 <td>Nguyễn Văn A</td>
                                 <td>Vinfast F8</td>
                                 <td>88A-68686</td>
@@ -129,65 +130,9 @@
                                 <td>19/09/2023</td>
                                 <td>21/09/2023</td>
                                 <td><span class="badge bg-warning">Đang hoạt động</span></td>
-                            
+                             <td> <a class="btn btn-info " href="/chuyenxe/ChiTietChuyen/{{this._id}}"> Xem chi tiết</a></td>
                             </tr>
-                            <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td><a href="ChiTietChuyen.html">8799-4737589 </a></td>
-                                <td>Nguyễn Văn A</td>
-                                <td>Vinfast F8</td>
-                                <td>88A-68686</td>
-                                <td>500.000đ</td>
-                                <td>19/09/2023</td>
-                                <td>21/09/2023</td>
-                                <td><span class="badge bg-success">Hoàn thành</span></td>
-                            </tr>
-                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td><a href="ChiTietChuyen.html">8799-4737589 </a></td>
-                            <td>Nguyễn Văn A</td>
-                            <td>Vinfast F8</td>
-                            <td>88A-68686</td>
-                            <td>500.000đ</td>
-                            <td>19/09/2023</td>
-                            <td>21/09/2023</td>
-                            <td><span class="badge bg-success">Đã cọc</span></td>
-
-                            </tr>
-                            <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td><a href="ChiTietChuyen.html">8799-4737589 </a></td>
-                                <td>Nguyễn Văn A</td>
-                                <td>Vinfast F8</td>
-                                <td>88A-68686</td>
-                                <td>500.000đ</td>
-                                <td>19/09/2023</td>
-                                <td>21/09/2023</td>
-                                <td><span class="badge bg-info">Chờ cọc</span></td>
-
-                            </tr>
-                            <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td><a href="ChiTietChuyen.html">8799-4737589 </a></td>
-                                <td>Nguyễn Văn A</td>
-                                <td>Vinfast F8</td>
-                                <td>88A-68686</td>
-                                <td>500.000đ</td>
-                                <td>19/09/2023</td>
-                                <td>21/09/2023</td>
-                                <td><span class="badge bg-warning">Đang hoạt động</span></td>
-
-                            </tr>
-                            <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td><a href="ChiTietChuyen.html">8799-4737589 </a></td>
-                                <td>Nguyễn Văn A</td>
-                                <td>Vinfast F8</td>
-                                <td>88A-68686</td>
-                                <td>500.000đ</td>
-                                <td>19/09/2023</td>
-                                <td>21/09/2023</td>
-                                <td><span class="badge bg-danger">Đã hủy</span></td>
-                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>
@@ -199,19 +144,19 @@
 
     </script>
     <!-- Essential javascripts for application to work-->
-    <script src="/src/doc/js/jquery-3.2.1.min.js"></script>
-    <script src="/src/doc/js/popper.min.js"></script>
-    <script src="/src/doc/js/bootstrap.min.js"></script>
+      <script src="/public/js/jquery-3.2.1.min.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="src/jquery.table2excel.js"></script>
-    <script src="/src/doc/js/main.js"></script>
+    <script src="/public/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="/src/doc/js/plugins/pace.min.js"></script>
+    <script src="/public/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <!-- Data table plugin-->
-    <script type="text/javascript" src="/src/doc/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/src/doc/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
     <script>
 
