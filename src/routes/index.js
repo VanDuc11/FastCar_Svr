@@ -7,6 +7,7 @@ const FeedBack = require('./FeedBack');
 const FavoriteCar = require('./FavoriteCar');
 const ThongKe = require('./ThongKe');
 const Home = require('./Home');
+const loginRouter = require('./login');
 let bodyparser = require('body-parser');
 
 const router = (app) =>{
@@ -14,7 +15,7 @@ const router = (app) =>{
         extended:true
     }))
 
-
+    app.use('/login',loginRouter);
     app.use('/Home', Home);  
     app.use('/quanlyxe', Xe);
     app.use('/chuyenxe',Hoadon_);
