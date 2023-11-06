@@ -20,6 +20,10 @@ class XeController {
             check = { DiaChiXe: regex };
         }
 
+        if (typeof (req.query.TrangThai) != 'undefined') {
+            check = { TrangThai: req.query.TrangThai };
+        }
+
         try {
             await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
                 .then((result) => {
@@ -46,10 +50,14 @@ class XeController {
         // get list xe không thuộc user login
         const emailUser = req.params.email;
         let check = null;
-        if (typeof req.query.DiaChiXe !== 'undefined') {
+        if (typeof req.query.DiaChiXe !== 'undefined' && typeof (req.query.TrangThai) != 'undefined' ) {
             const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
-            check = { DiaChiXe: regex };
+            check = { DiaChiXe: regex, TrangThai: req.query.TrangThai };
         }
+
+        // if (typeof (req.query.TrangThai) != 'undefined') {
+        //     check = { TrangThai: req.query.TrangThai };
+        // }
 
         try {
             const list = await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).exec();
@@ -99,10 +107,15 @@ class XeController {
 
     async find_top_5(req, res) {
         const emailUser = req.params.email;
+        let check = null;
+
+        if (typeof (req.query.TrangThai) != 'undefined') {
+            check = { TrangThai: req.query.TrangThai };
+        }
 
         try {
             // giới hạn 5 xe
-            const list = await Xe.find({}).populate({ path: 'ChuSH', model: 'User' }).sort({ SoChuyen: -1 }).limit(5).exec();
+            const list = await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ SoChuyen: -1 }).limit(5).exec();
 
             // nếu trong 5 xe, user login có 2 xe thì list = 3
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
@@ -144,7 +157,8 @@ class XeController {
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
-            TrangThai: req.body.TrangThai,
+            SoChuyen: 0,
+            TrangThai: 0,
         });
         try {
             await xe.save()
