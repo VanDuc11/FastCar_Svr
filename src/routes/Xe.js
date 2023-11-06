@@ -22,9 +22,9 @@ router.get('/',XeControlles.index);
 router.get('/ChiTietXe/:id',XeControlles.chitietxe);
 
 
-// get top 5 xe, trừ xe của user login
 router.get('/list',XeControlles.findXe);
 
+// get top 5 xe, trừ xe của user login
 router.get('/top5xe/:email',XeControlles.find_top_5);
 
 // get xe không thuộc user
@@ -33,9 +33,9 @@ router.get('/listXe_NotUser/:email', XeController.find_Xe_Not_User);
 // get xe của user
 router.get('/listXe_user/:email',XeControlles.find_Xe_User);
 
-router.post('/create',upload.array('HinhAnh',10),XeControlles.CreateXe);
+router.post('/create',upload.array('HinhAnh',4),XeControlles.CreateXe);
 
-router.post('/update/:id',upload.array('HinhAnh',10),XeControlles.UpdateXe);
+router.put('/update/:id',XeControlles.UpdateXe);
 
 router.delete('/delete/:id',XeControlles.DeleteXe);
 

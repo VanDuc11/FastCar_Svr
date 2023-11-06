@@ -194,7 +194,9 @@ class XeController {
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
-            TrangThai: req.body.TrangThai,
+            TrangThai: 0,
+            SoChuyen: 0,
+            TrungBinhSao: 0
         });
         try {
             await xe.save()
@@ -222,33 +224,18 @@ class XeController {
 
     async UpdateXe(req, res) {
         const id = req.params.id;
-        const img = [];
-        for (var i = 0; i < req.files.length; i++) {
-            img.push(path.basename(req.files[i].path));
-        }
         try {
             await Xe.findByIdAndUpdate({ _id: id },
                 {
                     $set: {
-                        BKS: req.body.BKS,
-                        HangXe: req.body.HangXe,
-                        MauXe: req.body.MauXe,
-                        NSX: req.body.NSX,
-                        SoGhe: req.body.SoGhe,
-                        ChuyenDong: req.body.ChuyenDong,
-                        LoaiNhienLieu: req.body.LoaiNhienLieu,
-                        TieuHao: req.body.TieuHao,
-                        MoTa: req.body.MoTa,
-                        HinhAnh: img,
-                        DiaChiXe: req.body.DiaChiXe,
-                        GiaThue1Ngay: req.body.GiaThue1Ngay,
                         TrangThai: req.body.TrangThai,
-                        SoChuyen: req.body.SoChuyen
+                        SoChuyen: req.body.SoChuyen,
+                        TrungBinhSao: req.body.TrungBinhSao
                     }
                 }
             )
                 .then((result) => {
-                    res.status(201).json({
+                    res.status(200).json({
                         success: true,
                         messages: "Yêu cầu cập nhât thành công"
                     });
@@ -276,7 +263,7 @@ class XeController {
             Xe.deleteOne({ _id: document._id })
                 .then((result) => {
                     console.log(`Deleted ${result.deletedCount}`);
-                    res.status(200).json({ message: 'User removed successfully' });
+                    res.status(200).json({ message: 'Car removed successfully' });
                 })
             console.log(document._id);
 
@@ -286,38 +273,5 @@ class XeController {
         }
     }
 
-    async pushDanhGiaXe(req, res) {
-        const DanhGia = {
-            UserName: req.body.UserName,
-            NoiDung: req.body.NoiDung,
-            Sao: req.body.Sao,
-        }
-        console.log(DanhGia);
-        try {
-            await Xe.updateOne({ _id: req.body.id }, {
-                $push: {
-                    FeedBack: DanhGia
-                }
-
-            }, { new: true }).then((result) => {
-                res.status(201).json({
-                    success: true,
-                    messages: "Đánh giá thành công"
-                });
-                console.log(result);
-            })
-                .catch((err) => {
-                    res.status(400).json({
-                        success: false,
-                        messages: 'Không thành công'
-                    });
-                })
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                messages: error.messages
-            });
-        }
-    }
 }
 module.exports = new XeController;
