@@ -29,24 +29,22 @@
                 </div>
               </div>
             </div>
-              <div class="col-md-6 col-lg-3">
-                <div class="widget-small info coloured-icon"><i
-                        class='icon fa-3x bx bxs-user-badge'></i>
-                    <div class="info">
-                        <h4> Xe đã thuê</h4>
-                        <p><b>20 xe</b></p>
-                    </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
+                <div class="info">
+                  <h4> Xe đã thuê</h4>
+                  <p><b>20 xe</b></p>
                 </div>
+              </div>
             </div>
             <div class="col-md-6 col-lg-3">
-              <div class="widget-small info coloured-icon"><i
-                      class='icon fa-3x bx bxs-user-badge'></i>
-                  <div class="info">
-                      <h4> Xe đang bảo trì</h4>
-                      <p><b>20 chuyến</b></p>
-                  </div>
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
+                <div class="info">
+                  <h4> Xe đang bảo trì</h4>
+                  <p><b>20 chuyến</b></p>
+                </div>
               </div>
-          </div>
+            </div>
           </div>
 
         </div>
@@ -55,561 +53,477 @@
         <table class="table table-hover table-bordered" id="sampleTable">
           <thead>
             <tr>
-              <th width="10"><input type="checkbox" id="all"></th>
-              <th width="80">Tên chủ xe</th>
-              <th width="80">Biển số</th>
-              <th width="80">Ảnh</th>
-              <th width="80">Mẫu xe</th>
-              <th width="100">Năm sản xuất</th>
-              <th width="60">Số ghế</th>
-              <th width="80">Truyền động</th>
-              <th width="100">Loại nhiêu liệu</th>
-
-              <th width="80">Giá </th>
-              <th width="80">Hiện thị</th>
-              <th width="80">Đã thuê</th>
-              <th width="80">Bảo trì</th>
-              <th width="80">Chức năng</th>
-            </tr>
+                <th style="text-align: center;">STT</th>
+                <th style="text-align: center;">Biển số xe</th>
+                <th style="text-align: center;">Tên xe</th>
+                <th style="text-align: center;">Ảnh</th>
+                <th style="text-align: center;">Số ghế</th>
+                <th style="text-align: center;">Năm sản xuất</th>
+                <th style="text-align: center;" >Giá </th>
+                <th style="text-align: center;">Tên chủ xe</th>
+                <th style="text-align: center;">Trạng thái</th>
+                <th width="80">Chức năng</th>
+              </tr>
           </thead>
           <tbody>
-            <tr>
-              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
-              <td style="vertical-align: middle;">Nguyễn Văn A</td>
-              <td style="vertical-align: middle;">88A1-68686</td>
-              <td style="vertical-align: middle;"><img
-                  src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg?width=700"
-                  alt="" width="100px;"></td>
-              <td style="vertical-align: middle;">VinFast F8 </td>
-              <td style="vertical-align: middle;">2022 </td>
-              <td style="vertical-align: middle;">4 </td>
-              <td style="vertical-align: middle;">Số Tự động </td>
-              <td style="vertical-align: middle;">Xăng </td>
-
-              <td style="vertical-align: middle;">5.600.000 đ</td>
-              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
-                  id="check1" value="something" checked></td>
-              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
-                  id="check2" value="something" checked></td>
-              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
-                  id="check3" value="something" checked></td>
-
-              <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
+            {{#each data}}
+              <tr>
+                <td style="text-align: center;" class="stt">{{@index}}</td>
+                <td style="text-align: center;">{{this.BKS}} </td>
+                <td style="text-align: center;">{{this.MauXe}}</td>
+                <td style="text-align: center;"> <img src="/images/{{this.HinhAnh.[0]}}" alt=""
+                    class="img-card-person1"> </td>
+                <td style="text-align: center;">{{this.SoGhe}} </td>
+                <td style="text-align: center;">{{this.NSX}}</td>
+                <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
+                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
+                <td style="text-align: center;">{{this.TrangThai}}</td>
+                <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
                     class="fas fa-trash-alt"></i>
                 </button>
                 <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                   data-target="#ModalUP"><i class="fas fa-edit"></i></button>
 
               </td>
-            </tr>
-            <tr>
-              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
-              <td style="vertical-align: middle;">Nguyễn Văn A</td>
-              <td style="vertical-align: middle;">88A1-68686</td>
-              <td><img
-                  src="https://ichef.bbci.co.uk/news/976/cpsprodpb/136F1/production/_130810697_gettyimages-1443361504.jpg"
-                  alt="" width="100px;"></td>
-              <td style="vertical-align: middle;">VinFast F8 </td>
-              <td style="vertical-align: middle;">2022 </td>
-              <td style="vertical-align: middle;">4 </td>
-              <td style="vertical-align: middle;">Số Tự động </td>
-              <td style="vertical-align: middle;">Xăng </td>
-              <td style="vertical-align: middle;">5.600.000 đ</td>
-              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
-                  id="check1" value="something" checked></td>
-              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
-                  id="check2" value="something" checked></td>
-              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
-                  id="check3" value="something" checked></td>
-              <td style="vertical-align: middle;"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                </button>
-                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-              </td>
-            </tr>
-            <tr>
-              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
-              <td style="vertical-align: middle;">Nguyễn Văn A</td>
-              <td style="vertical-align: middle;">88A1-68686</td>
-              <td style="vertical-align: middle;"><img
-                  src="https://vcdn-vnexpress.vnecdn.net/2020/08/04/VinFast-President-1-9915-1596526753.jpg" alt=""
-                  width="100px;"></td>
-              <td style="vertical-align: middle;">VinFast F8 </td>
-              <td style="vertical-align: middle;">2022 </td>
-              <td style="vertical-align: middle;">4 </td>
-              <td style="vertical-align: middle;">Số Tự động </td>
-              <td style="vertical-align: middle;">Xăng </td>
-              <td style="vertical-align: middle;">5.600.000 đ</td>
-              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
-                  id="check1" value="something" checked></td>
-              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
-                  id="check2" value="something" checked></td>
-              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
-                  id="check3" value="something" checked></td>
-              <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
-                    class="fas fa-trash-alt"></i>
-                </button>
-                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-              </td>
-            </tr>
-            <tr>
-              <td style="vertical-align: middle;" width="10"><input type="checkbox" name="check1" value="1"></td>
-              <td style="vertical-align: middle;">Nguyễn Văn A</td>
-              <td style="vertical-align: middle;">88A1-68686</td>
-              <td style="vertical-align: middle;"><img
-                  src="https://tiki.vn/blog/wp-content/uploads/2023/07/xe-dien-vinfast-thumb-1.jpg" alt=""
-                  width="100px;"></td>
-              <td style="vertical-align: middle;">VinFast F8 </td>
-              <td style="vertical-align: middle;">2022 </td>
-              <td style="vertical-align: middle;">4 </td>
-              <td style="vertical-align: middle;">Số Tự động </td>
-              <td style="vertical-align: middle;">Xăng </td>
-              <td style="vertical-align: middle;">5.600.000 đ</td>
-              <td style="vertical-align: middle;"><input style=" display: block; margin: auto; " type="checkbox"
-                  id="check1" value="something" checked></td>
-              <td style="vertical-align: middle;"><input style="display: block; margin: auto;" type="checkbox"
-                  id="check2" value="something" checked></td>
-              <td style="vertical-align: middle;"> <input style="display: block; margin: auto;" type="checkbox"
-                  id="check3" value="something" checked></td>
-              <td style="vertical-align: middle;"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                </button>
-                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-              </td>
-            </tr>
+              </tr>
+              {{/each}}
+            
 
           </tbody>
         </table>
       </div>
+    </div>
   </div>
-</div>
-</div>
+  </div>
 </main>
 
 <!--
 MODAL
 -->
 <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-data-keyboard="false">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content">
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
 
-<div class="modal-body">
-<div class="row">
-<div class="form-group  col-md-12">
-<span class="thong-tin-thanh-toan">
-<h5>Chỉnh sửa thông tin xe</h5>
-</span>
-</div>
-</div>
-<div class="row">
-<div class="form-group col-md-6">
-<label class="control-label">Biển số xe</label>
-<input class="form-control" type="text" required value="">
-</div>
-<div class="form-group col-md-6 ">
-<label for="exampleSelect1" class="control-label">Hãng xe</label>
-<select class="form-control" id="exampleSelect1">
-<option>VinFast</option>
-<option>Toyota</option>
-</select>
-</div>
-<div class="form-group col-md-6 ">
-<label for="exampleSelect1" class="control-label">Mẫu xe</label>
-<select class="form-control" id="exampleSelect1">
-<option>VinFast</option>
-<option>Toyota</option>
-</select>
-</div>
-<div class="form-group col-md-6 ">
-<label for="exampleSelect1" class="control-label">Năm sản xuất</label>
-<select class="form-control" id="exampleSelect1">
-<option>2023</option>
-<option>2022</option>
-<option>2021</option>
-</select>
-</div>
-<div class="form-group col-md-6 ">
-<label for="exampleSelect1" class="control-label">Số Ghế</label>
-<select class="form-control" id="exampleSelect1">
-<option>VinFast</option>
-<option>Toyota</option>
-</select>
-</div>
-<div class="form-group col-md-6 ">
-<label for="exampleSelect1" class="control-label">Truyền động</label>
-<select class="form-control" id="exampleSelect1">
-<option>Số tự động</option>
-<option>Số sàn</option>
-</select>
-</div>
-<div class="form-group col-md-6 ">
-<label for="exampleSelect1" class="control-label">Loại nhiêu liệu</label>
-<select class="form-control" id="exampleSelect1">
-<option>Xăng</option>
-<option>Dầu</option>
-<option>Điện</option>
-</select>
-</div>
-<div class="form-group col-md-6 ">
-<label for="exampleSelect1" class="control-label">Tình trạng </label>
-<select class="form-control" id="exampleSelect1">
-<option>Đang hoạt động</option>
-<option>Đã thuê</option>
-<option>Đang bảo trì</option>
-</select>
-</div>
-<div class="form-group col-md-6">
-<label class="control-label">Giá bán</label>
-<input class="form-control" type="text" value="5.600.000">
-</div>
-<div class="form-group  col-md-6">
-<label class="control-label">Mô tả</label>
-<textarea class="form-control" rows="2" ></textarea>
-</div>  
-</div>
-<div class="form-group col-md-12">
-<label class="control-label">Ảnh xe</label>
-<div id="myfileupload">
-<input type="file" id="uploadfile" name="ImageUpload" multiple onchange="readURL(this);" />
-</div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Chỉnh sửa thông tin xe</h5>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label class="control-label">Biển số xe</label>
+            <input class="form-control" type="text" required value="">
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Hãng xe</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Mẫu xe</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Năm sản xuất</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Số Ghế</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Truyền động</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Số tự động</option>
+              <option>Số sàn</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Loại nhiêu liệu</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Xăng</option>
+              <option>Dầu</option>
+              <option>Điện</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Tình trạng </label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Đang hoạt động</option>
+              <option>Đã thuê</option>
+              <option>Đang bảo trì</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Giá bán</label>
+            <input class="form-control" type="text" value="5.600.000">
+          </div>
+          <div class="form-group  col-md-6">
+            <label class="control-label">Mô tả</label>
+            <textarea class="form-control" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label class="control-label">Ảnh xe</label>
+          <div id="myfileupload">
+            <input type="file" id="uploadfile" name="ImageUpload" multiple onchange="readURL(this);" />
+          </div>
 
-<div id="boxchoice">
-<a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-<p style="clear:both"></p>
+          <div id="boxchoice">
+            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+            <p style="clear:both"></p>
 
-</div>
+          </div>
 
-</div>
-<button class="btn btn-save" type="button">Lưu lại</button>
-<a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-<BR>
-</div>
-<div class="modal-footer">
-</div>
-</div>
-</div>
+        </div>
+        <button class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        <BR>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
 </div>
 <!--
 MODAL
 -->
-<script> 
-const input = document.querySelector("#uploadfile");
-const boxChoice = document.querySelector("#boxchoice");
+<script>
+  const input = document.querySelector("#uploadfile");
+  const boxChoice = document.querySelector("#boxchoice");
 
-boxChoice.addEventListener("click", function() {
-input.click();
-});
+  boxChoice.addEventListener("click", function () {
+    input.click();
+  });
 
-input.addEventListener("change", function() {
-const files = input.files;
+  input.addEventListener("change", function () {
+    const files = input.files;
 
-// Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
-if (files.length !== 4) {
-alert("Bạn phải chọn 4 ảnh.");
-return;
-}
+    // Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
+    if (files.length !== 4) {
+      alert("Bạn phải chọn 4 ảnh.");
+      return;
+    }
 
-// Đọc các tệp đã chọn và hiển thị chúng.
-for (let i = 0; i < files.length; i++) {
-const reader = new FileReader();
+    // Đọc các tệp đã chọn và hiển thị chúng.
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
 
-reader.onload = function() {
-const imageUrl = reader.result;
+      reader.onload = function () {
+        const imageUrl = reader.result;
 
-// Hiển thị ảnh đã chọn.
-const img = document.createElement("img");
-img.src = imageUrl;
-boxChoice.appendChild(img);
-}
+        // Hiển thị ảnh đã chọn.
+        const img = document.createElement("img");
+        img.src = imageUrl;
+        boxChoice.appendChild(img);
+      }
 
-reader.readAsDataURL(files[i]);
-}
-});
+      reader.readAsDataURL(files[i]);
+    }
+  });
 </script>
 
- 
+
 </body>
 
 </html>
-        </div>
-  </main>
+</div>
+</main>
 
 
-  <!--
+<!--
   MODAL CHỨC VỤ 
 -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
 
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới hãng xe</h5>
-              </span>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Nhập hãng xe</label>
-              <input class="form-control" type="text" required>
-            </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Thêm mới hãng xe</h5>
+            </span>
           </div>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
+          <div class="form-group col-md-12">
+            <label class="control-label">Nhập hãng xe</label>
+            <input class="form-control" type="text" required>
+          </div>
         </div>
-        <div class="modal-footer">
-        </div>
+        <BR>
+        <button class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        <BR>
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
   </div>
-  <!--
+</div>
+<!--
 MODAL
 -->
 
 
 
-  <!--
+<!--
   MODAL DANH MỤC
 -->
-  <div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+<div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
 
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới mẫu xe </h5>
-              </span>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Nhập tên mẫu xe</label>
-              <input class="form-control" type="text" required>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Mẫu xe hiện đang có</label>
-              <ul style="padding-left: 20px;">
-                <li>VinFast f8</li>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Thêm mới mẫu xe </h5>
+            </span>
+          </div>
+          <div class="form-group col-md-12">
+            <label class="control-label">Nhập tên mẫu xe</label>
+            <input class="form-control" type="text" required>
+          </div>
+          <div class="form-group col-md-12">
+            <label class="control-label">Mẫu xe hiện đang có</label>
+            <ul style="padding-left: 20px;">
+              <li>VinFast f8</li>
               <li>Mazda</li>
               <li>Toyota</li>
               <li>Mercedes-benz</li>
               <li>Lexus</li>
-              
-              </ul>
-            </div>
+
+            </ul>
           </div>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
         </div>
-        <div class="modal-footer">
-        </div>
+        <BR>
+        <button class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        <BR>
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
   </div>
-  <!--
+</div>
+<!--
 MODAL
 -->
 
 
 
 
-  <!--
+<!--
   MODAL TÌNH TRẠNG
 -->
-  <div class="modal fade" id="addtinhtrang" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+<div class="modal fade" id="addtinhtrang" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
 
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới trạng thái</h5>
-              </span>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Nhập trạng thái</label>
-              <input class="form-control" type="text" required>
-            </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Thêm mới trạng thái</h5>
+            </span>
           </div>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
+          <div class="form-group col-md-12">
+            <label class="control-label">Nhập trạng thái</label>
+            <input class="form-control" type="text" required>
+          </div>
         </div>
-        <div class="modal-footer">
-        </div>
+        <BR>
+        <button class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        <BR>
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
   </div>
-  <!--
+</div>
+<!--
 MODAL
 -->
 
 
 
-  <script src="/src/doc/js/jquery-3.2.1.min.js"></script>
-  <script src="/src/doc/js/popper.min.js"></script>
-  <script src="/src/doc/js/bootstrap.min.js"></script>
-  <script src="/src/doc/js/main.js"></script>
-  <script src="/src/doc/js/plugins/pace.min.js"></script>
-  <script>
-    
-    
-    boxChoice.addEventListener("click", function() {
-      input.click();
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script>
+
+
+  boxChoice.addEventListener("click", function () {
+    input.click();
+  });
+
+  input.addEventListener("change", function () {
+    const files = input.files;
+
+    // Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
+    if (files.length !== 4) {
+      alert("Bạn phải chọn 4 ảnh.");
+      return;
+    }
+
+    // Đọc các tệp đã chọn và hiển thị chúng.
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        const imageUrl = reader.result;
+
+        // Hiển thị ảnh đã chọn.
+        const img = document.createElement("img");
+        img.src = imageUrl;
+        boxChoice.appendChild(img);
+      }
+
+      reader.readAsDataURL(files[i]);
+    }
+  });
+
+
+
+</script>
+<style>
+  .Choicefile {
+    display: block;
+    background: #14142B;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px 0px;
+    border-radius: 5px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Choicefile:hover {
+    text-decoration: none;
+    color: white;
+  }
+
+  #uploadfile,
+  .removeimg {
+    display: none;
+  }
+
+  #thumbbox {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .removeimg {
+    height: 25px;
+    position: absolute;
+    background-repeat: no-repeat;
+    top: 5px;
+    left: 5px;
+    background-size: 25px;
+    width: 25px;
+    /* border: 3px solid red; */
+    border-radius: 50%;
+
+  }
+
+  .removeimg::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    content: '';
+    border: 1px solid red;
+    background: red;
+    text-align: center;
+    display: block;
+    margin-top: 11px;
+    transform: rotate(45deg);
+  }
+
+  .removeimg::after {
+    /* color: #FFF; */
+    /* background-color: #DC403B; */
+    content: '';
+    background: red;
+    border: 1px solid red;
+    text-align: center;
+    display: block;
+    transform: rotate(-45deg);
+    margin-top: -2px;
+  }
+</style>
+<script>
+
+  function readURL(input, thumbimage) {
+    if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#thumbimage").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+    else { // Sử dụng cho IE
+      $("#thumbimage").attr('src', input.value);
+
+    }
+    $("#thumbimage").show();
+    $('.filename').text($("#uploadfile").val());
+    $('.Choicefile').css('background', '#14142B');
+    $('.Choicefile').css('cursor', 'default');
+    $(".removeimg").show();
+    $(".Choicefile").unbind('click');
+
+  }
+  $(document).ready(function () {
+    $(".Choicefile").bind('click', function () {
+      $("#uploadfile").click();
+
     });
-    
-    input.addEventListener("change", function() {
-      const files = input.files;
-    
-      // Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
-      if (files.length !== 4) {
-        alert("Bạn phải chọn 4 ảnh.");
-        return;
-      }
-    
-      // Đọc các tệp đã chọn và hiển thị chúng.
-      for (let i = 0; i < files.length; i++) {
-        const reader = new FileReader();
-    
-        reader.onload = function() {
-          const imageUrl = reader.result;
-    
-          // Hiển thị ảnh đã chọn.
-          const img = document.createElement("img");
-          img.src = imageUrl;
-          boxChoice.appendChild(img);
-        }
-    
-        reader.readAsDataURL(files[i]);
-      }
-    });
-
-
-    
-  </script>
-    <style>
-    .Choicefile {
-      display: block;
-      background: #14142B;
-      border: 1px solid #fff;
-      color: #fff;
-      width: 150px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      padding: 5px 0px;
-      border-radius: 5px;
-      font-weight: 500;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .Choicefile:hover {
-      text-decoration: none;
-      color: white;
-    }
-
-    #uploadfile,
-    .removeimg {
-      display: none;
-    }
-
-    #thumbbox {
-      position: relative;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .removeimg {
-      height: 25px;
-      position: absolute;
-      background-repeat: no-repeat;
-      top: 5px;
-      left: 5px;
-      background-size: 25px;
-      width: 25px;
-      /* border: 3px solid red; */
-      border-radius: 50%;
-
-    }
-
-    .removeimg::before {
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      content: '';
-      border: 1px solid red;
-      background: red;
-      text-align: center;
-      display: block;
-      margin-top: 11px;
-      transform: rotate(45deg);
-    }
-
-    .removeimg::after {
-      /* color: #FFF; */
-      /* background-color: #DC403B; */
-      content: '';
-      background: red;
-      border: 1px solid red;
-      text-align: center;
-      display: block;
-      transform: rotate(-45deg);
-      margin-top: -2px;
-    }
-  </style>
-    <script>
-
-    function readURL(input, thumbimage) {
-      if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $("#thumbimage").attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
-      else { // Sử dụng cho IE
-        $("#thumbimage").attr('src', input.value);
-
-      }
-      $("#thumbimage").show();
-      $('.filename').text($("#uploadfile").val());
-      $('.Choicefile').css('background', '#14142B');
-      $('.Choicefile').css('cursor', 'default');
-      $(".removeimg").show();
-      $(".Choicefile").unbind('click');
-
-    }
-    $(document).ready(function () {
+    $(".removeimg").click(function () {
+      $("#thumbimage").attr('src', '').hide();
+      $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+      $(".removeimg").hide();
       $(".Choicefile").bind('click', function () {
         $("#uploadfile").click();
-
       });
-      $(".removeimg").click(function () {
-        $("#thumbimage").attr('src', '').hide();
-        $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
-        $(".removeimg").hide();
-        $(".Choicefile").bind('click', function () {
-          $("#uploadfile").click();
-        });
-        $('.Choicefile').css('background', '#14142B');
-        $('.Choicefile').css('cursor', 'pointer');
-        $(".filename").text("");
-      });
-    })
-  </script>
+      $('.Choicefile').css('background', '#14142B');
+      $('.Choicefile').css('cursor', 'pointer');
+      $(".filename").text("");
+    });
+  })
+</script>
