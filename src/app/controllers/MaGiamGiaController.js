@@ -2,12 +2,15 @@ const MaGiamGia = require('../models/MaGiamGia.model');
 var path = require('path');
 const crypto = require('crypto');
 const dateNow = new Date();
+const moment = require('moment');
 
 class MaGiamGiaController {
     index(req, res) {
         res.render('KhuyenMai')
     }
-    
+    show(req, res) {
+        res.render('DanhSachVoucher')
+    }
     async findMaGiaGia(req, res) {
         let check = null;
         if (typeof (req.query.MaGiamGia) != 'undefined') {
@@ -16,7 +19,6 @@ class MaGiamGiaController {
         try {
             await MaGiamGia.find(check).sort({ _id: -1 })
                 .then((result) => {
-                    // console.log(result);
                     res.status(200).json(
                         result.length == 0 ? 'Không có dữ liệu' : result
                     );

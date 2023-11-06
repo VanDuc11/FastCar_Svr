@@ -6,8 +6,44 @@ class XeController {
         res.render('Quanlyxe')
     }
 
+    async chitietxe(req, res) {
+        await Xe.find({_id:req.params.id}).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+            .then((result) => {
+                console.log(result);
+
+                res.status(200).render('ChiTietXe', {
+                    data: result.map(res => res.toJSON())
+                })
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: true,
+                    message: error.message,
+                })
+            })
+    }
     show(req, res) {
         res.render('danhsachxe')
+    }
+  
+    async chitietxe(req, res) {
+        await Xe.find({_id:req.params.id}).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+            .then((result) => {
+                console.log(result);
+
+                res.status(200).render('ChiTietXe', {
+                    data: result.map(res => res.toJSON())
+                })
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: true,
+                    message: error.message,
+                })
+            })
+    }
+    add(req, res) {
+        res.render('AddXe')
     }
     async findXe(req, res) {
         let check = null;
@@ -79,6 +115,7 @@ class XeController {
             })
         }
     }
+    
 
     async find_Xe_User(req, res) {
         const emailUser = req.params.email;
@@ -157,8 +194,7 @@ class XeController {
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
-            SoChuyen: 0,
-            TrangThai: 0,
+            TrangThai: req.body.TrangThai,
         });
         try {
             await xe.save()

@@ -5,7 +5,9 @@ const ThongBao = require('./ThongBao');
 const Hoadon_ = require('./Hoadon_');
 const FeedBack = require('./FeedBack');
 const FavoriteCar = require('./FavoriteCar');
-
+const ThongKe = require('./ThongKe');
+const Home = require('./Home');
+const loginRouter = require('./login');
 let bodyparser = require('body-parser');
 
 const router = (app) =>{
@@ -13,13 +15,15 @@ const router = (app) =>{
         extended:true
     }))
 
-     // app.use('/index', Index);  
-// app.use('/quanlyxe', Xe);
-// // app.use('/chuyenxe',Chuyenxe);
-// app.use('/thongbao', ThongBao);
-// app.use('/khuyenmai',MaGiaGia);
-// // app.use('/thongke', Thongke);
-// app.use('/khachhang', user);
+    app.use('/login',loginRouter);
+    app.use('/Home', Home);  
+    app.use('/quanlyxe', Xe);
+    app.use('/chuyenxe',Hoadon_);
+    app.use('/thongbao', ThongBao);
+    app.use('/khuyenmai',MaGiaGia);
+    app.use('/thongke', ThongKe);
+    app.use('/khachhang', user);
+ 
 
     app.use('/api/user',user);
     app.use('/api/xe',Xe);

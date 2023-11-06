@@ -35,39 +35,40 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/src/resources/views/index1.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="/login"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
   </header>
   <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-  <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/public/images/images/FastCar.jpg" width="50px"
-      alt="User Image">
-    <div>
-      <p class="app-sidebar__user-name"><b>FastCar</b></p>
-      <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-    </div>
-    </div>
-    <hr>
-    <ul class="app-menu">
-      <li><a class="app-menu__item " href="/index"><i class='app-menu__icon bx bx-home-alt'></i><span
-        class="app-menu__label">Trang chủ</span></a></li>
-  
+      <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+      <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+          <img class="app-sidebar__user-avatar" src="/public/images/FastCar.jpg" width="50px" alt="User Image">
+          <div>
+            <p class="app-sidebar__user-name"><b>FastCar</b></p>
+            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+          </div>
+        </div>
+        <hr>
 
-  <li><a class="app-menu__item" href="/quanlyxe"><i
-        class='app-menu__icon bx bxs-car'></i><span class="app-menu__label">Quản lý xe</span></a>
-  </li>
-  <li><a class="app-menu__item" href="/chuyenXe"><i
-    class='app-menu__icon bx bxs-cart-download'></i><span class="app-menu__label">Chuyến</span></a>
-</li>
-  <li><a class="app-menu__item" href="/thongbao"><i   
-    class='app-menu__icon bx bxs-bell'></i><span class="app-menu__label">Thông báo</span></a>
-</li>
-  <li><a class="app-menu__item" href="/khuyenmai"><i
-    class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Khuyến mãi</span></a>
-</li>
+        <ul class="app-menu">
+          <li><a class="app-menu__item " href="/home"><i class='app-menu__icon bx bx-home-alt'></i><span
+                class="app-menu__label">Trang chủ</span></a></li>
+
+
+          <li><a class="app-menu__item" href="/quanlyxe"><i class='app-menu__icon bx bxs-car'></i><span
+                class="app-menu__label">Quản lý xe</span></a>
+          </li>
+          <li><a class="app-menu__item" href="/chuyenxe"><i class='app-menu__icon bx bxs-cart-download'></i><span
+                class="app-menu__label">Chuyến</span></a>
+          </li>
+          <li><a class="app-menu__item" href="/thongbao"><i class='app-menu__icon bx bxs-bell'></i><span
+                class="app-menu__label">Thông báo</span></a>
+          </li>
+          <li><a class="app-menu__item" href="/khuyenmai"><i class='app-menu__icon bx bxs-discount'></i><span
+                class="app-menu__label">Khuyến mãi</span></a>
+          </li>
 
   <li><a class="app-menu__item" href="/thongke"><i class='app-menu__icon bx bx-task'></i><span
         class="app-menu__label">Thống kê</span></a></li>
@@ -80,17 +81,56 @@
     </ul>
     </aside>
 
-    {{!-- <main class="app-content">
-        <div class="app-title">
-            <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Danh sách xe</b></a></li>
-            </ul>
-            <div id="clock"></div>
-        </div> --}}
-        <div class="row">
-            {{{body}}}
-        </div>
-    {{!-- </main> --}}
+
+  <div class="row">
+    <div class="col-md-12">
+      {{{body}}}
+    </div>
+  </div>
+
+
 </body>
+<script>
+  //Thời Gian
+  function time() {
+    var today = new Date();
+    var weekday = new Array(7);
+    weekday[0] = "Chủ Nhật";
+    weekday[1] = "Thứ Hai";
+    weekday[2] = "Thứ Ba";
+    weekday[3] = "Thứ Tư";
+    weekday[4] = "Thứ Năm";
+    weekday[5] = "Thứ Sáu";
+    weekday[6] = "Thứ Bảy";
+    var day = weekday[today.getDay()];
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    nowTime = h + " giờ " + m + " phút " + s + " giây";
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+      '</span>';
+    document.querySelector("#clock").innerHTML = tmp;
+    clocktime = setTimeout("time()", "1000", "Javascript");
+
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+  }
+</script>
 
 </html>

@@ -21,8 +21,8 @@ app.engine('.hbs', expressHbs.engine({
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname,'resources', 'views'));
 
-app.use(express.static(__dirname, {type:'text/css'}));
-app.use(express.static(__dirname, {type:'public'}));
+app.use(express.static(__dirname, {type:'text/css'}))
+app.use(express.static(path.join(__dirname, 'public')));// trỏ tới thư mục chứa ảnh
 
 DB.connect();
 // mongo_watch._client();
