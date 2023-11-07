@@ -36,22 +36,43 @@ class XeController {
                 })
             })
     }
-    async show(req, res) {
-        await Xe.find({})
-        .populate({ path: "ChuSH", model: "User" })
-        .sort({ _id: -1 })
-        .then((result) => {
-
-            res.status(200).render("danhsachxe", {
-                data: result.map((res) => res.toJSON()),
-            });
-        })
-        .catch((error) => {
+    async duyetxe(req, res) {
+        const id = req.params.id;
+        console.log(id);
+        await Xe.updateOne({ _id: id },
+            {
+                $set: {
+                    TrangThai: 1
+                }
+            }
+        ).then( ()=>{
+            res.status(200).json({
+                success: true,
+                messages: "Yêu cầu cập nhât thành công"
+            })
+        }).catch((err) => {
             res.status(400).json({
                 success: false,
-                message: error.message,
+                messages: err.messages
             });
-        });
+        })
+    }
+    async show(req, res) {
+        await Xe.find({})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+
+                res.status(200).render("danhsachxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
     }
 
     async chitietxe(req, res) {

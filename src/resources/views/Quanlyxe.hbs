@@ -37,7 +37,7 @@
             <div class="col-md-6 col-lg-3">
               <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
-                  <h4>Xe đã duyệt</h4>
+                  <h4>Xe hoạt động</h4>
                   <p><b id="daduyen"></b></p>
                 </div>
               </div>
@@ -63,7 +63,7 @@
                 <th style="text-align: center;">Ảnh</th>
                 <th style="text-align: center;">Số ghế</th>
                 <th style="text-align: center;">Năm sản xuất</th>
-                <th style="text-align: center;" >Giá </th>
+                <th style="text-align: center;">Giá </th>
                 <th style="text-align: center;">Tên chủ xe</th>
                 <th style="text-align: center;">Trạng thái</th>
                 <th style="text-align: center;">Chi tiết</th>
@@ -81,7 +81,7 @@
                 <td style="text-align: center;">{{this.NSX}}</td>
                 <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
                 <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
-                <td style="text-align: center;">{{this.TrangThai}}</td>
+                <td style="text-align: center; font-size: 13px;" class="trangthai">{{this.TrangThai}}</td>
                 <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
                     chi tiết</a></td>
               </tr>
@@ -98,6 +98,7 @@
 <script>
   load_data()
   async function load_data() {
+
     const response = await fetch('/api/xe/list').then(response => response.json());
     var tt0 = 0;
     var tt1 = 0;
@@ -116,6 +117,14 @@
 
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
     var GiaThue = document.querySelectorAll('.giathue');
+    var TrangThai = document.querySelectorAll('.trangthai');
+    TrangThai.forEach((i) => {
+      if (i.innerHTML == 0) {
+        i.innerHTML = "Chờ duyệt"
+      } else {
+        i.innerHTML = "Đang hoạt động"
+      }
+    })
 
     // số tứ tự
     const stt1 = document.querySelectorAll(".stt");
@@ -132,6 +141,7 @@
       });
       i.innerHTML = formattedPrice + " đ"
     })
+
 
   }
 
