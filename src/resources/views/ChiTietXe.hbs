@@ -150,8 +150,8 @@
       <div class="form-group col-md-12">
         <a class="btn btn-success" href="#" id="button-duyet4" data-status="Chưa duyệt"
           onclick="onSubmit(`{{this._id}}`)">Duyệt</a>
-        <a class="btn btn-success" href="#" id="button-sua" >Sửa</a>
-        <a class="btn btn-success" href="#" id="button-xem-tt">Xem thông tin thuê</a>
+        <a class="btn btn-success" href="#" id="button-sua" data-status="Chưa duyệt">Sửa</a>
+        <a class="btn btn-success" href="#" id="button-xem-tt" data-status="Chưa duyệt">Xem thông tin thuê</a>
         <a class="btn btn-cancel" id="button-tuchoi" href="#">Từ chối</a>
       </div>
 
@@ -324,113 +324,6 @@
   </div>
 </main>
 
-<!--
-MODAL
--->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-  data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Chỉnh sửa thông tin xe</h5>
-            </span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label class="control-label">Biển số xe</label>
-            <input class="form-control" type="text" required value="">
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Hãng xe</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>VinFast</option>
-              <option>Toyota</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Mẫu xe</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>VinFast</option>
-              <option>Toyota</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Năm sản xuất</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>2023</option>
-              <option>2022</option>
-              <option>2021</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Số Ghế</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>VinFast</option>
-              <option>Toyota</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Truyền động</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Số tự động</option>
-              <option>Số sàn</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Loại nhiêu liệu</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Xăng</option>
-              <option>Dầu</option>
-              <option>Điện</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Tình trạng </label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Đang hoạt động</option>
-              <option>Đã thuê</option>
-              <option>Đang bảo trì</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Giá bán</label>
-            <input class="form-control" type="text" value="5.600.000">
-          </div>
-          <div class="form-group  col-md-6">
-            <label class="control-label">Mô tả</label>
-            <textarea class="form-control" rows="2"></textarea>
-          </div>
-        </div>
-        <div class="form-group col-md-12">
-          <label class="control-label">Ảnh xe</label>
-          <div id="myfileupload">
-            <input type="file" id="uploadfile" name="ImageUpload" multiple onchange="readURL(this);" />
-          </div>
-
-          <div id="boxchoice">
-            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-            <p style="clear:both"></p>
-
-          </div>
-
-        </div>
-        <button class="btn btn-save" type="button">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-        <BR>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-<!--
-MODAL
--->
 
 <!-- Essential javascripts for application to work-->
 
