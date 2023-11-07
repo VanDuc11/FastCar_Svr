@@ -2,12 +2,26 @@ const Xe = require('../models/Xe.model');
 var path = require('path');
 
 class XeController {
-    index(req, res) {
-        res.render('Quanlyxe')
+    async index(req, res) {
+        await Xe.find({})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
     }
 
     async chitietxe(req, res) {
-        await Xe.find({_id:req.params.id}).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+        await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
                 console.log(result);
 
@@ -22,12 +36,47 @@ class XeController {
                 })
             })
     }
-    show(req, res) {
-        res.render('danhsachxe')
+    async duyetxe(req, res) {
+        const id = req.params.id;
+        console.log(id);
+        await Xe.updateOne({ _id: id },
+            {
+                $set: {
+                    TrangThai: 1
+                }
+            }
+        ).then( ()=>{
+            res.status(200).json({
+                success: true,
+                messages: "Yêu cầu cập nhât thành công"
+            })
+        }).catch((err) => {
+            res.status(400).json({
+                success: false,
+                messages: err.messages
+            });
+        })
     }
-  
+    async show(req, res) {
+        await Xe.find({})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+
+                res.status(200).render("danhsachxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+
     async chitietxe(req, res) {
-        await Xe.find({_id:req.params.id}).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+        await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
                 console.log(result);
 
@@ -115,7 +164,7 @@ class XeController {
             })
         }
     }
-    
+
 
     async find_Xe_User(req, res) {
         const emailUser = req.params.email;

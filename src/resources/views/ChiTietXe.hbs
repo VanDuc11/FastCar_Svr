@@ -9,8 +9,13 @@
   </div>
   <div class="tile">
     <form class="row">
-
       {{#each data}}
+      <p class="col-md-2"
+        style="border-radius: 5px; font-weight: bold;   height: 40px; text-align: center; padding-top: 10px; color: white; "
+        id="trangthaititlle">{{this.TrangThai}}</p>
+      <p class="col-md-12"> </p>
+
+
       <div class="form-group col-md-3">
         <label class="control-label">Biển số xe</label>
         <div class="form-control">
@@ -76,7 +81,7 @@
       <div class="form-group col-md-3">
         <label class="control-label">Trạng Thái</label>
         <div class="form-control">
-          <p><b>{{this.TrangThai}}</b></p>
+          <p><b id="trangthai">{{this.TrangThai}}</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
@@ -127,17 +132,15 @@
         </div>
 
         <div class="form-group col-md-3" style="margin-left:50px;">
-            <label class="control-label">Giấy tờ xe</label>
-            <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px"
-              width="150px" type="button" id="show-emp"
-              data-toggle="modal" data-target="#ModalUP1">
-          </div>
-          <div class="form-group col-md-3" style="margin-left:50px;">
-            <label class="control-label">Bảo hiểm</label>
-            <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="100px"
-              width="150px" type="button" id="show-emp"
-              data-toggle="modal" data-target="#ModalUP2">
-          </div>
+          <label class="control-label">Giấy tờ xe</label>
+          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px"
+            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
+        </div>
+        <div class="form-group col-md-3" style="margin-left:50px;">
+          <label class="control-label">Bảo hiểm</label>
+          <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="100px"
+            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
+        </div>
       </div>
 
       <div class="form-group col-md-12">
@@ -145,159 +148,279 @@
 
       </div>
       <div class="form-group col-md-12">
-        <a class="btn btn-success" href="#" id="button-duyet4" data-status="Chưa duyệt">Duyệt</a>
-        <a class="btn btn-cancel" href="Quanlyxe.html">Hủy bỏ</a>
+        <a class="btn btn-success" href="#" id="button-duyet4" data-status="Chưa duyệt"
+          onclick="onSubmit(`{{this._id}}`)">Duyệt</a>
+        <a class="btn btn-success" href="#" id="button-sua" >Sửa</a>
+        <a class="btn btn-success" href="#" id="button-xem-tt">Xem thông tin thuê</a>
+        <a class="btn btn-cancel" id="button-tuchoi" href="#">Từ chối</a>
+      </div>
+
+
+      {{!-- Modal --}}
+      <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Hình ảnh xe</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                  <div class="images" style=" display: flex;">
+                    <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="240px" width="340px"
+                      style="margin-left:30px;">
+
+                    <img src="/images/{{this.HinhAnh.[1]}}" alt="" height="240px" width="340px"
+                      style="margin-left:140px;">
+
+                  </div>
+                  <BR>
+                  <div class="images" style=" display: flex;">
+                    <img src="/images/{{this.HinhAnh.[2]}}" alt="" height="240px" width="340px"
+                      style="margin-left:30px;">
+                    <img src="/images/{{this.HinhAnh.[3]}}" alt="" height="240px" width="340px"
+                      style="margin-left:140px;">
+
+                  </div>
+                </div>
+              </div>
+              <BR>
+              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+              <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {{!-- ảnh bằng lái --}}
+      <div class="modal fade" id="ModalUP1" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Hình ảnh bằng lái</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                  <div class="images" style=" display: flex;">
+                    <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-truoc-bang-lai-xe.jpg"
+                      alt="" height="240px" width="340px" style="margin-left:40px;">
+
+                    <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-sau-bang-lai-xe.jpg" alt=""
+                      height="240px" width="340px" style="margin-left:150px;">
+                  </div>
+                  <BR>
+
+                </div>
+              </div>
+              <BR>
+              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+              <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{!-- ảnh bảo hiểm --}}
+      <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false" height="900px" width="950px">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Hình ảnh bảo hiểm</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                  <div class="images" style=" display: flex;">
+                    <img src="https://hyundaiphanthiet.vn/wp-content/uploads/2021/09/Xehay-BH-220421-6_1.jpg" alt=""
+                      height="240px" width="340px" style="margin-left:40px;">
+
+                    <img
+                      src="https://luatsux.vn/wp-content/uploads/2022/07/Bao-hiem-trach-nhiem-dan-su-o-to-co-bat-buoc-khong.png"
+                      alt="" height="240px" width="340px" style="margin-left:150px;">
+                  </div>
+                  <BR>
+
+                </div>
+              </div>
+              <BR>
+              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+              <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{!-- ảnh bảo hiểm --}}
+      <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false" height="900px" width="950px">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Hình ảnh bảo hiểm</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                  <div class="images" style=" display: flex;">
+                    <img
+                      src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
+                      alt="" height="100px" width="150px">
+                    <img
+                      src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
+                      alt="" height="100px" width="150px" style="margin-left:100px;">
+                  </div>
+                  <BR>
+
+                </div>
+              </div>
+              <BR>
+              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:180px;">Đóng</a>
+              <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
       </div>
       {{/each}}
 
     </form>
+
   </div>
 </main>
 
+<!--
+MODAL
+-->
 <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-    
-    <div class="modal-body">
-    <div class="row">
-    <div class="form-group  col-md-12">
-    <span class="thong-tin-thanh-toan">
-    <h5>Hình ảnh xe</h5>
-    </span>
-    </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;" >
-            <div class="images" style=" display: flex;">
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt="" height="240px" width="340px" style="margin-left:30px;">
-          
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt="" height="240px" width="340px" style="margin-left:140px;">
-           
-            </div>
-            <BR>
-            <div class="images" style=" display: flex;">
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt="" height="240px" width="340px" style="margin-left:30px;">
-              <img src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg" alt=""height="240px" width="340px"style="margin-left:140px;">
-                     
-            </div>
-          </div>
-    </div>
-    <BR>
-    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-    <BR>
-    </div>
-    <div class="modal-footer">
-    </div>
-    </div>
-    </div>
-    </div>
 
-
-       {{!-- ảnh bằng lái --}}
-     <div class="modal fade" id="ModalUP1" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    
-    <div class="modal-body">
-    <div class="row">
-    <div class="form-group  col-md-12">
-    <span class="thong-tin-thanh-toan">
-    <h5>Hình ảnh bằng lái</h5>
-    </span>
-    </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-            <div class="images" style=" display: flex;">
-              <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-truoc-bang-lai-xe.jpg" alt="" height="240px" width="340px" style="margin-left:40px;">
-          
-              <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-sau-bang-lai-xe.jpg" alt="" height="240px" width="340px" style="margin-left:150px;">
-            </div>
-            <BR>
-          
-          </div>
-    </div>
-    <BR>
-    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-    <BR>
-    </div>
-    <div class="modal-footer">
-    </div>
-    </div>
-    </div>
-    </div>
-
-      {{!-- ảnh bảo hiểm --}}
-  <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false"   height="900px" width="950px" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    
-    <div class="modal-body">
-    <div class="row">
-    <div class="form-group  col-md-12" >
-    <span class="thong-tin-thanh-toan" >
-    <h5  >Hình ảnh bảo hiểm</h5>
-    </span>
-    </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-            <div class="images" style=" display: flex;">
-              <img src="https://hyundaiphanthiet.vn/wp-content/uploads/2021/09/Xehay-BH-220421-6_1.jpg" alt="" height="240px" width="340px" style="margin-left:40px;">
-          
-              <img src="https://luatsux.vn/wp-content/uploads/2022/07/Bao-hiem-trach-nhiem-dan-su-o-to-co-bat-buoc-khong.png" alt="" height="240px" width="340px" style="margin-left:150px;">
-            </div>
-            <BR>
-          
-          </div>
-    </div>
-    <BR>
-    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-    <BR>
-    </div>
-    <div class="modal-footer">
-    </div>
-    </div>
-    </div>
-    </div>
-
-      {{!-- ảnh bảo hiểm --}}
-  <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false"   height="900px" width="950px" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    
-    <div class="modal-body">
-    <div class="row">
-    <div class="form-group  col-md-12" >
-    <span class="thong-tin-thanh-toan" >
-    <h5  >Hình ảnh bảo hiểm</h5>
-    </span>
-    </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-            <div class="images" style=" display: flex;">
-              <img
-                src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
-                alt="" height="100px" width="150px">
-              <img
-                src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
-                alt="" height="100px" width="150px" style="margin-left:100px;">
-            </div>
-            <BR>
-          
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Chỉnh sửa thông tin xe</h5>
+            </span>
           </div>
         </div>
-        <BR>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:180px;">Đóng</a>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label class="control-label">Biển số xe</label>
+            <input class="form-control" type="text" required value="">
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Hãng xe</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Mẫu xe</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Năm sản xuất</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Số Ghế</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Truyền động</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Số tự động</option>
+              <option>Số sàn</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Loại nhiêu liệu</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Xăng</option>
+              <option>Dầu</option>
+              <option>Điện</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Tình trạng </label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Đang hoạt động</option>
+              <option>Đã thuê</option>
+              <option>Đang bảo trì</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Giá bán</label>
+            <input class="form-control" type="text" value="5.600.000">
+          </div>
+          <div class="form-group  col-md-6">
+            <label class="control-label">Mô tả</label>
+            <textarea class="form-control" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label class="control-label">Ảnh xe</label>
+          <div id="myfileupload">
+            <input type="file" id="uploadfile" name="ImageUpload" multiple onchange="readURL(this);" />
+          </div>
+
+          <div id="boxchoice">
+            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+            <p style="clear:both"></p>
+
+          </div>
+
+        </div>
+        <button class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
         <BR>
       </div>
       <div class="modal-footer">
@@ -305,23 +428,27 @@
     </div>
   </div>
 </div>
+<!--
+MODAL
+-->
+
 <!-- Essential javascripts for application to work-->
 
-  <!-- Essential javascripts for application to work-->
-   <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+<!-- Essential javascripts for application to work-->
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
   let buttonStatus = "Chưa duyệt";
 
@@ -342,10 +469,20 @@
 </script>
 
 <script>
+  validatePrice()
   function validatePrice() {
     var GiaThue = document.querySelector('#giathue');
     var TieuHao = document.querySelector('#tieuhao');
     var NgayDang = document.querySelector('#ngaydang');
+    var TrangThai = document.querySelector('#trangthai');
+    var TrangThaiTitlle = document.getElementById('trangthaititlle');
+
+    var duyet = document.getElementById('button-duyet4');
+    var sua = document.getElementById('button-sua');
+    var xemTT = document.getElementById('button-xem-tt');
+    var tuchoi = document.getElementById('button-tuchoi');
+
+
 
     const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
       minimumFractionDigits: 2,
@@ -356,100 +493,148 @@
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    const formattedDate = day +'/'+month+'/'+year
+    const formattedDate = day + '/' + month + '/' + year
 
-    NgayDang.innerHTML  = formattedDate;
+    if (TrangThai.innerHTML == 0) {
+      TrangThai.innerHTML = "Đang chờ duyệt"
+      TrangThaiTitlle.innerHTML = "Đang chờ duyệt"
+      TrangThaiTitlle.style.background = "#e24a4a"; //#F9BABA
+      sua.style.display = "none"
+      xemTT.style.display = 'none'
+    } else if (TrangThai.innerHTML == 1) {
+      TrangThai.innerHTML = "Đang hoạt động"
+      TrangThaiTitlle.innerHTML = "Đã duyệt"
+      TrangThaiTitlle.style.background = "#7cea94";
+      duyet.style.display = "none"
+      tuchoi.style.display = 'none'
+    }
+    NgayDang.innerHTML = formattedDate;
     GiaThue.innerHTML = formattedPrice + " đ"
     TieuHao.innerHTML = TieuHao.innerHTML + " Lít/100Km"
+
   }
-  validatePrice()
+  // Hàm để hiển thị dialog loading
+  function showLoading() {
+    document.querySelector(".loading").style.display = "block";
+  }
+
+  // Hàm để kiểm tra kết quả của việc duyệt
+  function checkResult(result) {
+    if (result === true) {
+      // Hiển thị thông báo thành công
+      alert("Duyệt thành công");
+
+    } else {
+      // Hiển thị thông báo thất bại
+      alert("Duyệt thất bại");
+    }
 
 
-        //EXCEL
-        // $(document).ready(function () {
-        //   $('#').DataTable({
+  }
 
-        //     dom: 'Bfrtip',
-        //     "buttons": [
-        //       'excel'
-        //     ]
-        //   });
-        // });
+  // Hàm xử lý sự kiện nhấp vào nút duyệt
+  function onSubmit(id) {
+    fetch(`/api/xe/duyet/${id}`, { method: "POST" })
+      .then((response) => {
 
+        if (response.ok) {
+          checkResult(true);
+        location.reload(); // Reload lại trang
 
-        //Thời Gian
-        function time() {
-            var today = new Date();
-            var weekday = new Array(7);
-            weekday[0] = "Chủ Nhật";
-            weekday[1] = "Thứ Hai";
-            weekday[2] = "Thứ Ba";
-            weekday[3] = "Thứ Tư";
-            weekday[4] = "Thứ Năm";
-            weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bảy";
-            var day = weekday[today.getDay()];
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            var s = today.getSeconds();
-            m = checkTime(m);
-            s = checkTime(s);
-            nowTime = h + " giờ " + m + " phút " + s + " giây";
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                '</span>';
-            document.getElementById("clock").innerHTML = tmp;
-            clocktime = setTimeout("time()", "1000", "Javascript");
-
-            function checkTime(i) {
-                if (i < 10) {
-                    i = "0" + i;
-                }
-                return i;
-            }
+        } else {
+          checkResult(false);
         }
-        //In dữ liệu
-        var myApp = new function () {
-            this.printTable = function () {
-                var tab = document.getElementById('sampleTable');
-                var win = window.open('', '', 'height=700,width=700');
-                win.document.write(tab.outerHTML);
-                win.document.close();
-                win.print();
-            }
-        }
-        //     //Sao chép dữ liệu
-        //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-        // copyTextareaBtn.addEventListener('click', function(event) {
-        //   var copyTextarea = document.querySelector('.js-copytextarea');
-        //   copyTextarea.focus();
-        //   copyTextarea.select();
-
-        //   try {
-        //     var successful = document.execCommand('copy');
-        //     var msg = successful ? 'successful' : 'unsuccessful';
-        //     console.log('Copying text command was ' + msg);
-        //   } catch (err) {
-        //     console.log('Oops, unable to copy');
-        //   }
-        // });
+      })
+  }
 
 
-        //Modal
-        $("#show-emp").on("click", function () {
-            $("#ModalUP").modal({ backdrop: false, keyboard: false })
-        });
-    </script>
+
+
+  //EXCEL
+  // $(document).ready(function () {
+  //   $('#').DataTable({
+
+  //     dom: 'Bfrtip',
+  //     "buttons": [
+  //       'excel'
+  //     ]
+  //   });
+  // });
+
+
+  //Thời Gian
+  function time() {
+    var today = new Date();
+    var weekday = new Array(7);
+    weekday[0] = "Chủ Nhật";
+    weekday[1] = "Thứ Hai";
+    weekday[2] = "Thứ Ba";
+    weekday[3] = "Thứ Tư";
+    weekday[4] = "Thứ Năm";
+    weekday[5] = "Thứ Sáu";
+    weekday[6] = "Thứ Bảy";
+    var day = weekday[today.getDay()];
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    nowTime = h + " giờ " + m + " phút " + s + " giây";
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+      '</span>';
+    document.getElementById("clock").innerHTML = tmp;
+    clocktime = setTimeout("time()", "1000", "Javascript");
+
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+  }
+  //In dữ liệu
+  var myApp = new function () {
+    this.printTable = function () {
+      var tab = document.getElementById('sampleTable');
+      var win = window.open('', '', 'height=700,width=700');
+      win.document.write(tab.outerHTML);
+      win.document.close();
+      win.print();
+    }
+  }
+  //     //Sao chép dữ liệu
+  //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+  // copyTextareaBtn.addEventListener('click', function(event) {
+  //   var copyTextarea = document.querySelector('.js-copytextarea');
+  //   copyTextarea.focus();
+  //   copyTextarea.select();
+
+  //   try {
+  //     var successful = document.execCommand('copy');
+  //     var msg = successful ? 'successful' : 'unsuccessful';
+  //     console.log('Copying text command was ' + msg);
+  //   } catch (err) {
+  //     console.log('Oops, unable to copy');
+  //   }
+  // });
+
+
+  //Modal
+  $("#show-emp").on("click", function () {
+    $("#ModalUP").modal({ backdrop: false, keyboard: false })
+  });
+</script>
 </body>
 
 </html>

@@ -33,6 +33,11 @@ router.get('/listXe_NotUser/:email', XeController.find_Xe_Not_User);
 // get xe của user
 router.get('/listXe_user/:email',XeControlles.find_Xe_User);
 
+// duyệt xe
+router.post('/duyet/:id',XeControlles.duyetxe);
+
+
+
 router.post('/create',upload.array('HinhAnh',4),XeControlles.CreateXe);
 
 router.put('/update/:id',XeControlles.UpdateXe);
