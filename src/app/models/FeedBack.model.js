@@ -6,7 +6,7 @@ const FeedBack = new Schema({
     Xe: { type: mongoose.Schema.Types.ObjectId, ref: 'Xe' },
     NoiDung: { type: String},
     SoSao: { type: Number},
-    ThoiGian: { type: String }
+    ThoiGian: { type: Date }
 },{collection: 'feedback'}, { timestamps: true })
 
 module.exports = mongoose.model("FeedBack", FeedBack);

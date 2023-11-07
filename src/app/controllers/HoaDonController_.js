@@ -31,6 +31,10 @@ class HoaDonController_ {
             check = { TrangThaiHD: { $in: trangThaiValues }, User: req.query.User };
         }
 
+        if (trangThaiValues.length > 0 && typeof (req.query.Xe) != 'undefined') {
+            check = { TrangThaiHD: { $in: trangThaiValues }, Xe: req.query.Xe };
+        }
+
         try {
             await HoaDon.find(check).populate('Xe')
                 .populate({
