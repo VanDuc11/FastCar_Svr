@@ -105,7 +105,7 @@
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                             <tr>
-                                <th width="10"><input type="checkbox" id="all"></th>
+                                <th>STT</th>
                                 <th>Mã hóa đơn</th>
                                 <th>Tên khách hàng</th>
                                 <th>Tên xe</th>
@@ -119,19 +119,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{#each data}}
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                <td >{{@index}}</td>
                               
-                                <td>8799-4737589 </td>
-                                <td>Nguyễn Văn A</td>
-                                <td>Vinfast F8</td>
-                                <td>88A-68686</td>
-                                <td>500.000đ</td>
-                                <td>19/09/2023</td>
-                                <td>21/09/2023</td>
-                                <td><span class="badge bg-warning">Đang hoạt động</span></td>
+                                <td>{{this.MaHD}}</td>
+                                <td>{{this.User.UserName}}</td>
+                                <td>{{this.Xe.MauXe}}</td>
+                                <td>{{this.Xe.BKS}}</td>
+                                <td>{{this.TongTien}}</td>
+                                <td>{{this.NgayThue}}</td>
+                                <td>{{this.NgayTra}}</td>
+                                <td><span class="badge bg-warning">{{this.TrangThaiHD}}</span></td>
                              <td> <a class="btn btn-info " href="/chuyenxe/ChiTietChuyen/{{this._id}}"> Xem chi tiết</a></td>
                             </tr>
+                            {{/each}}
+                        
                         
                         </tbody>
                     </table>

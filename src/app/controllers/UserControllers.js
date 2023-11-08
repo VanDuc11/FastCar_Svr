@@ -12,7 +12,7 @@ class UserControlles {
                 result.forEach(item => {
                     const NgayThamGia = moment(item.NgayThamGia).format('DD/MM/YYYY', { locale: 'vi' });
                     const NgaySinh = moment(item.NgaySinh).format('DD/MM/YYYY', { locale: 'vi' });
-                    
+
                     const arr = {
                         _id: item._id,
                         UserName: item.UserName,
@@ -33,6 +33,17 @@ class UserControlles {
                     data: data
                 })
             });
+    }
+    async chitietkhachhang(req, res) {
+        var id = req.params.id;
+        await User.find({ _id: id })
+            .then((result) => {
+                res.render('ChiTietKhachHang',
+                    {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+            })
     }
     async user(req, res, next) {
         let check = null;
@@ -168,7 +179,7 @@ class UserControlles {
             });
         }
     }
-    
+
     async UpGPLX(req, res) {
         const img = [];
         for (var i = 0; i < req.files.length; i++) {
