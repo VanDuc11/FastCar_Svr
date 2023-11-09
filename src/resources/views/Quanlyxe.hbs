@@ -17,11 +17,23 @@
             </div>
 
 
+    {{!-- <div class="col-sm-2">
+                    <a class="lọc" ><i class='bx bx-slider-alt'></i></a>
+            
+            </div> --}}
+            
+  
 
             <div class="col-sm-2">
               <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
             </div>
+             <div class="col-sm-2" style="">
+  <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1"  >
+    <option>Đã duyệt</option>
+    <option>Chờ duyệt</option>
+  </select>
+   </div>
           </div>
 
 
@@ -94,7 +106,14 @@
     </div>
   </div>
 </main>
+<script>
+    const a = document.querySelector('.lọc');
 
+    a.addEventListener('click', function() {
+      // Hiển thị nội dung của thẻ select
+      document.querySelector('#exampleSelect1').style.display = 'block';
+    });
+  </script>
 <script>
   load_data()
   async function load_data() {

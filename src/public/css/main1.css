@@ -5859,6 +5859,19 @@ button.close {
     max-width: 900px;
   }
 }
+@media (min-width: 576px) {
+  .modal-dialog1 {
+    max-width: 400px;
+  
+    margin: 1.75rem auto;
+  }
+  .modal-dialog-centered {
+    min-height: calc(100% - (1.75rem * 2));
+  }
+  .modal-sm {
+    max-width: 900px;
+  }
+}
 
 @media (min-width: 992px) {
   .modal-lg {
