@@ -1,91 +1,82 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Chi tiết Chuyến xe</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Hóa đơn</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
     <div class="row element-button">
     </div>
     <div class="tile">
-        <form class="row">
-            <form class="row">
-                {{#each data}}
+      
+        {{#each data}}
+                <h1 style="font-size: 15px;" >Thông tin khách hàng</h1>    
+                <div class="row element-button">
+      </div>
+            <form class="row">   
+      
                 <div class="form-group col-md-3">
-                    <label class="control-label">Mã hóa đơn</label>
-                    <div class="form-control">
-                        <p><b>{{this.MaHD}}</b></p>
-                    </div>
+                    <label class="control-label">Mã hóa đơn: {{this.MaHD}}</label>   
+                </div>
+             
+                <div class="form-group col-md-3">
+                    <label class="control-label">Tên khách hàng: {{this.User.UserName}}</label>
+                 
                 </div>
                 <div class="form-group col-md-3">
-                    <label class="control-label">Tên khách hàng</label>
-                    <div class="form-control">
-                        <p><b>{{this.User.UserName}}</b></p>
-                    </div>
+                    <label class="control-label">Số điện thoại: {{this.User.SDT}}</label>
                 </div>
                 <div class="form-group col-md-3">
-                    <label class="control-label">Số điện thoại</label>
-                    <div class="form-control">
-                        <p><b>{{this.User.SDT}}</b></p>
-                    </div>
+                    <label class="control-label">Email: {{this.User.Email}}</label>
+                </div>
+</form>
+  <div class="row element-button">
+      </div>
+       <h1 style="font-size: 15px;" >Thông tin xe</h1>  
+       <div class="row element-button">
+      </div>  
+       <form class="row">   
+           
+                <div class="form-group col-md-3">
+                    <label class="control-label">Tên xe: {{this.Xe.MauXe}}</label>
+                  
                 </div>
                 <div class="form-group col-md-3">
-                    <label class="control-label">Email</label>
-                    <div class="form-control">
-                        <p><b>{{this.User.Email}}</b></p>
-                    </div>
+                    <label class="control-label">Biển số xe: {{this.Xe.BKS}}</label>
                 </div>
                 <div class="form-group col-md-3">
-                    <label class="control-label">Tên xe</label>
-                    <div class="form-control">
-                        <p><b>{{this.Xe.MauXe}}</b></p>
-                    </div>
+                    <label class="control-label">Ngày thuê: {{this.NgayThue}}</label>
                 </div>
                 <div class="form-group col-md-3">
-                    <label class="control-label">Biển số xe</label>
-                    <div class="form-control">
-                        <p><b>{{this.Xe.BKS}}</b></p>
-                    </div>
+                    <label class="control-label">Ngày trả: {{this.NgayTra}}</label>
+                </div>    
+                            </form>
+  <div class="row element-button">
+      </div>     
+       <h1  style="font-size: 15px;" >Thông tin dịch vụ</h1>    
+       <div class="row element-button">
+      </div>
+             <form class="row"> 
+                <div class="form-group col-md-3">
+                    <label class="control-label">Giá thuê : {{this.MaHD}}</label>
                 </div>
                 <div class="form-group col-md-3">
-                    <label class="control-label">Ngày thuê</label>
-                    <div class="form-control">
-                        <p><b>{{this.NgayThue}}</b></p>
-                    </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Ngày trả</label>
-                    <div class="form-control">
-                        <p><b>{{this.NgayTra}}</b></p>
-                    </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Giá thuê</label>
-                    <div class="form-control">
-                        <p><b>{{this.MaHD}}</b></p>
-                    </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Giá cọc</label>
-                    <div class="form-control">
-                        <p><b>{{this.MaHD}}</b></p>
-                    </div>
+                    <label class="control-label">Giá cọc: {{this.MaHD}}</label>        
                 </div>
                 <div class="form-group col-md-3 ">
-                    <label for="exampleSelect1" class="control-label">Trạng thái</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>-- Chọn trạng thái --</option>
-                        <option>Đã cọc</option>
-                        <option>Đang hoat động</option>
-                        <option>Đã hoàn thành</option>
-
-                    </select>
+                    <label for="exampleSelect1" class="control-label">Phí dịch vụ : {{this.PhiDV}}</label>
                 </div>
+                  <div class="form-group col-md-3 ">
+                    <label for="exampleSelect1" class="control-label">Phụ phí : {{this.PhuPhi}} </label>
+                </div>
+                                    </form>
+  <div class="row element-button">
+      </div>  
+       <h1  style="font-size: 15px; ">Thành tiền</h1>  
+       <div class="row element-button">
+      </div>  
                 <div class="form-group col-md-3">
-                    <label class="control-label">Tổng tiền </label>
-                    <div class="form-control">
-                        <p><b>{{this.MaHD}}</b></p>
-                    </div>
+                    <label class="control-label">Tổng tiền : {{this.TongTien}}</label>
                 </div>
                 <div class="form-group col-md-12">
 
@@ -93,6 +84,7 @@
 
                 <a class="btn btn-cancel" href="ChiTietChuyen.html">Hủy bỏ</a>
                 {{/each}}
+</form>
 
     </div>
     </div>
@@ -228,4 +220,3 @@
 </script>
 </body>
 
-</html>

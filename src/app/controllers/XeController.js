@@ -90,6 +90,9 @@ class XeController {
                 })
             })
     }
+  Thongtin(req, res) {
+        res.render('ThongTinKhachThue')
+    }
     add(req, res) {
         res.render('AddXe')
     }

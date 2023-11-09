@@ -1,130 +1,125 @@
 <main class="app-content">
   <div class="app-title">
     <ul class="app-breadcrumb breadcrumb side">
-      <li class="breadcrumb-item active"><a href="#"><b>Chi tiết xe</b></a></li>
+      <li class="breadcrumb-item active"><a href="#"><b>Danh sách các khách hàng đã thuê</b></a></li>
     </ul>
     <div id="clock"></div>
   </div>
-  <div class="row element-button">
-  </div>
-  <div class="tile">
-    <form class="row">
-      {{#each data}}
-      <p class="col-md-2"
-        style="border-radius: 5px; font-weight: bold;   height: 40px; text-align: center; padding-top: 10px; color: white; "
-        id="trangthaititlle">{{this.TrangThai}}</p>
-      <p class="col-md-12"> </p>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="row element-button">
+            <div class="col-sm-2">
+              <button type="button" id="add-new-btn" class="btn btn-add btn-sm"> Thông tin xe</button>
+            </div>
+          
 
 
-      <div class="form-group col-md-3">
+    
+          </div>
+
+          <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data"
+            style="display: none;">
+            <div class="row">
+             <div class="form-group col-md-3">
         <label class="control-label">Biển số xe</label>
         <div class="form-control">
-          <p><b>{{this.BKS}}</b></p>
+          <p><b>88H1-123123</b></p>
         </div>
       </div>
-      <div class="form-group col-md-3">
+              <div class="form-group col-md-3">
         <label class="control-label">Hãng xe</label>
         <div class="form-control">
-          <p><b>{{this.HangXe}}</b></p>
+          <p><b>Vin</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Tên xe</label>
         <div class="form-control">
-          <p><b>{{this.MauXe}}</b></p>
+          <p><b>Vinfast</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Năm sản xuất</label>
         <div class="form-control">
-          <p><b>{{this.NSX}}</b></p>
+          <p><b>2019</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Loại nhiêu liệu</label>
         <div class="form-control">
-          <p><b>{{this.LoaiNhienLieu}}</b></p>
+          <p><b>Xăng</b></p>
         </div>
       </div>
 
       <div class="form-group col-md-3">
         <label class="control-label">Truyền động</label>
         <div class="form-control">
-          <p><b>{{this.ChuyenDong}}</b></p>
+          <p><b>Tự động</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Số ghế</label>
         <div class="form-control">
-          <p><b>{{this.SoGhe}}</b></p>
+          <p><b>4</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Giá thuê</label>
         <div class="form-control">
-          <p><b id="giathue">{{this.GiaThue1Ngay}}</b></p>
+          <p><b id="giathue">1.520.000</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Tiêu hao</label>
         <div class="form-control">
-          <p><b id="tieuhao">{{this.TieuHao}}</b></p>
+          <p><b id="tieuhao">123123</b></p>
         </div>
       </div>
 
       <div class="form-group col-md-3">
         <label class="control-label">Số chuyến</label>
         <div class="form-control">
-          <p><b>{{this.SoChuyen}}</b></p>
+          <p><b>70</b></p>
         </div>
       </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Trạng Thái</label>
-        <div class="form-control">
-          <p><b id="trangthai">{{this.TrangThai}}</b></p>
-        </div>
-      </div>
+ 
       <div class="form-group col-md-3">
         <label class="control-label">Tên chủ xe</label>
         <div class="form-control">
-          <p><b>{{this.ChuSH.UserName}}</b></p>
+          <p><b>Nguyễn A </b></p>
         </div>
       </div>
 
       <div class="form-group col-md-3">
         <label class="control-label">Số điện thoại</label>
         <div class="form-control">
-          <p><b>{{this.ChuSH.SDT}}</b></p>
+          <p><b>092139129</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Email</label>
         <div class="form-control">
-          <p><b>{{this.ChuSH.Email}}</b></p>
+          <p><b>duy@gmail.com</b></p>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label class="control-label">Ngày Đăng</label>
         <div class="form-control">
-          <p><b id="ngaydang">{{this.createdAt}}</b></p>
+          <p><b id="ngaydang">20/11/2023</b></p>
         </div>
       </div>
-      <div class="form-group col-md-3">
-
-      </div>
+    
       <div class="form-group col-md-3">
         <label class="control-label">Địa chỉ Xe</label>
-        <textarea class="form-control">{{this.DiaChiXe}}</textarea>
-      </div>
-      <div class="form-group col-md-4">
-        <label class="control-label">Mô tả</label>
-        <textarea class="form-control" style=" width: 550px;">{{this.MoTa}}</textarea>
+        <textarea class="form-control">HÀ NỘI</textarea>
       </div>
       <div class="form-group col-md-3">
-
+        <label class="control-label">Mô tả</label>
+        <textarea class="form-control" style=" width: 300px;">ÁDASFASGASG</textarea>
       </div>
-
-      <div class="row" style="">
+             <div class="row">
         <div class="form-group col-md-3" style="margin-left:20px;">
           <label class="control-label">Ảnh xe</label> <BR>
           <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="100px" width="150px" type="button" id="show-emp"
@@ -142,57 +137,53 @@
             width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
         </div>
       </div>
+    
 
-      <div class="form-group col-md-12">
+            </div>
 
+            
 
-      </div>
-      <div class="form-group col-md-12">
-        <a class="btn btn-success" href="#" id="button-duyet4" data-status="Chưa duyệt"
-          onclick="onSubmit(`{{this._id}}`)">Duyệt</a>
-        <a class="btn btn-success" href="#" id="button-sua" data-status="Chưa duyệt"data-toggle="modal"
-                  data-target="#ModalUP3">Sửa</a>
-        <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue" id="button-xem-tt" data-status="Chưa duyệt">Xem thông tin thuê</a>
-        <a class="btn btn-cancel" id="button-tuchoi" href="#">Từ chối</a>
-      </div>
-
-{{!-- sửa trạng thái --}}
-<div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-  data-keyboard="false">
-  <div class="modal-dialog1 modal-dialog-centered1" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Chỉnh sửa thông tin xe</h5>
-            </span>
+          </form>
+          <div class="row element-button">
           </div>
+          <table class="table table-hover table-bordered" id="sampleTable">
+            <thead>
+           <th width="10"> STT</th>
+                <th width="100">Tên khách hàng</th>
+                <th width="100">Ảnh</th>
+                <th width="100">Số điện thoại</th>
+                <th width="100">Địa chỉ</th>
+                <th width="100">Email</th>
+                <th width="100">Giới tính </th>
+                <th width="100">Ngày sinh </th>
+                <th width="100">Chức năng</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr>
+                <td class="stt">{{@index}}</td>
+                <td>Nguyễn văn a</td>
+                <td><img src="/images/{{this.HinhAnh}}" alt="" width="100px;" height="60px"></td>
+                <td>0123192941</td>
+                <td>Hà nội</td>
+                <td >NGUYEN@GMAIL.COM</td>
+                <td>Nam</td>
+                 <td>20/11/2000</td>
+                
+                <td> <a class="btn btn-info " href="#"> Hóa đơn</a></td>
+
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="row">
-         
-          <div class="form-group col-md-6  " style="margin-left: 30px;">
-            <label for="exampleSelect1" class="control-label">Trạng thái </label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Đang hoạt động</option>
-              <option>Đã thuê</option>
-              <option>Đang bảo trì</option>
-            </select>
-          </div>
-       </div>
-        <BR>
-       
-          <a class="btn btn-save"  href="#" >Lưu lại</a>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#" >Hủy bỏ</a>
-        <BR>
-      </div>
-      <div class="modal-footer">
       </div>
     </div>
   </div>
-</div>
-      {{!-- Modal --}}
+</main>
+ {{!-- Modal --}}
       <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -353,16 +344,6 @@
           </div>
         </div>
       </div>
-      {{/each}}
-
-    </form>
-
-  </div>
-</main>
-
-
-<!-- Essential javascripts for application to work-->
-
 <!-- Essential javascripts for application to work-->
 <script src="/public/js/jquery-3.2.1.min.js"></script>
 <script src="/public/js/popper.min.js"></script>
@@ -379,191 +360,45 @@
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
-  let buttonStatus = "Chưa duyệt";
+  // ẩn hiện form
+  const addNewBtn = document.getElementById("add-new-btn");
+  let showForm = false;
 
-  // Tạo một hàm để xử lý sự kiện click của nút
-  function handleClick() {
-    // Thay đổi trạng thái của nút
-    buttonStatus = "Đã duyệt";
-
-    // Thay đổi văn bản của nút
-    this.textContent = buttonStatus;
-  }
-
-  // Thêm sự kiện click cho tất cả các nút
-  for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
-    document.querySelectorAll(".btn-success")[i].addEventListener("click", handleClick);
-  }
-
-</script>
-
-<script>
-  validatePrice()
-  function validatePrice() {
-    var GiaThue = document.querySelector('#giathue');
-    var TieuHao = document.querySelector('#tieuhao');
-    var NgayDang = document.querySelector('#ngaydang');
-    var TrangThai = document.querySelector('#trangthai');
-    var TrangThaiTitlle = document.getElementById('trangthaititlle');
-
-    var duyet = document.getElementById('button-duyet4');
-    var sua = document.getElementById('button-sua');
-    var xemTT = document.getElementById('button-xem-tt');
-    var tuchoi = document.getElementById('button-tuchoi');
-
-
-
-    const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
-      minimumFractionDigits: 2,
-      decimal: ',',
-      thousandsSeparator: '.',
-    });
-    const date = new Date(NgayDang.innerHTML);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const formattedDate = day + '/' + month + '/' + year
-
-    if (TrangThai.innerHTML == 0) {
-      TrangThai.innerHTML = "Đang chờ duyệt"
-      TrangThaiTitlle.innerHTML = "Đang chờ duyệt"
-      TrangThaiTitlle.style.background = "#e24a4a"; //#F9BABA
-      sua.style.display = "none"
-      xemTT.style.display = 'none'
-    } else if (TrangThai.innerHTML == 1) {
-      TrangThai.innerHTML = "Đang hoạt động"
-      TrangThaiTitlle.innerHTML = "Đã duyệt"
-      TrangThaiTitlle.style.background = "#7cea94";
-      duyet.style.display = "none"
-      tuchoi.style.display = 'none'
-    }
-    NgayDang.innerHTML = formattedDate;
-    GiaThue.innerHTML = formattedPrice + " đ"
-    TieuHao.innerHTML = TieuHao.innerHTML + " Lít/100Km"
-
-  }
-  // Hàm để hiển thị dialog loading
-  function showLoading() {
-    document.querySelector(".loading").style.display = "block";
-  }
-
-  // Hàm để kiểm tra kết quả của việc duyệt
-  function checkResult(result) {
-    if (result === true) {
-      // Hiển thị thông báo thành công
-      alert("Duyệt thành công");
-
-    } else {
-      // Hiển thị thông báo thất bại
-      alert("Duyệt thất bại");
-    }
-
-
-  }
-
-  // Hàm xử lý sự kiện nhấp vào nút duyệt
-  function onSubmit(id) {
-    fetch(`/api/xe/duyet/${id}`, { method: "POST" })
-      .then((response) => {
-
-        if (response.ok) {
-          checkResult(true);
-        location.reload(); // Reload lại trang
-
-        } else {
-          checkResult(false);
-        }
-      })
-  }
-
-
-
-
-  //EXCEL
-  // $(document).ready(function () {
-  //   $('#').DataTable({
-
-  //     dom: 'Bfrtip',
-  //     "buttons": [
-  //       'excel'
-  //     ]
-  //   });
-  // });
-
-
-  //Thời Gian
-  function time() {
-    var today = new Date();
-    var weekday = new Array(7);
-    weekday[0] = "Chủ Nhật";
-    weekday[1] = "Thứ Hai";
-    weekday[2] = "Thứ Ba";
-    weekday[3] = "Thứ Tư";
-    weekday[4] = "Thứ Năm";
-    weekday[5] = "Thứ Sáu";
-    weekday[6] = "Thứ Bảy";
-    var day = weekday[today.getDay()];
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    nowTime = h + " giờ " + m + " phút " + s + " giây";
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-    if (mm < 10) {
-      mm = '0' + mm
-    }
-    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-      '</span>';
-    document.getElementById("clock").innerHTML = tmp;
-    clocktime = setTimeout("time()", "1000", "Javascript");
-
-    function checkTime(i) {
-      if (i < 10) {
-        i = "0" + i;
-      }
-      return i;
-    }
-  }
-  //In dữ liệu
-  var myApp = new function () {
-    this.printTable = function () {
-      var tab = document.getElementById('sampleTable');
-      var win = window.open('', '', 'height=700,width=700');
-      win.document.write(tab.outerHTML);
-      win.document.close();
-      win.print();
-    }
-  }
-  //     //Sao chép dữ liệu
-  //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-  // copyTextareaBtn.addEventListener('click', function(event) {
-  //   var copyTextarea = document.querySelector('.js-copytextarea');
-  //   copyTextarea.focus();
-  //   copyTextarea.select();
-
-  //   try {
-  //     var successful = document.execCommand('copy');
-  //     var msg = successful ? 'successful' : 'unsuccessful';
-  //     console.log('Copying text command was ' + msg);
-  //   } catch (err) {
-  //     console.log('Oops, unable to copy');
-  //   }
-  // });
-
-
-  //Modal
-  $("#show-emp").on("click", function () {
-    $("#ModalUP").modal({ backdrop: false, keyboard: false })
+  addNewBtn.addEventListener("click", () => {
+    showForm = !showForm; // Đảo ngược giá trị của biến showForm
+    const form = document.getElementById("product-form");
+    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
   });
-</script>
-</body>
+  const HSD = document.querySelectorAll(".HSD");
+    HSD.forEach((i) => {
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+    })
+    var stt = 0;
+  const stt1 = document.querySelectorAll(".stt");
+  stt1.forEach((i) => {
+    stt++;
+    i.innerText = stt
+  })
 
-</html>
+  const TrangThai = document.querySelectorAll('.TrangThai');
+  TrangThai.forEach((i)=>{
+  console.log(i.innerHTML)
+
+    if(i.innerHTML === "true"){
+      i.innerHTML= "Hoạt động"
+      i.style.color = "#02790C"
+    }else{
+      i.innerHTML= "Hết hạn"
+      i.style.color = "#A90312"
+      i.style.background="#F9C9CD"
+    }
+  })
+
+</script>
+
+
