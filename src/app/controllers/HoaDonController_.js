@@ -12,8 +12,77 @@ admin.initializeApp({
 });
 
 class HoaDonController_ {
-    index(req, res) {
-        res.render('ChuyenXe')
+    async index(req, res) {
+        let check = null;
+        let trangThaiValues = [];
+
+        if (typeof (req.query.Xe) != 'undefined') {
+            check = { Xe: req.query.Xe };
+        }
+
+        if (typeof (req.query.User) != 'undefined') {
+            check = { User: req.query.User };
+        }
+
+        if (typeof (req.query.TrangThaiHD) !== 'undefined') {
+            trangThaiValues = req.query.TrangThaiHD.split(',').map(item => parseInt(item));
+        }
+
+        if (trangThaiValues.length > 0) {
+            check = { TrangThaiHD: { $in: trangThaiValues } };
+        }
+
+        if (trangThaiValues.length > 0 && typeof (req.query.User) != 'undefined') {
+            check = { TrangThaiHD: { $in: trangThaiValues }, User: req.query.User };
+        }
+
+        if (trangThaiValues.length > 0 && typeof (req.query.Xe) != 'undefined') {
+            check = { TrangThaiHD: { $in: trangThaiValues }, Xe: req.query.Xe };
+        }
+
+        try {
+            await HoaDon.find().populate('Xe')
+                .populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', model: 'User' }
+                })
+                .populate('User').sort({ _id: -1 })
+                .then((result) => {
+                    res.render('ChuyenXe', {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+    async chitietHD(req, res) {
+        var id = req.params.id;
+        await HoaDon.find({ _id: id }).populate('Xe')
+            .populate({
+                path: 'Xe',
+                populate: { path: 'ChuSH', model: 'User' }
+            })
+            .populate('User')
+            .then((result) => {
+                console.log(result);
+                res.status(200).render('ChiTietChuyen',
+                    {
+                        data: result.map((res) => res.toJSON())
+                    })
+            })
+
     }
     async find_hoadon(req, res) {
         let check = null;
@@ -103,15 +172,15 @@ class HoaDonController_ {
                 });
             })
                 .catch((err) => {
-                    res.status(400).json( err );
+                    res.status(400).json(err);
                     log(err);
                 })
         } catch (error) {
-            res.status(500).json( message )
+            res.status(500).json(message)
         }
 
     }
-    
+
     async update_trangthaiDH(req, res) {
         const maHD = req.params.maHD;
         await HoaDon.updateOne({ MaHD: maHD }, {
@@ -126,7 +195,7 @@ class HoaDonController_ {
             });
         })
             .catch((err) => {
-                res.status(400).json( err );
+                res.status(400).json(err);
                 log(err);
             })
     }

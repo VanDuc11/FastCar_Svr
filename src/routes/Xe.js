@@ -20,7 +20,7 @@ const upload = multer({ storage: storage });
 router.get('/danhsachxe',XeControlles.show);
 router.get('/',XeControlles.index);
 router.get('/ChiTietXe/:id',XeControlles.chitietxe);
-
+router.get('/ThongTinKhachThue',XeControlles.Thongtin);
 
 router.get('/list',XeControlles.findXe);
 
@@ -32,6 +32,11 @@ router.get('/listXe_NotUser/:email', XeController.find_Xe_Not_User);
 
 // get xe của user
 router.get('/listXe_user/:email',XeControlles.find_Xe_User);
+
+// duyệt xe
+router.post('/duyet/:id',XeControlles.duyetxe);
+
+
 
 router.post('/create',upload.array('HinhAnh',4),XeControlles.CreateXe);
 

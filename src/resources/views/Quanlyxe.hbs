@@ -1,29 +1,40 @@
-    
-    <main class="app-content">
-        <div class="app-title">
-            <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Thông báo</b></a></li>
-            </ul>
-            <div id="clock"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tile">
-                    <div class="tile-body">
-                        <div class="row element-button">
-                            <div class="col-sm-2">
-              
-                              <a class="btn btn-add btn-sm" href="/quanlyxe/danhsachxe" >
-                                Danh sách xe</a>
-                            </div>
-                            
-                          
-                        
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                            </div>
-                          </div>
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active"><a href="#"><b>Thông báo</b></a></li>
+    </ul>
+    <div id="clock"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="row element-button">
+            <div class="col-sm-2">
+
+              <a class="btn btn-add btn-sm" href="/quanlyxe/danhsachxe">
+                Danh sách xe</a>
+            </div>
+
+
+    {{!-- <div class="col-sm-2">
+                    <a class="lọc" ><i class='bx bx-slider-alt'></i></a>
+            
+            </div> --}}
+            
+  
+
+            <div class="col-sm-2">
+              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
+            </div>
+             <div class="col-sm-2" style="">
+  <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1"  >
+    <option>Đã duyệt</option>
+    <option>Chờ duyệt</option>
+  </select>
+   </div>
+          </div>
 
 
           <div class="row">
@@ -38,8 +49,8 @@
             <div class="col-md-6 col-lg-3">
               <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
-                  <h4>Xe đã duyệt</h4>
-                  <p><b>68 xe </b></p>
+                  <h4>Xe hoạt động</h4>
+                  <p><b id="daduyen"></b></p>
                 </div>
               </div>
             </div>
@@ -58,19 +69,35 @@
           <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
               <tr>
-                <th width="10">STT</th>
-                <th width="100">Biển số xe</th>
-                <th width="100">Tên xe</th>
-                <th width="100">Ảnh</th>
-                <th width="100">Số ghế</th>
-                <th width="100">Năm sản xuất</th>
-                <th width="100">Loại nhiêu liệu</th>
-                <th width="100">Giá </th>
-                <th width="110">Tên chủ xe</th>
-                <th width="120">Chi tiết</th>
+                <th style="text-align: center;">STT</th>
+                <th style="text-align: center;">Biển số xe</th>
+                <th style="text-align: center;">Tên xe</th>
+                <th style="text-align: center;">Ảnh</th>
+                <th style="text-align: center;">Số ghế</th>
+                <th style="text-align: center;">Năm sản xuất</th>
+                <th style="text-align: center;">Giá </th>
+                <th style="text-align: center;">Tên chủ xe</th>
+                <th style="text-align: center;">Trạng thái</th>
+                <th style="text-align: center;">Chi tiết</th>
               </tr>
             </thead>
             <tbody>
+              {{#each data}}
+              <tr>
+                <td style="text-align: center;" class="stt">{{@index}}</td>
+                <td style="text-align: center;">{{this.BKS}} </td>
+                <td style="text-align: center;">{{this.MauXe}}</td>
+                <td style="text-align: center;"> <img src="/images/{{this.HinhAnh.[0]}}" alt=""
+                    class="img-card-person1"> </td>
+                <td style="text-align: center;">{{this.SoGhe}} </td>
+                <td style="text-align: center;">{{this.NSX}}</td>
+                <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
+                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
+                <td style="text-align: center; font-size: 13px;" class="trangthai">{{this.TrangThai}}</td>
+                <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
+                    chi tiết</a></td>
+              </tr>
+              {{/each}}
 
             </tbody>
           </table>
@@ -79,274 +106,82 @@
     </div>
   </div>
 </main>
+<script>
+    const a = document.querySelector('.lọc');
 
-<!--
-  MODAL
--->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-  data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Thông tin xe</h5>
-            </span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label class="control-label">Tên khách hàng</label>
-            <div class="form-control">
-              <p>Nguyễn Văn A</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Số điện thoại</label>
-            <div class="form-control">
-              <p>Nguyễn Văn A</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Biển số xe</label>
-            <div class="form-control">
-              <p>88A1-82828</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Hãng xe</label>
-            <div class="form-control">
-              <p>VinFast</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Mẫu xe</label>
-            <div class="form-control">
-              <p>VinFast F4</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Năm sản xuất</label>
-            <div class="form-control">
-              <p>2020</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Số Ghế</label>
-            <div class="form-control">
-              <p>4</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Truyền động</label>
-            <div class="form-control">
-              <p>Số tự động</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Loại nhiêu liệu</label>
-            <div class="form-control">
-              <p>Xăng</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Tình trạng </label>
-            <div class="form-control">
-              <p>Nguyễn Văn A</p>
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Giá thuê</label>
-            <div class="form-control">
-              <p>500.000vnđ</p>
-            </div>
-          </div>
-          <div class="form-group  col-md-6">
-            <label class="control-label">Mô tả</label>
-            <textarea class="form-control" rows="2"></textarea>
-          </div>
-        </div>
-        <div class="form-group col-md-12">
-          <label class="control-label">Ảnh xe</label>
-          <div id="myfileupload">
-            <input type="file" id="uploadfile" name="ImageUpload" multiple onchange="readURL(this);" />
-          </div>
-
-          <div id="boxchoice">
-            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-            <p style="clear:both"></p>
-
-          </div>
-
-        </div>
-        <button class="btn btn-save" type="button">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-        <BR>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-<!--
-MODAL
--->
+    a.addEventListener('click', function() {
+      // Hiển thị nội dung của thẻ select
+      document.querySelector('#exampleSelect1').style.display = 'block';
+    });
+  </script>
 <script>
   load_data()
   async function load_data() {
+
     const response = await fetch('/api/xe/list').then(response => response.json());
-    var stt = 0;
-    var tt = 0;
-
-    var STT = document.querySelector('.Stt');
-    var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
-
+    var tt0 = 0;
+    var tt1 = 0;
+    var stt = 0
     response.forEach(xe => {
-      stt += 1;
+      // xe chờ duyệt
       if (xe.TrangThai == 0) {
-        tt += 1;
+        tt0 += 1;
       }
-      const formattedPrice = new Intl.NumberFormat('vi-VN').format(xe.GiaThue1Ngay, {
+      if (xe.TrangThai == 1) {
+        tt1 += 1;
+      }
+    });
+    document.getElementById('choduyen').innerText = tt0 + " Xe";
+    document.getElementById('daduyen').innerText = tt1 + " Xe";
+
+    var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
+    var GiaThue = document.querySelectorAll('.giathue');
+    var TrangThai = document.querySelectorAll('.trangthai');
+    TrangThai.forEach((i) => {
+      if (i.innerHTML == 0) {
+        i.innerHTML = "Chờ duyệt"
+      } else {
+        i.innerHTML = "Đang hoạt động"
+      }
+    })
+
+    // số tứ tự
+    const stt1 = document.querySelectorAll(".stt");
+    stt1.forEach((i) => {
+      stt++;
+      i.innerText = stt
+    })
+
+    GiaThue.forEach((i) => {
+      const formattedPrice = new Intl.NumberFormat('vi-VN').format(i.innerHTML, {
         minimumFractionDigits: 2,
         decimal: ',',
         thousandsSeparator: '.',
       });
-      const row = document.createElement('tr');
-      row.innerHTML = `
-                <td >${stt}</td>
-                <td>${xe.BKS} </td>
-                <td>${xe.MauXe}</td>
-                <td><img src="/images/${xe.HinhAnh[0]}" alt="" width="100px;" class="img-card-person1"></td>
-                <td>${xe.SoGhe} </td>
-                <td>${xe.NSX}</td>
-                <td>${xe.LoaiNhienLieu} </td >
-                <td>${formattedPrice} đ</td>
-                <td>${xe.ChuSH.UserName}</td>
-                <td> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/${xe._id}"> Xem chi tiết</a></td>`;
-      document.querySelector('#sampleTable').appendChild(row);
-    });
-  console.log(tt)
-    document.getElementById('choduyen').innerText = tt +" Xe";
+      i.innerHTML = formattedPrice + " đ"
+    })
+
+
   }
 
-</script>
-<script> 
-  const input = document.querySelector("#uploadfile");
-  const boxChoice = document.querySelector("#boxchoice");
-  
-  boxChoice.addEventListener("click", function() {
-    input.click();
-  });
-  
-  input.addEventListener("change", function() {
-    const files = input.files;
-  
-    // Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
-    if (files.length !== 4) {
-      alert("Bạn phải chọn 4 ảnh.");
-      return;
-    }
-  
-    // Đọc các tệp đã chọn và hiển thị chúng.
-    for (let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-  
-      reader.onload = function() {
-        const imageUrl = reader.result;
-  
-        // Hiển thị ảnh đã chọn.
-        const img = document.createElement("img");
-        img.src = imageUrl;
-        boxChoice.appendChild(img);
-      }
-  
-      reader.readAsDataURL(files[i]);
-    }
-  });
-</script>
-    <!-- Essential javascripts for application to work-->
-  <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $('#sampleTable').DataTable();
-        //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
 
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
-    }
-    </script>
-    <script>
-        function deleteRow(r) {
-            var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("myTable").deleteRow(i);
-        }
-        jQuery(function () {
-            jQuery(".trash").click(function () {
-                swal({
-                    title: "Cảnh báo",
-                    text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
-                    buttons: ["Hủy bỏ", "Đồng ý"],
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("Đã xóa thành công.!", {
 
-                            });
-                        }
-                    });
-            });
-        });
-        oTable = $('#sampleTable').dataTable();
-        $('#all').click(function (e) {
-            $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-            e.stopImmediatePropagation();
-        });
-    </script>
+</script>
+
+<!-- Essential javascripts for application to work-->
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+
+</script>

@@ -34,6 +34,17 @@ class UserControlles {
                 })
             });
     }
+    async chitietkhachhang(req, res) {
+        var id = req.params.id;
+        await User.find({ _id: id })
+            .then((result) => {
+                res.render('ChiTietKhachHang',
+                    {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+            })
+    }
     async user(req, res, next) {
         let check = null;
 
@@ -188,18 +199,18 @@ class UserControlles {
     //                 });
     //             })
 
-    //     } catch (error) {
-    //         res.status(500).send({
-    //             success: false,
-    //         });
-    //     }
-    // }
-
-    // async UpGPLX(req, res) {
-    //     const img = [];
-    //     for (var i = 0; i < req.files.length; i++) {
-    //         img.push(path.basename(req.files[i].path));
-    //     }
+        } catch (error) {
+            res.status(500).send({
+                success: false,
+            });
+        }
+    }
+    
+    async UpGPLX(req, res) {
+        const img = [];
+        for (var i = 0; i < req.files.length; i++) {
+            img.push(path.basename(req.files[i].path));
+        }
 
     //     console.log(GPLX);
     //     try {
