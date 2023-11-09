@@ -2,6 +2,14 @@ const { message } = require('statuses');
 const HoaDon = require('../models/HoaDon.model');
 var path = require('path');
 const { log } = require('console');
+const { parse } = require('querystring');
+const admin = require('firebase-admin');
+
+var serviceAccount = require("../../../myotp-76cf9-firebase-adminsdk-pgy17-f4b5071351.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 
 class HoaDonController_ {
     index(req, res) {
@@ -10,6 +18,7 @@ class HoaDonController_ {
     async find_hoadon(req, res) {
         let check = null;
         let trangThaiValues = [];
+        let xeValues = [];
 
         if (typeof (req.query.Xe) != 'undefined') {
             check = { Xe: req.query.Xe };
@@ -21,6 +30,10 @@ class HoaDonController_ {
 
         if (typeof (req.query.TrangThaiHD) !== 'undefined') {
             trangThaiValues = req.query.TrangThaiHD.split(',').map(item => parseInt(item));
+        }
+
+        if (typeof (req.query.Xe) !== 'undefined') {
+            xeValues = req.query.Xe.split(',').map(item => parse(item));
         }
 
         if (trangThaiValues.length > 0) {
@@ -43,9 +56,7 @@ class HoaDonController_ {
                 })
                 .populate('User').sort({ _id: -1 })
                 .then((result) => {
-                    res.status(200).json(
-                        result.length == 0 ? 'Không có dữ liệu' : result
-                    )
+                    res.status(200).json( result )
                 })
                 .catch((error) => {
                     res.status(400).json({
@@ -61,30 +72,6 @@ class HoaDonController_ {
         }
 
     }
-
-    // async find_HoaDon_User(req, res) {
-    //     try {
-    //         await HoaDon.find({
-    //             "User.Email": req.body.Email
-    //         }).sort({ _id: -1 })
-    //             .then((result) => {
-    //                 res.status(200).json(
-    //                     result.length == 0 ? 'Không có dữ liệu' : result
-    //                 )
-    //             })
-    //             .catch((error) => {
-    //                 res.status(400).json({
-    //                     success: true,
-    //                     message: err.message,
-    //                 })
-    //             })
-    //     } catch (error) {
-    //         res.status(500).json({
-    //             success: false,
-    //             message: error.message,
-    //         })
-    //     }
-    // }
 
     async create_Hoadon(req, res) {
         const hoadon = new HoaDon({
@@ -108,6 +95,8 @@ class HoaDonController_ {
         })
         try {
             await hoadon.save().then((result) => {
+                sendNotificationToUser(req.body.tokenFCM, "Yêu cầu thuê xe mới", "Xe Mercerdes C200 của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!");
+
                 res.status(201).json({
                     success: true,
                     messages: "Yêu cầu tạo mới thành công"
@@ -145,6 +134,25 @@ class HoaDonController_ {
     async delete_allHD(req, res) {
         await HoaDon.deleteMany({});
         return res.status(200).json('Success');
+    }
+}
+
+async function sendNotificationToUser(tokenFCM, title, body) {
+
+    const message = {
+        notification: {
+            title: title,
+            body: body
+        },
+        token: tokenFCM,
+    };
+
+    try {
+        // Gửi thông báo
+        await admin.messaging().send(message);
+        console.log('Thông báo đã được gửi đến token:', tokenFCM);
+    } catch (error) {
+        console.error('Gửi thông báo thất bại:', error);
     }
 }
 

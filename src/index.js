@@ -8,6 +8,8 @@ const path = require('path');
 const mongo_watch = require('./mongodb_watch');
 const { events } = require('./app/models/user.model');
 require('dotenv').config()
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
@@ -29,4 +31,4 @@ DB.connect();
 
 route(app);
 
-app.listen(process.env.PORT, () => { console.log("localhost:" + process.env.PORT) })
+app.listen(process.env.PORT, () => { console.log("localhost:" + process.env.PORT) });

@@ -24,11 +24,11 @@ router.post('/login', UserControlles.login);
 
 // router.get('/findUserEmail/:email',UserControlles.findUserEmail);
 
-router.post('/update_Profile',UserControlles.updateProfile);
+// router.post('/update_Profile',UserControlles.updateProfile);
 
-router.post('/updateUser',UserControlles.updateUser);
+router.put('/updateUser/:email',UserControlles.updateUser);
 
 
-router.post('/upGplx',upload.array('HinhAnh',2),UserControlles.UpGPLX);
+// router.post('/upGplx',upload.array('HinhAnh',2),UserControlles.UpGPLX);
 
 module.exports = router;

@@ -12,8 +12,13 @@ const User = new Schema({
     NgayCap_GPLX: { type: Date },
     DiaChi_GPLX: { type: String },
     HinhAnh_GPLX: { type: Array },
+    TrangThai_GPLX: { type: Number},
+    So_CCCD: { type: String },
+    NgayCap_CCCD: { type: Date },
+    NoiCap_CCCD: { type: String },
     MatKhau: { type: String },
     Avatar: { type: String },
-    NgayThamGia: { type: Date }
+    NgayThamGia: { type: Date },
+    SoDu: { type: Number}
 }, { timestamps: true });
 module.exports = mongoose.model('User', User);

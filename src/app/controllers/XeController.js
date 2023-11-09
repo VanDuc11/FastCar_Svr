@@ -63,9 +63,7 @@ class XeController {
         try {
             await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
                 .then((result) => {
-                    res.status(200).json(
-                        result.length == 0 ? 'Không có dữ liệu' : result
-                    )
+                    res.status(200).json(result)
                 })
                 .catch((error) => {
                     res.status(400).json({
@@ -191,6 +189,9 @@ class XeController {
             TieuHao: req.body.TieuHao,
             MoTa: req.body.MoTa,
             HinhAnh: img,
+            // DangKyXe: req.files.path,
+            // DangKiem: req.files.path,
+            // BaoHiem: req.files.path,
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
