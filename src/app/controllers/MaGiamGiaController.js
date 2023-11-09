@@ -3,13 +3,55 @@ var path = require('path');
 const crypto = require('crypto');
 const dateNow = new Date();
 const moment = require('moment');
+const ThongBao = require('../models/ThongBao');
+const { log } = require('console');
 
 class MaGiamGiaController {
-    index(req, res) {
-        res.render('KhuyenMai')
+    async index(req, res) {
+
+        try {
+            await MaGiamGia.find().sort({ _id: -1 })
+                .then((result) => {
+                    res.status(200).render('KhuyenMai',
+                        {
+                            data: result.map((res) => res.toJSON())
+                        })
+
+                }).catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: 'Không thành công',
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
     }
-    show(req, res) {
-        res.render('DanhSachVoucher')
+    async DanhSach(req, res) {
+
+        try {
+            await MaGiamGia.find({ TrangThai: [true] }).sort({ _id: -1 })
+                .then((result) => {
+                    res.status(200).render('DanhSachVoucher',
+                        {
+                            data: result.map((res) => res.toJSON())
+                        })
+
+                }).catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: 'Không thành công',
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
     }
     async findMaGiaGia(req, res) {
         let check = null;
@@ -59,20 +101,34 @@ class MaGiamGiaController {
 
 
         try {
+            const check = await MaGiamGia.findOne({ MaGiamGia: req.body.MaGiamGia });
+            if (check == null) {
+                const kq = await maGiamGia.save();
 
-            await maGiamGia.save()
-                .then((result) => {
-                    res.status(201).json({
-                        success: true,
-                        messages: "Yêu cầu tạo mới thành công"
+                console.log("maGiamGia", kq);
+                // thêm vào thông báo
+                if (kq) {
+                    res.status(201)
+                        .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/khuyenmai";</script>');
+                    const tb = new ThongBao({
+                        TieuDe: req.body.TieuDe,
+                        MaGiamGia: req.body.GiamGia,
+                        GiaTri: req.body.GiaTri,
+                        GiaTriMax: req.body.GiaTriMax,
+                        NoiDung: req.body.NoiDung,
+                        HinhAnh: img,
                     });
-                })
-                .catch((err) => {
-                    res.status(400).json({
-                        success: false,
-                        messages: 'Không thành công'
-                    });
-                })
+
+                    await tb.save().then((res) => {
+                        console.log("Thong baoes", res);
+                    })
+                }
+
+            } else {
+                res.status(400)
+                    .send('<script>alert("Mã khuyến mãi đã tồn tại"); window.location.href="/khuyenmai";</script>');
+            }
+
 
 
         } catch (error) {

@@ -1,90 +1,90 @@
- 
-    <main class="app-content">
-      <div class="app-title">
-        <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item active"><a href="#"><b>Thông báo</b></a></li>
-        </ul>
-        <div id="clock"></div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="tile">
-            <div class="tile-body">
-               <div class="row element-button"  >
-               <div class="col-sm-2">
-                    <button  type="button" id="add-new-btn" class="btn btn-add btn-sm" > <i class="fas fa-plus"></i> Thêm mới</button>
-        </div>
-                 
-                <div class="col-sm-2">
-                  <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                      class="fas fa-trash-alt"></i> Xóa tất cả </a>
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active"><a href="#"><b>Thông báo</b></a></li>
+    </ul>
+    <div id="clock"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="row element-button">
+            <div class="col-sm-2">
+              <button type="button" id="add-new-btn" class="btn btn-add btn-sm"> <i class="fas fa-plus"></i> Thêm
+                mới</button>
+            </div>
+
+            <div class="col-sm-2">
+              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
+            </div>
+            <div class="end" style="margin-left: 640px;  ">
+              <div class="row">
+                <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
+                  <label class="control-label1">Từ ngày</label>
+                  <input class="form-control1" type="date" required>
                 </div>
-                <div class="end" style="margin-left: 640px;  " >
-                <div class="row">
-                  <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;" >
-                    <label class="control-label1">Từ ngày</label>
-                    <input class="form-control1"  type="date" required >
-                  </div>
-                  <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
-                    <label class="control-label1" >Đến ngày</label>
-                    <input class="form-control1"  type="date" required>
-                  </div>
-                  <div class="col-sm-22" style="margin-left: 20px;  ">
-                    <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
+                <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+                  <label class="control-label1">Đến ngày</label>
+                  <input class="form-control1" type="date" required>
+                </div>
+                <div class="col-sm-22" style="margin-left: 20px;  ">
+                  <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
                     align-items: center;">Tìm kiếm</a>
                 </div>
               </div>
             </div>
           </div>
-       
-        <form action="/product/create_data" id="product-form" method="post" enctype="multipart/form-data"
-                style="display: none;">
 
-          <div class="row">               
-            <div class="form-group col-md-3" style="margin-left: 20px;">
-              <label class="control-label">Tiêu đề</label>
-              <input class="form-control" type="text">
-            </div>
-            <div class="form-group col-md-3" >
-              <label class="control-label">Ảnh </label>
-              <div id="myfileupload">
-                <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+          <form action="/product/create_data" id="product-form" method="post" enctype="multipart/form-data"
+            style="display: none;">
+
+            <div class="row">
+              <div class="form-group col-md-3" style="margin-left: 20px;">
+                <label class="control-label">Tiêu đề</label>
+                <input class="form-control" type="text">
               </div>
-              <div id="boxchoice">
-                <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                <p style="clear:both"></p>
+              <div class="form-group col-md-3">
+                <label class="control-label">Ảnh </label>
+                <div id="myfileupload">
+                  <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+                </div>
+                <div id="boxchoice">
+                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                  <p style="clear:both"></p>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="form-group col-md-3" style="margin-left: 32px;">
+                  <label class="control-label">Thông tin</label>
+                  <textarea class="form-control" name="mota" id="mota"
+                    style=" height: 20px; width: 1350px;; "></textarea>
+                  <script>CKEDITOR.replace('mota');</script>
+                </div>
               </div>
             </div>
-        
-        
-           <div class="row">
-             <div class="form-group col-md-3" style="margin-left: 32px;">
-              <label class="control-label">Thông tin</label>
-              <textarea class="form-control" name="mota" id="mota" style=" height: 20px; width: 1350px;; "></textarea>
-              <script>CKEDITOR.replace('mota');</script>
+            <div style="margin-left: 18px;">
+              <button class="btn btn-save" type="button">Lưu lại</button>
+              <a class="btn btn-cancel" href="/khuyenmai">Hủy bỏ</a>
             </div>
-            </div>
-              </div>
-              <div style="margin-left: 18px;">
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" href="/khuyenmai">Hủy bỏ</a>
-          </div>
         </div>
-        
+
       </div>
-      
-       </form>
+
+      </form>
       <div class="row element-button">
       </div>
       <table class="table table-hover table-bordered" id="sampleTable">
         <thead>
           <tr>
-            <th width="10"><input type="checkbox" id="all"></th>
-        
+            <th width="10">STT</th>
             <th>Tiêu đề</th>
             <th>Ảnh</th>
-
-            <th>Thông tin</th>
+            <th>Nội dung</th>
+            <th>Ngày đăng</th>
             <th width="100">Chức năng</th>
 
 
@@ -93,14 +93,11 @@
         <tbody>
           {{#each data}}
           <tr>
-            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-     
+            <td>{{@index}}</td>
             <td>{{this.TieuDe}}</td>
-            <td><img src="/images/{{this.HinhAnh}}" alt="" width="100px;" height="60px"></td>
-        
-            <td>{{this.ThongTin}}</td>
-
-
+            <td><img src="/images/{{this.HinhAnh}}" alt=""></td>
+            <td>{{this.NoiDung}}</td>
+            <td class="NgayDang" style="width: 150px;">{{this.createdAt}}</td>
             <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
                   class="fas fa-trash-alt"></i>
               </button>
@@ -198,170 +195,72 @@
 
 
 <script>
-   // ẩn hiện form
-    const addNewBtn = document.getElementById("add-new-btn");
-    let showForm = false;
+  // ẩn hiện form
+  const addNewBtn = document.getElementById("add-new-btn");
+  let showForm = false;
 
-    addNewBtn.addEventListener("click", () => {
-        showForm = !showForm; // Đảo ngược giá trị của biến showForm
-        const form = document.getElementById("product-form");
-        form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
-    });
-
-    const btnUpdate = document.querySelectorAll(".btnupdate");
+  addNewBtn.addEventListener("click", () => {
+    showForm = !showForm; // Đảo ngược giá trị của biến showForm
     const form = document.getElementById("product-form");
-    btnUpdate.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            form.style.display = "block";
+    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
+  });
 
-            const row = btn.closest("tr");
-            const id = row.cells[0].textContent;
-            const name = row.cells[1].textContent;
-            const image = row.cells[2].querySelector("img").src;
-            const soluong = row.cells[3].textContent;
-            const status = row.cells[4].textContent;
-            const price = row.cells[5].textContent;
-            const loai = row.cells[6].textContent;
-            console.log(soluong, price, image);
+  const btnUpdate = document.querySelectorAll(".btnupdate");
+  const form = document.getElementById("product-form");
+  btnUpdate.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      form.style.display = "block";
 
-            document.getElementById("id").value = id;
-            document.getElementById("name").value = name;
-            document.getElementById("quantity").value = soluong;
-            document.getElementById("status").value = status;
-            document.getElementById("price").value = price;
-            document.getElementById("category").value = loai;
-            document.getElementById("image").value = image;
-            document.body.scrollTop = 0; // cho Safari
-            document.documentElement.scrollTop = 0;
-        });
+      const row = btn.closest("tr");
+      const id = row.cells[0].textContent;
+      const name = row.cells[1].textContent;
+      const image = row.cells[2].querySelector("img").src;
+      const soluong = row.cells[3].textContent;
+      const status = row.cells[4].textContent;
+      const price = row.cells[5].textContent;
+      const loai = row.cells[6].textContent;
+      console.log(soluong, price, image);
+
+      document.getElementById("id").value = id;
+      document.getElementById("name").value = name;
+      document.getElementById("quantity").value = soluong;
+      document.getElementById("status").value = status;
+      document.getElementById("price").value = price;
+      document.getElementById("category").value = loai;
+      document.getElementById("image").value = image;
+      document.body.scrollTop = 0; // cho Safari
+      document.documentElement.scrollTop = 0;
     });
+  });
 
 </script>
-  <!-- Essential javascripts for application to work-->
-   <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
-  <script>
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-      jQuery(".trash").click(function () {
-        swal({
-          title: "Cảnh báo",
-         
-          text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
-          buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Đã xóa thành công.!", {
-                
-              });
-            }
-          });
-      });
-    });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-      $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-      e.stopImmediatePropagation();
-    });
+<!-- Essential javascripts for application to work-->
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script>
+  const HSD = document.querySelectorAll(".NgayDang");
+  HSD.forEach((i) => {
+    const date = new Date(i.innerHTML);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = day + '/' + month + '/' + year
+    i.innerHTML = formattedDate
+  })
 
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
-
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
-
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
-    }
-    //In dữ liệu
-    var myApp = new function () {
-      this.printTable = function () {
-        var tab = document.getElementById('sampleTable');
-        var win = window.open('', '', 'height=700,width=700');
-        win.document.write(tab.outerHTML);
-        win.document.close();
-        win.print();
-      }
-    }
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
-
-
-    //Modal
-    $("#show-emp").on("click", function () {
-      $("#ModalUP").modal({ backdrop: false, keyboard: false })
-    });
-  </script>
+  $("#show-emp").on("click", function () {
+    $("#ModalUP").modal({ backdrop: false, keyboard: false })
+  });
+</script>
