@@ -199,18 +199,18 @@ class UserControlles {
     //                 });
     //             })
 
-        } catch (error) {
-            res.status(500).send({
-                success: false,
-            });
-        }
-    }
+    //     } catch (error) {
+    //         res.status(500).send({
+    //             success: false,
+    //         });
+    //     }
+    // }
     
-    async UpGPLX(req, res) {
-        const img = [];
-        for (var i = 0; i < req.files.length; i++) {
-            img.push(path.basename(req.files[i].path));
-        }
+    // async UpGPLX(req, res) {
+    //     const img = [];
+    //     for (var i = 0; i < req.files.length; i++) {
+    //         img.push(path.basename(req.files[i].path));
+    //     }
 
     //     console.log(GPLX);
     //     try {
