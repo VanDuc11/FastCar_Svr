@@ -6,7 +6,8 @@ const ThongBao = new Schema({
     MaGiamGia: { type: String },
     Code: { type: String },
     GiaTri: { type: Number },
-    ThongTin: { type: String },
-    HinhAnh: { type: [String] },
+    GiaTriMax: { type: Number },
+    NoiDung: { type: String },
+    HinhAnh: { type: String},
 }, { timestamps: true })
 module.exports = mongoose.model("ThongBao", ThongBao);

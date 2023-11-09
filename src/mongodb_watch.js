@@ -27,7 +27,7 @@
 //                     const expiredDate = new Date(element.HSD);
 //                     if (dateNow > expiredDate && element.TrangThai == true) {
 //                         console.log(element._id);
-//                         MaGiamGia.updateOne({ _id: element._id }, {
+//                         MaGiamGia.updateOne({ _id: ._id }, {
 //                             $set: {
 //                                 TrangThai: false
 //                             }

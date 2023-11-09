@@ -10,15 +10,14 @@
       <div class="tile">
         <div class="tile-body">
           <div class="row element-button">
-                      <div class="col-sm-2">
-                    <button  type="button" id="add-new-btn" class="btn btn-add btn-sm" > <i class="fas fa-plus"></i> Thêm mới</button>
-        </div>
+            <div class="col-sm-2">
+              <button type="button" id="add-new-btn" class="btn btn-add btn-sm"> <i class="fas fa-plus"></i> Thêm
+                mới</button>
+            </div>
             <div class="col-sm-2">
               <a class="btn btn-add btn-sm" href="/khuyenmai/DanhSachVoucher" title="Thêm">Danh sách Voucher</i>
               </a>
             </div>
-     
-          
 
 
             <div class="row" style="margin-left:590px;">
@@ -36,349 +35,165 @@
               </div>
             </div>
           </div>
-     
-            <form action="/product/create_data" id="product-form" method="post" enctype="multipart/form-data"
-                style="display: none;">
-          <div class="row">
-         
-            <div class="form-group col-md-3">
-              <label class="control-label">Mã</label>
-              <input class="form-control" type="text">
-            </div>
-            <div class="form-group col-md-3">
-              <label class="control-label">Tiêu đề</label>
-              <input class="form-control" type="text">
-            </div>
-            <div class="form-group col-md-3 ">
-              <label for="exampleSelect1" class="control-label">Giá trị giảm</label>
-              <select class="form-control" id="exampleSelect1" style=" padding-left: 200px;">
-                <option>50.000vnđ</option>
-                <option>100.000vnđ</option>
-                <option>150.000vnđ</option>
-                <option>250.000vnđ</option>
-                <option>300.000vnđ</option>
-                <option>350.000vnđ</option>
-              </select>
-            </div>
 
-            <div class="form-group col-md-3">
-              <label class="control-label">Ngày bắt đầu</label>
-              <input class="form-control" type="date" required>
-            </div>
-            <div class="form-group col-md-3">
-              <label class="control-label">Ngày kết thúc</label>
-              <input class="form-control" type="date" required>
-            </div>
-
-            <div class="form-group col-md-3">
-              <label class="control-label">Mô tả xe</label>
-              <textarea class="form-control" name="mota" id="mota" style=" height: 20px; width: 370px; "></textarea>
-              <script>CKEDITOR.replace('mota');</script>
-            </div>
-            <div class="form-group col-md-3" style=" padding-left: 80px;">
-              <label class="control-label">Ảnh </label>
-              <div id="myfileupload">
-                <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+          <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data"
+            style="display: none;">
+            <div class="row">
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="name" class="form-label">Mã khuyến mãi:</label>
+                <input type="text" id="name" name="MaGiamGia" class="form-control" required
+                  placeholder="Nhập mã khuyễn mãi" min="1" max="10">
               </div>
-              <div id="boxchoice">
-                <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                <p style="clear:both"></p>
-
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="quantity" class="form-label">Tiêu đề:</label>
+                <input type="text" id="quantity" name="TieuDe" class="form-control" required placeholder="Nhập tiêu đề">
               </div>
 
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="exampleSelect1" class="form-label">Giá trị giảm (%): </label>
+                <select class="form-control" id="exampleSelect1" name="GiaTri">
+                  <option>-- Chọn giá trị --</option>
+                  <option value="5">5%</option>
+                  <option value="10">10%</option>
+                  <option value="15">15%</option>
+                  <option value="20">20%</option>
+                  <option value="25">25%</option>
+                  <option value="30">30%</option>
+                </select>
+              </div>
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="exampleSelect1" class="form-label">Giá trị giảm: </label>
+                <select class="form-control" id="exampleSelect1" name="GiaTriMax">
+                  <option>-- Chọn giá trị tối đa --</option>
+                  <option value="50000">50.000vnđ</option>
+                  <option value="100000">100.000vnđ</option>
+                  <option value="150000">150.000vnđ</option>
+                  <option value="250000">250.000vnđ</option>
+                  <option value="300000">300.000vnđ</option>
+                  <option value="350000">350.000vnđ</option>
+                </select>
+              </div>
+
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="price" class="form-label">Ngày bắt đầu:</label>
+                <input type="date" id="price" name="NgayBD" class="form-control" required>
+              </div>
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="price" class="form-label">Ngày kết thúc:</label>
+                <input type="date" id="price" name="HSD" class="form-control" required>
+              </div>
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="image" class="form-label">Hình ảnh:</label>
+                <input type="file" id="image" name="HinhAnh" class="form-control" accept="image/*" required>
+              </div>
+              <div class="col-md-4" style="margin-top: 10px;">
+                <label for="price" class="form-label">Nội dung:</label>
+                <textarea name="NoiDung" id="price" cols="30" class="form-control" rows="10" required
+                  placeholder="Nhập nội dung"></textarea>
+              </div>
+
             </div>
+
+            <button type="submit" class="btn btn-save" style="margin-top: 20px; margin-bottom: 10px;">Thêm mã giảm
+              giá</button>
+
+          </form>
+          <div class="row element-button">
           </div>
-              <div style="margin-left: 18px;">
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" href="/khuyenmai">Hủy bỏ</a>
-          </div>
+          <table class="table table-hover table-bordered" id="sampleTable">
+            <thead>
+              <tr>
+
+                <th>STT</th>
+                <th>Mã</th>
+                <th>Ảnh</th>
+                <th>Tiêu đề</th>
+                <th>Giá trị giảm</th>
+                <th width="100">Ngày kết thúc</th>
+                <th width="100">Trạng thái</th>
+                <th width="100">Chức năng</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              {{#each data}}
+              <tr>
+                <td class="stt">{{@index}}</td>
+                <td>{{this.MaGiamGia}}</td>
+                <td><img src="/images/{{this.HinhAnh}}" alt="" width="100px;" height="60px"></td>
+                <td>{{this.TieuDe}}</td>
+                <td>{{this.GiaTri}}%</td>
+                <td class="HSD">{{this.HSD}}</td>
+                <td><span class="TrangThai" style="border-radius: 5px; background: #BFEFC4; padding: 5px;">{{this.TrangThai}}</span></td>
+                <td> <a class="btn btn-info " href="#"> Xem chi tiết</a></td>
+
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
         </div>
       </div>
-       </form>
-      <div class="row element-button">
-      </div>
-    <table class="table table-hover table-bordered" id="sampleTable">
-        <thead>
-          <tr>
-            
-            <th  >STT</th>
-            <th>Mã</th>
-            <th>Ảnh</th>
-            <th>Tiêu đề</th>
-            <th>Giá trị giảm</th>
-            <th>Ngày kết thúc</th>
-            <th width="100">Trạng thái</th>
-            <th width="100">Chức năng</th>
-
-
-          </tr>
-        </thead>
-        <tbody>
-          {{#each data}}
-          <tr>
-             
-            <td>{{index}}</td>
-            <td>{{this.MaGiamGia}}</td>
-            <td><img src="/images/{{this.HinhAnh}}" alt="" width="100px;" height="60px"></td>
-            <td>{{this.TieuDe}}</td>
-            <td>{{this.GiaTri}}%</td>
-            <td>{{this.HSD}}</td>
-            <td><span class="badge bg-success">{{this.TrangThai}}</span></td>
-            <td> <a class="btn btn-info " href="#"> Xem chi tiết</a></td>
-
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
     </div>
-  </div>
-  </div>
   </div>
 </main>
+
+<!-- Essential javascripts for application to work-->
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
-   // ẩn hiện form
-    const addNewBtn = document.getElementById("add-new-btn");
-    let showForm = false;
+  // ẩn hiện form
+  const addNewBtn = document.getElementById("add-new-btn");
+  let showForm = false;
 
-    addNewBtn.addEventListener("click", () => {
-        showForm = !showForm; // Đảo ngược giá trị của biến showForm
-        const form = document.getElementById("product-form");
-        form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
-    });
-
-    const btnUpdate = document.querySelectorAll(".btnupdate");
+  addNewBtn.addEventListener("click", () => {
+    showForm = !showForm; // Đảo ngược giá trị của biến showForm
     const form = document.getElementById("product-form");
-    btnUpdate.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            form.style.display = "block";
+    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
+  });
+  const HSD = document.querySelectorAll(".HSD");
+    HSD.forEach((i) => {
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+    })
+    var stt = 0;
+  const stt1 = document.querySelectorAll(".stt");
+  stt1.forEach((i) => {
+    stt++;
+    i.innerText = stt
+  })
 
-            const row = btn.closest("tr");
-            const id = row.cells[0].textContent;
-            const name = row.cells[1].textContent;
-            const image = row.cells[2].querySelector("img").src;
-            const soluong = row.cells[3].textContent;
-            const status = row.cells[4].textContent;
-            const price = row.cells[5].textContent;
-            const loai = row.cells[6].textContent;
-            console.log(soluong, price, image);
+  const TrangThai = document.querySelectorAll('.TrangThai');
+  TrangThai.forEach((i)=>{
+  console.log(i.innerHTML)
 
-            document.getElementById("id").value = id;
-            document.getElementById("name").value = name;
-            document.getElementById("quantity").value = soluong;
-            document.getElementById("status").value = status;
-            document.getElementById("price").value = price;
-            document.getElementById("category").value = loai;
-            document.getElementById("image").value = image;
-            document.body.scrollTop = 0; // cho Safari
-            document.documentElement.scrollTop = 0;
-        });
-    });
+    if(i.innerHTML === "true"){
+      i.innerHTML= "Hoạt động"
+      i.style.color = "#02790C"
+    }else{
+      i.innerHTML= "Hết hạn"
+      i.style.color = "#A90312"
+      i.style.background="#F9C9CD"
+    }
+  })
 
 </script>
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-  data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
 
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Chỉnh sửa thông tin Voucher</h5>
-            </span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label class="control-label">MÃ</label>
-            <input class="form-control" type="text" required value="">
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Tiêu đề</label>
-          <input class="form-control" type="text" required value="">
-        </div>
-          <div class="form-group col-md-6 ">
-            <label  class="control-label">GIÁ TRỊ giảm</label>
-            <select class="form-control" id="exampleSelect1" style=" padding-left: 100px;">
-              <option>50.000vnđ</option>
-              <option>100.000vnđ</option>
-              <option>150.000vnđ</option>
-              <option>250.000vnđ</option>
-              <option>300.000vnđ</option>
-              <option>350.000vnđ</option>
-              </select>
-          </div>
-    
-          <div class="form-group col-md-6">
-            <label class="control-label">Ngày bắt đầu</label>
-            <input class="form-control" type="date" required>
-          </div>
-          <div class="fform-group col-md-6">
-            <label class="control-label">Ngày kết thúc</label>
-            <input class="form-control" type="date" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Mô tả xe</label>
-            <textarea class="form-control" name="mota" id="mota" style=" height: 20px; width: 200px; "></textarea>
-            <script>CKEDITOR.replace('mota');</script>
-          </div>
-       
-          <div class="form-group col-md-12">
-            <label class="control-label">Ảnh xe</label>
-            <div id="myfileupload">
-              <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
-            </div>
-           
-            <div id="boxchoice">
-              <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-              <p style="clear:both"></p>
-              
-            </div>
-
-          </div>
-
-
-
-        </div>
-        <div class="row element-button">
-        </div>
-        <button class="btn btn-save" type="button">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-        <BR>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Essential javascripts for application to work-->
- <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
-  <script>
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-      jQuery(".trash").click(function () {
-        swal({
-          title: "Cảnh báo",
-         
-          text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
-          buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Đã xóa thành công.!", {
-                
-              });
-            }
-          });
-      });
-    });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-      $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-      e.stopImmediatePropagation();
-    });
-
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
-
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
-
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
-    }
-    //In dữ liệu
-    var myApp = new function () {
-      this.printTable = function () {
-        var tab = document.getElementById('sampleTable');
-        var win = window.open('', '', 'height=700,width=700');
-        win.document.write(tab.outerHTML);
-        win.document.close();
-        win.print();
-      }
-    }
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
-
-
-    //Modal
-    $("#show-emp").on("click", function () {
-      $("#ModalUP").modal({ backdrop: false, keyboard: false })
-    });
-  </script>
- 
 
 </html>
