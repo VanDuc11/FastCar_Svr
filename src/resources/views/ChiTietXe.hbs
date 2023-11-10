@@ -152,7 +152,7 @@
           onclick="onSubmit(`{{this._id}}`)">Duyệt</a>
         <a class="btn btn-success" href="#" id="button-sua" data-status="Chưa duyệt"data-toggle="modal"
                   data-target="#ModalUP3">Sửa</a>
-        <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue" id="button-xem-tt" data-status="Chưa duyệt">Xem thông tin thuê</a>
+        <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue" id="button-xem-tt" >Xem thông tin thuê</a>
         <a class="btn btn-cancel" id="button-tuchoi" href="#">Từ chối</a>
       </div>
 
@@ -379,16 +379,7 @@
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
-  let buttonStatus = "Chưa duyệt";
-
-  // Tạo một hàm để xử lý sự kiện click của nút
-  function handleClick() {
-    // Thay đổi trạng thái của nút
-    buttonStatus = "Đã duyệt";
-
-    // Thay đổi văn bản của nút
-    this.textContent = buttonStatus;
-  }
+   
 
   // Thêm sự kiện click cho tất cả các nút
   for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
@@ -478,59 +469,6 @@
 
 
 
-
-  //EXCEL
-  // $(document).ready(function () {
-  //   $('#').DataTable({
-
-  //     dom: 'Bfrtip',
-  //     "buttons": [
-  //       'excel'
-  //     ]
-  //   });
-  // });
-
-
-  //Thời Gian
-  function time() {
-    var today = new Date();
-    var weekday = new Array(7);
-    weekday[0] = "Chủ Nhật";
-    weekday[1] = "Thứ Hai";
-    weekday[2] = "Thứ Ba";
-    weekday[3] = "Thứ Tư";
-    weekday[4] = "Thứ Năm";
-    weekday[5] = "Thứ Sáu";
-    weekday[6] = "Thứ Bảy";
-    var day = weekday[today.getDay()];
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    nowTime = h + " giờ " + m + " phút " + s + " giây";
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-    if (mm < 10) {
-      mm = '0' + mm
-    }
-    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-      '</span>';
-    document.getElementById("clock").innerHTML = tmp;
-    clocktime = setTimeout("time()", "1000", "Javascript");
-
-    function checkTime(i) {
-      if (i < 10) {
-        i = "0" + i;
-      }
-      return i;
-    }
-  }
   //In dữ liệu
   var myApp = new function () {
     this.printTable = function () {
