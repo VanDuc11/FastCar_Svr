@@ -125,7 +125,8 @@
                 <td>{{this.TieuDe}}</td>
                 <td>{{this.GiaTri}}%</td>
                 <td class="HSD">{{this.HSD}}</td>
-                <td><span class="TrangThai" style="border-radius: 5px; background: #BFEFC4; padding: 5px;">{{this.TrangThai}}</span></td>
+                <td><span class="TrangThai"
+                    style="border-radius: 5px; background: #BFEFC4; padding: 5px;">{{this.TrangThai}}</span></td>
                 <td> <a class="btn btn-info " href="#"> Xem chi tiết</a></td>
 
               </tr>
@@ -164,15 +165,15 @@
     form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
   });
   const HSD = document.querySelectorAll(".HSD");
-    HSD.forEach((i) => {
-      const date = new Date(i.innerHTML);
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
-      const formattedDate = day + '/' + month + '/' + year
-      i.innerHTML = formattedDate
-    })
-    var stt = 0;
+  HSD.forEach((i) => {
+    const date = new Date(i.innerHTML);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = day + '/' + month + '/' + year
+    i.innerHTML = formattedDate
+  })
+  var stt = 0;
   const stt1 = document.querySelectorAll(".stt");
   stt1.forEach((i) => {
     stt++;
@@ -180,16 +181,16 @@
   })
 
   const TrangThai = document.querySelectorAll('.TrangThai');
-  TrangThai.forEach((i)=>{
-  console.log(i.innerHTML)
+  TrangThai.forEach((i) => {
+    console.log(i.innerHTML)
 
-    if(i.innerHTML === "true"){
-      i.innerHTML= "Hoạt động"
+    if (i.innerHTML === "true") {
+      i.innerHTML = "Hoạt động"
       i.style.color = "#02790C"
-    }else{
-      i.innerHTML= "Hết hạn"
+    } else {
+      i.innerHTML = "Hết hạn"
       i.style.color = "#A90312"
-      i.style.background="#F9C9CD"
+      i.style.background = "#F9C9CD"
     }
   })
 
