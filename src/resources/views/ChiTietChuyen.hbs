@@ -8,83 +8,178 @@
     <div class="row element-button">
     </div>
     <div class="tile">
-      
         {{#each data}}
-                <h1 style="font-size: 15px;" >Thông tin khách hàng</h1>    
-                <div class="row element-button">
-      </div>
-            <form class="row">   
-      
-                <div class="form-group col-md-3">
-                    <label class="control-label">Mã hóa đơn: {{this.MaHD}}</label>   
-                </div>
-             
-                <div class="form-group col-md-3">
-                    <label class="control-label">Tên khách hàng: {{this.User.UserName}}</label>
-                 
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Số điện thoại: {{this.User.SDT}}</label>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Email: {{this.User.Email}}</label>
-                </div>
-</form>
-  <div class="row element-button">
-      </div>
-       <h1 style="font-size: 15px;" >Thông tin xe</h1>  
-       <div class="row element-button">
-      </div>  
-       <form class="row">   
-           
-                <div class="form-group col-md-3">
-                    <label class="control-label">Tên xe: {{this.Xe.MauXe}}</label>
-                  
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Biển số xe: {{this.Xe.BKS}}</label>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Ngày thuê: {{this.NgayThue}}</label>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Ngày trả: {{this.NgayTra}}</label>
-                </div>    
-                            </form>
-  <div class="row element-button">
-      </div>     
-       <h1  style="font-size: 15px;" >Thông tin dịch vụ</h1>    
-       <div class="row element-button">
-      </div>
-             <form class="row"> 
-                <div class="form-group col-md-3">
-                    <label class="control-label">Giá thuê : {{this.MaHD}}</label>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label">Giá cọc: {{this.MaHD}}</label>        
-                </div>
-                <div class="form-group col-md-3 ">
-                    <label for="exampleSelect1" class="control-label">Phí dịch vụ : {{this.PhiDV}}</label>
-                </div>
-                  <div class="form-group col-md-3 ">
-                    <label for="exampleSelect1" class="control-label">Phụ phí : {{this.PhuPhi}} </label>
-                </div>
-                                    </form>
-  <div class="row element-button">
-      </div>  
-       <h1  style="font-size: 15px; ">Thành tiền</h1>  
-       <div class="row element-button">
-      </div>  
-                <div class="form-group col-md-3">
-                    <label class="control-label">Tổng tiền : {{this.TongTien}}</label>
-                </div>
-                <div class="form-group col-md-12">
+        <div class="row">
+            <h2 class="col-md-9">Thông tin hóa đơn</h2>
+            <p style="background: red; width: 200px; height: 40px; text-align: center; 
+                padding-top: 10px; border-radius: 10px; color: white;">
+                Chưa thanh toán</p>
+        </div>
 
+        <div class="row element-button">
+        </div>
+        <br>
+        <h1 style="font-size: 15px; ">Thông tin khách hàng</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Mã hóa đơn: <span style="font-weight: bold;">{{this.MaHD}}</span> </label> 
+                </div>
+                <div class="col-md-12">
+                    <label id="ngaytao">{{this.GioTaoHD}}</label>
                 </div>
 
-                <a class="btn btn-cancel" href="ChiTietChuyen.html">Hủy bỏ</a>
-                {{/each}}
-</form>
+
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Tên khách hàng:  <span style="font-weight: bold;">{{this.User.UserName}}</span> </label>
+                </div>
+                <div class="col-md-12">
+                    <label>Số điện thoại: {{this.User.SDT}}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Email: {{this.User.Email}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label>Địa chỉ: chưa config</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row element-button">
+        </div>
+        <h1 style="font-size: 15px; ">Thông tin xe</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Tên xe: {{this.Xe.MauXe}}</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Biển số xe: {{this.Xe.BKS}}</label>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Chỗ ngồi: {{this.Xe.SoGhe}} chỗ ngồi</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Loại nhiên liệu: {{this.Xe.LoaiNhienLieu}}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Năm sản xuất: {{this.Xe.NSX}}</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Chủ xe: {{this.User.UserName}}</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row element-button">
+        </div>
+        <h1 style="font-size: 15px;">Thông tin dịch vụ</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Ngày thuê: {{this.NgayThue}}</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Ngày trả: {{this.NgayTra}}</label>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Tổng số ngày: {{this.TongSoNgayThue}} Ngày</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Mã giảm giá: {{this.MaGiamGia}}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Lời nhắn : {{this.LoiNhan}}</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Lý do: {{this.LyDo}}</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row element-button">
+        </div>
+        <h1 style="font-size: 15px; ">Thành tiền</h1>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label>Đơn giá thuê/ngày:</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label>phí dịch vụ FastCar: {{this.TongSoNgayThue}} ngày</label>
+                </div>
+                <div class="col-md-12">
+                    <label>Tổng phí: {{this.TongSoNgayThue}} ngày</label>
+                </div>
+                <div class="col-md-12">
+                    <label>Mã khuyến mại: {{this.MaGiamGia}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label>Tổng Cộng:</label>
+                </div>
+                <div class="col-md-12">
+                    <label>Đặt cọc (30%):</label>
+                </div>
+                <div class="col-md-12">
+                    <label class="control-label">Thanh toán khi nhận xe:</label>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label class="money"> {{this.Xe.GiaThue1Ngay}}</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="money"> {{this.PhiDV}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label class="money"> {{this.TongTien}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label class="money"> {{this.GiamGia}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label class="money"> {{this.TongTien}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label class="money"> {{this.TienCoc}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label class="money" style="font-weight: bold;"> {{this.ThanhToan}}</label>
+                </div>
+
+            </div>
+        </div>
+        {{/each}}
+        </form>
 
     </div>
     </div>
@@ -106,111 +201,25 @@
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
-    function deleteRow(r) {
-        var i = r.parentNode.parentNode.rowIndex;
-        document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-        jQuery(".trash").click(function () {
-            swal({
-                title: "Cảnh báo",
-
-                text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
-                buttons: ["Hủy bỏ", "Đồng ý"],
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Đã xóa thành công.!", {
-
-                        });
-                    }
-                });
+    const money = document.querySelectorAll('.money');
+    const NgayTao = document.getElementById('ngaytao');
+    money.forEach((i) => {
+        const formattedPrice = new Intl.NumberFormat('vi-VN').format(i.innerHTML, {
+            minimumFractionDigits: 2,
+            decimal: ',',
+            thousandsSeparator: '.',
         });
-    });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-        $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-        e.stopImmediatePropagation();
-    });
-
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
-
-    //Thời Gian
-    function time() {
-        var today = new Date();
-        var weekday = new Array(7);
-        weekday[0] = "Chủ Nhật";
-        weekday[1] = "Thứ Hai";
-        weekday[2] = "Thứ Ba";
-        weekday[3] = "Thứ Tư";
-        weekday[4] = "Thứ Năm";
-        weekday[5] = "Thứ Sáu";
-        weekday[6] = "Thứ Bảy";
-        var day = weekday[today.getDay()];
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        nowTime = h + " giờ " + m + " phút " + s + " giây";
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-            '</span>';
-        document.getElementById("clock").innerHTML = tmp;
-        clocktime = setTimeout("time()", "1000", "Javascript");
-
-        function checkTime(i) {
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
-        }
-    }
-    //In dữ liệu
-    var myApp = new function () {
-        this.printTable = function () {
-            var tab = document.getElementById('sampleTable');
-            var win = window.open('', '', 'height=700,width=700');
-            win.document.write(tab.outerHTML);
-            win.document.close();
-            win.print();
-        }
-    }
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
+        i.innerHTML = formattedPrice + " đ"
+    })
+    const date = new Date(NgayTao.innerHTML);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+    const formattedDatetime = day + '/' + month + '/' + year + ' ' + hour + ':' + minute + ':' + second;
+    NgayTao.innerHTML = "Ngày Tạo: " + formattedDatetime
 
 
     //Modal
@@ -219,4 +228,3 @@
     });
 </script>
 </body>
-

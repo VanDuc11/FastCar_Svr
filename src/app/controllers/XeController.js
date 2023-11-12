@@ -44,7 +44,7 @@ class XeController {
                     TrangThai: 1
                 }
             }
-        ).then( ()=>{
+        ).then(() => {
             res.status(200).json({
                 success: true,
                 messages: "Yêu cầu cập nhât thành công"
@@ -90,7 +90,7 @@ class XeController {
                 })
             })
     }
-  Thongtin(req, res) {
+    Thongtin(req, res) {
         res.render('ThongTinKhachThue')
     }
     add(req, res) {
@@ -135,7 +135,7 @@ class XeController {
         // get list xe không thuộc user login
         const emailUser = req.params.email;
         let check = null;
-        if (typeof req.query.DiaChiXe !== 'undefined' && typeof (req.query.TrangThai) != 'undefined' ) {
+        if (typeof req.query.DiaChiXe !== 'undefined' && typeof (req.query.TrangThai) != 'undefined') {
             const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
             check = { DiaChiXe: regex, TrangThai: req.query.TrangThai };
         }
@@ -224,10 +224,10 @@ class XeController {
     }
 
     async CreateXe(req, res) {
-        const img = [];
-        for (var i = 0; i < req.files.length; i++) {
-            img.push(path.basename(req.files[i].path));
-        }
+        // const img = [];
+        // for (var i = 0; i < req.files['HinhAnh'].length; i++) {
+        //     img.push(path.basename(req.files['HinhAnh'].get[i].path));
+        // }
 
         const xe = new Xe({
             BKS: req.body.BKS,
@@ -239,10 +239,10 @@ class XeController {
             LoaiNhienLieu: req.body.LoaiNhienLieu,
             TieuHao: req.body.TieuHao,
             MoTa: req.body.MoTa,
-            HinhAnh: img,
-            // DangKyXe: req.files.path,
-            // DangKiem: req.files.path,
-            // BaoHiem: req.files.path,
+            HinhAnh: req.files['HinhAnh'].map(file => file.filename),
+            DangKyXe: req.files['DangKyXe'][0].filename,
+            DangKiem: req.files['DangKiem'][0].filename,
+            BaoHiem: req.files['BaoHiem'][0].filename,
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,

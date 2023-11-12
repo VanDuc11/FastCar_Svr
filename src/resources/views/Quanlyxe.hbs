@@ -17,23 +17,20 @@
             </div>
 
 
-    {{!-- <div class="col-sm-2">
-                    <a class="lọc" ><i class='bx bx-slider-alt'></i></a>
             
-            </div> --}}
-            
-  
+
+
 
             <div class="col-sm-2">
               <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
             </div>
-             <div class="col-sm-2" style="">
-  <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1"  >
-    <option>Đã duyệt</option>
-    <option>Chờ duyệt</option>
-  </select>
-   </div>
+            <div class="col-sm-2" style="">
+              <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1">
+                <option>Đã duyệt</option>
+                <option>Chờ duyệt</option>
+              </select>
+            </div>
           </div>
 
 
@@ -67,6 +64,7 @@
           <div class="row element-button">
           </div>
           <table class="table table-hover table-bordered" id="sampleTable">
+          
             <thead>
               <tr>
                 <th style="text-align: center;">STT</th>
@@ -93,7 +91,8 @@
                 <td style="text-align: center;">{{this.NSX}}</td>
                 <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
                 <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
-                <td style="text-align: center; font-size: 13px;" class="trangthai">{{this.TrangThai}}</td>
+                <td><span class="TrangThai"
+                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
                 <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
                     chi tiết</a></td>
               </tr>
@@ -107,13 +106,13 @@
   </div>
 </main>
 <script>
-    const a = document.querySelector('.lọc');
+  const a = document.querySelector('.lọc');
 
-    a.addEventListener('click', function() {
-      // Hiển thị nội dung của thẻ select
-      document.querySelector('#exampleSelect1').style.display = 'block';
-    });
-  </script>
+  a.addEventListener('click', function () {
+    // Hiển thị nội dung của thẻ select
+    document.querySelector('#exampleSelect1').style.display = 'block';
+  });
+</script>
 <script>
   load_data()
   async function load_data() {
@@ -136,12 +135,14 @@
 
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
     var GiaThue = document.querySelectorAll('.giathue');
-    var TrangThai = document.querySelectorAll('.trangthai');
+    var TrangThai = document.querySelectorAll('.TrangThai');
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
         i.innerHTML = "Chờ duyệt"
+        i.style.background="#F9C9CD"
       } else {
-        i.innerHTML = "Đang hoạt động"
+        i.innerHTML = "Hoạt động"
+        i.style.background = "#BFEFC4"
       }
     })
 
