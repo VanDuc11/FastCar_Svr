@@ -13,7 +13,6 @@ var storage = multer.diskStorage({
     }
 });
 
-
 const upload = multer({ storage: storage });
 
 
@@ -35,7 +34,6 @@ router.get('/listXe_user/:email',XeControlles.find_Xe_User);
 
 // duyệt xe
 router.post('/duyet/:id',XeControlles.duyetxe);
-
 
 
 router.post('/create',upload.array('HinhAnh',4),XeControlles.CreateXe);

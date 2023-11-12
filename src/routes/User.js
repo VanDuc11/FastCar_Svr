@@ -3,6 +3,7 @@ const router = express.Router();
 const UserControlles = require('../app/controllers/UserControllers');
 
 var multer = require('multer');
+const UserControllers = require('../app/controllers/UserControllers');
 var storage = multer.diskStorage({
     destination: (rep, file, cb) => {
         cb(null, 'src/public/images');
@@ -23,13 +24,14 @@ router.post('/create',UserControlles.createrUser);
 
 router.post('/login', UserControlles.login);
 
-// router.get('/findUserEmail/:email',UserControlles.findUserEmail);
-
-// router.post('/update_Profile',UserControlles.updateProfile);
+router.post('/logout/:email', UserControllers.logout);
 
 router.put('/updateUser/:email',UserControlles.updateUser);
 
+router.put('/updateSoDu/:email',UserControlles.updateSoDu);
 
-// router.post('/upGplx',upload.array('HinhAnh',2),UserControlles.UpGPLX);
+router.put('/updateTTGPLX/:email',UserControlles.updateTTGPLX);
+
+router.post('/upGplx/:email',upload.array('HinhAnh_GPLX',2),UserControlles.UpdateGPLX);
 
 module.exports = router;
