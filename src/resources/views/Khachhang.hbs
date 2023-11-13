@@ -17,6 +17,37 @@
                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
             </div>
           </div>
+            <div class="row">
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
+                <div class="info">
+                  <h4>Tổng khách hàng</h4>
+                  <p><b>100</b></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
+                <div class="info">
+                  <h4>Khách hàng cho thuê xe</h4>
+                  <p><b >20 </b></p>
+                 
+                </div>
+              </div>
+            </div>
+         <div class="col-md-6 col-lg-3">
+           <div class="widget-small info coloured-icon"><i
+            class='icon fa-3x bx bxs-user-badge'></i>
+            <div class="info">
+            <h4> Khách hàng thuê</h4>
+          <p><b>80</b></p>
+            </div>
+            </div>
+             </div>
+
+          </div>
+          <div class="row element-button">
+          </div>
           <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
             id="sampleTable">
             <thead>
@@ -29,6 +60,7 @@
                 <th width="80">Ngày sinh</th>
                 <th width="80">SĐT</th>
                 <th width="100">Ngày tham gia</th>
+                <th width="100">Khách hàng</th>
                 <th width="100">Chức năng</th>
 
               </tr>
@@ -44,6 +76,7 @@
                 <td>{{this.NgaySinh}}</td>
                 <td>{{this.SDT}}</td>
                 <td>{{this.NgayThamGia}}</td>
+                 <td>Đã đăng xe</td>
                 <td> <a class="btn btn-info " href="/khachhang/ChiTietKhachHang/{{this._id}}"> Xem chi tiết</a></td>
 
 
