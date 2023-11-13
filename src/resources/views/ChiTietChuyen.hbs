@@ -12,7 +12,7 @@
         <div class="row">
             <h2 class="col-md-9">Thông tin hóa đơn</h2>
             <p style="background: red; width: 200px; height: 40px; text-align: center; 
-                padding-top: 10px; border-radius: 10px; color: white;">
+                padding-top: 10px; border-radius: 10px; color: white;margin-left: 120px;">
                 Chưa thanh toán</p>
         </div>
 
@@ -133,7 +133,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <label>phí dịch vụ FastCar: {{this.TongSoNgayThue}} ngày</label>
+                    <label>Phí dịch vụ FastCar: {{this.TongSoNgayThue}} ngày</label>
                 </div>
                 <div class="col-md-12">
                     <label>Tổng phí: {{this.TongSoNgayThue}} ngày</label>
@@ -177,11 +177,14 @@
                 </div>
 
             </div>
+            
         </div>
         {{/each}}
         </form>
+        <BR>
 
-    </div>
+             <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+        <a class="btn btn-cancel" data-dismiss="modal" href="/chuyenxe" >Quay lại</a>     
     </div>
 
 </main>
