@@ -1,4 +1,5 @@
 const Xe = require('../models/Xe.model');
+const User = require('../models/user.model');
 var path = require('path');
 
 class XeController {
@@ -228,7 +229,7 @@ class XeController {
         // for (var i = 0; i < req.files['HinhAnh'].length; i++) {
         //     img.push(path.basename(req.files['HinhAnh'].get[i].path));
         // }
-
+        var check = req.body.ChuSH;
         const xe = new Xe({
             BKS: req.body.BKS,
             HangXe: req.body.HangXe,
@@ -245,19 +246,17 @@ class XeController {
             BaoHiem: req.files['BaoHiem'][0].filename,
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
-            ChuSH: req.body.ChuSH,
+            ChuSH: req.body.ChuSH || await User.findById("6513ad0281cfc8cdaaa6f728"),
             TrangThai: 0,
             SoChuyen: 0,
             TrungBinhSao: 0
         });
-        console.log("kiemtra",xe.ChuSH);
+        
         try {
             await xe.save()
                 .then((result) => {
-                    res.status(201).json({
-                        success: true,
-                        messages: "Yêu cầu tạo mới thành công"
-                    });
+                    res.status(201)
+                    .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/quanlyxe";</script>');
                     console.log(result);
                 })
                 .catch((err) => {
