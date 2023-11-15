@@ -250,6 +250,7 @@ class XeController {
             SoChuyen: 0,
             TrungBinhSao: 0
         });
+        console.log("kiemtra",xe.ChuSH);
         try {
             await xe.save()
                 .then((result) => {
