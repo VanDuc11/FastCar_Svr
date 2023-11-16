@@ -20,8 +20,9 @@ router.get('/danhsachxe', XeControlles.show);
 router.get('/', XeControlles.index);
 router.get('/Addxe',XeControlles.add);
 router.get('/ChiTietXe/:id', XeControlles.chitietxe);
-router.get('/ThongTinKhachThue', XeControlles.Thongtin);
+router.get('/ThongTinKhachThue/:id', XeControlles.Thongtin);
 
+router.get('/findTrangthai0_1', XeControlles.findXeTrangThai0_1);
 router.get('/list', XeControlles.findXe);
 
 // get top 5 xe, trừ xe của user login
@@ -34,7 +35,7 @@ router.get('/listXe_NotUser/:email', XeController.find_Xe_Not_User);
 router.get('/listXe_user/:email', XeControlles.find_Xe_User);
 
 // duyệt xe
-router.post('/duyet/:id', XeControlles.duyetxe);
+router.post('/duyet/:id/:trangthai', XeControlles.duyetxe);
 
 router.post('/create', upload.fields([{ name: 'HinhAnh', maxCount: 4 }, { name: 'DangKyXe', maxCount: 1 }, { name: 'DangKiem', maxCount: 1 }, { name: 'BaoHiem', maxCount: 1 }]), XeControlles.CreateXe);
 

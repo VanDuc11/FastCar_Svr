@@ -7,47 +7,54 @@
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
-   
+
         <div class="tile-body">
-<div class="row element-button">
+          <div class="row element-button">
             <div class="col-sm-2">
 
               <a class="btn btn-add btn-sm" href="/quanlyxe">
                 Quản lý xe</a>
             </div>
-              </div>
+          </div>
           <div class="row">
             <div class="col-md-6 col-lg-3">
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
                   <h4>Tổng xe</h4>
-                  <p><b>100 xe</b></p>
+                  <p><b id="info_tong_xe"></b></p>
                 </div>
               </div>
             </div>
-
-
             <div class="col-md-6 col-lg-3">
-              <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-chart'></i>
+              <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
-                  <h4>Xe đang hoạt động</h4>
-                  <p><b>168 xe</b></p>
+                  <h4>Xe hoạt động</h4>
+                  <p><b id="daduyen"></b></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
+                <div class="info">
+                  <h4>Xe chờ duyệt</h4>
+                  <p><b id="choduyen"></b></p>
+                </div>
+              </div>
+            </div>
+             
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
+                <div class="info">
+                  <h4>không hoạt động</h4>
+                  <p><b id="khonghd"></b></p>
                 </div>
               </div>
             </div>
             <div class="col-md-6 col-lg-3">
               <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
                 <div class="info">
-                  <h4> Xe đã thuê</h4>
-                  <p><b>20 xe</b></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
-                <div class="info">
-                  <h4> Xe đang bảo trì</h4>
-                  <p><b>20 chuyến</b></p>
+                  <h4>Từ chối</h4>
+                  <p><b id="tuchoi"></b></p>
                 </div>
               </div>
             </div>
@@ -59,41 +66,42 @@
         <table class="table table-hover table-bordered" id="sampleTable">
           <thead>
             <tr>
-                <th style="text-align: center;">STT</th>
-                <th style="text-align: center;">Biển số xe</th>
-                <th style="text-align: center;">Tên xe</th>
-                <th style="text-align: center;">Ảnh</th>
-                <th style="text-align: center;">Số ghế</th>
-                <th style="text-align: center;">Năm sản xuất</th>
-                <th style="text-align: center;" >Giá </th>
-                <th style="text-align: center;">Tên chủ xe</th>
-                <th style="text-align: center;">Trạng thái</th>
-                <th width="80">Chức năng</th>
-              </tr>
+              <th style="text-align: center;">STT</th>
+              <th style="text-align: center;">Biển số xe</th>
+              <th style="text-align: center;">Tên xe</th>
+              <th style="text-align: center;">Ảnh</th>
+              <th style="text-align: center;">Số ghế</th>
+              <th style="text-align: center;">Năm sản xuất</th>
+              <th style="text-align: center;">Giá </th>
+              <th style="text-align: center;">Tên chủ xe</th>
+              <th style="text-align: center;">Trạng thái</th>
+              <th width="80">Chức năng</th>
+            </tr>
           </thead>
           <tbody>
             {{#each data}}
-              <tr>
-                <td style="text-align: center;" class="stt">{{@index}}</td>
-                <td style="text-align: center;">{{this.BKS}} </td>
-                <td style="text-align: center;">{{this.MauXe}}</td>
-                <td style="text-align: center;"> <img src="/images/{{this.HinhAnh.[0]}}" alt=""
-                    class="img-card-person1"> </td>
-                <td style="text-align: center;">{{this.SoGhe}} </td>
-                <td style="text-align: center;">{{this.NSX}}</td>
-                <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
-                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
-                <td style="text-align: center;">{{this.TrangThai}}</td>
-                <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
+            <tr>
+              <td style="text-align: center;" class="stt">{{@index}}</td>
+              <td style="text-align: center;">{{this.BKS}} </td>
+              <td style="text-align: center;">{{this.MauXe}}</td>
+              <td style="text-align: center;"> <img src="/images/{{this.HinhAnh.[0]}}" alt="" class="img-card-person1">
+              </td>
+              <td style="text-align: center;">{{this.SoGhe}} </td>
+              <td style="text-align: center;">{{this.NSX}}</td>
+              <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
+              <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
+              <td><span class="TrangThai"
+                  style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+              <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
                     class="fas fa-trash-alt"></i>
                 </button>
                 <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                   data-target="#ModalUP"><i class="fas fa-edit"></i></button>
 
               </td>
-              </tr>
-              {{/each}}
-            
+            </tr>
+            {{/each}}
+
 
           </tbody>
         </table>
@@ -210,41 +218,75 @@ MODAL
 <!--
 MODAL
 -->
+
 <script>
-  const input = document.querySelector("#uploadfile");
-  const boxChoice = document.querySelector("#boxchoice");
+   load_data()
+  async function load_data() {
 
-  boxChoice.addEventListener("click", function () {
-    input.click();
-  });
-
-  input.addEventListener("change", function () {
-    const files = input.files;
-
-    // Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
-    if (files.length !== 4) {
-      alert("Bạn phải chọn 4 ảnh.");
-      return;
-    }
-
-    // Đọc các tệp đã chọn và hiển thị chúng.
-    for (let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-
-      reader.onload = function () {
-        const imageUrl = reader.result;
-
-        // Hiển thị ảnh đã chọn.
-        const img = document.createElement("img");
-        img.src = imageUrl;
-        boxChoice.appendChild(img);
+    const response = await fetch('/api/xe/list').then(response => response.json());
+    var tt0 = 0;
+    var tt1 = 0;
+    var tt2 = 0;
+    var tt3 = 0;
+    var stt = 0
+    response.forEach(xe => {
+      // xe chờ duyệt
+      if (xe.TrangThai == 0) {
+        tt0 += 1;
       }
+      if (xe.TrangThai == 1) {
+        tt1 += 1;
+      }
+      if (xe.TrangThai == 2) {
+        tt2 += 1;
+      }
+      if (xe.TrangThai == 3) {
+        tt3 += 1;
+      }
+    });
+    document.getElementById('choduyen').innerText = tt0 + " Xe";
+    document.getElementById('daduyen').innerText = tt1 + " Xe";
+    document.getElementById('tuchoi').innerText = tt2 + " Xe";
+    document.getElementById('khonghd').innerText = tt3 + " Xe";
 
-      reader.readAsDataURL(files[i]);
-    }
-  });
+    var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
+    var GiaThue = document.querySelectorAll('.giathue');
+    var TrangThai = document.querySelectorAll('.TrangThai');
+    TrangThai.forEach((i) => {
+      if (i.innerHTML == 0) {
+        i.innerHTML = "Chờ duyệt"
+        i.style.background="#F9C9CD"
+      } else if(i.innerHTML == 1) {
+        i.innerHTML = "Hoạt động"
+        i.style.background = "#BFEFC4"
+      } else if(i.innerHTML == 2) {
+        i.innerHTML = "Từ chối"
+        i.style.background = "#e24a4a"
+      }else if(i.innerHTML == 3) {
+        i.innerHTML = "không hoạt động"
+        i.style.background = "#F9BABA"
+      }
+    })
+
+    // số tứ tự
+    const stt1 = document.querySelectorAll(".stt");
+    stt1.forEach((i) => {
+      stt++;
+      i.innerText = stt
+    })
+
+    GiaThue.forEach((i) => {
+      const formattedPrice = new Intl.NumberFormat('vi-VN').format(i.innerHTML, {
+        minimumFractionDigits: 2,
+        decimal: ',',
+        thousandsSeparator: '.',
+      });
+      i.innerHTML = formattedPrice + " đ"
+    })
+
+
+  }
 </script>
-
 
 </body>
 
