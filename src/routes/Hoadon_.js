@@ -12,6 +12,7 @@ var storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+router.get('/DanhSachChuyen',HoaDonController_.danhsach);
 router.get('/',HoaDonController_.index);
 router.get('/ChiTietChuyen/:id',HoaDonController_.chitietHD);
 router.get('/list',HoaDonController_.find_hoadon);
