@@ -7,7 +7,7 @@ class LSGDController {
             check = { User: req.query.User };
         }
 
-        await lsgd.find(check).populate('User').sort({ _id: -1 })
+        await lsgd.find(check).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
             .then((result) => {
                 res.status(200).json(result);
             });

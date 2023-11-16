@@ -102,17 +102,12 @@ class XeController {
             check = { User: req.query.ChuSH };
         }
 
-        if (typeof req.query.DiaChiXe !== 'undefined') {
-            const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
-            check = { DiaChiXe: regex };
-        }
-
         if (typeof (req.query.TrangThai) != 'undefined') {
             check = { TrangThai: req.query.TrangThai };
         }
 
         try {
-            await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+            await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(result)
                 })
@@ -140,12 +135,13 @@ class XeController {
             check = { DiaChiXe: regex, TrangThai: req.query.TrangThai };
         }
 
-        // if (typeof (req.query.TrangThai) != 'undefined') {
-        //     check = { TrangThai: req.query.TrangThai };
-        // }
+        if (typeof req.query.ChuSH !== 'undefined' && typeof (req.query.TrangThai) != 'undefined') {
+            const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
+            check = { DiaChiXe: regex, TrangThai: req.query.TrangThai };
+        }
 
         try {
-            const list = await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).exec();
+            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).exec();
 
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
 
@@ -170,7 +166,7 @@ class XeController {
         const emailUser = req.params.email;
 
         try {
-            const list = await Xe.find({}).populate({ path: 'ChuSH', model: 'User' }).exec();
+            const list = await Xe.find({}).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).exec();
 
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() === emailUser);
 
@@ -201,7 +197,7 @@ class XeController {
 
         try {
             // giới hạn 5 xe
-            const list = await Xe.find(check).populate({ path: 'ChuSH', model: 'User' }).sort({ SoChuyen: -1 }).limit(5).exec();
+            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).sort({ SoChuyen: -1 }).limit(5).exec();
 
             // nếu trong 5 xe, user login có 2 xe thì list = 3
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);

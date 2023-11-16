@@ -1,5 +1,7 @@
 const { message } = require('statuses');
 const HoaDon = require('../models/HoaDon.model');
+const User = require('../models/user.model');
+const Xe = require('../models/Xe.model');
 var path = require('path');
 const { log } = require('console');
 const { parse } = require('querystring');
@@ -41,12 +43,11 @@ class HoaDonController_ {
         }
 
         try {
-            await HoaDon.find().populate('Xe')
+            await HoaDon.find()
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', model: 'User' }
-                })
-                .populate('User').sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
                 .then((result) => {
                     res.render('ChuyenXe', {
                         data: result.map((res) => res.toJSON())
@@ -69,12 +70,11 @@ class HoaDonController_ {
     }
     async chitietHD(req, res) {
         var id = req.params.id;
-        await HoaDon.find({ _id: id }).populate('Xe')
+        await HoaDon.find({ _id: id })
             .populate({
                 path: 'Xe',
-                populate: { path: 'ChuSH', model: 'User' }
-            })
-            .populate('User')
+                populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+            }).populate('User', ('_id UserName Email UID SDT Avatar'))
             .then((result) => {
                 console.log(result);
                 res.status(200).render('ChiTietChuyen',
@@ -118,14 +118,13 @@ class HoaDonController_ {
         }
 
         try {
-            await HoaDon.find(check).populate('Xe')
+            await HoaDon.find(check)
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', model: 'User' }
-                })
-                .populate('User').sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
                 .then((result) => {
-                    res.status(200).json( result )
+                    res.status(200).json(result)
                 })
                 .catch((error) => {
                     res.status(400).json({
@@ -163,8 +162,15 @@ class HoaDonController_ {
             LyDo: ""
         })
         try {
+            const car = await Xe.findOne({_id: hoadon.Xe });
+            const chuSH = await User.findOne({_id: car.ChuSH });
+
+            let title = 'Yêu cầu thuê xe mới';
+            let contentNotify = "Xe " + car.MauXe + " của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!"
+            let url_image = "http://localhost:9000/public/images/" + car.HinhAnh[0];
             await hoadon.save().then((result) => {
-                sendNotificationToUser(req.body.tokenFCM, "Yêu cầu thuê xe mới", "Xe Mercerdes C200 của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!");
+
+                sendNotificationToUser(chuSH.TokenFCM, title, contentNotify, "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/800px-Android_robot.svg.png");
 
                 res.status(201).json({
                     success: true,
@@ -206,12 +212,13 @@ class HoaDonController_ {
     }
 }
 
-async function sendNotificationToUser(tokenFCM, title, body) {
+async function sendNotificationToUser(tokenFCM, title, body, image) {
 
     const message = {
         notification: {
             title: title,
-            body: body
+            body: body,
+            image: image
         },
         token: tokenFCM,
     };
