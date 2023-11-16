@@ -108,8 +108,8 @@
                   Quản lý xe</a>
               </div>
             </div>
-         
-          
+
+
             <div class="row element-button">
 
               <form class="row" action="/api/xe/create" method="post" enctype="multipart/form-data">
@@ -193,85 +193,88 @@
                 </div>
                 <div class="col-md-5">
                   <label for="img1" class="control-label">Đăng ký:</label>
-                  <input type="file" class="form-control" id="img1" placeholder="" name="DangKyXe" accept="Image/*"multiple>
+                  <input type="file" class="form-control" id="img1" placeholder="" name="DangKyXe" accept="Image/*"
+                    multiple>
                   <p id="file-error1" style="display:none; color:red;">Bạn chỉ được chọn tối đa 2 ảnh</p>
                 </div>
                 <div class="col-md-5">
                   <label for="img2" class="control-label">Đăng kiểm:</label>
-                  <input type="file" class="form-control" id="img2" placeholder="" name="DangKiem" accept="Image/*"multiple>
+                  <input type="file" class="form-control" id="img2" placeholder="" name="DangKiem" accept="Image/*"
+                    multiple>
                   <p id="file-error2" style="display:none; color:red;">Bạn chỉ được chọn tối đa 2 ảnh</p>
                 </div>
                 <div class="col-md-5">
                   <label for="img3" class="control-label">Bảo hiểm:</label>
-                  <input type="file" class="form-control" id="img3" placeholder="" name="BaoHiem" accept="Image/*"multiple>
+                  <input type="file" class="form-control" id="img3" placeholder="" name="BaoHiem" accept="Image/*"
+                    multiple>
                   <p id="file-error3" style="display:none; color:red;">Bạn chỉ được chọn tối đa 2 ảnh</p>
                 </div>
                 <div class="col-md-5" style="margin-top: 20px;">
-                  <button class="btn btn-save" type="submit">Thêm xe</button> 
+                  <button class="btn btn-save" type="submit">Thêm xe</button>
                   <a class="btn btn-cancel" href="/quanlyxe/Addxe">Hủy bỏ</a>
                 </div>
 
               </form>
 
-   </div>
-
-          </div>
-
             </div>
 
           </div>
+
+        </div>
+
+      </div>
   </main>
- <script>
-const imgInputXe = document.querySelector("#img");
-const fileErrorXe = document.querySelector("#file-error");
+  <script>
+    const imgInputXe = document.querySelector("#img");
+    const fileErrorXe = document.querySelector("#file-error");
 
-imgInputXe.addEventListener("change", function() {
-  const files = imgInputXe.files;
-  if (files.length > 4) {
-    fileErrorXe.innerHTML = "Bạn chỉ được chọn tối đa 4 ảnh";
-    fileErrorXe.style.display = "block";
-  } else {
-    fileErrorXe.style.display = "none";
-  }
-});
+    imgInputXe.addEventListener("change", function () {
+      const files = imgInputXe.files;
+      if (files.length > 4) {
+        fileErrorXe.innerHTML = "Bạn chỉ được chọn tối đa 4 ảnh";
+        fileErrorXe.style.display = "block";
+      } else {
+        fileErrorXe.style.display = "none";
+      }
+    });
 
-const imgInputDangKy = document.querySelector("#img1");
-const fileErrorDangKy = document.querySelector("#file-error1");
+    const imgInputDangKy = document.querySelector("#img1");
+    const fileErrorDangKy = document.querySelector("#file-error1");
 
-imgInputDangKy.addEventListener("change", function() {
-  const files = imgInputDangKy.files;
-  if (files.length > 2) {
-    fileErrorDangKy.innerHTML = "Bạn chỉ được chọn tối đa 2 ảnh";
-    fileErrorDangKy.style.display = "block";
-  } else {
-    fileErrorDangKy.style.display = "none";
-  }
-});
-const imgInputDangKiem = document.querySelector("#img2");
-const fileErrorDangKiem = document.querySelector("#file-error2");
+    imgInputDangKy.addEventListener("change", function () {
+      const files = imgInputDangKy.files;
+      if (files.length > 2) {
+        fileErrorDangKy.innerHTML = "Bạn chỉ được chọn tối đa 2 ảnh";
+        fileErrorDangKy.style.display = "block";
+      } else {
+        fileErrorDangKy.style.display = "none";
+      }
+    });
+    const imgInputDangKiem = document.querySelector("#img2");
+    const fileErrorDangKiem = document.querySelector("#file-error2");
 
-imgInputDangKiem.addEventListener("change", function() {
-  const files = imgInputDangKiem.files;
-  if (files.length > 2) {
-    fileErrorDangKiem.innerHTML = "Bạn chỉ được chọn tối đa 2 ảnh";
-    fileErrorDangKiem.style.display = "block";
-  } else {
-    fileErrorDangKiem.style.display = "none";
-  }
-});
-const imgInputBaoHiem = document.querySelector("#img3");
-const fileErrorBaoHiem = document.querySelector("#file-error3");
+    imgInputDangKiem.addEventListener("change", function () {
+      const files = imgInputDangKiem.files;
+      if (files.length > 2) {
+        fileErrorDangKiem.innerHTML = "Bạn chỉ được chọn tối đa 2 ảnh";
+        fileErrorDangKiem.style.display = "block";
+      } else {
+        fileErrorDangKiem.style.display = "none";
+      }
+    });
+    const imgInputBaoHiem = document.querySelector("#img3");
+    const fileErrorBaoHiem = document.querySelector("#file-error3");
 
-imgInputBaoHiem.addEventListener("change", function() {
-  const files = imgInputBaoHiem.files;
-  if (files.length > 2) {
-    fileErrorBaoHiem.innerHTML = "Bạn chỉ được chọn tối đa 2 ảnh";
-    fileErrorBaoHiem.style.display = "block";
-  } else {
-    fileErrorBaoHiem.style.display = "none";
-  }
-});
-</script>
+    imgInputBaoHiem.addEventListener("change", function () {
+      const files = imgInputBaoHiem.files;
+      if (files.length > 2) {
+        fileErrorBaoHiem.innerHTML = "Bạn chỉ được chọn tối đa 2 ảnh";
+        fileErrorBaoHiem.style.display = "block";
+      } else {
+        fileErrorBaoHiem.style.display = "none";
+      }
+    });
+  </script>
   <script src="/public/js/jquery-3.2.1.min.js"></script>
   <script src="/public/js/popper.min.js"></script>
   <script src="/public/js/bootstrap.min.js"></script>
@@ -280,7 +283,8 @@ imgInputBaoHiem.addEventListener("change", function() {
 
 
 
-  {{!-- <script>
+  {{!--
+  <script>
     const inpFile = document.getElementById("inpFile");
     const loadFile = document.getElementById("loadFile");
     const previewContainer = document.getElementById("imagePreview");
