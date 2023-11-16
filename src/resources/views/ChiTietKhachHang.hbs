@@ -28,47 +28,52 @@
 
           
             
-      <h1 style="font-size: 15px; ">Thông tin Khách hàng</h1>
+      <h1 style="font-size: 20px; ">Thông tin Khách hàng</h1>
         <div class="row">
            <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Họ và tên: {{this.Xe.MauXe}}</label>
+                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Họ và tên:</span> Nguyễn văn A</label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>Ngày sinh: {{this.Xe.BKS}}</label>
+                    <label style="font-size: 18px;"> Ngày sinh:</span> 26/3/2000</label>
                 </div>
 
-            </div>
+            </div><span style="font-weight: bold;">
             <div class="col-md-4">
                <div class="col-md-12">
-                    <label>Số điện thoại: {{this.Xe.SoGhe}} </label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số điện thoại:</span> 092939121 </label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>Giới tính: {{this.Xe.LoaiNhienLieu}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giới tính:</span> Nam</label>
                 </div>
             </div>
               <div class="col-md-4">    
                 <div class="col-md-12">
-                    <label>Email: {{this.Xe.SoGhe}} </label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Email:</span> Nguyên@gmail.com </label>
                 </div>
                 <div class="col-md-12">
-                    <label>Địa chỉ: {{this.Xe.LoaiNhienLieu}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Địa chỉ:</span> Hà nội</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Ngày tham gia: {{this.Xe.NSX}}</label>
-                </div>
-
-                <div class="col-md-12">
-                    <label>Số dư ví: {{this.User.UserName}}</label>
-                </div>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ngày tham gia:</span> 20/10/2023</label>
+                </div> 
             </div>
+            <div class="col-md-4">
+             <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số dư ví:</span> 686.000vnđ</label>
+                </div>
+                  </div>
+                   </div>
+
+
+                      <div class="row">
              <div class="col-md-4">
                 <div class="col-md-12">
-                    <label >Avata :</label> 
+                    <label style="font-size: 18px;" ><span style="font-weight: bold;">Avata </span></label> 
           <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="50px" width="50px" type="button" id="show-emp"
             data-toggle="modal" data-target="#ModalUP3">
                 </div>
@@ -76,64 +81,66 @@
           
                    <div class="col-md-4">      
                 <div class="col-md-12">
-                  <label >Giấy tờ xe</label>
+                  <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy tờ xe</span></label>
           <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="50px"
             width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
-            <p style="margin-left: 20px;font-size: 12px;">Chưa xác minh</p>
+            <p style="margin-left: 20px;font-size: 12px;color: red;">Chưa xác minh</p>
                 </div>
             </div>
                      <div class="col-md-4">      
                 <div class="col-md-12">
-                  <label >CMND</label>
+                  <label style="font-size: 18px;"><span style="font-weight: bold;">CMND</span></label>
           <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="50px"
             width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP5">
-              <p style="margin-left: 20px; font-size: 12px;">Chưa xác minh</p>
+              <p style="margin-left: 20px; font-size: 12px;color: red;">Chưa xác minh</p>
                 </div>
             </div>
         </div>
+       
+
     <div class="row element-button">
   </div>
-           <h1 style="font-size: 15px; ">Thông tin xe</h1>
+           <h1 style="font-size: 20px; ">Thông tin xe</h1>
         <div class="row">
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Tên xe: {{this.Xe.MauXe}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên xe:</span> VinFast F8</label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>Biển số xe: {{this.Xe.BKS}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;"> số xe:</span> 88A-21312</label>
                 </div>
 
             </div>
             <div class="col-md-4">
                <div class="col-md-12">
-                    <label>Hãng: {{this.Xe.SoGhe}} </label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Hãng:</span> Vinfast </label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>Loại nhiên liệu: {{this.Xe.LoaiNhienLieu}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Loại nhiên liệu:</span> Xăng</label>
                 </div>
             </div>
               <div class="col-md-4">    
                 <div class="col-md-12">
-                    <label>Số ghế: {{this.Xe.SoGhe}} </label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số ghế:</span> 4 </label>
                 </div>
                 <div class="col-md-12">
-                    <label>Truyền động: {{this.Xe.LoaiNhienLieu}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Truyền động:</span> Số tự động</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Năm sản xuất: {{this.Xe.NSX}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Năm sản xuất:</span> 2020</label>
                 </div>
 
                 <div class="col-md-12">
-                    <label>Giá thuê: {{this.User.UserName}}</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giá thuê:</span> 1.050.000nvnđ</label>
                 </div>
             </div>
              <div class="col-md-4">
                 <div class="col-md-12">
-                    <label >Ảnh xe :</label> 
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ảnh xe </span></label> 
           <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="50px" width="50px" type="button" id="show-emp"
             data-toggle="modal" data-target="#ModalUP">
                 </div>
@@ -141,24 +148,12 @@
           
                    <div class="col-md-4">      
                 <div class="col-md-12">
-                  <label >Bảo hiểm</label>
+                  <label style="font-size: 18px;"><span style="font-weight: bold;">Bảo hiểm</span></label>
           <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="50px"
             width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
                 </div>
             </div>
         </div>
-
-       
-
-    
-
-   
-
- 
-  
-
-
-
 
 
   {{/each}}
