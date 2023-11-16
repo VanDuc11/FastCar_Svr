@@ -11,11 +11,11 @@ class FeedBackController {
             check = { User: req.query.User };
         }
 
-        await feedback.find(check).populate('Xe')
+        await feedback.find(check)
         .populate({
             path: 'Xe',
-            populate: { path: 'ChuSH', model: 'User' }
-        }).populate('User').sort({ _id: -1 })
+            populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+        }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
             .then((result) => {
                 res.status(200).json(result);
             });

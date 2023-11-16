@@ -6,6 +6,7 @@ const Hoadon_ = require('./Hoadon_');
 const FeedBack = require('./FeedBack');
 const FavoriteCar = require('./FavoriteCar');
 const LSGD = require('./LSGD');
+const NganHangg = require('./NganHang');
 const ThongKe = require('./ThongKe');
 const Home = require('./Home');
 const loginRouter = require('./login');
@@ -34,6 +35,7 @@ const router = (app) =>{
     app.use('/api/feedback', FeedBack);
     app.use('/api/favoriteCar', FavoriteCar);
     app.use('/api/lsgd', LSGD);
+    app.use('/api/nganhang', NganHangg);
 }
 
 module.exports = router;
