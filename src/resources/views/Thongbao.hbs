@@ -20,20 +20,22 @@
                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
             </div>
             <div class="end" style="margin-left: 640px;  ">
-              <div class="row">
-                <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
-                  <label class="control-label1">Từ ngày</label>
-                  <input class="form-control1" type="date" required>
-                </div>
-                <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
-                  <label class="control-label1">Đến ngày</label>
-                  <input class="form-control1" type="date" required>
-                </div>
-                <div class="col-sm-22" style="margin-left: 20px;  ">
-                  <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
-                    align-items: center;">Tìm kiếm</a>
-                </div>
-              </div>
+          
+  <div class="row">
+    <div class="col-sm-22" style="margin-left: 20px; font-weight: bold; font-size: 15px;">
+      <label class="control-label1">Từ ngày</label>
+      <input class="form-control1" id="tuNgay" name='Từ ngày' type="date" required>
+    </div>
+    <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+      <label class="control-label1">Đến ngày</label>
+      <input class="form-control1" id="denNgay" name='Đến ngày' type="date" required>
+    </div>
+    <div class="col-sm-22" style="margin-left: 20px;">
+      <a class="btn btn-tim-kiem" id="timKiem" name='Tìm kiếm' href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
+        align-items: center;">Tìm kiếm</a>
+    </div>
+  </div>
+
             </div>
           </div>
 
@@ -86,8 +88,6 @@
             <th>Nội dung</th>
             <th>Ngày đăng</th>
             <th width="100">Chức năng</th>
-
-
           </tr>
         </thead>
         <tbody>
@@ -154,7 +154,7 @@
             <label class="control-label">Ngày bắt đầu</label>
             <input class="form-control" type="date" required>
           </div>
-          <div class="fform-group col-md-6">
+          <div class="form-group col-md-6">
             <label class="control-label">Ngày kết thúc</label>
             <input class="form-control" type="date" required>
           </div>
@@ -193,7 +193,36 @@
   </div>
 </div>
 
+<script>
+  const table = document.getElementById('sampleTable');
+  const fromDateInput = document.getElementById('tuNgay');
+  const toDateInput = document.getElementById('denNgay');
+  const searchButton = document.getElementById('timKiem');
+  searchButton.addEventListener('click', filterTable);
 
+  function filterTable() {
+    const fromDate = new Date(fromDateInput.value);
+    const toDate = new Date(toDateInput.value);
+
+    const rows = table.querySelectorAll('tbody tr');
+    for (const row of rows) {
+      const createdAtElement = row.querySelector('.NgayDang');
+      const createdAtText = createdAtElement.textContent;
+      const createdAtDate = new Date(createdAtText);
+
+      if (createdAtDate instanceof Date) {
+        if (createdAtDate >= fromDate && createdAtDate <= toDate) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      } else {
+        // Handle the case where createdAtDate is NaN
+        row.style.display = ''; // Show the row even if the date is not in a supported format
+      }
+    }
+  }
+</script>
 <script>
   // ẩn hiện form
   const addNewBtn = document.getElementById("add-new-btn");

@@ -21,125 +21,54 @@
 
           <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data"
             style="display: none;">
-            <div class="row">
-             <div class="form-group col-md-3">
-        <label class="control-label">Biển số xe</label>
-        <div class="form-control">
-          <p><b>88H1-123123</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-3">
-        <label class="control-label">Hãng xe</label>
-        <div class="form-control">
-          <p><b>Vin</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Tên xe</label>
-        <div class="form-control">
-          <p><b>Vinfast</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Năm sản xuất</label>
-        <div class="form-control">
-          <p><b>2019</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Loại nhiêu liệu</label>
-        <div class="form-control">
-          <p><b>Xăng</b></p>
-        </div>
-      </div>
+           <h1 style="font-size: 20px; ">Thông tin xe</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên xe: </span>VinFast F8</label>
+                </div>
 
-      <div class="form-group col-md-3">
-        <label class="control-label">Truyền động</label>
-        <div class="form-control">
-          <p><b>Tự động</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Số ghế</label>
-        <div class="form-control">
-          <p><b>4</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Giá thuê</label>
-        <div class="form-control">
-          <p><b id="giathue">1.520.000</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Tiêu hao</label>
-        <div class="form-control">
-          <p><b id="tieuhao">123123</b></p>
-        </div>
-      </div>
-
-      <div class="form-group col-md-3">
-        <label class="control-label">Số chuyến</label>
-        <div class="form-control">
-          <p><b>70</b></p>
-        </div>
-      </div>
- 
-      <div class="form-group col-md-3">
-        <label class="control-label">Tên chủ xe</label>
-        <div class="form-control">
-          <p><b>Nguyễn A </b></p>
-        </div>
-      </div>
-
-      <div class="form-group col-md-3">
-        <label class="control-label">Số điện thoại</label>
-        <div class="form-control">
-          <p><b>092139129</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Email</label>
-        <div class="form-control">
-          <p><b>duy@gmail.com</b></p>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Ngày Đăng</label>
-        <div class="form-control">
-          <p><b id="ngaydang">20/11/2023</b></p>
-        </div>
-      </div>
-    
-      <div class="form-group col-md-3">
-        <label class="control-label">Địa chỉ Xe</label>
-        <textarea class="form-control">HÀ NỘI</textarea>
-      </div>
-      <div class="form-group col-md-3">
-        <label class="control-label">Mô tả</label>
-        <textarea class="form-control" style=" width: 300px;">ÁDASFASGASG</textarea>
-      </div>
-             <div class="row">
-        <div class="form-group col-md-3" style="margin-left:20px;">
-          <label class="control-label">Ảnh xe</label> <BR>
-          <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="100px" width="150px" type="button" id="show-emp"
-            data-toggle="modal" data-target="#ModalUP">
-        </div>
-
-        <div class="form-group col-md-3" style="margin-left:50px;">
-          <label class="control-label">Giấy tờ xe</label>
-          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px"
-            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
-        </div>
-        <div class="form-group col-md-3" style="margin-left:50px;">
-          <label class="control-label">Bảo hiểm</label>
-          <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="100px"
-            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
-        </div>
-      </div>
-    
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Biển số xe:</span> 88A-21312</label>
+                </div>
 
             </div>
+            <div class="col-md-4">
+               <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Hãng:</span> Vinfast </label>
+                </div>
+
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Loại nhiên liệu:</span> Xăng</label>
+                </div>
+            </div>
+              <div class="col-md-4">    
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số ghế:</span> 4 </label>
+                </div>
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Truyền động: </span>Số tự động</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Năm sản xuất:</span> 2020</label>
+                </div>
+
+                
+            </div>
+               <div class="col-md-4">
+                 <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giá thuê:</span> 1.050.000nvnđ</label>
+                </div>
+                </div>
+                 <div class="col-md-4">
+                 <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Chủ xe:</span> Nguyễn văn a</label>
+                </div>
+                </div>
+ </div>
+           
 
             
 
