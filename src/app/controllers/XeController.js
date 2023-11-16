@@ -1,4 +1,5 @@
 const Xe = require('../models/Xe.model');
+const User = require('../models/user.model');
 const HoaDon = require('../models/HoaDon.model');
 var path = require('path');
 
