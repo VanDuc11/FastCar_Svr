@@ -1,10 +1,10 @@
 const Xe = require('../models/Xe.model');
-const User = require('../models/user.model');
+const HoaDon = require('../models/HoaDon.model');
 var path = require('path');
 
 class XeController {
     async index(req, res) {
-        await Xe.find({})
+        await Xe.find({TrangThai: [0,1]})
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -42,7 +42,7 @@ class XeController {
         await Xe.updateOne({ _id: id },
             {
                 $set: {
-                    TrangThai: 1
+                    TrangThai: req.params.trangthai
                 }
             }
         ).then(() => {
@@ -91,11 +91,46 @@ class XeController {
                 })
             })
     }
-    Thongtin(req, res) {
-        res.render('ThongTinKhachThue')
+    async Thongtin(req, res) {
+
+        await HoaDon.find({ Xe: req.params.id }).populate('Xe')
+            .populate({
+                path: 'Xe',
+                populate: { path: 'ChuSH', model: 'User' }
+            })
+            .populate('User').sort({ _id: -1 })
+            .then((result) => {
+                console.log(result);
+                res.status(200).render('ThongTinKhachThue', {
+                    data: result.map(res => res.toJSON())
+                })
+            })
     }
     add(req, res) {
         res.render('AddXe')
+    }
+    async findXeTrangThai0_1(req, res) {
+        
+
+        try {
+            await Xe.find({TrangThai: [0,1]}).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+                .then((result) => {
+                    res.status(200).json(result)
+                    console.log(result.length);
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: true,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: true,
+                message: err.message,
+            })
+        }
+
     }
     async findXe(req, res) {
         let check = null;
@@ -247,12 +282,12 @@ class XeController {
             SoChuyen: 0,
             TrungBinhSao: 0
         });
-        
+
         try {
             await xe.save()
                 .then((result) => {
                     res.status(201)
-                    .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/quanlyxe";</script>');
+                        .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/quanlyxe";</script>');
                     console.log(result);
                 })
                 .catch((err) => {
