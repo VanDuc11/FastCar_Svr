@@ -41,7 +41,7 @@
                 </div>
               </div>
             </div>
-             
+
             <div class="col-md-6 col-lg-3">
               <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
                 <div class="info">
@@ -92,13 +92,8 @@
               <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
               <td><span class="TrangThai"
                   style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
-              <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
-                    class="fas fa-trash-alt"></i>
-                </button>
-                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                  data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-              </td>
+              <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
+                  chi tiết</a></td>
             </tr>
             {{/each}}
 
@@ -220,7 +215,7 @@ MODAL
 -->
 
 <script>
-   load_data()
+  load_data()
   async function load_data() {
 
     const response = await fetch('/api/xe/list').then(response => response.json());
@@ -255,14 +250,14 @@ MODAL
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
         i.innerHTML = "Chờ duyệt"
-        i.style.background="#F9C9CD"
-      } else if(i.innerHTML == 1) {
+        i.style.background = "#F9C9CD"
+      } else if (i.innerHTML == 1) {
         i.innerHTML = "Hoạt động"
         i.style.background = "#BFEFC4"
-      } else if(i.innerHTML == 2) {
+      } else if (i.innerHTML == 2) {
         i.innerHTML = "Từ chối"
         i.style.background = "#e24a4a"
-      }else if(i.innerHTML == 3) {
+      } else if (i.innerHTML == 3) {
         i.innerHTML = "không hoạt động"
         i.style.background = "#F9BABA"
       }
@@ -276,6 +271,9 @@ MODAL
     })
 
     GiaThue.forEach((i) => {
+      if (!isFinite(i.innerHTML)) {
+        return i.innerHTML;
+      }
       const formattedPrice = new Intl.NumberFormat('vi-VN').format(i.innerHTML, {
         minimumFractionDigits: 2,
         decimal: ',',
@@ -286,6 +284,7 @@ MODAL
 
 
   }
+  setInterval(load_data, 1000);
 </script>
 
 </body>

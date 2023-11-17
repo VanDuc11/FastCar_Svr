@@ -77,9 +77,9 @@ class HoaDonController_ {
             .populate({
                 path: 'Xe',
                 populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-            }).populate('User', ('_id UserName Email UID SDT Avatar'))
+            }).populate('User')
             .then((result) => {
-                console.log(result);
+                console.log("abc",result);
                 res.status(200).render('ChiTietChuyen',
                     {
                         data: result.map((res) => res.toJSON())
