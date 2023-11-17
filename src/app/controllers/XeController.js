@@ -1,10 +1,12 @@
 const Xe = require('../models/Xe.model');
+const User = require('../models/user.model');
 const HoaDon = require('../models/HoaDon.model');
 var path = require('path');
+const { log } = require('console');
 
 class XeController {
     async index(req, res) {
-        await Xe.find({TrangThai: [0,1]})
+        await Xe.find({ TrangThai: [0, 1] })
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -92,7 +94,7 @@ class XeController {
             })
     }
     async Thongtin(req, res) {
-
+         
         await HoaDon.find({ Xe: req.params.id }).populate('Xe')
             .populate({
                 path: 'Xe',
@@ -100,9 +102,8 @@ class XeController {
             })
             .populate('User').sort({ _id: -1 })
             .then((result) => {
-                console.log(result);
                 res.status(200).render('ThongTinKhachThue', {
-                    data: result.map(res => res.toJSON())
+                    data: result.map(res => res.toJSON()),
                 })
             })
     }
@@ -110,13 +111,12 @@ class XeController {
         res.render('AddXe')
     }
     async findXeTrangThai0_1(req, res) {
-        
+
 
         try {
-            await Xe.find({TrangThai: [0,1]}).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+            await Xe.find({ TrangThai: [0, 1] }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(result)
-                    console.log(result.length);
                 })
                 .catch((error) => {
                     res.status(400).json({
@@ -131,6 +131,15 @@ class XeController {
             })
         }
 
+    }
+    async findXe_id(req, res) {
+        let id = req.params.id;
+        await Xe.findById(id)
+            .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+            .then((result) => {
+                res.json(result)
+                console.log('findXe_id',result)
+            })
     }
     async findXe(req, res) {
         let check = null;

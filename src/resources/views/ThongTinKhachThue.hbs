@@ -19,57 +19,64 @@
 
           </div>
 
-          <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data"
-            style="display: none;">
- 
-           <h1 style="font-size: 20px; ">Thông tin xe</h1>
-        <div class="row">
-            <div class="col-md-4">
+          <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data">
+
+            <h1 style="font-size: 20px; ">Thông tin xe</h1>
+            <div class="row">
+              <div class="col-md-4">
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên xe: </span>VinFast F8</label>
+                  <label style="font-size: 18px;"> Tên xe: <span id="tenxe" style="font-weight: bold;"></span>
+                  </label>
                 </div>
 
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Biển số xe:</span> 88A-21312</label>
+                  <label style="font-size: 18px;">Biển số xe: <span id="bks" style="font-weight: bold;"></span>
+                  </label>
                 </div>
 
-            </div>
-            <div class="col-md-4">
-               <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Hãng:</span> Vinfast </label>
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 18px;">Hãng: <span id="hang" style="font-weight: bold;"></span>
+                  </label>
                 </div>
 
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Loại nhiên liệu:</span> Xăng</label>
+                  <label style="font-size: 18px;">Loại nhiên liệu: <span id="loainhienlieu"
+                      style="font-weight: bold;"></span> </label>
                 </div>
-            </div>
-              <div class="col-md-4">    
+              </div>
+              <div class="col-md-4">
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số ghế:</span> 4 </label>
+                  <label style="font-size: 18px;">Số ghế: <span id="soghe" style="font-weight: bold;"></span></label>
                 </div>
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Truyền động: </span>Số tự động</label>
+                  <label style="font-size: 18px;">Truyền động: <span id="sotudong" style="font-weight: bold;"></span>
+                  </label>
                 </div>
-            </div>
-            <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Năm sản xuất:</span> 2020</label>
+                  <label style="font-size: 18px;"> Năm sản xuất: <span id="nsx" style="font-weight: bold;"></span>
+                  </label>
                 </div>
 
-                
+
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 18px;">Giá thuê: <span id="gia" style="font-weight: bold;"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 18px;"> Chủ xe: <span id="username" style="font-weight: bold;"></span>
+                  </label>
+                </div>
+              </div>
             </div>
-               <div class="col-md-4">
-                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giá thuê:</span> 1.050.000nvnđ</label>
-                </div>
-                </div>
-                 <div class="col-md-4">
-                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Chủ xe:</span> Nguyễn văn a</label>
-                </div>
-                </div>
- </div>
-           
+
 
 
 
@@ -288,43 +295,44 @@
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
-  // ẩn hiện form
-  const addNewBtn = document.getElementById("add-new-btn");
-  let showForm = false;
+ 
+  load()
 
-  addNewBtn.addEventListener("click", () => {
-    showForm = !showForm; // Đảo ngược giá trị của biến showForm
-    const form = document.getElementById("product-form");
-    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
-  });
-  const HSD = document.querySelectorAll(".HSD");
-  HSD.forEach((i) => {
-    const date = new Date(i.innerHTML);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const formattedDate = day + '/' + month + '/' + year
-    i.innerHTML = formattedDate
-  })
-  var stt = 0;
-  const stt1 = document.querySelectorAll(".stt");
-  stt1.forEach((i) => {
-    stt++;
-    i.innerText = stt
-  })
+  async function load() {
 
-  const TrangThai = document.querySelectorAll('.TrangThai');
-  TrangThai.forEach((i) => {
-    console.log(i.innerHTML)
+    // Lấy URL hiện tại
+    const url = window.location.href;
 
-    if (i.innerHTML === "true") {
-      i.innerHTML = "Hoạt động"
-      i.style.color = "#02790C"
-    } else {
-      i.innerHTML = "Hết hạn"
-      i.style.color = "#A90312"
-      i.style.background = "#F9C9CD"
-    }
-  })
+    // đến chuỗi url`
+    const idStart = "http://localhost:9000/quanlyxe/ThongTinKhachThue/";
+
+    // cắt chuỗi chuỗi :id
+    const id = url.slice(idStart.length, url.length);
+
+    const response = await fetch(`/api/xe/find_id/${id}`).then(response => response.json());
+    console.log(response)
+    document.getElementById('tenxe').innerHTML = response.MauXe
+    document.getElementById('username').innerHTML = response.ChuSH.UserName
+    document.getElementById('gia').innerHTML = response.GiaThue1Ngay
+    document.getElementById('nsx').innerHTML = response.NSX
+    document.getElementById('sotudong').innerHTML = response.ChuyenDong
+    document.getElementById('soghe').innerHTML = response.SoGhe
+    document.getElementById('hang').innerHTML = response.HangXe
+    document.getElementById('bks').innerHTML = response.BKS
+    document.getElementById('loainhienlieu').innerHTML = response.LoaiNhienLieu
+
+    var GiaThue = document.querySelector('#gia');
+
+    const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
+      minimumFractionDigits: 2,
+      decimal: ',',
+      thousandsSeparator: '.',
+    });
+    GiaThue.innerHTML = formattedPrice + " đ"
+
+  }
+
+
+
 
 </script>
