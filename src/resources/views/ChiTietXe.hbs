@@ -124,22 +124,28 @@
 
       </div>
 
-      <div class="row" style="">
-        <div class="form-group col-md-3" style="margin-left:20px;">
+      <div class="end"  >
+        
+        <div class="form-group1 " style="margin-left:20px; display: inline-block; ">
           <label class="control-label">Ảnh xe</label> <BR>
           <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="100px" width="150px" type="button" id="show-emp"
             data-toggle="modal" data-target="#ModalUP">
         </div>
-
-        <div class="form-group col-md-3" style="margin-left:50px;">
-          <label class="control-label">Giấy tờ xe</label>
-          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px"
+        <div class="form-group " style="margin-left:20px;display: inline-block;">
+          <label class="control-label">Giấy tờ xe</label><BR>
+          <img src="/images/{{this.DangKyXe}}" alt="" height="100px"
             width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
         </div>
-        <div class="form-group col-md-3" style="margin-left:50px;">
-          <label class="control-label">Bảo hiểm</label>
-          <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="100px"
-            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
+        
+        <div class="form-group " style="margin-left:20px;display: inline-block;">
+          <label class="control-label">Bảo hiểm</label><BR>
+          <img src="/images/{{this.BaoHiem}}" alt="" height="100px"
+            width="150px"  type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
+        </div>
+          <div class="form-group " style="margin-left:20px;display: inline-block;">
+          <label class="control-label">Đăng kiểm</label><BR>
+          <img src="/images/{{this.DangKiem}}" alt="" height="100px"
+            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP4">
         </div>
       </div>
 
@@ -228,7 +234,7 @@
                   </div>
                 </div>
               </div>
-              <BR>
+             
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -257,7 +263,7 @@
                 <div class="form-group col-md-3" style=" display: flex;
         flex-direction: column;">
                   <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.DangKyXe}}" alt="" height="240px" width="340px" style="margin-left:40px;">
+                    <img src="/images/{{this.DangKyXe}}" alt="" height="280px" width="400px" style="margin-left:230px;">
 
 
                   </div>
@@ -265,7 +271,7 @@
 
                 </div>
               </div>
-              <BR>
+            
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -293,7 +299,7 @@
                 <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
                   <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.BaoHiem}}" alt="" height="240px" width="340px" style="margin-left:40px;">
+                    <img src="/images/{{this.BaoHiem}}" alt="" height="280px" width="400px" style="margin-left:230px;">
 
 
                   </div>
@@ -301,7 +307,7 @@
 
                 </div>
               </div>
-              <BR>
+             
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -310,7 +316,41 @@
           </div>
         </div>
       </div>
+  {{!-- đang kiểm --}}
+      <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false" height="900px" width="950px">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
 
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Hình ảnh đăng kiểm</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                  <div class="images" style=" display: flex;">
+                    <img src="/images/{{this.DangKiem}}" alt="" height="280px" width="400px" style="margin-left:230px;">
+
+
+                  </div>
+                  <BR>
+
+                </div>
+              </div>
+             
+              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+              <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
 
       {{/each}}
 

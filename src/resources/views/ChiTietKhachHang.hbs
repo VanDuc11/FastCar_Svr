@@ -1,70 +1,61 @@
 <main class="app-content">
   <div class="app-title">
     <ul class="app-breadcrumb breadcrumb side">
-      <li class="breadcrumb-item active"><a href="#"><b>Chi tiết Khách Hàng</b></a></li>
+      <li class="breadcrumb-item active"><a href="#"><b>Khách hàng đang thuê</b></a></li>
     </ul>
     <div id="clock"></div>
   </div>
-  <div class="row element-button">
-  </div>
-
-  <div class="tile">
-    <div class="tile-body">
-   
-      <div class="row">
-        {{#each data}}  
-        </div>
-         </div>
-           <h2 class="col-md-9">Chi tiết khách hàng</h2>
- <div class="row element-button">
-  </div>
-          {{!-- <div class="col-sm-2">
-              <button type="button" id="add-new-btn" class="btn btn-add btn-sm">Thông tin xe</button>
-            </div>
-   <div class="row element-button">
-  </div>
-  <form  action="/product/create_data" id="product-form" method="post" enctype="multipart/form-data"
-            style="display: none;"> --}}
-
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="row element-button">
           
-            
-      <h1 style="font-size: 20px; ">Thông tin Khách hàng</h1>
+
+
+
+
+          </div>
+
+             {{#each data}}
+ 
+           <h1 style="font-size: 20px; ">Thông tin Khách hàng</h1>
         <div class="row">
            <div class="col-md-4">
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Họ và tên:</span> Nguyễn văn A</label>
+                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Họ và tên:</span> {{this.UserName}}</label>
                 </div>
 
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"> Ngày sinh:</span> 26/3/2000</label>
+                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Ngày sinh:</span>{{this.NgaySinh}}  </label>
                 </div>
 
-            </div><span style="font-weight: bold;">
+            </div>
             <div class="col-md-4">
                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số điện thoại:</span> 092939121 </label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số điện thoại:</span> {{this.SDT}} </label>
                 </div>
 
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giới tính:</span> Nam</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giới tính:</span> {{this.GioiTinh}}</label>
                 </div>
             </div>
               <div class="col-md-4">    
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Email:</span> Nguyên@gmail.com </label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Email:</span>{{this.Email}} </label>
                 </div>
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Địa chỉ:</span> Hà nội</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Địa chỉ:</span> {{this.DiaChi_GPLX}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ngày tham gia:</span> 20/10/2023</label>
+                    <label style="font-size: 18px;" ><span style="font-weight: bold;"  >Ngày tham gia:</span> <span class="HSD"  >{{this.NgayThamGia}}</span></label>
                 </div> 
             </div>
             <div class="col-md-4">
              <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số dư ví:</span> 686.000vnđ</label>
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số dư ví:</span> {{this.SoDu}}</label>
                 </div>
                   </div>
                    </div>
@@ -74,7 +65,7 @@
              <div class="col-md-4">
                 <div class="col-md-12">
                     <label style="font-size: 18px;" ><span style="font-weight: bold;">Avata </span></label> 
-          <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="50px" width="50px" type="button" id="show-emp"
+          <img src="/images/{{this.Avatar}}" alt="" height="50px" width="50px" type="button" id="show-emp"
             data-toggle="modal" data-target="#ModalUP3">
                 </div>
             </div>
@@ -82,7 +73,7 @@
                    <div class="col-md-4">      
                 <div class="col-md-12">
                   <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy tờ xe</span></label>
-          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="50px"
+          <img src="/images/{{this.HinhAnh_GPLX}} " alt="" height="50px"
             width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
             <p style="margin-left: 20px;font-size: 12px;color: red;">Chưa xác minh</p>
                 </div>
@@ -96,51 +87,56 @@
                 </div>
             </div>
         </div>
-       
+           
 
-    <div class="row element-button">
+
+
+   
+          <div class="row element-button">
+          </div>
+          <table class="table table-hover table-bordered" id="sampleTable">
+            <thead>
+              <th style="text-align: center;">STT</th>
+                <th style="text-align: center;">Biển số xe</th>
+                <th style="text-align: center;">Tên xe</th>
+                <th style="text-align: center;">Ảnh</th>
+                 <th style="text-align: center;">Hãng</th>
+                <th style="text-align: center;">Số ghế</th>
+                <th style="text-align: center;">Năm sản xuất</th>
+                <th style="text-align: center;">Giá </th>
+                <th style="text-align: center;">Tên chủ xe</th>
+            
+
+
+              </tr>
+            </thead>
+            <tbody>
+          
+              <tr>
+                <td class="stt">{{@index}}</td>
+                <td>{{this.MaHD}}</td>
+                <td>{{this.User.UserName}}</td>
+                <td>{{this.User.SDT}}</td>
+                <td>{{this.User.DiaChi_GPLX}}</td>
+                <td>{{this.User.Email}}</td>
+                <td>{{this.User.GioiTinh}}</td>
+                <td>{{this.User.NgaySinh}}</td>
+
+            
+
+              </tr>
+          
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-           <h1 style="font-size: 20px; ">Thông tin xe</h1>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên xe:</span> VinFast F8</label>
-                </div>
 
+             {{!-- <div class="col-md-4">
                 <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;"> số xe:</span> 88A-21312</label>
-                </div>
-
-            </div>
-            <div class="col-md-4">
-               <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Hãng:</span> Vinfast </label>
-                </div>
-
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Loại nhiên liệu:</span> Xăng</label>
-                </div>
-            </div>
-              <div class="col-md-4">    
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số ghế:</span> 4 </label>
-                </div>
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Truyền động:</span> Số tự động</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Năm sản xuất:</span> 2020</label>
-                </div>
-
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giá thuê:</span> 1.050.000nvnđ</label>
-                </div>
-            </div>
-             <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ảnh xe </span></label> 
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ảnh xe     </span></label> 
           <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="50px" width="50px" type="button" id="show-emp"
             data-toggle="modal" data-target="#ModalUP">
                 </div>
@@ -149,17 +145,67 @@
                    <div class="col-md-4">      
                 <div class="col-md-12">
                   <label style="font-size: 18px;"><span style="font-weight: bold;">Bảo hiểm</span></label>
-          <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="50px"
+          <img src="/images/{{this.BaoHiem}}" alt="" height="50px"
             width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
                 </div>
             </div>
-        </div>
+             
+                   <div class="col-md-4">      
+                <div class="col-md-12">
+                  <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy tờ xe</span></label>
+          <img src="/images/{{this.DangKyXe}}" alt="" height="50px"
+            width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
+                </div>
+            </div>
+             
+                   <div class="col-md-4">      
+                <div class="col-md-12">
+                  <label style="font-size: 18px;"><span style="font-weight: bold;">Đăng kiểm</span></label>
+          <img src="/images/{{this.DangKiem}}" alt="" height="50px"
+            width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP4">
+                </div>
+            </div>
+        </div> --}}
 
-
-  {{/each}}
 
  
+ 
 </main>
+ {{!-- đang kiểm --}}
+      <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false" height="900px" width="950px">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Hình ảnh đăng kiểm</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                  <div class="images" style=" display: flex;">
+                    <img src="/images/{{this.DangKiem}}" alt="" height="280px" width="400px" style="margin-left:230px;">
+
+
+                  </div>
+                  <BR>
+
+                </div>
+              </div>
+             
+              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+              <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
 <div class="modal fade" id="ModalUP5" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false" height="900px" width="950px">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -262,11 +308,10 @@
                 <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
                   <div class="images" style=" display: flex;">
-                    <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-truoc-bang-lai-xe.jpg"
-                      alt="" height="240px" width="340px" style="margin-left:40px;">
+                    <img src="/images/{{this.DangKyXe}}"
+                      alt=""height="280px" width="400px" style="margin-left:230px;">
 
-                    <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-sau-bang-lai-xe.jpg" alt=""
-                      height="240px" width="340px" style="margin-left:150px;">
+            
                   </div>
                   <BR>
 
@@ -301,12 +346,10 @@
                 <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
                   <div class="images" style=" display: flex;">
-                    <img src="https://hyundaiphanthiet.vn/wp-content/uploads/2021/09/Xehay-BH-220421-6_1.jpg" alt=""
-                      height="240px" width="340px" style="margin-left:40px;">
+                    <img src="/images/{{this.BaoHiem}}" alt=""
+                     height="280px" width="400px" style="margin-left:230px;">
 
-                    <img
-                      src="https://luatsux.vn/wp-content/uploads/2022/07/Bao-hiem-trach-nhiem-dan-su-o-to-co-bat-buoc-khong.png"
-                      alt="" height="240px" width="340px" style="margin-left:150px;">
+              
                   </div>
                   <BR>
 
@@ -341,8 +384,8 @@
         flex-direction: column;">
             <div class="images" style=" display: flex; ">
               <img
-                src="https://cdn.vietnambiz.vn/1881912202208555/images/2023/07/10/bang-gia-xe-o-to-vinfast-20230710142102225.jpg"
-                alt="" height="220px" width="350px" style="margin-left:220px;">
+                src="/images/{{this.Avatar}}"
+                alt="" height="280px" width="400px" style="margin-left:230px;">
 
 
 
@@ -357,8 +400,20 @@
       </div>
     </div>
   </div>
+ 
+ {{/each}}
 
-
+<script>
+    const HSD = document.querySelectorAll(".HSD");
+  HSD.forEach((i) => {
+    const date = new Date(i.innerHTML);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = day + '/' + month + '/' + year
+    i.innerHTML = formattedDate
+  })
+</script>
       
   <!-- Essential javascripts for application to work-->
 

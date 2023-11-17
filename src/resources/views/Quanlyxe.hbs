@@ -20,16 +20,13 @@
               <a class="btn btn-add btn-sm" href="/quanlyxe/danhsachxe">
                 Danh sách xe</a>
             </div>
-
-
-            
-
-
-
-            <div class="col-sm-2">
-              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
+               <div class="col-sm-2">
+   <button type="button" class="btn btn-primary" id="car-status" onclick="findActiveCarStatus()">Tìm trạng thái xe</button>
             </div>
+
+
+
+          
             <div class="col-sm-2" style="">
               <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1">
                 <option>Đã duyệt</option>
@@ -68,8 +65,7 @@
           </div>
           <div class="row element-button">
           </div>
-          <table class="table table-hover table-bordered" id="sampleTable">
-          
+          <table class="table table-hover table-bordered" id="sampleTable">     
             <thead>
               <tr>
                 <th style="text-align: center;">STT</th>
@@ -95,14 +91,13 @@
                 <td style="text-align: center;">{{this.SoGhe}} </td>
                 <td style="text-align: center;">{{this.NSX}}</td>
                 <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
-                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
-                <td><span class="TrangThai"
-                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>    
+                 <td><span class="TrangThai" style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+                 
                 <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
                     chi tiết</a></td>
               </tr>
               {{/each}}
-
             </tbody>
           </table>
         </div>
@@ -110,6 +105,92 @@
     </div>
   </div>
 </main>
+<script>
+  const searchInput = document.getElementById('searchInput');
+const tableBody = document.getElementById('sampleTable').querySelector('tbody');
+
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+
+  fetch('/api/xe/findTrangthai0_1')
+    .then(response => response.json())
+    .then(data => {
+      const filteredData = data.filter(car => {
+        const carStatus = car.TrangThai.toLowerCase();
+        return carStatus.includes(searchTerm);
+      });
+
+      // Clear the table body and repopulate it with the filtered data
+      tableBody.innerHTML = '';
+      filteredData.forEach(car => {
+        const row = document.createElement('tr');
+
+        const sttCell = document.createElement('td');
+        sttCell.classList.add('stt');
+        sttCell.textContent = car.index;
+
+        const bksCell = document.createElement('td');
+        bksCell.textContent = car.BKS;
+
+        const mauXeCell = document.createElement('td');
+        mauXeCell.textContent = car.MauXe;
+
+        const imgCell = document.createElement('td');
+        const img = document.createElement('img');
+        img.src = `/images/${car.HinhAnh[0]}`;
+        img.classList.add('img-card-person1');
+        imgCell.appendChild(img);
+
+        const soGheCell = document.createElement('td');
+        soGheCell.textContent = car.SoGhe;
+
+        const nsxCell = document.createElement('td');
+        nsxCell.textContent = car.NSX;
+
+        const giaThueCell = document.createElement('td');
+        giaThueCell.classList.add('giathue');
+        const formattedPrice = new Intl.NumberFormat('vi-VN').format(car.GiaThue1Ngay, {
+          minimumFractionDigits: 2,
+          decimal: ',',
+          thousandsSeparator: '.',
+        });
+        giaThueCell.textContent = formattedPrice + ' đ';
+
+        const chuSHCell = document.createElement('td');
+        chuSHCell.textContent = car.ChuSH.UserName;
+
+        const trangThaiCell = document.createElement('td');
+        trangThaiCell.classList.add('TrangThai');
+        if (car.TrangThai === 0) {
+          trangThaiCell.textContent = 'Chờ duyệt';
+          trangThaiCell.style.background = '#F9C9CD';
+        } else {
+          trangThaiCell.textContent = 'Hoạt động';
+          trangThaiCell.style.background = '#BFEFC4';
+        }
+
+        const chiTietCell = document.createElement('td');
+        const chiTietLink = document.createElement('a');
+        chiTietLink.href = `/quanlyxe/ChiTietXe/${car._id}`;
+        chiTietLink.textContent = 'Xem chi tiết';
+        chiTietCell.appendChild(chiTietLink);
+
+        row.appendChild(sttCell);
+        row.appendChild(bksCell);
+        row.appendChild(mauXeCell);
+        row.appendChild(imgCell);
+        row.appendChild(soGheCell);
+        row.appendChild(nsxCell);
+        row.appendChild(giaThueCell);
+        row.appendChild(chuSHCell);
+        row.appendChild(trangThaiCell);
+        row.appendChild(chiTietCell);
+
+        tableBody.appendChild(row);
+      });
+    });
+});
+</script>
 <script>
   const a = document.querySelector('.lọc');
 

@@ -98,13 +98,10 @@
             <td><img src="/images/{{this.HinhAnh}}" alt=""></td>
             <td>{{this.NoiDung}}</td>
             <td class="NgayDang" style="width: 150px;">{{this.createdAt}}</td>
-            <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i>
-              </button>
-              <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+             <td> <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal"
+                data-target="#ModalUP">Xem chi tiết</button></td>
 
-            </td>
+         
           </tr>
           {{/each }}
 
@@ -125,70 +122,60 @@
         <div class="row">
           <div class="form-group  col-md-12">
             <span class="thong-tin-thanh-toan">
-              <h5>Chỉnh sửa thông tin Voucher</h5>
+              <h5> Thông tin Thông báo</h5>
             </span>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-6">
-            <label class="control-label">MÃ</label>
-            <input class="form-control" type="text" required value="">
-          </div>
+                  <div class="form-group col-md-6" style="margin-left: 300px;"> 
+          <img src="/images/{{this.HinhAnh}}" alt="" height="200px"
+            width="300px" >
+        </div>
           <div class="form-group col-md-6">
             <label class="control-label">Tiêu đề</label>
-            <input class="form-control" type="text" required value="">
-          </div>
-          <div class="form-group col-md-6 ">
-            <label class="control-label">GIÁ TRỊ giảm</label>
-            <select class="form-control" id="exampleSelect1" style=" padding-left: 100px;">
-              <option>50.000vnđ</option>
-              <option>100.000vnđ</option>
-              <option>150.000vnđ</option>
-              <option>250.000vnđ</option>
-              <option>300.000vnđ</option>
-              <option>350.000vnđ</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label class="control-label">Ngày bắt đầu</label>
-            <input class="form-control" type="date" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Ngày kết thúc</label>
-            <input class="form-control" type="date" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Mô tả xe</label>
-            <textarea class="form-control" name="mota" id="mota" style=" height: 20px; width: 200px; "></textarea>
-            <script>CKEDITOR.replace('mota');</script>
-          </div>
-
-          <div class="form-group col-md-12">
-            <label class="control-label">Ảnh xe</label>
-            <div id="myfileupload">
-              <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
-            </div>
-
-            <div id="boxchoice">
-              <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-              <p style="clear:both"></p>
-
-            </div>
-
-          </div>
-
-
-
+                <div class="form-control">
+          <p><b >{{this.TieuDe}}</b></p>
         </div>
-        <div class="row element-button">
+          </div>
+                <div class="form-group col-md-6">
+        <label class="control-label">Ngày đăng</label>
+        <div class="form-control">
+          <p><b class="NgayDang">{{this.createdAt}}</b></p>
         </div>
-        <button class="btn btn-save" type="button">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-        <BR>
       </div>
-      <div class="modal-footer">
+              <div class="form-group col-md-6">
+        <label class="control-label">Mã khuyến mãi</label>
+        <div class="form-control">
+          <p><b>{{this.MaGiamGia}}</b></p>
+        </div>
       </div>
+              <div class="form-group col-md-6">
+        <label class="control-label">Giá trị giảm(%)</label>
+        <div class="form-control">
+          <p><b >{{this.GiaTri}}%</b></p>
+        </div>
+      </div>
+              <div class="form-group col-md-6">
+        <label class="control-label">Giá trị giảm</label>
+        <div class="form-control">
+          <p><b id="giathue">{{this.GiaTriMax}}</b></p>
+        </div>
+      </div>
+         <div class="form-group col-md-6">
+            <label class="control-label">Nôi dung</label>
+             <textarea class="form-control" style=" height: 10px; width: 420px">{{this.NoiDung}}</textarea>
+          </div>
+
+        
+         
+            </div>
+         
+
+      
+        <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left: 400px;">Đóng</a>
+      
+      </div>
+     
     </div>
   </div>
 </div>
