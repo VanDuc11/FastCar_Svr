@@ -22,8 +22,13 @@ router.get('/Addxe',XeControlles.add);
 router.get('/ChiTietXe/:id', XeControlles.chitietxe);
 router.get('/ThongTinKhachThue/:id', XeControlles.Thongtin);
 
-router.get('/findTrangthai0_1', XeControlles.findXeTrangThai0_1);
+
 router.get('/list', XeControlles.findXe);
+
+// get theo trạng thái 0,1
+router.get('/findTrangthai0_1', XeControlles.findXeTrangThai0_1);
+//get xe theo id 
+router.get('/find_id/:id', XeControlles.findXe_id);
 
 // get top 5 xe, trừ xe của user login
 router.get('/top5xe/:email', XeControlles.find_top_5);

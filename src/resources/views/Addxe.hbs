@@ -236,7 +236,10 @@
       if (files.length > 4) {
         fileErrorXe.innerHTML = "Bạn chỉ được chọn tối đa 4 ảnh";
         fileErrorXe.style.display = "block";
-      } else {
+      } else if (files.length < 4) {
+        fileErrorXe.innerHTML = "Bạn chỉ được chọn 4 ảnh";
+        fileErrorXe.style.display = "block";
+      } else  {
         fileErrorXe.style.display = "none";
       }
     });
@@ -284,48 +287,4 @@
   <script src="/public/js/main.js"></script>
   <script src="/public/js/plugins/pace.min.js"></script>
 
-
-
-  {{!--
-  <script>
-    const inpFile = document.getElementById("inpFile");
-    const loadFile = document.getElementById("loadFile");
-    const previewContainer = document.getElementById("imagePreview");
-
-    const previewImage = previewContainer.querySelector(".image-preview__image");
-    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-    inpFile.addEventListener("change", function () {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        previewDefaultText.style.display = "none";
-        previewImage.style.display = "block";
-        reader.addEventListener("load", function () {
-          previewImage.setAttribute("src", this.result);
-        });
-        reader.readAsDataURL(file);
-      }
-    });
-    function validate() {
-      var img = document.getElementById("uploadfile").files;
-      var isValid = true;
-      if (img.length > 4) {
-        document.getElementById("file-error").innerHTML = "Chỉ chọn tối đa 4 file ảnh";
-        document.getElementById("file-error").style.display = "block";
-        isValid = false;
-      } else {
-        document.getElementById("file-error").style.display = "none";
-      }
-      if (img.length == 0) {
-        document.getElementById("file-error").innerHTML = "Vui lòng chọn ảnh ";
-        document.getElementById("file-error").style.display = "block";
-        isValid = false;
-      } else {
-        document.getElementById("file-error").style.display = "none";
-      }
-
-      return isValid;
-    }
-    // validate();
-  </script> --}}
 </body>

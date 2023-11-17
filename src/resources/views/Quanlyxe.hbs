@@ -10,11 +10,11 @@
       <div class="tile">
         <div class="tile-body">
           <div class="row element-button">
-               <div class="col-sm-2">
+            <div class="col-sm-2">
 
               <a class="btn btn-add btn-sm" href="/quanlyxe/Addxe" title="Thêm"><i class="fas fa-plus"></i>
-               Thêm xe</a>
-                     </div>
+                Thêm xe</a>
+            </div>
             <div class="col-sm-2">
 
               <a class="btn btn-add btn-sm" href="/quanlyxe/danhsachxe">
@@ -22,7 +22,7 @@
             </div>
 
 
-            
+
 
 
 
@@ -69,7 +69,7 @@
           <div class="row element-button">
           </div>
           <table class="table table-hover table-bordered" id="sampleTable">
-          
+
             <thead>
               <tr>
                 <th style="text-align: center;">STT</th>
@@ -110,16 +110,10 @@
     </div>
   </div>
 </main>
-<script>
-  const a = document.querySelector('.lọc');
 
-  a.addEventListener('click', function () {
-    // Hiển thị nội dung của thẻ select
-    document.querySelector('#exampleSelect1').style.display = 'block';
-  });
-</script>
 <script>
-  load_data()
+  var GiaThue = document.querySelectorAll('.giathue');
+  var TrangThai = document.querySelectorAll('.TrangThai');
   async function load_data() {
 
     const response = await fetch('/api/xe/findTrangthai0_1').then(response => response.json());
@@ -139,13 +133,12 @@
     document.getElementById('daduyen').innerText = tt1 + " Xe";
 
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
-    var GiaThue = document.querySelectorAll('.giathue');
-    var TrangThai = document.querySelectorAll('.TrangThai');
+
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
         i.innerHTML = "Chờ duyệt"
-        i.style.background="#F9C9CD"
-      } else {
+        i.style.background = "#F9C9CD"
+      } else if (i.innerHTML == 1) {
         i.innerHTML = "Hoạt động"
         i.style.background = "#BFEFC4"
       }
@@ -159,6 +152,9 @@
     })
 
     GiaThue.forEach((i) => {
+      if (!isFinite(i.innerHTML)) {
+        return i.innerHTML;
+      }
       const formattedPrice = new Intl.NumberFormat('vi-VN').format(i.innerHTML, {
         minimumFractionDigits: 2,
         decimal: ',',
@@ -166,12 +162,10 @@
       });
       i.innerHTML = formattedPrice + " đ"
     })
-
-
   }
 
-
-
+  load_data();
+  setInterval(load_data, 1000);
 </script>
 
 <!-- Essential javascripts for application to work-->
