@@ -14,6 +14,14 @@ admin.initializeApp({
 });
 
 class HoaDonController_ {
+     
+    thongke(req, res) {
+        res.render('Thongke')
+    }
+    top(req, res) {
+        res.render('ThongKeTopXe')
+    }
+
     async index(req, res) {
         let check = null;
         let trangThaiValues = [];

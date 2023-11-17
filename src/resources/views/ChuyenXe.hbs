@@ -105,33 +105,33 @@
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>Mã hóa đơn</th>
-                                <th>Tên khách hàng</th>
-                                <th>Tên xe</th>
-                                <th>Biển số xe</th>
-                                <th>Giá thuê</th>
-                                <th>Ngày thuê</th>
-                                <th>Ngày trả</th>
-                                <th>Tình trạng</th>
-                                <th>Chức năng</th>
+                                <th style="text-align: center;">STT</th>
+                                <th style="text-align: center;">Mã hóa đơn</th>
+                                <th style="text-align: center;">Tên khách hàng</th>
+                                <th style="text-align: center;">Tên xe</th>
+                                <th style="text-align: center;">Biển số xe</th>
+                                <th style="text-align: center;">Giá thuê</th>
+                                <th style="text-align: center;">Ngày thuê</th>
+                                <th style="text-align: center;">Ngày trả</th>
+                                <th style="text-align: center;">Tình trạng</th>
+                                <th style="text-align: center;">Chức năng</th>
                                
                             </tr>
                         </thead>
                         <tbody>
                             {{#each data}}
                             <tr>
-                                <td >{{@index}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{@index}}</td>
                               
-                                <td>{{this.MaHD}}</td>
-                                <td>{{this.User.UserName}}</td>
-                                <td>{{this.Xe.MauXe}}</td>
-                                <td>{{this.Xe.BKS}}</td>
-                                <td >{{this.TongTien}}</td>
-                                <td>{{this.NgayThue}}</td>
-                                <td>{{this.NgayTra}}</td>
-                                <td><span class="badge bg-warning">{{this.TrangThaiHD}}</span></td>
-                             <td> <a class="btn btn-info " href="/chuyenxe/ChiTietChuyen/{{this._id}}"> Hóa đơn</a></td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MaHD}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.Xe.MauXe}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.Xe.BKS}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TongTien}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NgayThue}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NgayTra}}</td>
+                                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="badge bg-warning">{{this.TrangThaiHD}}</span></td>
+                             <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info " href="/chuyenxe/ChiTietChuyen/{{this._id}}"> Hóa đơn</a></td>
                             </tr>
                             {{/each}}
                         

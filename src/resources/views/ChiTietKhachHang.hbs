@@ -99,11 +99,11 @@
               <th style="text-align: center;">STT</th>
                 <th style="text-align: center;">Biển số xe</th>
                 <th style="text-align: center;">Tên xe</th>
-                <th style="text-align: center;">Ảnh</th>
-                 <th style="text-align: center;">Hãng</th>
+                <th style="text-align: center;">Ảnh xe</th>
+                <th style="text-align: center;">Hãng</th>
                 <th style="text-align: center;">Số ghế</th>
                 <th style="text-align: center;">Năm sản xuất</th>
-                <th style="text-align: center;">Giá </th>
+                <th  style="text-align: center;">Giá </th>
                 <th style="text-align: center;">Tên chủ xe</th>
             
 
@@ -114,14 +114,14 @@
           
               <tr>
                 <td class="stt">{{@index}}</td>
-                <td>{{this.MaHD}}</td>
-                <td>{{this.User.UserName}}</td>
-                <td>{{this.User.SDT}}</td>
-                <td>{{this.User.DiaChi_GPLX}}</td>
-                <td>{{this.User.Email}}</td>
-                <td>{{this.User.GioiTinh}}</td>
-                <td>{{this.User.NgaySinh}}</td>
-
+                <td id="tenxe"></td>
+                <td id="tenxe"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> </td>
+                 <td ></td>
             
 
               </tr>
@@ -171,6 +171,44 @@
  
  
 </main>
+<script>
+ 
+  async function load() {
+  // Get the current URL
+  const url = window.location.href;
+
+  // Get the ID from the URL
+  const idStart = "http://localhost:9000/khachhang/ChiTietKhachHang/";
+  const id = url.slice(idStart.length, url.length);
+
+  // Fetch the car data from the API
+  const response = await fetch(`/api/xe/find_id/${id}`).then(response => response.json());
+
+  // Update the corresponding elements with the car data
+  document.getElementById('tenxe').innerHTML = response.MauXe;
+  document.getElementById('username').innerHTML = response.ChuSH.UserName;
+
+  // Replace the '<td>' element with the formatted price
+  const giaThueElement = document.getElementById('gia');
+  const formattedPrice = new Intl.NumberFormat('vi-VN').format(giaThueElement.innerHTML, {
+    minimumFractionDigits: 2,
+    decimal: ',',
+    thousandsSeparator: '.',
+  });
+  giaThueElement.parentElement.innerHTML = `<td class="gifd">${formattedPrice} đ</td>`;
+
+  // Update the remaining '<td>' elements with the corresponding data
+  document.getElementById('nsx').innerHTML = response.NSX;
+  document.getElementById('sotudong').innerHTML = response.ChuyenDong;
+  document.getElementById('soghe').innerHTML = response.SoGhe;
+  document.getElementById('hang').innerHTML = response.HangXe;
+  document.getElementById('bks').innerHTML = response.BKS;
+  document.getElementById('loainhienlieu').innerHTML = response.LoaiNhienLieu;
+}
+
+
+
+</script>
  {{!-- đang kiểm --}}
       <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false" height="900px" width="950px">

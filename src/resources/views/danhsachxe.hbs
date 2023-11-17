@@ -75,24 +75,24 @@
               <th style="text-align: center;">Giá </th>
               <th style="text-align: center;">Tên chủ xe</th>
               <th style="text-align: center;">Trạng thái</th>
-              <th width="80">Chức năng</th>
+              <th style="text-align: center;"width="80">Chức năng</th>
             </tr>
           </thead>
           <tbody>
             {{#each data}}
             <tr>
-              <td style="text-align: center;" class="stt">{{@index}}</td>
-              <td style="text-align: center;">{{this.BKS}} </td>
-              <td style="text-align: center;">{{this.MauXe}}</td>
-              <td style="text-align: center;"> <img src="/images/{{this.HinhAnh.[0]}}" alt="" class="img-card-person1">
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"class="stt">{{@index}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.BKS}} </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MauXe}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <img src="/images/{{this.HinhAnh.[0]}}" alt="" class="img-card-person1">
               </td>
-              <td style="text-align: center;">{{this.SoGhe}} </td>
-              <td style="text-align: center;">{{this.NSX}}</td>
-              <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
-              <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
-              <td><span class="TrangThai"
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoGhe}} </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NSX}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="giathue">{{this.GiaThue1Ngay}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.ChuSH.UserName}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
                   style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
-              <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
                   chi tiết</a></td>
             </tr>
             {{/each}}

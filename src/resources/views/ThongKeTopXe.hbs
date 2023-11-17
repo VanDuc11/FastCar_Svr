@@ -102,25 +102,31 @@
             <table class="table table-hover table-bordered" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
-                     <th>Tên Chủ xe</th>
-                  <th>Tên xe</th>
-                  <th>Lượt Thuê</th>
-                  <th>Giá thuê</th>
-                  <th>Doanh thu</th>
+                      <th style="text-align: center;" width="10">STT</th>
+                   <th style="text-align: center;">Tên Chủ xe</th>
+                  <th style="text-align: center;">Tên xe</th>
+                  <th style="text-align: center;">Biển số xe </th>
+                  <th style="text-align: center;">Lượt Thuê</th>
+                  <th style="text-align: center;">Giá thuê</th>
+                  <th style="text-align: center;">Doanh thu</th>
+                    <th style="text-align: center;"> Tiền Hoa hồng</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-          
-                  <td>Nguyễn văn a</td>
-                  <td>Vinfast F8</td>
-                  <td>2</td> 
-                  <td>500.000đ</td>
-                  <td>9.400.000 đ</td>
-                 
-                </tr>
+                      {{#each data}}
+          <tr>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{@index}}</td>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User}}</td>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MauXe}}</td>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.BKS}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoChuyen}}</td>
+       <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.GiaThue1Ngay}}</td> 
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TongTien}}</td>
+                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
+
+         
+          </tr>
+          {{/each }}
               
               </tbody>
             </table>

@@ -101,14 +101,14 @@
             <thead>
               <tr>
 
-                <th>STT</th>
-                <th>Mã</th>
-                <th>Ảnh</th>
-                <th>Tiêu đề</th>
-                <th>Giá trị giảm</th>
-                <th width="100">Ngày kết thúc</th>
-                <th width="100">Trạng thái</th>
-                <th width="100">Chức năng</th>
+                <th style="text-align: center;">STT</th>
+                <th style="text-align: center;">Mã</th>
+                <th style="text-align: center;">Ảnh</th>
+                <th style="text-align: center;">Tiêu đề</th>
+                <th style="text-align: center;">Giá trị giảm</th>
+                <th style="text-align: center;" width="100">Ngày kết thúc</th>
+                <th style="text-align: center;" width="100">Trạng thái</th>
+                <th  style="text-align: center;"width="100">Chức năng</th>
 
 
               </tr>
@@ -116,15 +116,15 @@
             <tbody>
               {{#each data}}
               <tr>
-                <td class="stt">{{@index}}</td>
-                <td>{{this.MaGiamGia}}</td>
-                <td><img src="/images/{{this.HinhAnh}}" alt="" width="100px;" height="60px"></td>
-                <td>{{this.TieuDe}}</td>
-                <td>{{this.GiaTri}}%</td>
-                <td class="HSD">{{this.HSD}}</td>
-                <td><span class="TrangThai"
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MaGiamGia}}</td>
+                <td  ><img src="/images/{{this.HinhAnh}}" alt=""class="img-card-person1"></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TieuDe}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.GiaTri}}%</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"class="HSD">{{this.HSD}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
                     style="border-radius: 5px; background: #BFEFC4; padding: 5px;">{{this.TrangThai}}</span></td>
-                <td> <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal"
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal"
                 data-target="#ModalUP">Xem chi tiết</button></td>
 
               </tr>

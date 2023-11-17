@@ -82,23 +82,23 @@
       <table class="table table-hover table-bordered" id="sampleTable">
         <thead>
           <tr>
-            <th width="10">STT</th>
-            <th>Tiêu đề</th>
-            <th>Ảnh</th>
-            <th>Nội dung</th>
-            <th>Ngày đăng</th>
-            <th width="100">Chức năng</th>
+            <th style="text-align: center;" width="10">STT</th>
+            <th style="text-align: center;">Tiêu đề</th>
+            <th style="text-align: center;">Ảnh</th>
+            <th style="text-align: center;">Nội dung</th>
+            <th style="text-align: center;">Ngày đăng</th>
+            <th style="text-align: center;" width="100">Chức năng</th>
           </tr>
         </thead>
         <tbody>
           {{#each data}}
           <tr>
-            <td>{{@index}}</td>
-            <td>{{this.TieuDe}}</td>
-            <td><img src="/images/{{this.HinhAnh}}" alt=""></td>
-            <td>{{this.NoiDung}}</td>
-            <td class="NgayDang" style="width: 150px;">{{this.createdAt}}</td>
-             <td> <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal"
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{@index}}</td>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TieuDe}}</td>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img src="/images/{{this.HinhAnh}}" alt=""></td>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
+            <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="NgayDang" style="width: 150px;">{{this.createdAt}}</td>
+             <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal"
                 data-target="#ModalUP">Xem chi tiết</button></td>
 
          
@@ -180,36 +180,7 @@
   </div>
 </div>
 
-<script>
-  const table = document.getElementById('sampleTable');
-  const fromDateInput = document.getElementById('tuNgay');
-  const toDateInput = document.getElementById('denNgay');
-  const searchButton = document.getElementById('timKiem');
-  searchButton.addEventListener('click', filterTable);
 
-  function filterTable() {
-    const fromDate = new Date(fromDateInput.value);
-    const toDate = new Date(toDateInput.value);
-
-    const rows = table.querySelectorAll('tbody tr');
-    for (const row of rows) {
-      const createdAtElement = row.querySelector('.NgayDang');
-      const createdAtText = createdAtElement.textContent;
-      const createdAtDate = new Date(createdAtText);
-
-      if (createdAtDate instanceof Date) {
-        if (createdAtDate >= fromDate && createdAtDate <= toDate) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
-      } else {
-        // Handle the case where createdAtDate is NaN
-        row.style.display = ''; // Show the row even if the date is not in a supported format
-      }
-    }
-  }
-</script>
 <script>
   // ẩn hiện form
   const addNewBtn = document.getElementById("add-new-btn");
