@@ -24,12 +24,7 @@
 
 
 
-
-
-            <div class="col-sm-2">
-              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
-            </div>
+          
             <div class="col-sm-2" style="">
               <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1">
                 <option>Đã duyệt</option>
@@ -68,8 +63,9 @@
           </div>
           <div class="row element-button">
           </div>
-          <table class="table table-hover table-bordered" id="sampleTable">
 
+          <table class="table table-hover table-bordered" id="sampleTable">     
+ 
             <thead>
               <tr>
                 <th style="text-align: center;">STT</th>
@@ -95,14 +91,13 @@
                 <td style="text-align: center;">{{this.SoGhe}} </td>
                 <td style="text-align: center;">{{this.NSX}}</td>
                 <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
-                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
-                <td><span class="TrangThai"
-                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>    
+                 <td><span class="TrangThai" style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+                 
                 <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
                     chi tiết</a></td>
               </tr>
               {{/each}}
-
             </tbody>
           </table>
         </div>
@@ -110,6 +105,7 @@
     </div>
   </div>
 </main>
+
 
 <script>
   var GiaThue = document.querySelectorAll('.giathue');

@@ -124,7 +124,8 @@
                 <td class="HSD">{{this.HSD}}</td>
                 <td><span class="TrangThai"
                     style="border-radius: 5px; background: #BFEFC4; padding: 5px;">{{this.TrangThai}}</span></td>
-                <td> <a class="btn btn-info " href="#"> Xem chi tiết</a></td>
+                <td> <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal"
+                data-target="#ModalUP">Xem chi tiết</button></td>
 
               </tr>
               {{/each}}
@@ -135,6 +136,103 @@
     </div>
   </div>
 </main>
+ {{#each data}}
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Thông tin Khuyến mãi</h5>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+        <label class="control-label">Mã khuyến mãi</label>
+        <div class="form-control">
+          <p><b>{{this.MaGiamGia}}</b></p>
+        </div>
+      </div>
+              <div class="form-group col-md-6">
+        <label class="control-label">Giá trị giảm(%)</label>
+        <div class="form-control">
+          <p><b >{{this.GiaTri}}%</b></p>
+        </div>
+      </div>
+              <div class="form-group col-md-6">
+        <label class="control-label">Giá trị giảm</label>
+        <div class="form-control">
+          <p><b id="giathue">{{this.GiaTriMax}}</b></p>
+        </div>
+      </div>
+
+            <div class="form-group col-md-6">
+        <label class="control-label">Ngày bắt đầu</label>
+        <div class="form-control">
+          <p><b class="HSD">{{this.NgayBD}}</b></p>
+        </div>
+      </div>
+              <div class="form-group col-md-6">
+        <label class="control-label">Ngày kết thúc</label>
+        <div class="form-control">
+          <p><b class="HSD">{{this.HSD}}</b></p>
+        </div>
+      </div>
+              <div class="form-group col-md-6">
+        <label class="control-label">Trạng thái</label>
+        <div class="form-control">
+          <p><b class="TrangThai">{{this.TrangThai}}</b></p>
+        </div>
+      </div>
+          <div class="form-group col-md-6">
+        <label class="control-label">Tiêu đề</label>
+          <textarea class="form-control" style=" height: 20px; width: 420px">{{this.TieuDe}}</textarea>
+      </div>
+     
+          <div class="form-group col-md-6">
+          
+        <label class="control-label">Mô tả</label>
+        <textarea class="form-control" style=" height: 20px; width: 420px">{{this.NoiDung}}</textarea>
+  
+          </div>
+
+                 <div class="form-group col-md-6" style="margin-left: 300px;"> 
+          <img src="/images/{{this.HinhAnh}}" alt="" height="200px"
+            width="300px" >
+            </div>
+
+
+        </div>
+ 
+    
+        <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left: 400px;">Đóng</a>
+       
+      </div>
+     
+    </div>
+  </div>
+</div>
+  {{/each}}
+<script>
+   validatePrice()
+  function validatePrice() {
+    var GiaThue = document.querySelector('#giathue');
+    const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
+      minimumFractionDigits: 2,
+      decimal: ',',
+      thousandsSeparator: '.',
+    });
+   
+  
+    GiaThue.innerHTML = formattedPrice + " đ"
+  
+
+  }
+</script>
 
 <!-- Essential javascripts for application to work-->
 <script src="/public/js/jquery-3.2.1.min.js"></script>
