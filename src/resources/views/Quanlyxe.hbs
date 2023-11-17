@@ -108,14 +108,20 @@
 
 
 <script>
-  var GiaThue = document.querySelectorAll('.giathue');
-  var TrangThai = document.querySelectorAll('.TrangThai');
-  async function load_data() {
+  var stt = 0
+  const stt1 = document.querySelectorAll(".stt");
+  stt1.forEach((i) => {
+    stt++;
+    i.innerText = stt
+  })
 
+  load()
+  async function load() {
+    var GiaThue = document.querySelectorAll('.giathue');
+    var TrangThai = document.querySelectorAll('.TrangThai');
     const response = await fetch('/api/xe/findTrangthai0_1').then(response => response.json());
     var tt0 = 0;
     var tt1 = 0;
-    var stt = 0
     response.forEach(xe => {
       // xe chờ duyệt
       if (xe.TrangThai == 0) {
@@ -129,6 +135,11 @@
     document.getElementById('daduyen').innerText = tt1 + " Xe";
 
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
+    // số tứ tự
+
+  }
+
+  function load_data() {
 
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
@@ -140,12 +151,7 @@
       }
     })
 
-    // số tứ tự
-    const stt1 = document.querySelectorAll(".stt");
-    stt1.forEach((i) => {
-      stt++;
-      i.innerText = stt
-    })
+
 
     GiaThue.forEach((i) => {
       if (!isFinite(i.innerHTML)) {
