@@ -24,7 +24,7 @@
 
 
 
-          
+
             <div class="col-sm-2" style="">
               <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1">
                 <option>Đã duyệt</option>
@@ -64,8 +64,8 @@
           <div class="row element-button">
           </div>
 
-          <table class="table table-hover table-bordered" id="sampleTable">     
- 
+          <table class="table table-hover table-bordered" id="sampleTable">
+
             <thead>
               <tr>
                 <th style="text-align: center;">STT</th>
@@ -108,14 +108,18 @@
 
 
 <script>
-  var GiaThue = document.querySelectorAll('.giathue');
-  var TrangThai = document.querySelectorAll('.TrangThai');
-  async function load_data() {
+  var stt = 0
+  const stt1 = document.querySelectorAll(".stt");
+  stt1.forEach((i) => {
+    stt++;
+    i.innerText = stt
+  })
 
+  load()
+  async function load() {
     const response = await fetch('/api/xe/findTrangthai0_1').then(response => response.json());
     var tt0 = 0;
     var tt1 = 0;
-    var stt = 0
     response.forEach(xe => {
       // xe chờ duyệt
       if (xe.TrangThai == 0) {
@@ -129,7 +133,13 @@
     document.getElementById('daduyen').innerText = tt1 + " Xe";
 
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
+    // số tứ tự
 
+  }
+
+  function load_data() {
+    var GiaThue = document.querySelectorAll('.giathue');
+    var TrangThai = document.querySelectorAll('.TrangThai');
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
         i.innerHTML = "Chờ duyệt"
@@ -140,12 +150,7 @@
       }
     })
 
-    // số tứ tự
-    const stt1 = document.querySelectorAll(".stt");
-    stt1.forEach((i) => {
-      stt++;
-      i.innerText = stt
-    })
+
 
     GiaThue.forEach((i) => {
       if (!isFinite(i.innerHTML)) {
