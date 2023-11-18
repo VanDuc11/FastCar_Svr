@@ -310,7 +310,6 @@
     const id = url.slice(idStart.length, url.length);
 
     const response = await fetch(`/api/xe/find_id/${id}`).then(response => response.json());
-    console.log(response)
     document.getElementById('tenxe').innerHTML = response.MauXe
     document.getElementById('username').innerHTML = response.ChuSH.UserName
     document.getElementById('gia').innerHTML = response.GiaThue1Ngay

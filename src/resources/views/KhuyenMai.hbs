@@ -14,7 +14,7 @@
               <button type="button" id="add-new-btn" class="btn btn-add btn-sm"> <i class="fas fa-plus"></i> Thêm
                 mới</button>
             </div>
-          
+
 
 
             <div class="row" style="margin-left:690px;">
@@ -33,8 +33,7 @@
             </div>
           </div>
 
-          <form action="/api/voucher/create" id="product-form"  enctype="multipart/form-data"
-            style="display: none;">
+          <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data" style="display: none;">
             <div class="row">
               <div class="col-md-4" style="margin-top: 10px;">
                 <label for="name" class="form-label">Mã khuyến mãi:</label>
@@ -108,7 +107,7 @@
                 <th style="text-align: center;">Giá trị giảm</th>
                 <th style="text-align: center;" width="100">Ngày kết thúc</th>
                 <th style="text-align: center;" width="100">Trạng thái</th>
-                <th  style="text-align: center;"width="100">Chức năng</th>
+                <th style="text-align: center;" width="100">Chức năng</th>
 
 
               </tr>
@@ -116,16 +115,20 @@
             <tbody>
               {{#each data}}
               <tr>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}
+                </td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MaGiamGia}}</td>
-                <td  ><img src="/images/{{this.HinhAnh}}" alt=""class="img-card-person1"></td>
+                <td><img src="/images/{{this.HinhAnh}}" alt="" class="img-card-person1"></td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TieuDe}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.GiaTri}}%</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"class="HSD">{{this.HSD}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="HSD">{{this.HSD}}
+                </td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
                     style="border-radius: 5px; background: #BFEFC4; padding: 5px;">{{this.TrangThai}}</span></td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal"
-                data-target="#ModalUP">Xem chi tiết</button></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">
+                  <button class="btn btn-info" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP"
+                    onclick="chitiet(`{{this._id}}`)">Xem chi tiết</button>
+                </td>
 
               </tr>
               {{/each}}
@@ -136,7 +139,7 @@
     </div>
   </div>
 </main>
- {{#each data}}
+{{#each data}}
 <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
   data-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -151,74 +154,73 @@
           </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6">
-        <label class="control-label">Mã khuyến mãi</label>
-        <div class="form-control">
-          <p><b>{{this.MaGiamGia}}</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-6">
-        <label class="control-label">Giá trị giảm(%)</label>
-        <div class="form-control">
-          <p><b >{{this.GiaTri}}%</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-6">
-        <label class="control-label">Giá trị giảm</label>
-        <div class="form-control">
-          <p><b id="giathue">{{this.GiaTriMax}}</b></p>
-        </div>
-      </div>
-
-            <div class="form-group col-md-6">
-        <label class="control-label">Ngày bắt đầu</label>
-        <div class="form-control">
-          <p><b class="HSD">{{this.NgayBD}}</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-6">
-        <label class="control-label">Ngày kết thúc</label>
-        <div class="form-control">
-          <p><b class="HSD">{{this.HSD}}</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-6">
-        <label class="control-label">Trạng thái</label>
-        <div class="form-control">
-          <p><b class="TrangThai">{{this.TrangThai}}</b></p>
-        </div>
-      </div>
           <div class="form-group col-md-6">
-        <label class="control-label">Tiêu đề</label>
-          <textarea class="form-control" style=" height: 20px; width: 420px">{{this.TieuDe}}</textarea>
-      </div>
-     
+            <label class="control-label">Mã khuyến mãi</label>
+            <div class="form-control">
+              <p><b id="MaGiamGia"> </b></p>
+            </div>
+          </div>
           <div class="form-group col-md-6">
-          
-        <label class="control-label">Mô tả</label>
-        <textarea class="form-control" style=" height: 20px; width: 420px">{{this.NoiDung}}</textarea>
-  
+            <label class="control-label">Giá trị giảm(%)</label>
+            <div class="form-control">
+              <p><b id="GiaTri"> </b></p>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Giá trị giảm</label>
+            <div class="form-control">
+              <p><b id="GiaTriMax"> </b></p>
+            </div>
           </div>
 
-                 <div class="form-group col-md-6" style="margin-left: 300px;"> 
-          <img src="/images/{{this.HinhAnh}}" alt="" height="200px"
-            width="300px" >
+          <div class="form-group col-md-6">
+            <label class="control-label">Ngày bắt đầu</label>
+            <div class="form-control">
+              <p><b id="NgayBD"> </b></p>
             </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Ngày kết thúc</label>
+            <div class="form-control">
+              <p><b id="HSD"></b></p>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Trạng thái</label>
+            <div class="form-control">
+              <p><b id="TrangThaiModal"></b></p>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Tiêu đề</label>
+            <textarea class="form-control" style=" height: 20px; width: 420px" id="TieuDe"></textarea>
+          </div>
+
+          <div class="form-group col-md-6">
+
+            <label class="control-label">Mô tả</label>
+            <textarea class="form-control" style=" height: 20px; width: 420px" id="NoiDung"> </textarea>
+
+          </div>
+
+          <div class="form-group col-md-6" style="margin-left: 300px;">
+            <img src="" alt="" height="200px" width="300px" id="img">
+          </div>
 
 
         </div>
- 
-    
+
+
         <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left: 400px;">Đóng</a>
-       
+
       </div>
-     
+
     </div>
   </div>
 </div>
-  {{/each}}
+{{/each}}
 <script>
-   validatePrice()
+  validatePrice()
   function validatePrice() {
     var GiaThue = document.querySelector('#giathue');
     const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
@@ -226,10 +228,10 @@
       decimal: ',',
       thousandsSeparator: '.',
     });
-   
-  
+
+
     GiaThue.innerHTML = formattedPrice + " đ"
-  
+
 
   }
 </script>
@@ -276,8 +278,8 @@
   })
 
   const TrangThai = document.querySelectorAll('.TrangThai');
+
   TrangThai.forEach((i) => {
-    console.log(i.innerHTML)
 
     if (i.innerHTML === "true") {
       i.innerHTML = "Hoạt động"
@@ -288,6 +290,29 @@
       i.style.background = "#F9C9CD"
     }
   })
+
+  async function chitiet(id) {
+    const response = await fetch(`/api/voucher/find/${id}`).then(response => response.json());
+
+    const TrangThaiModal = document.getElementById('TrangThaiModal');
+    if (TrangThaiModal.innerHTML === "true") {
+      TrangThaiModal.innerHTML = "Hoạt động"
+      TrangThaiModal.style.color = "#02790C"
+    } else {
+      TrangThaiModal.innerHTML = "Hết hạn"
+      TrangThaiModal.style.color = "#A90312"
+    }
+    document.getElementById("MaGiamGia").innerHTML = response.MaGiamGia
+    document.getElementById("NoiDung").innerHTML = response.NoiDung
+    document.getElementById("TieuDe").innerHTML = response.TieuDe
+    document.getElementById("TrangThaiModal").innerHTML = response.TrangThai
+    document.getElementById("HSD").innerHTML = response.HSD
+    document.getElementById("NgayBD").innerHTML = response.NgayBD
+    document.getElementById("GiaTri").innerHTML = response.GiaTri
+    document.getElementById("GiaTriMax").innerHTML = response.GiaTriMax
+    document.getElementById("img").src = "/images/"+ response.HinhAnh
+
+  }
 
 </script>
 

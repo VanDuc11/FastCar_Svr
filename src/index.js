@@ -27,7 +27,7 @@ app.use(express.static(__dirname, {type:'text/css'}))
 app.use(express.static(path.join(__dirname, 'public')));// trỏ tới thư mục chứa ảnh
 
 DB.connect();
-// mongo_watch._client();
+mongo_watch.updateExpiredPromotionalOffers();
 
 route(app);
 

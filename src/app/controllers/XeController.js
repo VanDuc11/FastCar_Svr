@@ -296,7 +296,7 @@ class XeController {
             await xe.save()
                 .then((result) => {
                     res.status(201)
-                        .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/quanlyxe";</script>');
+                        .send('<script>alert("Thêm xe thành công"); window.location.href="/quanlyxe";</script>');
                     console.log(result);
                 })
                 .catch((err) => {

@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const ThongBao = new Schema({
     TieuDe: { type: String },
     MaGiamGia: { type: String },
-    Code: { type: String },
     GiaTri: { type: Number },
     GiaTriMax: { type: Number },
     NoiDung: { type: String },

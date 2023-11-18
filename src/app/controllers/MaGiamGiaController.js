@@ -77,17 +77,27 @@ class MaGiamGiaController {
         }
 
     }
+    async find_id(req,res){
+        await MaGiamGia.findById(req.params.id)
+        .then((result)=>{
+            console.log(result);
+            res.status(200).json(result)
+        }).catch((error) => {
+            res.status(400).json({
+                success: false,
+                message: 'Không thành công',
+            })
+        })
+    }
 
     async CreateMaGiamGia(req, res) {
         const img = path.basename(req.file.path);
         const randomBytes = crypto.randomBytes(6);
-        const randomString = String.fromCharCode(...randomBytes);
 
 
         const maGiamGia = new MaGiamGia({
             TieuDe: req.body.TieuDe,
             MaGiamGia: req.body.MaGiamGia,
-            Code: randomString,
             GiaTri: req.body.GiaTri,
             GiaTriMax: req.body.GiaTriMax,
             NoiDung: req.body.NoiDung,
@@ -110,7 +120,7 @@ class MaGiamGiaController {
                         .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/khuyenmai";</script>');
                     const tb = new ThongBao({
                         TieuDe: req.body.TieuDe,
-                        MaGiamGia: req.body.GiamGia,
+                        MaGiamGia: req.body.MaGiamGia,
                         GiaTri: req.body.GiaTri,
                         GiaTriMax: req.body.GiaTriMax,
                         NoiDung: req.body.NoiDung,
