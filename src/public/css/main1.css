@@ -14177,6 +14177,15 @@ be a descendant of the grid when it is being dragged.
   border-radius: .357rem;
     object-fit: cover;
 }
+.img-card-person2{
+  display: block;
+  margin-left: auto;
+  margin-right:  auto;
+  width: 350px;
+  height: 200px;
+  border-radius: .357rem;
+    object-fit: cover;
+}
 .app-title {
   display: block;
   display: -ms-flexbox;
