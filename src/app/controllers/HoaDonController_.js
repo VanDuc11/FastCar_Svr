@@ -76,9 +76,7 @@ class HoaDonController_ {
             })
         }
     }
-    danhsach(req, res) {
-        res.render('DanhSachChuyen')
-    }
+    
     async chitietHD(req, res) {
         var id = req.params.id;
         await HoaDon.find({ _id: id })
