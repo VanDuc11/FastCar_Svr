@@ -11,8 +11,8 @@
         {{#each data}}
         <div class="row">
             <h2 class="col-md-8">Thông tin hóa đơn</h2>
-            <p class="col-md-2"style="background: red; width: 200px; height: 40px; text-align: center; 
-                padding-top: 10px; border-radius: 10px; color: white;margin-left: 120px;">
+            <p class="col-md-2" style="background: #F9BABA; width: 200px; height: 40px; text-align: center; 
+                padding-top: 10px; border-radius: 10px; color: white;margin-left: 120px; font-weight: bold;" id="TinhTrang">
                 Chưa thanh toán</p>
         </div>
 
@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Mã hóa đơn: <span style="font-weight: bold;">{{this.MaHD}}</span> </label> 
+                    <label>Mã hóa đơn: <span style="font-weight: bold;">{{this.MaHD}}</span> </label>
                 </div>
                 <div class="col-md-12">
                     <label id="ngaytao">{{this.GioTaoHD}}</label>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Tên khách hàng:  <span style="font-weight: bold;">{{this.User.UserName}}</span> </label>
+                    <label>Tên khách hàng: <span style="font-weight: bold;">{{this.User.UserName}}</span> </label>
                 </div>
                 <div class="col-md-12">
                     <label>Số điện thoại: {{this.User.SDT}}</label>
@@ -116,12 +116,13 @@
                 </div>
 
                 <div class="col-md-12">
-                    <label>Lý do: {{this.LyDo}}</label>
+                    <label id="LyDo" style="display: none;">Lý do: {{this.LyDo}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Tình trạng : {{this.TrangThaiHD}}</label>
+                    <label style="font-weight: bold;">Tình trạng : <span
+                            id="TrangThai">{{this.TrangThaiHD}}</span></label>
                 </div>
             </div>
 
@@ -182,14 +183,14 @@
                 </div>
 
             </div>
-            
+
         </div>
         {{/each}}
         </form>
         <BR>
 
-             <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-        <a class="btn btn-cancel" data-dismiss="modal" href="/chuyenxe" >Quay lại</a>     
+        <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+        <a class="btn btn-cancel" data-dismiss="modal" href="/chuyenxe">Quay lại</a>
     </div>
 
 </main>
@@ -229,7 +230,60 @@
     const formattedDatetime = day + '/' + month + '/' + year + ' ' + hour + ':' + minute + ':' + second;
     NgayTao.innerHTML = "Ngày Tạo: " + formattedDatetime
 
+    const TrangThai = document.getElementById('TrangThai');
+    const LyDo = document.getElementById('LyDo');
+    const TinhTrang = document.getElementById('TinhTrang');
 
-     
+    if (TrangThai.innerHTML == 0) {
+        TrangThai.innerHTML = "Hóa đơn đã bị hủy"
+        TrangThai.style.color = "red"
+        LyDo.style.display = "block"
+
+        TinhTrang.innerHTML = "Hóa đơn bị hủy"
+    } else if (TrangThai.innerHTML == 1) {
+        TrangThai.innerHTML = "Chờ duyệt"
+        TrangThai.style.color = '#FF8B07'
+
+        TinhTrang.innerHTML = "Chờ duyệt"
+        TinhTrang.style.background = "#FDE1C3"
+
+    } else if (TrangThai.innerHTML == 2) {
+        TrangThai.innerHTML = "Chờ đặt cọc"
+        TrangThai.style.color = '#FF8B07'
+
+        TinhTrang.innerHTML = "Chờ duyệt"
+        TinhTrang.style.background = "#FDE1C3"
+    } else if (TrangThai.innerHTML == 3) {
+        TrangThai.innerHTML = "Đặt cọc thành công"
+        TrangThai.style.color = '#22AD56'
+
+        TinhTrang.innerHTML = "Đã đặt cọc"
+        TinhTrang.style.background = "#B9FFD3"
+        TinhTrang.style.color="#24AE58"
+    } else if (TrangThai.innerHTML == 4) {
+        TrangThai.innerHTML = "Chủ xe giao xe thành công"
+        TrangThai.style.color = '#22AD56'
+        TinhTrang.innerHTML = "Đang hoạt động"
+        TinhTrang.style.background = "#B9FFD3"
+        TinhTrang.style.color="#24AE58"
+    } else if (TrangThai.innerHTML == 5) {
+        TrangThai.innerHTML = "Khách hàng trả xe thành công"
+        TrangThai.style.color = '#22AD56'
+        TinhTrang.innerHTML = "Đang hoạt động"
+        TinhTrang.style.background = "#B9FFD3"
+        TinhTrang.style.color="#24AE58"
+    } else if (TrangThai.innerHTML == 6) {
+        TrangThai.innerHTML = "Chủ xe nhận xe thành công"
+        TrangThai.style.color = '#22AD56'
+        TinhTrang.innerHTML = "Đang hoạt động"
+        TinhTrang.style.background = "#B9FFD3"
+        TinhTrang.style.color="#24AE58"
+    } else if (TrangThai.innerHTML == 7) {
+        TrangThai.innerHTML = "Đơn hàng đã hoàn thành"
+        TrangThai.style.color = '#22AD56'
+        TinhTrang.innerHTML = "Hoàn thành"
+        TinhTrang.style.background = "#B9FFD3"
+        TinhTrang.style.color="#24AE58"
+    }
+
 </script>
-</body>

@@ -6,6 +6,7 @@ var path = require('path');
 const { log } = require('console');
 const { parse } = require('querystring');
 const admin = require('firebase-admin');
+const ISODate = require('isodate')
 
 var serviceAccount = require("../../../myotp-76cf9-firebase-adminsdk-pgy17-f4b5071351.json");
 
@@ -14,7 +15,7 @@ admin.initializeApp({
 });
 
 class HoaDonController_ {
-     
+
     thongke(req, res) {
         res.render('Thongke')
     }
@@ -23,33 +24,6 @@ class HoaDonController_ {
     }
 
     async index(req, res) {
-        let check = null;
-        let trangThaiValues = [];
-
-        if (typeof (req.query.Xe) != 'undefined') {
-            check = { Xe: req.query.Xe };
-        }
-
-        if (typeof (req.query.User) != 'undefined') {
-            check = { User: req.query.User };
-        }
-
-        if (typeof (req.query.TrangThaiHD) !== 'undefined') {
-            trangThaiValues = req.query.TrangThaiHD.split(',').map(item => parseInt(item));
-        }
-
-        if (trangThaiValues.length > 0) {
-            check = { TrangThaiHD: { $in: trangThaiValues } };
-        }
-
-        if (trangThaiValues.length > 0 && typeof (req.query.User) != 'undefined') {
-            check = { TrangThaiHD: { $in: trangThaiValues }, User: req.query.User };
-        }
-
-        if (trangThaiValues.length > 0 && typeof (req.query.Xe) != 'undefined') {
-            check = { TrangThaiHD: { $in: trangThaiValues }, Xe: req.query.Xe };
-        }
-
         try {
             await HoaDon.find()
                 .populate({
@@ -76,7 +50,169 @@ class HoaDonController_ {
             })
         }
     }
-    
+    async chuyen_hd(req, res) {
+        try {
+            await HoaDon.find({ TrangThaiHD: [4, 5, 6] })
+                .populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                .then((result) => {
+                    res.render('ChuyenXe', {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+    async chuyen_dc(req, res) {
+        try {
+            await HoaDon.find({ TrangThaiHD: 3 })
+                .populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                .then((result) => {
+                    res.render('ChuyenXe', {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+    async chuyen_TC(req, res) {
+        try {
+            await HoaDon.find({ TrangThaiHD: 7 })
+                .populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                .then((result) => {
+                    res.render('ChuyenXe', {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+    async chuyen_CC(req, res) {
+        try {
+            await HoaDon.find({ TrangThaiHD: [1, 2] })
+                .populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                .then((result) => {
+                    res.render('ChuyenXe', {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+    async chuyen_Huy(req, res) {
+        try {
+            await HoaDon.find({ TrangThaiHD: 0 })
+                .populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                .then((result) => {
+                    res.render('ChuyenXe', {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: false,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    }
+    async find_theoNgay(req, res) {
+
+        // Tạo điều kiện tìm kiếm
+        const query = {
+            "GioTaoHD": {
+                $gte: new Date(req.body.batdau),
+                $lte: new Date(req.body.ketthuc),
+            },
+        };
+        await HoaDon.find(query).populate({
+            path: 'Xe',
+            populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+        }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+            .then((result) => {
+                console.log(result);
+                res.render('ChuyenXe', {
+                    data: result.map((res) => res.toJSON())
+                })
+
+
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                })
+            })
+    }
     async chitietHD(req, res) {
         var id = req.params.id;
         await HoaDon.find({ _id: id })
@@ -85,7 +221,7 @@ class HoaDonController_ {
                 populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
             }).populate('User')
             .then((result) => {
-                console.log("abc",result);
+                console.log("abc", result);
                 res.status(200).render('ChiTietChuyen',
                     {
                         data: result.map((res) => res.toJSON())
@@ -171,8 +307,8 @@ class HoaDonController_ {
             LyDo: ""
         })
         try {
-            const car = await Xe.findOne({_id: hoadon.Xe });
-            const chuSH = await User.findOne({_id: car.ChuSH });
+            const car = await Xe.findOne({ _id: hoadon.Xe });
+            const chuSH = await User.findOne({ _id: car.ChuSH });
 
             let title = 'Yêu cầu thuê xe mới';
             let contentNotify = "Xe " + car.MauXe + " của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!"

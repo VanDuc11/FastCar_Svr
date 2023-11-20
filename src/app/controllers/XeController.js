@@ -6,7 +6,78 @@ const { log } = require('console');
 
 class XeController {
     async index(req, res) {
-        await Xe.find({ TrangThai: [0, 1] })
+        await Xe.find()
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe hoạt động
+
+    async xe_Hd(req, res) {
+        await Xe.find({TrangThai: 1})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe chờ không hđ
+
+    async xe_KHD(req, res) {
+        await Xe.find({TrangThai: 3})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe chờ từ chối
+
+    async xe_TC(req, res) {
+        await Xe.find({TrangThai: 2})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe chờ duyệt
+    async xe_CD(req, res) {
+        await Xe.find({TrangThai: 0})
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -59,23 +130,7 @@ class XeController {
             });
         })
     }
-    async show(req, res) {
-        await Xe.find({})
-            .populate({ path: "ChuSH", model: "User" })
-            .sort({ _id: -1 })
-            .then((result) => {
-
-                res.status(200).render("danhsachxe", {
-                    data: result.map((res) => res.toJSON()),
-                });
-            })
-            .catch((error) => {
-                res.status(400).json({
-                    success: false,
-                    message: error.message,
-                });
-            });
-    }
+     
 
     async chitietxe(req, res) {
         await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
@@ -95,7 +150,7 @@ class XeController {
     }
     async Thongtin(req, res) {
          
-        await HoaDon.find({ Xe: req.params.id }).populate('Xe')
+        await HoaDon.find({ Xe: req.params.id, TrangThaiHD:[3,4,5,6] }).populate('Xe')
             .populate({
                 path: 'Xe',
                 populate: { path: 'ChuSH', model: 'User' }
@@ -107,31 +162,22 @@ class XeController {
                 })
             })
     }
+    async dem_hoa_don_HD(req, res) {
+         
+        await HoaDon.find({ Xe: req.params.id, TrangThaiHD:[3,4,5,6] }).populate('Xe')
+            .populate({
+                path: 'Xe',
+                populate: { path: 'ChuSH', model: 'User' }
+            })
+            .populate('User').sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).json(result);
+            })
+    }
     add(req, res) {
         res.render('AddXe')
     }
-    async findXeTrangThai0_1(req, res) {
-
-
-        try {
-            await Xe.find({ TrangThai: [0, 1] }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
-                .then((result) => {
-                    res.status(200).json(result)
-                })
-                .catch((error) => {
-                    res.status(400).json({
-                        success: true,
-                        message: error.message,
-                    })
-                })
-        } catch (error) {
-            res.status(500).json({
-                success: true,
-                message: err.message,
-            })
-        }
-
-    }
+    
     async findXe_id(req, res) {
         let id = req.params.id;
         await Xe.findById(id)

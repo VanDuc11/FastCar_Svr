@@ -16,17 +16,20 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-router.get('/danhsachxe', XeControlles.show);
 router.get('/', XeControlles.index);
 router.get('/Addxe',XeControlles.add);
 router.get('/ChiTietXe/:id', XeControlles.chitietxe);
 router.get('/ThongTinKhachThue/:id', XeControlles.Thongtin);
+router.get('/demthoadon/:id', XeControlles.dem_hoa_don_HD);
 
 
 router.get('/list', XeControlles.findXe);
 
 // get theo trạng thái 0,1
-router.get('/findTrangthai0_1', XeControlles.findXeTrangThai0_1);
+router.get('/hoatdong', XeControlles.xe_Hd);
+router.get('/khonghoatdong', XeControlles.xe_KHD);
+router.get('/tuchoi', XeControlles.xe_TC);
+router.get('/choduyen', XeControlles.xe_CD);
 //get xe theo id 
 router.get('/find_id/:id', XeControlles.findXe_id);
 

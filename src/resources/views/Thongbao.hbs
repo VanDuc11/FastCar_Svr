@@ -75,45 +75,45 @@
           </form>
         </div>
 
+
+        </form>
+        <div class="row element-button">
+        </div>
+        <table class="table table-hover table-bordered" id="sampleTable">
+          <thead>
+            <tr>
+              <th style="text-align: center;" width="10">STT</th>
+              <th style="text-align: center;">Tiêu đề</th>
+              <th style="text-align: center;">Ảnh</th>
+              <th style="text-align: center;">Nội dung</th>
+              <th style="text-align: center;">Ngày đăng</th>
+              <th style="text-align: center;" width="100">Chức năng</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each data}}
+            <tr>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{@index}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TieuDe}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img
+                  src="/images/{{this.HinhAnh}}" alt="" class="img-card-person1"></td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="NgayDang"
+                style="width: 150px;">{{this.createdAt}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button
+                  class="btn btn-info" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP">Xem chi
+                  tiết</button></td>
+
+
+            </tr>
+            {{/each }}
+
+
+          </tbody>
+        </table>
       </div>
 
-      </form>
-      <div class="row element-button">
-      </div>
-      <table class="table table-hover table-bordered" id="sampleTable">
-        <thead>
-          <tr>
-            <th style="text-align: center;" width="10">STT</th>
-            <th style="text-align: center;">Tiêu đề</th>
-            <th style="text-align: center;">Ảnh</th>
-            <th style="text-align: center;">Nội dung</th>
-            <th style="text-align: center;">Ngày đăng</th>
-            <th style="text-align: center;" width="100">Chức năng</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each data}}
-          <tr>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{@index}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TieuDe}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img
-                src="/images/{{this.HinhAnh}}" alt=""class="img-card-person1"></td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="NgayDang"
-              style="width: 150px;">{{this.createdAt}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button class="btn btn-info"
-                type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP">Xem chi tiết</button></td>
-
-
-          </tr>
-          {{/each }}
-
-
-        </tbody>
-      </table>
     </div>
-  </div>
-  </div>
   </div>
 </main>
 
@@ -132,7 +132,7 @@
         </div>
         <div class="row">
           <div class="form-group col-md-6" style="margin-left: 230px;">
-            <img src="/images/{{this.HinhAnh}}" alt="" class="img-card-person2" >
+            <img src="/images/{{this.HinhAnh}}" alt="" class="img-card-person2">
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Tiêu đề</label>
