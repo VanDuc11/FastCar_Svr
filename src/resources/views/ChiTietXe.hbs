@@ -109,9 +109,13 @@
           <p><b id="ngaydang">{{this.createdAt}}</b></p>
         </div>
       </div>
-      <div class="form-group col-md-3">
-
+      <div class="col-md-3">
+        <label class="control-label">Số chuyến đang HĐ</label>
+        <div class="form-control">
+          <p><b id="dangHD"></b></p>
+        </div>
       </div>
+      
       <div class="form-group col-md-3">
         <label class="control-label">Địa chỉ Xe</label>
         <textarea class="form-control">{{this.DiaChiXe}}</textarea>
@@ -391,7 +395,9 @@
 
 <script>
   validatePrice()
-  function validatePrice() {
+  async function validatePrice() {
+    
+    
     var GiaThue = document.querySelector('#giathue');
     var TieuHao = document.querySelector('#tieuhao');
     var NgayDang = document.querySelector('#ngaydang');
@@ -402,8 +408,18 @@
     var sua = document.getElementById('button-sua');
     var xemTT = document.getElementById('button-xem-tt');
     var tuchoi = document.getElementById('button-tuchoi');
+    
+     // Lấy URL hiện tại
+    const url = window.location.href;
 
+    // đến chuỗi url`
+    const idStart = "http://localhost:9000/quanlyxe/ChiTietXe/";
 
+    // cắt chuỗi chuỗi :id
+    const id = url.slice(idStart.length, url.length);
+
+    const response = await fetch(`/api/xe/demthoadon/${id}`).then(response => response.json());
+    document.getElementById('dangHD').innerHTML = response.length
 
     const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
       minimumFractionDigits: 2,
