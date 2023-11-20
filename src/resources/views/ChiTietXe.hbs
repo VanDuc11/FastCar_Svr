@@ -109,9 +109,13 @@
           <p><b id="ngaydang">{{this.createdAt}}</b></p>
         </div>
       </div>
-      <div class="form-group col-md-3">
-
+      <div class="col-md-3">
+        <label class="control-label">Số chuyến đang HĐ</label>
+        <div class="form-control">
+          <p><b id="dangHD"></b></p>
+        </div>
       </div>
+      
       <div class="form-group col-md-3">
         <label class="control-label">Địa chỉ Xe</label>
         <textarea class="form-control">{{this.DiaChiXe}}</textarea>
@@ -124,22 +128,28 @@
 
       </div>
 
-      <div class="row" style="">
-        <div class="form-group col-md-3" style="margin-left:20px;">
+      <div class="end"  >
+        
+        <div class="form-group1 " style="margin-left:20px; display: inline-block; ">
           <label class="control-label">Ảnh xe</label> <BR>
           <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="100px" width="150px" type="button" id="show-emp"
             data-toggle="modal" data-target="#ModalUP">
         </div>
-
-        <div class="form-group col-md-3" style="margin-left:50px;">
-          <label class="control-label">Giấy tờ xe</label>
-          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px"
+        <div class="form-group " style="margin-left:20px;display: inline-block;">
+          <label class="control-label">Giấy tờ xe</label><BR>
+          <img src="/images/{{this.DangKyXe}}" alt="" height="100px"
             width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
         </div>
-        <div class="form-group col-md-3" style="margin-left:50px;">
-          <label class="control-label">Bảo hiểm</label>
-          <img src="https://hondaotomydinh.net/wp-content/uploads/2020/08/BHTNDS.jpg" alt="" height="100px"
-            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
+        
+        <div class="form-group " style="margin-left:20px;display: inline-block;">
+          <label class="control-label">Bảo hiểm</label><BR>
+          <img src="/images/{{this.BaoHiem}}" alt="" height="100px"
+            width="150px"  type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
+        </div>
+          <div class="form-group " style="margin-left:20px;display: inline-block;">
+          <label class="control-label">Đăng kiểm</label><BR>
+          <img src="/images/{{this.DangKiem}}" alt="" height="100px"
+            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP4">
         </div>
       </div>
 
@@ -148,50 +158,51 @@
 
       </div>
       <div class="form-group col-md-12">
-        <a class="btn btn-success" href="#" id="button-duyet4" data-status="Chưa duyệt"
-          onclick="onSubmit(`{{this._id}}`)">Duyệt</a>
-        <a class="btn btn-success" href="#" id="button-sua" data-status="Chưa duyệt"data-toggle="modal"
-                  data-target="#ModalUP3">Sửa</a>
-        <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue" id="button-xem-tt" >Xem thông tin thuê</a>
-        <a class="btn btn-cancel" id="button-tuchoi" href="#">Từ chối</a>
+        <a class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
+          onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
+        <a class="btn btn-success" href="#" id="button-sua" data-status="Chưa duyệt" data-toggle="modal"
+          data-target="#ModalUP3">Sửa</a>
+        <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue/{{this._id}}" id="button-xem-tt">Xem thông tin
+          thuê</a>
+        <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
       </div>
 
-{{!-- sửa trạng thái --}}
-<div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-  data-keyboard="false">
-  <div class="modal-dialog1 modal-dialog-centered1" role="document">
-    <div class="modal-content">
+      {{!-- sửa trạng thái --}}
+      <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog1 modal-dialog-centered1" role="document">
+          <div class="modal-content">
 
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Chỉnh sửa thông tin xe</h5>
-            </span>
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Chỉnh sửa thông tin xe</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="form-group col-md-6  " style="margin-left: 30px;">
+                  <label for="exampleSelect1" class="control-label">Trạng thái </label>
+                  <select class="form-control" id="exampleSelect1">
+                    <option>Đang hoạt động</option>
+                    <option>Đã thuê</option>
+                    <option>Đang bảo trì</option>
+                  </select>
+                </div>
+              </div>
+              <BR>
+
+              <a class="btn btn-save" href="#">Lưu lại</a>
+              <a class="btn btn-cancel" href="/quanlyxe/ChiTietXe/{{this._id}}">Hủy bỏ</a>
+              <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
           </div>
         </div>
-        <div class="row">
-         
-          <div class="form-group col-md-6  " style="margin-left: 30px;">
-            <label for="exampleSelect1" class="control-label">Trạng thái </label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Đang hoạt động</option>
-              <option>Đã thuê</option>
-              <option>Đang bảo trì</option>
-            </select>
-          </div>
-       </div>
-        <BR>
-       
-          <a class="btn btn-save"  href="#" >Lưu lại</a>
-        <a class="btn btn-cancel" href="/quanlyxe/ChiTietXe/{{this._id}}" >Hủy bỏ</a>
-        <BR>
       </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
       {{!-- Modal --}}
       <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false">
@@ -227,7 +238,7 @@
                   </div>
                 </div>
               </div>
-              <BR>
+             
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -253,20 +264,18 @@
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-md-6" style=" display: flex;
+                <div class="form-group col-md-3" style=" display: flex;
         flex-direction: column;">
                   <div class="images" style=" display: flex;">
-                    <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-truoc-bang-lai-xe.jpg"
-                      alt="" height="240px" width="340px" style="margin-left:40px;">
+                    <img src="/images/{{this.DangKyXe}}" alt="" height="280px" width="400px" style="margin-left:230px;">
 
-                    <img src="https://cdn.thuvienphapluat.vn//uploads/tintuc/2022/08/22/mat-sau-bang-lai-xe.jpg" alt=""
-                      height="240px" width="340px" style="margin-left:150px;">
+
                   </div>
                   <BR>
 
                 </div>
               </div>
-              <BR>
+            
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -294,18 +303,52 @@
                 <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
                   <div class="images" style=" display: flex;">
-                    <img src="https://hyundaiphanthiet.vn/wp-content/uploads/2021/09/Xehay-BH-220421-6_1.jpg" alt=""
-                      height="240px" width="340px" style="margin-left:40px;">
 
-                    <img
-                      src="https://luatsux.vn/wp-content/uploads/2022/07/Bao-hiem-trach-nhiem-dan-su-o-to-co-bat-buoc-khong.png"
-                      alt="" height="240px" width="340px" style="margin-left:150px;">
+                    <img src="/images/{{this.BaoHiem}}" alt="" height="280px" width="400px" style="margin-left:230px;">
+
+
+ 
                   </div>
                   <BR>
 
                 </div>
               </div>
+             
+              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+  {{!-- đang kiểm --}}
+      <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false" height="900px" width="950px">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Hình ảnh đăng kiểm</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                  <div class="images" style=" display: flex;">
+                    <img src="/images/{{this.DangKiem}}" alt="" height="280px" width="400px" style="margin-left:230px;">
+
+
+                  </div>
+                  <BR>
+
+                </div>
+              </div>
+             
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -315,7 +358,6 @@
         </div>
       </div>
 
-     
       {{/each}}
 
     </form>
@@ -342,7 +384,7 @@
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
-   
+
 
   // Thêm sự kiện click cho tất cả các nút
   for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
@@ -353,7 +395,9 @@
 
 <script>
   validatePrice()
-  function validatePrice() {
+  async function validatePrice() {
+    
+    
     var GiaThue = document.querySelector('#giathue');
     var TieuHao = document.querySelector('#tieuhao');
     var NgayDang = document.querySelector('#ngaydang');
@@ -364,8 +408,18 @@
     var sua = document.getElementById('button-sua');
     var xemTT = document.getElementById('button-xem-tt');
     var tuchoi = document.getElementById('button-tuchoi');
+    
+     // Lấy URL hiện tại
+    const url = window.location.href;
 
+    // đến chuỗi url`
+    const idStart = "http://localhost:9000/quanlyxe/ChiTietXe/";
 
+    // cắt chuỗi chuỗi :id
+    const id = url.slice(idStart.length, url.length);
+
+    const response = await fetch(`/api/xe/demthoadon/${id}`).then(response => response.json());
+    document.getElementById('dangHD').innerHTML = response.length
 
     const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
       minimumFractionDigits: 2,
@@ -381,7 +435,7 @@
     if (TrangThai.innerHTML == 0) {
       TrangThai.innerHTML = "Đang chờ duyệt"
       TrangThaiTitlle.innerHTML = "Đang chờ duyệt"
-      TrangThaiTitlle.style.background = "#e24a4a"; //#F9BABA
+      TrangThaiTitlle.style.background = "#F9BABA"; //#F9BABA
       sua.style.display = "none"
       xemTT.style.display = 'none'
     } else if (TrangThai.innerHTML == 1) {
@@ -390,6 +444,14 @@
       TrangThaiTitlle.style.background = "#7cea94";
       duyet.style.display = "none"
       tuchoi.style.display = 'none'
+    } else if (TrangThai.innerHTML == 2) {
+      TrangThai.innerHTML = "Từ chối"
+      TrangThaiTitlle.innerHTML = "Xe bị từ chối"
+      TrangThaiTitlle.style.background = "#e24a4a";
+      duyet.style.display = "none"
+      tuchoi.style.display = 'none'
+      sua.style.display = "none"
+      xemTT.style.display = 'none'
     }
     NgayDang.innerHTML = formattedDate;
     GiaThue.innerHTML = formattedPrice + " đ"
@@ -416,13 +478,13 @@
   }
 
   // Hàm xử lý sự kiện nhấp vào nút duyệt
-  function onSubmit(id) {
-    fetch(`/api/xe/duyet/${id}`, { method: "POST" })
+  function onSubmit(id, trangthai) {
+    fetch(`/api/xe/duyet/${id}/${trangthai}`, { method: "POST" })
       .then((response) => {
 
         if (response.ok) {
           checkResult(true);
-        location.reload(); // Reload lại trang
+          location.reload(); // Reload lại trang
 
         } else {
           checkResult(false);

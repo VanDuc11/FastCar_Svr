@@ -1,9 +1,83 @@
 const Xe = require('../models/Xe.model');
+const User = require('../models/user.model');
+const HoaDon = require('../models/HoaDon.model');
 var path = require('path');
+const { log } = require('console');
 
 class XeController {
     async index(req, res) {
-        await Xe.find({})
+        await Xe.find()
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe hoạt động
+
+    async xe_Hd(req, res) {
+        await Xe.find({TrangThai: 1})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe chờ không hđ
+
+    async xe_KHD(req, res) {
+        await Xe.find({TrangThai: 3})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe chờ từ chối
+
+    async xe_TC(req, res) {
+        await Xe.find({TrangThai: 2})
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    // xe chờ duyệt
+    async xe_CD(req, res) {
+        await Xe.find({TrangThai: 0})
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -41,7 +115,7 @@ class XeController {
         await Xe.updateOne({ _id: id },
             {
                 $set: {
-                    TrangThai: 1
+                    TrangThai: req.params.trangthai
                 }
             }
         ).then(() => {
@@ -56,23 +130,7 @@ class XeController {
             });
         })
     }
-    async show(req, res) {
-        await Xe.find({})
-            .populate({ path: "ChuSH", model: "User" })
-            .sort({ _id: -1 })
-            .then((result) => {
-
-                res.status(200).render("danhsachxe", {
-                    data: result.map((res) => res.toJSON()),
-                });
-            })
-            .catch((error) => {
-                res.status(400).json({
-                    success: false,
-                    message: error.message,
-                });
-            });
-    }
+     
 
     async chitietxe(req, res) {
         await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
@@ -90,11 +148,44 @@ class XeController {
                 })
             })
     }
-    Thongtin(req, res) {
-        res.render('ThongTinKhachThue')
+    async Thongtin(req, res) {
+         
+        await HoaDon.find({ Xe: req.params.id, TrangThaiHD:[3,4,5,6] }).populate('Xe')
+            .populate({
+                path: 'Xe',
+                populate: { path: 'ChuSH', model: 'User' }
+            })
+            .populate('User').sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render('ThongTinKhachThue', {
+                    data: result.map(res => res.toJSON()),
+                })
+            })
+    }
+    async dem_hoa_don_HD(req, res) {
+         
+        await HoaDon.find({ Xe: req.params.id, TrangThaiHD:[3,4,5,6] }).populate('Xe')
+            .populate({
+                path: 'Xe',
+                populate: { path: 'ChuSH', model: 'User' }
+            })
+            .populate('User').sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).json(result);
+            })
     }
     add(req, res) {
         res.render('AddXe')
+    }
+    
+    async findXe_id(req, res) {
+        let id = req.params.id;
+        await Xe.findById(id)
+            .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+            .then((result) => {
+                res.json(result)
+                console.log('findXe_id',result)
+            })
     }
     async findXe(req, res) {
         let check = null;
@@ -273,13 +364,12 @@ class XeController {
             SoChuyen: 0,
             TrungBinhSao: 0
         });
+        
         try {
             await xe.save()
                 .then((result) => {
-                    res.status(201).json({
-                        success: true,
-                        messages: "Yêu cầu tạo mới thành công"
-                    });
+                    res.status(201)
+                    .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/quanlyxe";</script>');
                     console.log(result);
                 })
                 .catch((err) => {

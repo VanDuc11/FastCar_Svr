@@ -1,131 +1,132 @@
 <main class="app-content">
   <div class="app-title">
-    <ul class="app-breadcrumb breadcrumb side">
-      <li class="breadcrumb-item active"><a href="#"><b>Thông báo</b></a></li>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item">Quản lý xe</li>
     </ul>
     <div id="clock"></div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
+
         <div class="tile-body">
           <div class="row element-button">
-               <div class="col-sm-2">
+            <div class="col-sm-2">
 
               <a class="btn btn-add btn-sm" href="/quanlyxe/Addxe" title="Thêm"><i class="fas fa-plus"></i>
-               Thêm xe</a>
-                     </div>
-            <div class="col-sm-2">
-
-              <a class="btn btn-add btn-sm" href="/quanlyxe/danhsachxe">
-                Danh sách xe</a>
-            </div>
-
-
-            
-
-
-
-            <div class="col-sm-2">
-              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
-            </div>
-            <div class="col-sm-2" style="">
-              <select style="width: 25px;height: 30px;" class="form-control" id="exampleSelect1">
-                <option>Đã duyệt</option>
-                <option>Chờ duyệt</option>
-              </select>
+                Thêm xe</a>
             </div>
           </div>
-
-
           <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <a href="/quanlyxe" class="col-md-6 col-lg-3">
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
                   <h4>Tổng xe</h4>
                   <p><b id="info_tong_xe"></b></p>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
+            </a>
+            <a href="/quanlyxe/hoatdong" class="col-md-6 col-lg-3">
+              <div class="widget-small info coloured-icon"><i class='icon bx bxs-truck fa-3x'></i>
                 <div class="info">
                   <h4>Xe hoạt động</h4>
                   <p><b id="daduyen"></b></p>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
+            </a>
+            <a href="/quanlyxe/choduyen" class="col-md-6 col-lg-3">
+              <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-comment-error'></i>
                 <div class="info">
                   <h4>Xe chờ duyệt</h4>
                   <p><b id="choduyen"></b></p>
                 </div>
               </div>
-            </div>
+            </a>
 
+            <a href="/quanlyxe/khonghoatdong" class="col-md-6 col-lg-3">
+              <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-car-mechanic'></i>
+                <div class="info">
+                  <h4> Xe không hoạt động</h4>
+                  <p><b id="khonghd"></b></p>
+                </div>
+              </div>
+            </a>
+            <a href="/quanlyxe/tuchoi" class="col-md-6 col-lg-3">
+              <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
+                <div class="info">
+                  <h4>Từ chối</h4>
+                  <p><b id="tuchoi"></b></p>
+                </div>
+              </div>
+            </a>
           </div>
-          <div class="row element-button">
-          </div>
-          <table class="table table-hover table-bordered" id="sampleTable">
-          
-            <thead>
-              <tr>
-                <th style="text-align: center;">STT</th>
-                <th style="text-align: center;">Biển số xe</th>
-                <th style="text-align: center;">Tên xe</th>
-                <th style="text-align: center;">Ảnh</th>
-                <th style="text-align: center;">Số ghế</th>
-                <th style="text-align: center;">Năm sản xuất</th>
-                <th style="text-align: center;">Giá </th>
-                <th style="text-align: center;">Tên chủ xe</th>
-                <th style="text-align: center;">Trạng thái</th>
-                <th style="text-align: center;">Chi tiết</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each data}}
-              <tr>
-                <td style="text-align: center;" class="stt">{{@index}}</td>
-                <td style="text-align: center;">{{this.BKS}} </td>
-                <td style="text-align: center;">{{this.MauXe}}</td>
-                <td style="text-align: center;"> <img src="/images/{{this.HinhAnh.[0]}}" alt=""
-                    class="img-card-person1"> </td>
-                <td style="text-align: center;">{{this.SoGhe}} </td>
-                <td style="text-align: center;">{{this.NSX}}</td>
-                <td style="text-align: center;" class="giathue">{{this.GiaThue1Ngay}}</td>
-                <td style="text-align: center;">{{this.ChuSH.UserName}}</td>
-                <td><span class="TrangThai"
-                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
-                <td style="text-align: center;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
-                    chi tiết</a></td>
-              </tr>
-              {{/each}}
 
-            </tbody>
-          </table>
         </div>
+        <div class="row element-button">
+        </div>
+        <table class="table table-hover table-bordered" id="sampleTable">
+          <thead>
+            <tr>
+              <th style="text-align: center;">STT</th>
+              <th style="text-align: center;">Biển số xe</th>
+              <th style="text-align: center;">Tên xe</th>
+              <th style="text-align: center;">Ảnh</th>
+              <th style="text-align: center;">Số ghế</th>
+              <th style="text-align: center;">Năm sản xuất</th>
+              <th style="text-align: center;">Giá </th>
+              <th style="text-align: center;">Tên chủ xe</th>
+              <th style="text-align: center;">Trạng thái</th>
+              <th style="text-align: center;" width="80">Chức năng</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each data}}
+            <tr>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.BKS}} </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MauXe}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <img
+                  src="/images/{{this.HinhAnh.[0]}}" alt="" class="img-card-person1">
+              </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoGhe}} </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NSX}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="giathue">
+                {{this.GiaThue1Ngay}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.ChuSH.UserName}}
+              </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
+                  style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info "
+                  href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
+                  chi tiết</a></td>
+            </tr>
+            {{/each}}
+
+
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </main>
 <script>
-  const a = document.querySelector('.lọc');
+  // số tứ tự
+  var stt = 0
+  const stt1 = document.querySelectorAll(".stt");
+  stt1.forEach((i) => {
+    stt++;
+    i.innerText = stt
+  })
+  console.log(stt1.length)
 
-  a.addEventListener('click', function () {
-    // Hiển thị nội dung của thẻ select
-    document.querySelector('#exampleSelect1').style.display = 'block';
-  });
-</script>
-<script>
   load_data()
   async function load_data() {
 
     const response = await fetch('/api/xe/list').then(response => response.json());
     var tt0 = 0;
     var tt1 = 0;
-    var stt = 0
+    var tt2 = 0;
+    var tt3 = 0;
     response.forEach(xe => {
       // xe chờ duyệt
       if (xe.TrangThai == 0) {
@@ -134,9 +135,17 @@
       if (xe.TrangThai == 1) {
         tt1 += 1;
       }
+      if (xe.TrangThai == 2) {
+        tt2 += 1;
+      }
+      if (xe.TrangThai == 3) {
+        tt3 += 1;
+      }
     });
     document.getElementById('choduyen').innerText = tt0 + " Xe";
     document.getElementById('daduyen').innerText = tt1 + " Xe";
+    document.getElementById('tuchoi').innerText = tt2 + " Xe";
+    document.getElementById('khonghd').innerText = tt3 + " Xe";
 
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
     var GiaThue = document.querySelectorAll('.giathue');
@@ -144,21 +153,24 @@
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
         i.innerHTML = "Chờ duyệt"
-        i.style.background="#F9C9CD"
-      } else {
+        i.style.background = "#FDE1C3"
+      } else if (i.innerHTML == 1) {
         i.innerHTML = "Hoạt động"
-        i.style.background = "#BFEFC4"
+        i.style.background = "#B9FFD3"
+      } else if (i.innerHTML == 2) {
+        i.innerHTML = "Từ chối"
+        i.style.background = "#F9BABA"
+      } else if (i.innerHTML == 3) {
+        i.innerHTML = "không hoạt động"
+        i.style.background = "#ADCBF3"
       }
     })
 
-    // số tứ tự
-    const stt1 = document.querySelectorAll(".stt");
-    stt1.forEach((i) => {
-      stt++;
-      i.innerText = stt
-    })
 
     GiaThue.forEach((i) => {
+      if (!isFinite(i.innerHTML)) {
+        return i.innerHTML;
+      }
       const formattedPrice = new Intl.NumberFormat('vi-VN').format(i.innerHTML, {
         minimumFractionDigits: 2,
         decimal: ',',
@@ -169,18 +181,19 @@
 
 
   }
-
-
-
+  setInterval(load_data, 1000);
 </script>
 
-<!-- Essential javascripts for application to work-->
+
+
+
+
+
 <script src="/public/js/jquery-3.2.1.min.js"></script>
 <script src="/public/js/popper.min.js"></script>
 <script src="/public/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="src/jquery.table2excel.js"></script>
-<script src="/publicjs/main.js"></script>
+
 <!-- The javascript plugin to display page loading on top-->
 <script src="/public/js/plugins/pace.min.js"></script>
 <!-- Page specific javascripts-->
@@ -189,5 +202,3 @@
 <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
-
-</script>

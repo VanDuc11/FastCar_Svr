@@ -16,14 +16,24 @@ const upload = multer({ storage: storage });
 
 
 router.get('/danhsachxe', XeController.show);
+
 router.get('/', XeController.index);
 router.get('/Addxe',XeController.add);
 router.get('/ChiTietXe/:id', XeController.chitietxe);
-router.get('/ThongTinKhachThue', XeController.Thongtin);
+router.get('/ThongTinKhachThue/:id', XeController.Thongtin);
+router.get('/demthoadon/:id', XeController.dem_hoa_don_HD);
 
 router.get('/list', XeController.findXe);
 
 router.get('/findById/:id', XeController.findXe_byID);
+
+// get theo trạng thái 0,1
+router.get('/hoatdong', XeController.xe_Hd);
+router.get('/khonghoatdong', XeController.xe_KHD);
+router.get('/tuchoi', XeController.xe_TC);
+router.get('/choduyen', XeController.xe_CD);
+//get xe theo id 
+router.get('/find_id/:id', XeController.findXe_id);
 
 // get top 5 xe, trừ xe của user login
 router.get('/top5xe/:email', XeController.find_top_5);
@@ -35,7 +45,7 @@ router.get('/listXe_NotUser/:email', XeController.find_Xe_Not_User);
 router.get('/listXe_user/:email', XeController.find_Xe_User);
 
 // duyệt xe
-router.post('/duyet/:id', XeController.duyetxe);
+router.post('/duyet/:id/:trangthai', XeController.duyetxe);
 
 router.post('/create', upload.fields([{ name: 'HinhAnh', maxCount: 4 }, { name: 'DangKyXe', maxCount: 1 }, { name: 'DangKiem', maxCount: 1 }, { name: 'BaoHiem', maxCount: 1 }]), XeController.CreateXe);
 
