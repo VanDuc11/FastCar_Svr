@@ -15,15 +15,35 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+const httpServer = createServer(app);
+const io = new Server(httpServer, { /* options */ });
+
+io.on("connect", (socket) => {
+    console.log("User connected to socket.io in PORT: " + process.env.PORT_SOCKET);
+
+    socket.on("connect user", function () {
+        console.log("Connected");
+        io.emit('connect user', user);
+    })
+
+    socket.on("payment_success", (data) => {
+        console.log("Nhan du lieu tu server:", data);
+    });
+
+    socket.on('disconnect', function () {
+        console.log("Disconnected");
+    });
+
+});
 
 app.engine('.hbs', expressHbs.engine({
     extname: '.hbs'
 }));
 
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname,'resources', 'views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
-app.use(express.static(__dirname, {type:'text/css'}))
+app.use(express.static(__dirname, { type: 'text/css' }))
 app.use(express.static(path.join(__dirname, 'public')));// trỏ tới thư mục chứa ảnh
 
 DB.connect();
@@ -32,3 +52,5 @@ DB.connect();
 route(app);
 
 app.listen(process.env.PORT, () => { console.log("localhost:" + process.env.PORT) });
+
+httpServer.listen(process.env.PORT_SOCKET);

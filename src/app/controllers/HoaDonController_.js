@@ -13,6 +13,10 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
+const io = require("socket.io-client");
+const socket = io("http://localhost:9001");
+
+
 class HoaDonController_ {
     async index(req, res) {
         let check = null;
@@ -73,13 +77,14 @@ class HoaDonController_ {
     }
     async chitietHD(req, res) {
         var id = req.params.id;
+
         await HoaDon.find({ _id: id })
             .populate({
                 path: 'Xe',
                 populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
             }).populate('User', ('_id UserName Email UID SDT Avatar'))
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 res.status(200).render('ChiTietChuyen',
                     {
                         data: result.map((res) => res.toJSON())
@@ -98,6 +103,10 @@ class HoaDonController_ {
 
         if (typeof (req.query.User) != 'undefined') {
             check = { User: req.query.User };
+        }
+
+        if (typeof (req.query.MaHD) != 'undefined') {
+            check = { MaHD: req.query.MaHD };
         }
 
         if (typeof (req.query.TrangThaiHD) !== 'undefined') {
@@ -161,19 +170,20 @@ class HoaDonController_ {
             ThanhToan: req.body.ThanhToan,
             LoiNhan: req.body.LoiNhan,
             GioTaoHD: req.body.GioTaoHD,
-            TrangThaiHD: req.body.TrangThaiHD,
+            TimeChuXeXN: req.body.TimeChuXeXN,
+            TrangThaiHD: 1,
             LyDo: ""
         })
         try {
-            const car = await Xe.findOne({_id: hoadon.Xe });
-            const chuSH = await User.findOne({_id: car.ChuSH });
+            const car = await Xe.findOne({ _id: hoadon.Xe });
+            const chuSH = await User.findOne({ _id: car.ChuSH });
 
             let title = 'Yêu cầu thuê xe mới';
             let contentNotify = "Xe " + car.MauXe + " của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!"
-            let url_image = "http://localhost:9000/public/images/" + car.HinhAnh[0];
+            // let url_image = "https:///fastcar-ulwr.onrender.com/public/images/" + car.HinhAnh[0];
             await hoadon.save().then((result) => {
 
-                sendNotificationToUser(chuSH.TokenFCM, title, contentNotify, "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/800px-Android_robot.svg.png");
+                sendNotificationToUser(chuSH.TokenFCM, title, contentNotify);
 
                 res.status(201).json({
                     success: true,
@@ -190,18 +200,61 @@ class HoaDonController_ {
 
     }
 
-    async update_trangthaiDH(req, res) {
+    async update_TimeChuSHXN(req, res) {
         const maHD = req.params.maHD;
+        const car = await Xe.findOne({ _id: req.body.Xe });
+        // const chuSH = await User.findOne({ _id: car.ChuSH });
+        const khachhang = await User.findOne({ _id: req.body.User });
+
+        let trangthai = req.body.TrangThaiHD;
+
         await HoaDon.updateOne({ MaHD: maHD }, {
             $set: {
-                TrangThaiHD: req.body.TrangThaiHD,
-                LyDo: req.body.LyDo
+                TrangThaiHD: trangthai,
+                TimeChuXeXN: req.body.TimeChuXeXN,
+                User: req.body.User,
+                Xe: req.body.Xe
             }
         }).then((result) => {
-            res.status(200).json({
-                success: true,
-                messages: "Sửa trạng thái HD thành công"
-            });
+            if (trangthai == 2) {
+                let title = 'Thông báo mới';
+                let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất"
+                // let url_image = "https://fastcar-ulwr.onrender.com/public/images/" + car.HinhAnh[0];
+                sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
+            }
+
+            res.status(200).json("Sửa trạng thái HD thành công"
+            );
+        })
+            .catch((err) => {
+                res.status(400).json(err);
+                log(err);
+            })
+    }
+
+    async update_trangthaiDH(req, res) {
+        const maHD = req.params.maHD;
+        const car = await Xe.findOne({ _id: req.body.Xe });
+        // const chuSH = await User.findOne({ _id: car.ChuSH });
+        const khachhang = await User.findOne({ _id: req.body.User });
+
+        let trangthai = req.body.TrangThaiHD;
+
+        await HoaDon.updateOne({ MaHD: maHD }, {
+            $set: {
+                TrangThaiHD: trangthai,
+                LyDo: req.body.LyDo,
+                User: req.body.User,
+                Xe: req.body.Xe
+            }
+        }).then((result) => {
+            if (trangthai == 3) {
+                // gửi socket đến ChuSH
+                // socket.emit("payment_success", );
+            }
+
+            res.status(200).json("Sửa trạng thái HD thành công"
+            );
         })
             .catch((err) => {
                 res.status(400).json(err);
@@ -213,6 +266,11 @@ class HoaDonController_ {
         await HoaDon.deleteMany({});
         return res.status(200).json('Success');
     }
+
+    async deleteItem(req, res) {
+        await HoaDon.deleteOne({_id: req.params.id});
+        return res.status(200).json('Success');
+    }
 }
 
 async function sendNotificationToUser(tokenFCM, title, body, image) {
@@ -220,8 +278,7 @@ async function sendNotificationToUser(tokenFCM, title, body, image) {
     const message = {
         notification: {
             title: title,
-            body: body,
-            image: image
+            body: body
         },
         token: tokenFCM,
     };
