@@ -15,11 +15,8 @@
                 mới</button>
             </div>
 
-            <div class="col-sm-2">
-              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
-            </div>
-            <div class="end" style="margin-left: 640px;  ">
+           
+            <div class="end" style="margin-left: 740px;  ">
 
               <div class="row">
                 <div class="col-sm-22" style="margin-left: 20px; font-weight: bold; font-size: 15px;">
@@ -39,38 +36,33 @@
             </div>
           </div>
 
-          <form action="/product/create_data" id="product-form" method="post" enctype="multipart/form-data"
+              <form action="/api/thongbao/create" id="product-form" method="post" enctype="multipart/form-data"
             style="display: none;">
 
             <div class="row">
               <div class="form-group col-md-3" style="margin-left: 20px;">
-                <label class="control-label">Tiêu đề</label>
-                <input class="form-control" type="text">
+                <label for="quantity" class="control-label">Tiêu đề</label>
+                <input class="form-control" type="text" id="quantity" name="TieuDe" class="form-control" required placeholder="Nhập tiêu đề">
+              </div>  
+               <div class="form-group col-md-3" style="margin-left: 20px;">
+                <label for="image" class="control-label">Ảnh </label>
+                   <input type="file" id="image" name="HinhAnh" class="form-control" accept="image/*" required>
+               
               </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Ảnh </label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+               
                 </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <div class="form-group col-md-3" style="margin-left: 32px;">
-                  <label class="control-label">Thông tin</label>
-                  <textarea class="form-control" name="mota" id="mota"
-                    style=" height: 20px; width: 1350px;; "></textarea>
-                  <script>CKEDITOR.replace('mota');</script>
+              <div class="row">  
+            <div class="form-group col-md-3" style="margin-left: 20px">
+                  <label for="price" class="control-label">Nôi dung</label>
+                  <textarea class="form-control"  style=" height: 20px; width: 450px;" name="NoiDung" id="price" cols="30" class="form-control" rows="10" required
+                  placeholder="Nhập nội dung"></textarea>
+                
                 </div>
               </div>
-            </div>
+            
             <div style="margin-left: 18px;">
-              <button class="btn btn-save" type="button">Lưu lại</button>
-              <a class="btn btn-cancel" href="/khuyenmai">Hủy bỏ</a>
+              <button class="btn btn-save" type="submit">Lưu lại</button>
+             
             </div>
           </form>
         </div>
@@ -83,11 +75,11 @@
           <thead>
             <tr>
               <th style="text-align: center;" width="10">STT</th>
-              <th style="text-align: center;">Tiêu đề</th>
-              <th style="text-align: center;">Ảnh</th>
-              <th style="text-align: center;">Nội dung</th>
-              <th style="text-align: center;">Ngày đăng</th>
-              <th style="text-align: center;" width="100">Chức năng</th>
+              <th style="text-align: center;  width: 80px;">Tiêu đề</th>
+              <th style="text-align: center; width: 80px;">Ảnh</th>
+              <th style="text-align: center; width: 50px;">Ngày đăng</th>
+             <th style="text-align: center; width: 100px;">Nội dung</th>
+              <th style="text-align: center; width: 50px;" >Chức năng</th>
             </tr>
           </thead>
           <tbody>
@@ -96,12 +88,12 @@
               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{@index}}</td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TieuDe}}</td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img
-                  src="/images/{{this.HinhAnh}}" alt="" class="img-card-person1"></td>
-              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
+                  src="/images/{{this.HinhAnh}}" alt="" class="img-card-person3"></td>     
               <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="NgayDang"
                 style="width: 150px;">{{this.createdAt}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button
-                  class="btn btn-info" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP">Xem chi
+                  class="btn btn-info" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP" onclick="chitiet(`{{this._id}}`)">Xem chi
                   tiết</button></td>
 
 
@@ -132,49 +124,46 @@
         </div>
         <div class="row">
           <div class="form-group col-md-6" style="margin-left: 230px;">
-            <img src="/images/{{this.HinhAnh}}" alt="" class="img-card-person2">
+            <img  id="img" class="img-card-person2">
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Tiêu đề</label>
             <div class="form-control">
-              <p><b>{{this.TieuDe}}</b></p>
+              <p><b id="TieuDe"></b></p>
             </div>
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Ngày đăng</label>
             <div class="form-control">
-              <p><b class="NgayDang">{{this.createdAt}}</b></p>
+              <p><b id="Ngaydang"></b></p>
             </div>
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Mã khuyến mãi</label>
             <div class="form-control">
-              <p><b>{{this.MaGiamGia}}</b></p>
+              <p><b id="MaGiamGia" ></b></p>
             </div>
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Giá trị giảm(%)</label>
             <div class="form-control">
-              <p><b>{{this.GiaTri}}%</b></p>
+              <p><b id="GiaTri"></b>%</p>
             </div>
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Giá trị giảm</label>
             <div class="form-control">
-              <p><b id="giathue">{{this.GiaTriMax}}</b></p>
+              <p><b id="GiaTriMax"></b></p>
             </div>
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Nôi dung</label>
-            <textarea class="form-control" style=" height: 10px; width: 420px">{{this.NoiDung}}</textarea>
+            <textarea class="form-control" style=" height: 10px; width: 420px" id="NoiDung"></textarea>
           </div>
 
 
 
         </div>
-
-
-
         <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left: 400px;">Đóng</a>
 
       </div>
@@ -183,7 +172,51 @@
   </div>
 </div>
 
+<script>
+    async function chitiet(id) {
+    const response = await fetch(`/api/thongbao/find/${id}`).then(response => response.json());
+    document.getElementById("MaGiamGia").innerHTML = response.MaGiamGia
+    document.getElementById("NoiDung").innerHTML = response.NoiDung
+    document.getElementById("TieuDe").innerHTML = response.TieuDe
+    document.getElementById("GiaTri").innerHTML = response.GiaTri
+    document.getElementById("GiaTriMax").innerHTML = response.GiaTriMax
+    document.getElementById("img").src = "/images/" + response.HinhAnh
+      document.getElementById("Ngaydang").innerHTML = response.createdAt
+    // format giá 
+    var GiaTriMax = document.querySelector('#GiaTriMax');
+    const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaTriMax.innerHTML, {
+      minimumFractionDigits: 2,
+      decimal: ',',
+      thousandsSeparator: '.',
+    });
+    GiaTriMax.innerHTML = formattedPrice + " đ"
 
+    // format Ngày ================
+    var Ngaydang = document.querySelector("#Ngaydang");
+    const date = new Date(Ngaydang.innerHTML);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = day + '/' + month + '/' + year
+    Ngaydang.innerHTML = formattedDate
+    GiaTriMax.innerHTML = formattedPrice + " đ"
+  
+
+
+
+    // validate trạng thái
+    const TrangThaiModal = document.querySelector('#TrangThaiModal');
+    if (TrangThaiModal.innerHTML === "true") {
+      TrangThaiModal.innerHTML = "Hoạt động"
+      TrangThaiModal.style.color = "#02790C"
+    } else {
+      TrangThaiModal.innerHTML = "Hết hạn"
+      TrangThaiModal.style.color = "#A90312"
+    }
+
+
+  }
+</script>
 <script>
   // ẩn hiện form
   const addNewBtn = document.getElementById("add-new-btn");
@@ -223,7 +256,7 @@
     i.innerHTML = formattedDate
   })
 
-  $("#show-emp").on("click", function () {
+  {{!-- $("#show-emp").on("click", function () {
     $("#ModalUP").modal({ backdrop: false, keyboard: false })
-  });
+  }); --}}
 </script>
