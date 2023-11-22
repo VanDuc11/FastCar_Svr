@@ -1,6 +1,21 @@
 const lsgd = require('../models/LichSuGiaoDich.model');
-
+const User = require('../models/user.model');
 class LSGDController {
+    thanhtoan(req, res) {
+        res.render('ThanhToan')
+    }
+
+    async chitietthanhtoan(req, res) {
+        var id = req.params.id;
+        await User.find({ _id: id })
+            .then((result) => {
+                res.render('ChiTietThanhToan',
+                    {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+            })
+    }
     async getLSGD(req, res, next) {
         let check = null;
         if (typeof (req.query.User) != 'undefined') {
@@ -23,6 +38,7 @@ class LSGDController {
             return res.status(400).send(error);
         }
     }
+   
 }
 
 module.exports = new LSGDController;

@@ -1,7 +1,7 @@
 <main class="app-content">
   <div class="app-title">
     <ul class="app-breadcrumb breadcrumb side">
-      <li class="breadcrumb-item active"><a href="#"><b>Khách hàng đang thuê</b></a></li>
+      <li class="breadcrumb-item active"><a href="#"><b>Thông tin khách hàng</b></a></li>
     </ul>
     <div id="clock"></div>
   </div>
@@ -9,81 +9,122 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
-          <div class="row element-button">
           
-
-
-
-
-          </div>
 
              {{#each data}}
  
-           <h1 style="font-size: 20px; ">Thông tin Khách hàng</h1>
+         
         <div class="row">
-           <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Họ và tên:</span> {{this.UserName}}</label>
-                </div>
+              <div class="form-group col-md-3">
+        <label class="control-label">Họ và tên</label>
+        <div class="form-control">
+          <p><b>{{this.UserName}}</b></p>
+        </div>
+      </div>
+              <div class="form-group col-md-3">
+        <label class="control-label">Ngày sinh</label>
+        <div class="form-control">
+          <p><b>{{this.NgaySinh}}</b></p>
+        </div>
+      </div>
+                 <div class="form-group col-md-3">
+        <label class="control-label">Số điện thoại</label>
+        <div class="form-control">
+          <p><b>{{this.SDT}}</b></p>
+        </div>
+      </div>
+             <div class="form-group col-md-3">
+        <label class="control-label">Giới tính</label>
+        <div class="form-control">
+          <p><b>{{this.GioiTinh}}</b></p>
+        </div>
+      </div>
+              <div class="form-group col-md-3">
+        <label class="control-label">Email</label>
+        <div class="form-control">
+          <p><b>{{this.Email}}</b></p>
+        </div>
+      </div>
+     
+     
+                   <div class="form-group col-md-3">
+        <label class="control-label">Ngày tham gia </label>
+        <div class="form-control">
+          <p><b class="HSD" >{{this.NgayThamGia}}</b></p>
+        </div>
+      </div>
+                <div class="form-group col-md-3">
+        <label class="control-label">Số dư ví </label>
+        <div class="form-control">
+          <p><b>{{this.SoDu}}</b></p>
+        </div>
+      </div>
+                <div class="form-group col-md-3">
+        <label class="control-label">Họ tên GPLX </label>
+        <div class="form-control">
+          <p><b>{{this.HoTen_GPLX}}</b></p>
+        </div>
+      </div>
+                  <div class="form-group col-md-3">
+        <label class="control-label">Số GPLX </label>
+        <div class="form-control">
+          <p><b>{{this.So_GPLX}}</b></p>
+        </div>
+      </div>
+                    <div class="form-group col-md-3">
+        <label class="control-label">Ngày cấp GPLX </label>
+        <div class="form-control">
+          <p><b class="HSD" >{{this.NgayCap_GPLX}}</b></p>
+        </div>
+      </div>
+                    <div class="form-group col-md-3">
+        <label class="control-label">Số CMND </label>
+        <div class="form-control">
+          <p><b >{{this.So_CCCD}}</b></p>
+        </div>
+      </div>
+                  <div class="form-group col-md-3">
+        <label class="control-label"> Ngày cấp CMND</label>
+        <div class="form-control">
+          <p><b class="HSD" >{{this.NgayCap_CCCD}}</b></p>
+        </div>
+      </div>
+          <div class="form-group col-md-3">
+        <label class="control-label"> Nơi cấp CMND</label>
+        <div class="form-control">
+          <p><b>{{this.NoiCap_CCCD}}</b></p>
+        </div>
+      </div>  
+               <div class="form-group col-md-3">
+        <label class="control-label">Địa chỉ </label>
+     <textarea class="form-control">{{this.DiaChi_GPLX}}</textarea>
+         
+        </div>  
+        </div>
 
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Ngày sinh:</span>{{this.NgaySinh}}  </label>
-                </div>
-
-            </div>
-            <div class="col-md-4">
-               <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số điện thoại:</span> {{this.SDT}} </label>
-                </div>
-
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Giới tính:</span> {{this.GioiTinh}}</label>
-                </div>
-            </div>
-              <div class="col-md-4">    
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Email:</span>{{this.Email}} </label>
-                </div>
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Địa chỉ:</span> {{this.DiaChi_GPLX}}</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 18px;" ><span style="font-weight: bold;"  >Ngày tham gia:</span> <span class="HSD"  >{{this.NgayThamGia}}</span></label>
-                </div> 
-            </div>
-            <div class="col-md-4">
-             <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số dư ví:</span> {{this.SoDu}}</label>
-                </div>
-                  </div>
-                   </div>
-
-
+  
                       <div class="row">
              <div class="col-md-4">
                 <div class="col-md-12">
-                    <label style="font-size: 18px;" ><span style="font-weight: bold;">Avata </span></label> 
-          <img src="/images/{{this.Avatar}}" alt="" height="50px" width="50px" type="button" id="show-emp"
+                    <label style="font-size: 18px;" ><span style="font-weight: bold;">Avata </span></label>    <BR>
+          <img src="{{this.Avatar}}" alt="" height="100px" width="150px" type="button" id="show-emp"
             data-toggle="modal" data-target="#ModalUP3">
                 </div>
             </div>
           
-                   <div class="col-md-4">      
+                   <div class="col-md-4"style=" margin-left: -110px;" >      
                 <div class="col-md-12">
-                  <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy tờ xe</span></label>
-          <img src="/images/{{this.HinhAnh_GPLX}} " alt="" height="50px"
-            width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
-            <p style="margin-left: 20px;font-size: 12px;color: red;">Chưa xác minh</p>
+                  <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy phép lái xe</span></label>   <BR>
+          <img src=" " alt="" height="100px" width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
+            <p style="margin-left: 32px;font-size: 12px;"  id="trangthaititlle">{{this.TrangThai_GPLX}}</p>
                 </div>
             </div>
-                     <div class="col-md-4">      
+                 <div class="col-md-4" style=" margin-left: -110px;">      
                 <div class="col-md-12">
-                  <label style="font-size: 18px;"><span style="font-weight: bold;">CMND</span></label>
-          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="50px"
-            width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP5">
-              <p style="margin-left: 20px; font-size: 12px;color: red;">Chưa xác minh</p>
+                  <label style="font-size: 18px;"><span style="font-weight: bold;">CMND</span></label>    <BR>
+          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px" width="150px" type="button" 
+          id="show-emp" data-toggle="modal" data-target="#ModalUP5">
+              <p style=" margin-left: 32px; font-size: 12px;color: red;">Chưa xác minh</p>
                 </div>
             </div>
         </div>
@@ -92,123 +133,14 @@
 
 
    
-          <div class="row element-button">
-          </div>
-          <table class="table table-hover table-bordered" id="sampleTable">
-            <thead>
-              <th style="text-align: center;">STT</th>
-                <th style="text-align: center;">Biển số xe</th>
-                <th style="text-align: center;">Tên xe</th>
-                <th style="text-align: center;">Ảnh xe</th>
-                <th style="text-align: center;">Hãng</th>
-                <th style="text-align: center;">Số ghế</th>
-                <th style="text-align: center;">Năm sản xuất</th>
-                <th  style="text-align: center;">Giá </th>
-                <th style="text-align: center;">Tên chủ xe</th>
-            
-
-
-              </tr>
-            </thead>
-            <tbody>
-          
-              <tr>
-                <td class="stt">{{@index}}</td>
-                <td id="tenxe"></td>
-                <td id="tenxe"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td> </td>
-                 <td ></td>
-            
-
-              </tr>
-          
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-             {{!-- <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ảnh xe     </span></label> 
-          <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="50px" width="50px" type="button" id="show-emp"
-            data-toggle="modal" data-target="#ModalUP">
-                </div>
-            </div>
-          
-                   <div class="col-md-4">      
-                <div class="col-md-12">
-                  <label style="font-size: 18px;"><span style="font-weight: bold;">Bảo hiểm</span></label>
-          <img src="/images/{{this.BaoHiem}}" alt="" height="50px"
-            width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
-                </div>
-            </div>
-             
-                   <div class="col-md-4">      
-                <div class="col-md-12">
-                  <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy tờ xe</span></label>
-          <img src="/images/{{this.DangKyXe}}" alt="" height="50px"
-            width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
-                </div>
-            </div>
-             
-                   <div class="col-md-4">      
-                <div class="col-md-12">
-                  <label style="font-size: 18px;"><span style="font-weight: bold;">Đăng kiểm</span></label>
-          <img src="/images/{{this.DangKiem}}" alt="" height="50px"
-            width="50px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP4">
-                </div>
-            </div>
-        </div> --}}
+         
+      
 
 
  
  
 </main>
-<script>
- 
-  async function load() {
-  // Get the current URL
-  const url = window.location.href;
 
-  // Get the ID from the URL
-  const idStart = "http://localhost:9000/khachhang/ChiTietKhachHang/";
-  const id = url.slice(idStart.length, url.length);
-
-  // Fetch the car data from the API
-  const response = await fetch(`/api/xe/find_id/${id}`).then(response => response.json());
-
-  // Update the corresponding elements with the car data
-  document.getElementById('tenxe').innerHTML = response.MauXe;
-  document.getElementById('username').innerHTML = response.ChuSH.UserName;
-
-  // Replace the '<td>' element with the formatted price
-  const giaThueElement = document.getElementById('gia');
-  const formattedPrice = new Intl.NumberFormat('vi-VN').format(giaThueElement.innerHTML, {
-    minimumFractionDigits: 2,
-    decimal: ',',
-    thousandsSeparator: '.',
-  });
-  giaThueElement.parentElement.innerHTML = `<td class="gifd">${formattedPrice} đ</td>`;
-
-  // Update the remaining '<td>' elements with the corresponding data
-  document.getElementById('nsx').innerHTML = response.NSX;
-  document.getElementById('sotudong').innerHTML = response.ChuyenDong;
-  document.getElementById('soghe').innerHTML = response.SoGhe;
-  document.getElementById('hang').innerHTML = response.HangXe;
-  document.getElementById('bks').innerHTML = response.BKS;
-  document.getElementById('loainhienlieu').innerHTML = response.LoaiNhienLieu;
-}
-
-
-
-</script>
  {{!-- đang kiểm --}}
       <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false" height="900px" width="950px">
@@ -346,7 +278,7 @@
                 <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
                   <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.DangKyXe}}"
+                    <img src="/images/{{this.HinhAnh_GPLX}}"
                       alt=""height="280px" width="400px" style="margin-left:230px;">
 
             
@@ -356,8 +288,10 @@
                 </div>
               </div>
               <BR>
-               <a class="btn btn-info" data-dismiss="modal" href="#" style="margin-left: 40%;">Xác minh</a>
-              <a class="btn btn-cancel" data-dismiss="modal" href="#" >Đóng</a>
+              <a style="margin-left: 40%;" class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
+          onclick="onSubmit(`{{this._id}}`,1)">Xác minh</a>
+              <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
+                
               <BR>
             </div>
             <div class="modal-footer">
@@ -422,8 +356,8 @@
         flex-direction: column;">
             <div class="images" style=" display: flex; ">
               <img
-                src="/images/{{this.Avatar}}"
-                alt="" height="280px" width="400px" style="margin-left:230px;">
+                src="{{this.Avatar}}"
+                alt="" height="280px" width="400px" style="margin-left:290px;">
 
 
 
@@ -456,12 +390,12 @@
   <!-- Essential javascripts for application to work-->
 
   <script>
-    let buttonStatus = "Chưa duyệt";
+    let buttonStatus = "Chưa xác minh";
 
     // Tạo một hàm để xử lý sự kiện click của nút
     function handleClick() {
       // Thay đổi trạng thái của nút
-      buttonStatus = "Đã duyệt";
+      buttonStatus = "Đã xác minh";
 
       // Thay đổi văn bản của nút
       this.textContent = buttonStatus;
@@ -473,6 +407,7 @@
     }
 
   </script>
+ 
   <script src="public/js/jquery-3.2.1.min.js"></script>
   <script src="public/js/popper.min.js"></script>
   <script src="/public/js/bootstrap.min.js"></script>
@@ -601,5 +536,3 @@
     });
   </script>
   </body>
-
-  </html>
