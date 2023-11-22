@@ -217,16 +217,32 @@ class XeController {
 
     }
 
+    async findXe_byID(req, res) {
+        let idXe = req.params.id;
+        try {
+            await Xe.findOne({_id: idXe}).populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+                .then((result) => {
+                    res.status(200).json(result)
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        success: true,
+                        message: error.message,
+                    })
+                })
+        } catch (error) {
+            res.status(500).json({
+                success: true,
+                message: err.message,
+            })
+        }
+    }
+
     async find_Xe_Not_User(req, res) {
         // get list xe không thuộc user login
         const emailUser = req.params.email;
         let check = null;
         if (typeof req.query.DiaChiXe !== 'undefined' && typeof (req.query.TrangThai) != 'undefined') {
-            const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
-            check = { DiaChiXe: regex, TrangThai: req.query.TrangThai };
-        }
-
-        if (typeof req.query.ChuSH !== 'undefined' && typeof (req.query.TrangThai) != 'undefined') {
             const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
             check = { DiaChiXe: regex, TrangThai: req.query.TrangThai };
         }
@@ -254,10 +270,21 @@ class XeController {
 
 
     async find_Xe_User(req, res) {
+        let check = null;
+        let trangThaiValues = [];
         const emailUser = req.params.email;
 
+        if (typeof (req.query.TrangThai) !== 'undefined') {
+            trangThaiValues = req.query.TrangThai.split(',').map(item => parseInt(item));
+        }
+
+        if (trangThaiValues.length > 0 ) {
+            check = { TrangThai: { $in: trangThaiValues }};
+        }
+
+
         try {
-            const list = await Xe.find({}).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).exec();
+            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).exec();
 
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() === emailUser);
 
@@ -315,7 +342,7 @@ class XeController {
         // for (var i = 0; i < req.files['HinhAnh'].length; i++) {
         //     img.push(path.basename(req.files['HinhAnh'].get[i].path));
         // }
-        var check = req.body.ChuSH;
+
         const xe = new Xe({
             BKS: req.body.BKS,
             HangXe: req.body.HangXe,
@@ -332,17 +359,17 @@ class XeController {
             BaoHiem: req.files['BaoHiem'][0].filename,
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
-            ChuSH: req.body.ChuSH || await User.findById("6513ad0281cfc8cdaaa6f728"),
+            ChuSH: req.body.ChuSH,
             TrangThai: 0,
             SoChuyen: 0,
             TrungBinhSao: 0
         });
-
+        
         try {
             await xe.save()
                 .then((result) => {
                     res.status(201)
-                        .send('<script>alert("Thêm xe thành công"); window.location.href="/quanlyxe";</script>');
+                    .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/quanlyxe";</script>');
                     console.log(result);
                 })
                 .catch((err) => {
@@ -366,9 +393,39 @@ class XeController {
             await Xe.findByIdAndUpdate({ _id: id },
                 {
                     $set: {
-                        TrangThai: req.body.TrangThai,
                         SoChuyen: req.body.SoChuyen,
                         TrungBinhSao: req.body.TrungBinhSao
+                    }
+                }
+            )
+                .then((result) => {
+                    res.status(200).json({
+                        success: true,
+                        messages: "Yêu cầu cập nhât thành công"
+                    });
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: err.messages
+                    });
+                })
+
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                messages: error.messages
+            });
+        }
+    }
+
+    async UpdateTrangThaiXe(req, res) {
+        const id = req.params.id;
+        try {
+            await Xe.findByIdAndUpdate({ _id: id },
+                {
+                    $set: {
+                        TrangThai: req.body.TrangThai
                     }
                 }
             )
@@ -403,7 +460,6 @@ class XeController {
                     console.log(`Deleted ${result.deletedCount}`);
                     res.status(200).json({ message: 'Car removed successfully' });
                 })
-            console.log(document._id);
 
         } catch (error) {
             console.log(error);

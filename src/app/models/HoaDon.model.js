@@ -17,6 +17,7 @@ const HoaDon = new Schema({
     ThanhToan: { type: Number },
     LoiNhan: { type: String},
     GioTaoHD: { type: Date },
+    TimeChuXeXN:  { type: Date },
     TrangThaiHD: { type: Number},
     LyDo: { type: String }
 }, { timestamps: true });

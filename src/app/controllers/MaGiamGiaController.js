@@ -93,8 +93,6 @@ class MaGiamGiaController {
     async CreateMaGiamGia(req, res) {
         const img = path.basename(req.file.path);
         const randomBytes = crypto.randomBytes(6);
-
-
         const maGiamGia = new MaGiamGia({
             TieuDe: req.body.TieuDe,
             MaGiamGia: req.body.MaGiamGia,
@@ -106,8 +104,6 @@ class MaGiamGiaController {
             HSD: req.body.HSD,
             TrangThai: dateNow > new Date(req.body.HSD) ? false : true
         });
-
-
         try {
             const check = await MaGiamGia.findOne({ MaGiamGia: req.body.MaGiamGia });
             if (check == null) {

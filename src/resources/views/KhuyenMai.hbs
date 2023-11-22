@@ -17,7 +17,7 @@
 
 
 
-            <div class="row" style="margin-left:690px;">
+            <div class="row" style="margin-left:720px;">
               <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
                 <label class="control-label1">Từ ngày</label>
                 <input class="form-control1" type="date" required>
@@ -31,8 +31,36 @@
                     align-items: center;">Tìm kiếm</a>
               </div>
             </div>
+                 
           </div>
-
+              <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
+                        <div class="info">
+                            <h4>Tổng Voucher</h4>
+                            <p><b>100 Voucher</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                   <div class="widget-small info  coloured-icon"><i
+                                    class='icon fa-3x bx bxs-hourglass-top'></i>   
+                        <div class="info">
+                            <h4>Voucher còn hạn</h4>
+                            <p><b>68 Voucher</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                  <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle' ></i>
+                        <div class="info">
+                            <h4>Voucher hết hạn</h4>
+                            <p><b>4 Voucher</b></p>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
           <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data"
             style="display: none;">
             <div class="row">
@@ -164,7 +192,7 @@
           <div class="form-group col-md-6">
             <label class="control-label">Giá trị giảm(%)</label>
             <div class="form-control">
-              <p><b id="GiaTri"> </b></p>
+              <p><b id="GiaTri"> </b>%</p>
             </div>
           </div>
           <div class="form-group col-md-6">
