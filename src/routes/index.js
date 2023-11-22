@@ -24,6 +24,7 @@ const router = (app) =>{
     app.use('/thongbao', ThongBao);
     app.use('/khuyenmai',MaGiaGia);
     app.use('/thongke', ThongKe);
+    app.use('/thanhtoan', LSGD);
     app.use('/khachhang', user);
  
 

@@ -19,7 +19,8 @@ router.get('/',UserControlles.index);
 router.get('/ChiTietKhachHang/:id',UserControlles.chitietkhachhang);
 
 router.get('/list', UserControlles.user);
-
+// Duyệt GPLX
+router.post('/duyet/:id/:trangthai', UserControlles.duyetGPLX);
 router.post('/create',UserControlles.createrUser);
 
 router.post('/login', UserControlles.login);

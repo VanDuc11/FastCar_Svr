@@ -1,5 +1,6 @@
 const { log } = require('console');
 const User = require('../models/user.model');
+const Xe = require('../models/Xe.model');
 const path = require('path');
 const moment = require('moment');
 
@@ -34,7 +35,27 @@ class UserControlles {
                 })
             });
     }
-
+    async duyetGPLX(req, res) {
+        const id = req.params.id;
+        console.log(id);
+        await Xe.updateOne({ _id: id },
+            {
+                $set: {
+                    TrangThai_GPLX: req.params.trangthai
+                }
+            }
+        ).then(() => {
+            res.status(200).json({
+                success: true,
+                messages: "Yêu cầu cập nhât thành công"
+            })
+        }).catch((err) => {
+            res.status(400).json({
+                success: false,
+                messages: err.messages
+            });
+        })
+    }
     async chitietkhachhang(req, res) {
         var id = req.params.id;
         await User.find({ _id: id })
