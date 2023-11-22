@@ -10,7 +10,7 @@ const updateExpiredPromotionalOffers = async () => {
       for (const offer of offers) {
         // Kiểm tra xem ưu đãi đã hết hạn chưa
         const now = new Date();
-        if (now > offer.HSD) {
+        if (offer.HSD < now) {
           // Cập nhật trạng thái của ưu đãi thành false
           await MaGiamGia.updateOne({ _id: offer._id }, {
             $set: {
@@ -24,7 +24,7 @@ const updateExpiredPromotionalOffers = async () => {
     };
   
     // Chạy hàm kiểm tra trạng thái của mã giảm giá định kỳ
-    setInterval(checkExpiredPromotionalOffers, 10000);
+    setInterval(checkExpiredPromotionalOffers, 1000);
   };
   
 

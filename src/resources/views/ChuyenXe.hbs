@@ -11,15 +11,16 @@
 
                 <div class="tile-body">
                     <div class="row element-button">
-                        <div class="end" style="margin-left:830px;">
-                            <form action="/api/hoadon/find_theoNgay" method="post" class="row">
+
+                        <div class="end" style="margin-left: 600px;">
+                            <form action="/chuyenxe" method="get" class="row">
                                 <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
                                     <label class="control-label1">Từ ngày</label>
-                                    <input class="form-control1" type="date" name="batdau" required>
+                                    <input class="form-control1" type="date" name="start_date" required>
                                 </div>
                                 <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
                                     <label class="control-label1">Đến ngày</label>
-                                    <input class="form-control1" type="date" name="ketthuc" required>
+                                    <input class="form-control1" type="date" name="end_date" required>
                                 </div>
                                 <div class="col-sm-22" style="margin-left: 20px;  ">
                                     <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
@@ -31,7 +32,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <a class="col-md-6 col-lg-3" href="/chuyenxe">
+                        <a class="col-md-6 col-lg-3" href="" id="all">
                             <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                                 <div class="info">
                                     <h4>Tổng Chuyến</h4>
@@ -39,7 +40,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/chuyenxe/hoatdong" class="col-md-6 col-lg-3">
+                        <a href="" id="hd" class="col-md-6 col-lg-3">
                             <div class="widget-small info coloured-icon"><i class='icon bx bxs-truck fa-3x'></i>
                                 <div class="info">
                                     <h4>Chuyến đang hoạt động</h4>
@@ -47,7 +48,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/chuyenxe/dacoc" class="col-md-6 col-lg-3">
+                        <a href="" id="dc" class="col-md-6 col-lg-3">
                             <div class="widget-small primary coloured-icon"><i
                                     class='icon fa-3x bx bx-check-shield'></i>
                                 <div class="info">
@@ -56,7 +57,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/chuyenxe/thanhcong" class="col-md-6 col-lg-3">
+                        <a href="" id="tc" class="col-md-6 col-lg-3">
                             <div class="widget-small primary coloured-icon"><i
                                     class='icon fa-3x bx bxs-select-multiple'></i>
                                 <div class="info">
@@ -68,7 +69,7 @@
 
                     </div>
                     <div class="row">
-                        <a href="/chuyenxe/chococ" class="col-md-6 col-lg-3">
+                        <a href="" id="cc" class="col-md-6 col-lg-3">
                             <div class="widget-small warning coloured-icon"><i
                                     class='icon fa-3x bx bx-message-dots'></i>
                                 <div class="info">
@@ -77,7 +78,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/chuyenxe/huy" class="col-md-6 col-lg-3">
+                        <a href="" id="dahuy" class="col-md-6 col-lg-3">
                             <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
                                 <div class="info">
                                     <h4>Chuyến đã hủy</h4>
@@ -92,6 +93,7 @@
 
                 <div class="row element-button">
                 </div>
+
                 <table class="table table-hover table-bordered" id="sampleTable">
                     <thead>
                         <tr>
@@ -171,14 +173,41 @@
             stt1[i].innerText = i + 1;
         }
 
-        const response = await fetch('/api/hoadon/list').then(response => response.json());
+        var response = null;
         var tt0 = 0;
         var tt1 = 0;
         var tt2 = 0;
         var tt3 = 0;
         var tt4 = 0;
 
-        response.forEach(hd => {
+       
+
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const startDate = urlParams.get('start_date');
+        const endDate = urlParams.get('end_date');
+        if (urlParams.has('start_date') && urlParams.has('end_date')) {
+
+            document.getElementById('hd').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"4,5,6"}`;
+            document.getElementById('dc').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"3"}`;
+            document.getElementById('tc').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"7"}`;
+            document.getElementById('cc').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"1,2"}`;
+            document.getElementById('dahuy').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"0"}`;
+            document.getElementById('all').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"0,1,2,3,4,5,6,7"}`;
+            response = await fetch(`/api/hoadon/list?start_date=${startDate}&end_date=${endDate}`).then(response => response.json());
+        } else {
+            document.getElementById('hd').href = `chuyenxe?TrangThaiHD=${"4,5,6"}`;
+            document.getElementById('dc').href = `chuyenxe?TrangThaiHD=${"3"}`;
+            document.getElementById('tc').href = `chuyenxe?TrangThaiHD=${"7"}`;
+            document.getElementById('cc').href = `chuyenxe?TrangThaiHD=${"1,2"}`;
+            document.getElementById('dahuy').href = `chuyenxe?TrangThaiHD=${"0"}`;
+            document.getElementById('all').href = `chuyenxe?TrangThaiHD=${"0,1,2,3,4,5,6,7"}`;
+            response = await fetch('/api/hoadon/list').then(response => response.json());
+
+        }
+
+         response.forEach(hd => {
             // hd chờ duyệt
             if (hd.TrangThaiHD == 0) {
                 tt0++;
@@ -190,7 +219,7 @@
             if (hd.TrangThaiHD == 3) {
                 tt2++;
             }
-            if (hd.TrangThaiHD == 4 || hd.TrangThaiHD == 5 || hd.TrangThaiHD == 7) {
+            if (hd.TrangThaiHD == 4 || hd.TrangThaiHD == 5 || hd.TrangThaiHD == 6) {
                 tt3++;
             }
             if (hd.TrangThaiHD == 7) {
