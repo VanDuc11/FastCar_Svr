@@ -222,13 +222,13 @@
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Tiêu đề</label>
-            <textarea class="form-control" style=" height: 20px; width: 420px" id="TieuDe"></textarea>
+            <textarea class="form-control" style=" height: 20px; width: 420px" id="TieuDe" readonly></textarea>
           </div>
 
           <div class="form-group col-md-6">
 
             <label class="control-label">Mô tả</label>
-            <textarea class="form-control" style=" height: 20px; width: 420px" id="NoiDung"> </textarea>
+            <textarea class="form-control" style=" height: 20px; width: 420px" id="NoiDung" readonly> </textarea>
 
           </div>
 
@@ -247,6 +247,10 @@
     </div>
   </div>
 </div>
+<script>
+  const textarea = document.querySelector("textarea");
+textarea.setAttribute("readonly", true);
+</script>
 <script>
   // ẩn hiện form
   const addNewBtn = document.getElementById("add-new-btn");
