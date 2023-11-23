@@ -15,52 +15,52 @@
                 mới</button>
             </div>
 
+          <div class="col-md-5"></div>
 
 
-            <div class="row" style="margin-left:720px;">
+            <form action="/khuyenmai" method="get" class="row">
               <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
                 <label class="control-label1">Từ ngày</label>
-                <input class="form-control1" type="date" required>
+                <input class="form-control1" type="date" name="start_date" required>
               </div>
               <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
                 <label class="control-label1">Đến ngày</label>
-                <input class="form-control1" type="date" required>
+                <input class="form-control1" type="date" name="end_date" required>
               </div>
               <div class="col-sm-22" style="margin-left: 20px;  ">
-                <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
-                    align-items: center;">Tìm kiếm</a>
+                <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
+                                     display: flex; justify-content: center; align-items: center;">Tìm kiếm</button>
+              </div>
+            </form>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
+                <div class="info">
+                  <h4>Tổng Voucher</h4>
+                  <p><b>100 Voucher</b></p>
+                </div>
               </div>
             </div>
-                 
-          </div>
-              <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
-                        <div class="info">
-                            <h4>Tổng Voucher</h4>
-                            <p><b>100 Voucher</b></p>
-                        </div>
-                    </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small info  coloured-icon"><i class='icon fa-3x bx bxs-hourglass-top'></i>
+                <div class="info">
+                  <h4>Voucher còn hạn</h4>
+                  <p><b>68 Voucher</b></p>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                   <div class="widget-small info  coloured-icon"><i
-                                    class='icon fa-3x bx bxs-hourglass-top'></i>   
-                        <div class="info">
-                            <h4>Voucher còn hạn</h4>
-                            <p><b>68 Voucher</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                  <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle' ></i>
-                        <div class="info">
-                            <h4>Voucher hết hạn</h4>
-                            <p><b>4 Voucher</b></p>
-                        </div>
-                    </div>
-                </div>
-              
+              </div>
             </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
+                <div class="info">
+                  <h4>Voucher hết hạn</h4>
+                  <p><b>4 Voucher</b></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
           <form action="/api/voucher/create" id="product-form" method="post" enctype="multipart/form-data"
             style="display: none;">
             <div class="row">
@@ -260,7 +260,7 @@
   async function chitiet(id) {
     const response = await fetch(`/api/voucher/find/${id}`).then(response => response.json());
 
-    
+
     document.getElementById("MaGiamGia").innerHTML = response.MaGiamGia
     document.getElementById("NoiDung").innerHTML = response.NoiDung
     document.getElementById("TieuDe").innerHTML = response.TieuDe
@@ -270,7 +270,7 @@
     document.getElementById("GiaTri").innerHTML = response.GiaTri
     document.getElementById("GiaTriMax").innerHTML = response.GiaTriMax
     document.getElementById("img").src = "/images/" + response.HinhAnh
-    
+
     // format giá 
     var GiaTriMax = document.querySelector('#GiaTriMax');
     const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaTriMax.innerHTML, {
@@ -289,7 +289,7 @@
     const formattedDate = day + '/' + month + '/' + year
     NgayBD.innerHTML = formattedDate
     GiaTriMax.innerHTML = formattedPrice + " đ"
-  
+
     var HSD = document.querySelector("#HSD1");
     const date1 = new Date(HSD.innerHTML);
     const day1 = date.getDate();
@@ -315,7 +315,7 @@
 </script>
 
 <script>
-   // số tứ tự
+  // số tứ tự
   var stt = 0
   const stt1 = document.querySelectorAll(".stt");
   stt1.forEach((i) => {
@@ -326,29 +326,29 @@
 
   load_data()
   async function load_data() {
-  var TrangThai = document.querySelectorAll('.TrangThai');
-  var HSD = document.querySelectorAll(".HSD");
-  HSD.forEach((i) => {
-    const date = new Date(i.innerHTML);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const formattedDate = day + '/' + month + '/' + year
-    i.innerHTML = formattedDate
-  })
- 
+    var TrangThai = document.querySelectorAll('.TrangThai');
+    var HSD = document.querySelectorAll(".HSD");
+    HSD.forEach((i) => {
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+    })
 
-  TrangThai.forEach((i) => {
 
-    if (i.innerHTML === "true") {
-      i.innerHTML = "Hoạt động"
-      i.style.color = "#02790C"
-    } else {
-      i.innerHTML = "Hết hạn"
-      i.style.color = "#A90312"
-      i.style.background = "#F9C9CD"
-    }
-  })
+    TrangThai.forEach((i) => {
+
+      if (i.innerHTML === "true") {
+        i.innerHTML = "Hoạt động"
+        i.style.color = "#02790C"
+      } else {
+        i.innerHTML = "Hết hạn"
+        i.style.color = "#A90312"
+        i.style.background = "#F9C9CD"
+      }
+    })
   }
 
 </script>
@@ -369,5 +369,3 @@
 <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
-
-

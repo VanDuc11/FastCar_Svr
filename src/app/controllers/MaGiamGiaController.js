@@ -8,9 +8,41 @@ const { log } = require('console');
 
 class MaGiamGiaController {
     async index(req, res) {
+        var query = null;
+        const start_date = req.query.start_date;
+        const end_date = req.query.end_date;
+        const TrangThai = req.query.TrangThai;
+        if (start_date != undefined &&
+            end_date != undefined &&
+            TrangThai == undefined) {
+            query = {
+                "NgayBD": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+            }
+        } else if (TrangThai != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "NgayBD": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                "TrangThai": TrangThai
+            }
 
+
+        } else if (TrangThai != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                TrangThai: TrangThai
+            }
+
+        }
         try {
-            await MaGiamGia.find().sort({ _id: -1 })
+            await MaGiamGia.find(query).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).render('KhuyenMai',
                         {
