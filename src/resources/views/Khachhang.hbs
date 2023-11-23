@@ -6,10 +6,10 @@
     <div id="clock"></div>
   </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="tile-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
 
           <div class="row element-button">
             <div class="col-sm-2" style="margin-left: 92%;">
@@ -17,7 +17,7 @@
                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
             </div>
           </div>
-            <div class="row">
+          <div class="row">
             <div class="col-md-6 col-lg-3">
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
@@ -30,20 +30,19 @@
               <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
                   <h4>Khách hàng cho thuê xe</h4>
-                  <p><b >20 </b></p>
-                 
+                  <p><b>20 </b></p>
+
                 </div>
               </div>
             </div>
-         <div class="col-md-6 col-lg-3">
-           <div class="widget-small info coloured-icon"><i
-            class='icon fa-3x bx bxs-user-badge'></i>
-            <div class="info">
-            <h4> Khách hàng thuê</h4>
-          <p><b>80</b></p>
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
+                <div class="info">
+                  <h4> Khách hàng thuê</h4>
+                  <p><b>80</b></p>
+                </div>
+              </div>
             </div>
-            </div>
-             </div>
 
           </div>
           <div class="row element-button">
@@ -52,112 +51,114 @@
             id="sampleTable">
             <thead>
               <tr>
-                <th style="text-align: center;"width="10">STT</th>
-                <th style="text-align: center;"width="150">User Name</th>
-                <th style="text-align: center;"width="20">Ảnh </th>
-                <th style="text-align: center;"width="150">Địa chỉ</th>
-                <th  style="text-align: center;"width="50">Giới tính</th>
-                <th  style="text-align: center;"width="80">Ngày sinh</th>
-                <th  style="text-align: center;"width="80">SĐT</th>
-                <th style="text-align: center;"width="100">Ngày tham gia</th>
-                <th style="text-align: center;"width="100">Trạng thái GPLX</th>
-                <th style="text-align: center;"width="100">Trạng thái CMND</th>
-                <th style="text-align: center;"width="100">Chức năng</th>
+                <th style="text-align: center;" width="10">STT</th>
+                <th style="text-align: center;" width="150">User Name</th>
+                <th style="text-align: center;" width="20">Ảnh </th>
+                <th style="text-align: center;" width="150">Địa chỉ</th>
+                <th style="text-align: center;" width="50">Giới tính</th>
+                <th style="text-align: center;" width="80">Ngày sinh</th>
+                <th style="text-align: center;" width="80">SĐT</th>
+                <th style="text-align: center;" width="100">Ngày tham gia</th>
+                <th style="text-align: center;" width="100">GPLX</th>
+                <th style="text-align: center;" width="100">Chức năng</th>
 
               </tr>
             </thead>
             <tbody>
               {{#each data}}
-              <tr >
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"  class="stt">{{@index}}</td>
+              <tr>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}
+                </td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.UserName}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img class="img-card-person" src="{{this.Avatar}}" alt=""></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img
+                    class="img-card-person" src="{{this.Avatar}}" alt=""></td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.DiaChi_GPLX}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.GioiTinh}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NgaySinh}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SDT}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NgayThamGia}}</td>
-                 <td style="text-align: center; word-break: break-word;vertical-align: middle;color: red;">Chưa xác minh</td>
-                 <td style="text-align: center; word-break: break-word;vertical-align: middle; color: red;">Chưa xác minh</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info " href="/khachhang/ChiTietKhachHang/{{this._id}}"> Xem chi tiết</a></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="Ngay">
+                  {{this.NgayThamGia}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
+                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai_GPLX}}</span>
+                </td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info "
+                    href="/khachhang/ChiTietKhachHang/{{this._id}}"> Xem chi tiết</a></td>
 
 
               </tr>
               {{/each}}
 
-              </tbody>
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
 <script>
-    // số tứ tự
+  // số tứ tự
   var stt = 0
   const stt1 = document.querySelectorAll(".stt");
   stt1.forEach((i) => {
     stt++;
     i.innerText = stt
   })
-  console.log(stt1.length)
+  function load_data() {
+    var Ngay = document.querySelectorAll('.Ngay');
+    var TrangThai = document.querySelectorAll('.TrangThai');
+    TrangThai.forEach((i) => {
+      // bị hủy
+      if (i.innerHTML == 0 || i.innerHTML == "") {
+        i.innerHTML = "Chưa xác minh"
+        i.style.background = "#FDE1C3"
+      } else if (i.innerHTML == 1) { // chờ cọc
+        i.innerHTML = "Chờ xác minh"
+        i.style.background = "#FDE1C3"
+      } else if (i.innerHTML == 2) { // đã cọc
+        i.innerHTML = "Đã xác minh"
+        i.style.background = "#B9FFD3"
+      } else if (i.innerHTML == 3) { // đang hoạt động
+        i.innerHTML = "thất bại"
+        i.style.background = "#ADCBF3"
+      }
+    })
+    Ngay.forEach((i) => {
+      if (i.innerHTML.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+        return i.innerHTML
+      }
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      if (month < 10) {
+        month = "0" + date.getMonth() + 1;
+      }
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+
+
+    })
+
+
+
+  }
+  load_data()
+
+  setInterval(load_data, 1000);
 </script>
 
 
- 
-  <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
-<script>
- 
- 
 
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
-    
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
-
-
-    //Modal
-    {{!-- $("#show-emp").on("click", function () {
-      $("#ModalUP").modal({ backdrop: false, keyboard: false })
-    }); --}}
-  </script>
-</body>
-
-</html>
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>

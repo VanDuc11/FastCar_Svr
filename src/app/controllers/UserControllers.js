@@ -1,44 +1,22 @@
 const { log } = require('console');
 const User = require('../models/user.model');
-const Xe = require('../models/Xe.model');
 const path = require('path');
 const moment = require('moment');
 
 class UserControlles {
     async index(req, res) {
-        const data = [];
 
         await User.find().sort({ _id: -1 })
             .then((result) => {
-                result.forEach(item => {
-                    const NgayThamGia = moment(item.NgayThamGia).format('DD/MM/YYYY', { locale: 'vi' });
-                    const NgaySinh = moment(item.NgaySinh).format('DD/MM/YYYY', { locale: 'vi' });
-
-                    const arr = {
-                        _id: item._id,
-                        UserName: item.UserName,
-                        SDT: item.SDT,
-                        NgaySinh: NgaySinh,
-                        GioiTinh: item.GioiTinh,
-                        Email: item.Email,
-                        UID: item.UID,
-                        DiaChi_GPLX: item.DiaChi_GPLX,
-                        Avatar: item.Avatar,
-                        NgayThamGia: NgayThamGia,
-                        __v: item.__v,
-                    }
-                    console.log(item);
-                    data.push(arr)
-                });
+                
                 res.status(200).render('Khachhang', {
-                    data: data
+                    data: result.map((res)=> res.toJSON())
                 })
             });
     }
     async duyetGPLX(req, res) {
         const id = req.params.id;
-        console.log(id);
-        await Xe.updateOne({ _id: id },
+        await User.updateOne({ _id: id },
             {
                 $set: {
                     TrangThai_GPLX: req.params.trangthai
