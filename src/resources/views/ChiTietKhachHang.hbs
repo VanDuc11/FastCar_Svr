@@ -97,7 +97,7 @@
       </div>  
                <div class="form-group col-md-3">
         <label class="control-label">Địa chỉ </label>
-     <textarea class="form-control">{{this.DiaChi_GPLX}}</textarea>
+     <textarea class="form-control" readonly>{{this.DiaChi_GPLX}}</textarea>
          
         </div>  
         </div>
@@ -140,7 +140,10 @@
  
  
 </main>
-
+<script>
+  const textarea = document.querySelector("textarea");
+textarea.setAttribute("readonly", true);
+</script>
  {{!-- đang kiểm --}}
       <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false" height="900px" width="950px">
@@ -385,6 +388,8 @@
     const formattedDate = day + '/' + month + '/' + year
     i.innerHTML = formattedDate
   })
+
+  
 </script>
       
   <!-- Essential javascripts for application to work-->

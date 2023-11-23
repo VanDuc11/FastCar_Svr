@@ -11,95 +11,45 @@
         <div class="tile-body">
           
 
-             {{#each data}}
- 
-         
+              {{#each data}}
         <div class="row">
               <div class="form-group col-md-3">
-        <label class="control-label">Họ và tên</label>
+        <label class="control-label">Khách hàng</label>
         <div class="form-control">
-          <p><b>{{this.UserName}}</b></p>
+          <p><b>{{this.User}}</b></p>
         </div>
       </div>
               <div class="form-group col-md-3">
-        <label class="control-label">Ngày sinh</label>
+        <label class="control-label">Số dư ví</label>
         <div class="form-control">
-          <p><b>{{this.NgaySinh}}</b></p>
+          <p><b class="SoTienGD">{{this.SoTienGD}}</b></p>
         </div>
       </div>
                  <div class="form-group col-md-3">
-        <label class="control-label">Số điện thoại</label>
+        <label class="control-label">Số tiền rút</label>
         <div class="form-control">
-          <p><b>{{this.SDT}}</b></p>
+          <p><b class="SoTienGD">{{this.SoTienGD}}</b></p>
         </div>
       </div>
              <div class="form-group col-md-3">
-        <label class="control-label">Giới tính</label>
+        <label class="control-label">Nội dung</label>
         <div class="form-control">
-          <p><b>{{this.GioiTinh}}</b></p>
+          <p><b>{{this.NoiDung}}</b></p>
         </div>
       </div>
               <div class="form-group col-md-3">
-        <label class="control-label">Email</label>
+        <label class="control-label">Thời gian</label>
         <div class="form-control">
-          <p><b>{{this.Email}}</b></p>
+          <p><b class="HSD">{{this.ThoiGian}}</b></p>
+        </div>
+      </div>
+             <div class="form-group col-md-3">
+        <label class="control-label">Trạng thái</label>
+        <div class="form-control">
+          <p><b class="TrangThai">{{this.TrangThai}}</b></p>
         </div>
       </div>
      
-     
-                   <div class="form-group col-md-3">
-        <label class="control-label">Ngày tham gia </label>
-        <div class="form-control">
-          <p><b class="HSD" >{{this.NgayThamGia}}</b></p>
-        </div>
-      </div>
-                <div class="form-group col-md-3">
-        <label class="control-label">Số dư ví </label>
-        <div class="form-control">
-          <p><b>{{this.SoDu}}</b></p>
-        </div>
-      </div>
-                <div class="form-group col-md-3">
-        <label class="control-label">Họ tên GPLX </label>
-        <div class="form-control">
-          <p><b>{{this.HoTen_GPLX}}</b></p>
-        </div>
-      </div>
-                  <div class="form-group col-md-3">
-        <label class="control-label">Số GPLX </label>
-        <div class="form-control">
-          <p><b>{{this.So_GPLX}}</b></p>
-        </div>
-      </div>
-                    <div class="form-group col-md-3">
-        <label class="control-label">Ngày cấp GPLX </label>
-        <div class="form-control">
-          <p><b class="HSD" >{{this.NgayCap_GPLX}}</b></p>
-        </div>
-      </div>
-                    <div class="form-group col-md-3">
-        <label class="control-label">Số CMND </label>
-        <div class="form-control">
-          <p><b >{{this.So_CCCD}}</b></p>
-        </div>
-      </div>
-                  <div class="form-group col-md-3">
-        <label class="control-label"> Ngày cấp CMND</label>
-        <div class="form-control">
-          <p><b class="HSD" >{{this.NgayCap_CCCD}}</b></p>
-        </div>
-      </div>
-          <div class="form-group col-md-3">
-        <label class="control-label"> Nơi cấp CMND</label>
-        <div class="form-control">
-          <p><b>{{this.NoiCap_CCCD}}</b></p>
-        </div>
-      </div>  
-               <div class="form-group col-md-3">
-        <label class="control-label">Địa chỉ </label>
-     <textarea class="form-control">{{this.DiaChi_GPLX}}</textarea>
-         
-        </div>  
         </div>
 
      <div class="form-group col-md-12">
@@ -108,8 +58,8 @@
         <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
       </div>
                  
-           
- {{/each}}
+    {{/each}}        
+
 
 
    
@@ -123,7 +73,10 @@
 
 
 <script>
-    const HSD = document.querySelectorAll(".HSD");
+   load_data()
+  async function load_data() {
+  var TrangThai = document.querySelectorAll('.TrangThai');
+  var HSD = document.querySelectorAll(".HSD");
   HSD.forEach((i) => {
     const date = new Date(i.innerHTML);
     const day = date.getDate();
@@ -132,17 +85,55 @@
     const formattedDate = day + '/' + month + '/' + year
     i.innerHTML = formattedDate
   })
+ 
+
+  TrangThai.forEach((i) => {
+            if (i.innerHTML == 0) {
+                i.innerHTML = "Chờ thanh toán"
+                
+            } else if (i.innerHTML == 1 ) { 
+                i.innerHTML = "Đã thanh toán"
+              
+            } else if (i.innerHTML == 2) { 
+                i.innerHTML = "Tù chối"
+               
+            }
+        })
+
+  }
+ 
 </script>
-      
+      <script>
+        const SoTienGD = document.querySelectorAll(".SoTienGD");
+
+for (const soTienElement of SoTienGD) {
+  const soTienString = soTienElement.textContent.trim();
+  if (!isNaN(soTienString)) {
+    const soTienNumber = parseFloat(soTienString);
+    if (soTienNumber >= 0) {
+      const formattedPrice = new Intl.NumberFormat('vi-VN').format(soTienNumber, {
+        minimumFractionDigits: 2,
+        decimal: ',',
+        thousandsSeparator: '.',
+      });
+      soTienElement.textContent = formattedPrice + " đ";
+    } else {
+      console.error("Invalid transaction amount:", soTienString);
+    }
+  } else {
+    console.error("Invalid transaction amount format:", soTienString);
+  }
+}
+      </script>
   <!-- Essential javascripts for application to work-->
 
   <script>
-    let buttonStatus = "Chưa xác minh";
+    let buttonStatus = "Chưa duyệt";
 
     // Tạo một hàm để xử lý sự kiện click của nút
     function handleClick() {
       // Thay đổi trạng thái của nút
-      buttonStatus = "Đã xác minh";
+      buttonStatus = "Đã duyệt";
 
       // Thay đổi văn bản của nút
       this.textContent = buttonStatus;
@@ -282,4 +273,4 @@
       $("#ModalUP").modal({ backdrop: false, keyboard: false })
     });
   </script>
-  </body>
+
