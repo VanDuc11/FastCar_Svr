@@ -9,374 +9,207 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
-          
-
-             {{#each data}}
- 
-         
-        <div class="row">
-              <div class="form-group col-md-3">
-        <label class="control-label">Họ và tên</label>
-        <div class="form-control">
-          <p><b>{{this.UserName}}</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-3">
-        <label class="control-label">Ngày sinh</label>
-        <div class="form-control">
-          <p><b>{{this.NgaySinh}}</b></p>
-        </div>
-      </div>
-                 <div class="form-group col-md-3">
-        <label class="control-label">Số điện thoại</label>
-        <div class="form-control">
-          <p><b>{{this.SDT}}</b></p>
-        </div>
-      </div>
-             <div class="form-group col-md-3">
-        <label class="control-label">Giới tính</label>
-        <div class="form-control">
-          <p><b>{{this.GioiTinh}}</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-3">
-        <label class="control-label">Email</label>
-        <div class="form-control">
-          <p><b>{{this.Email}}</b></p>
-        </div>
-      </div>
-     
-     
-                   <div class="form-group col-md-3">
-        <label class="control-label">Ngày tham gia </label>
-        <div class="form-control">
-          <p><b class="HSD" >{{this.NgayThamGia}}</b></p>
-        </div>
-      </div>
-                <div class="form-group col-md-3">
-        <label class="control-label">Số dư ví </label>
-        <div class="form-control">
-          <p><b>{{this.SoDu}}</b></p>
-        </div>
-      </div>
-                <div class="form-group col-md-3">
-        <label class="control-label">Họ tên GPLX </label>
-        <div class="form-control">
-          <p><b>{{this.HoTen_GPLX}}</b></p>
-        </div>
-      </div>
-                  <div class="form-group col-md-3">
-        <label class="control-label">Số GPLX </label>
-        <div class="form-control">
-          <p><b>{{this.So_GPLX}}</b></p>
-        </div>
-      </div>
-                    <div class="form-group col-md-3">
-        <label class="control-label">Ngày cấp GPLX </label>
-        <div class="form-control">
-          <p><b class="HSD" >{{this.NgayCap_GPLX}}</b></p>
-        </div>
-      </div>
-                    <div class="form-group col-md-3">
-        <label class="control-label">Số CMND </label>
-        <div class="form-control">
-          <p><b >{{this.So_CCCD}}</b></p>
-        </div>
-      </div>
-                  <div class="form-group col-md-3">
-        <label class="control-label"> Ngày cấp CMND</label>
-        <div class="form-control">
-          <p><b class="HSD" >{{this.NgayCap_CCCD}}</b></p>
-        </div>
-      </div>
-          <div class="form-group col-md-3">
-        <label class="control-label"> Nơi cấp CMND</label>
-        <div class="form-control">
-          <p><b>{{this.NoiCap_CCCD}}</b></p>
-        </div>
-      </div>  
-               <div class="form-group col-md-3">
-        <label class="control-label">Địa chỉ </label>
-     <textarea class="form-control">{{this.DiaChi_GPLX}}</textarea>
-         
-        </div>  
-        </div>
-
-  
-                      <div class="row">
-             <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 18px;" ><span style="font-weight: bold;">Avata </span></label>    <BR>
-          <img src="{{this.Avatar}}" alt="" height="100px" width="150px" type="button" id="show-emp"
-            data-toggle="modal" data-target="#ModalUP3">
-                </div>
-            </div>
-          
-                   <div class="col-md-4"style=" margin-left: -110px;" >      
-                <div class="col-md-12">
-                  <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy phép lái xe</span></label>   <BR>
-          <img src=" " alt="" height="100px" width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
-            <p style="margin-left: 32px;font-size: 12px;"  id="trangthaititlle">{{this.TrangThai_GPLX}}</p>
-                </div>
-            </div>
-                 <div class="col-md-4" style=" margin-left: -110px;">      
-                <div class="col-md-12">
-                  <label style="font-size: 18px;"><span style="font-weight: bold;">CMND</span></label>    <BR>
-          <img src="https://lsvn.vn/storage/uploads/2020/07/21/GPLX-01-4314-1595306430.jpg" alt="" height="100px" width="150px" type="button" 
-          id="show-emp" data-toggle="modal" data-target="#ModalUP5">
-              <p style=" margin-left: 32px; font-size: 12px;color: red;">Chưa xác minh</p>
-                </div>
-            </div>
-        </div>
-           
 
 
-
-   
-         
-      
+          {{#each data}}
 
 
- 
- 
-</main>
-
- {{!-- đang kiểm --}}
-      <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false" height="900px" width="950px">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group  col-md-12">
-                  <span class="thong-tin-thanh-toan">
-                    <h5>Hình ảnh đăng kiểm</h5>
-                  </span>
-                </div>
+          <div class="row">
+            <div class="form-group col-md-3">
+              <label class="control-label">Họ và tên</label>
+              <div class="form-control">
+                <p><b>{{this.UserName}}</b></p>
               </div>
-              <div class="row">
-                <div class="form-group col-md-6" style=" display: flex;
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Ngày sinh</label>
+              <div class="form-control">
+                <p><b>{{this.NgaySinh}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Số điện thoại</label>
+              <div class="form-control">
+                <p><b>{{this.SDT}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Giới tính</label>
+              <div class="form-control">
+                <p><b>{{this.GioiTinh}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Email</label>
+              <div class="form-control">
+                <p><b>{{this.Email}}</b></p>
+              </div>
+            </div>
+
+
+            <div class="form-group col-md-3">
+              <label class="control-label">Ngày tham gia </label>
+              <div class="form-control">
+                <p><b class="HSD">{{this.NgayThamGia}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Số dư ví </label>
+              <div class="form-control">
+                <p><b>{{this.SoDu}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Họ tên GPLX </label>
+              <div class="form-control">
+                <p><b>{{this.HoTen_GPLX}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Số GPLX </label>
+              <div class="form-control">
+                <p><b>{{this.So_GPLX}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Ngày cấp GPLX </label>
+              <div class="form-control">
+                <p><b >{{this.NgayCap_GPLX}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Số CMND </label>
+              <div class="form-control">
+                <p><b>{{this.So_CCCD}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label"> Ngày cấp CMND</label>
+              <div class="form-control">
+                <p><b  >{{this.NgayCap_CCCD}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label"> Nơi cấp CMND</label>
+              <div class="form-control">
+                <p><b>{{this.NoiCap_CCCD}}</b></p>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label">Địa chỉ </label>
+              <textarea class="form-control">{{this.DiaChi_GPLX}}</textarea>
+
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <label style="font-size: 18px;"><span style="font-weight: bold;">Avata </span></label> <BR>
+                <img src="{{this.Avatar}}" alt="" height="100px" width="150px" type="button" id="show-emp"
+                  data-toggle="modal" data-target="#ModalUP3">
+              </div>
+            </div>
+
+            <div class="col-md-4" style=" margin-left: -110px;">
+              <div class="col-md-12">
+                <label style="font-size: 18px;"><span style="font-weight: bold;">Giấy phép lái xe</span></label> <BR>
+                <img src="/images/{{this.HinhAnh_GPLX.[0]}}" alt="" height="100px" width="150px" type="button"
+                  id="show-emp" data-toggle="modal" data-target="#ModalUP1">
+                <p style="margin-left: 32px;font-size: 12px;" id="trangthaititlle">{{this.TrangThai_GPLX}}</p>
+              </div>
+            </div>
+          </div>
+
+          {{!-- ảnh bằng lái --}}
+          <div class="modal fade" id="ModalUP1" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group  col-md-12">
+                      <span class="thong-tin-thanh-toan">
+                        <h5>Giấy phép lái xe</h5>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-6" style=" display: flex;
         flex-direction: column;">
-                  <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.DangKiem}}" alt="" height="280px" width="400px" style="margin-left:230px;">
+                      <div class="images" style=" display: flex;">
+                        <img src="/images/{{this.HinhAnh_GPLX.[0]}}" alt="" height="280px" width="400px"
+                          style="margin-left:230px;">
+                        <img src="/images/{{this.HinhAnh_GPLX.[1]}}" alt="" height="280px" width="400px"
+                          style="margin-left:230px;">
 
 
+                      </div>
+                      <BR>
+
+                    </div>
                   </div>
                   <BR>
+                  <a style="margin-left: 40%;" class="btn btn-success" id="button-duyet" data-status="Chưa duyệt"
+                    onclick="onSubmit(`{{this._id}}`,2)">Xác minh</a>
+                  <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,3)">Từ chối</a>
+                  <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
 
-                </div>
-              </div>
-             
-              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-              <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
-<div class="modal fade" id="ModalUP5" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false" height="900px" width="950px">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group  col-md-12">
-                  <span class="thong-tin-thanh-toan">
-                    <h5>Hình ảnh CMND</h5>
-                  </span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-                  <div class="images" style=" display: flex;">
-                    <img src="https://hyundaiphanthiet.vn/wp-content/uploads/2021/09/Xehay-BH-220421-6_1.jpg" alt=""
-                      height="240px" width="340px" style="margin-left:40px;">
-
-                    <img
-                      src="https://luatsux.vn/wp-content/uploads/2022/07/Bao-hiem-trach-nhiem-dan-su-o-to-co-bat-buoc-khong.png"
-                      alt="" height="240px" width="340px" style="margin-left:150px;">
-                  </div>
                   <BR>
-
+                </div>
+                <div class="modal-footer">
                 </div>
               </div>
-              <BR>
-               <a class="btn btn-info" data-dismiss="modal" href="#" style="margin-left: 40%;">Xác minh</a>
-              <a class="btn btn-cancel" data-dismiss="modal" href="#" >Đóng</a>
-              <BR>
-            </div>
-            <div class="modal-footer">
             </div>
           </div>
-        </div>
-      </div>
- {{!-- Modal --}}
-      <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
 
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group  col-md-12">
-                  <span class="thong-tin-thanh-toan">
-                    <h5>Hình ảnh xe</h5>
-                  </span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-                  <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="240px" width="340px"
-                      style="margin-left:30px;">
+          <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
 
-                    <img src="/images/{{this.HinhAnh.[1]}}" alt="" height="240px" width="340px"
-                      style="margin-left:140px;">
-
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group  col-md-12">
+                      <span class="thong-tin-thanh-toan">
+                        <h5>Avata</h5>
+                      </span>
+                    </div>
                   </div>
-                  <BR>
-                  <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.HinhAnh.[2]}}" alt="" height="240px" width="340px"
-                      style="margin-left:30px;">
-                    <img src="/images/{{this.HinhAnh.[3]}}" alt="" height="240px" width="340px"
-                      style="margin-left:140px;">
+                  <div class="row">
+                    <div class="form-group col-md-6" style=" display: flex;
+        flex-direction: column;">
+                      <div class="images" style=" display: flex; ">
+                        <img src="{{this.Avatar}}" alt="" height="280px" width="400px" style="margin-left:290px;">
 
+
+
+                      </div>
+                    </div>
+                    <BR>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+                    <BR>
+                  </div>
+                  <div class="modal-footer">
                   </div>
                 </div>
               </div>
-              <BR>
-              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-              <BR>
             </div>
-            <div class="modal-footer">
-            </div>
+
+            {{/each}}
           </div>
-        </div>
-      </div>
-
-
-      {{!-- ảnh bằng lái --}}
-      <div class="modal fade" id="ModalUP1" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group  col-md-12">
-                  <span class="thong-tin-thanh-toan">
-                    <h5>Hình ảnh bằng lái</h5>
-                  </span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-                  <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.HinhAnh_GPLX}}"
-                      alt=""height="280px" width="400px" style="margin-left:230px;">
-
-            
-                  </div>
-                  <BR>
-
-                </div>
-              </div>
-              <BR>
-              <a style="margin-left: 40%;" class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
-          onclick="onSubmit(`{{this._id}}`,1)">Xác minh</a>
-              <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
-                
-              <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {{!-- ảnh bảo hiểm --}}
-      <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false" height="900px" width="950px">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group  col-md-12">
-                  <span class="thong-tin-thanh-toan">
-                    <h5>Hình ảnh bảo hiểm</h5>
-                  </span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-                  <div class="images" style=" display: flex;">
-                    <img src="/images/{{this.BaoHiem}}" alt=""
-                     height="280px" width="400px" style="margin-left:230px;">
-
-              
-                  </div>
-                  <BR>
-
-                </div>
-              </div>
-              <BR>
-              <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-              <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-<div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-  data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Avata</h5>
-            </span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-            <div class="images" style=" display: flex; ">
-              <img
-                src="{{this.Avatar}}"
-                alt="" height="280px" width="400px" style="margin-left:290px;">
-
-
-
-            </div>
-          </div>
-          <BR>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-          <BR>
-        </div>
-        <div class="modal-footer">
         </div>
       </div>
     </div>
   </div>
- 
- {{/each}}
+
+</main>
+
 
 <script>
-    const HSD = document.querySelectorAll(".HSD");
+  const HSD = document.querySelectorAll(".HSD");
   HSD.forEach((i) => {
     const date = new Date(i.innerHTML);
     const day = date.getDate();
@@ -385,154 +218,87 @@
     const formattedDate = day + '/' + month + '/' + year
     i.innerHTML = formattedDate
   })
+
+  const trangthai = document.getElementById("trangthaititlle");
+  const duyet = document.getElementById("button-duyet");
+  const tuchoi = document.getElementById("button-tuchoi");
+
+  if (trangthai.innerHTML == 0 || trangthai.innerHTML == "") {
+    trangthai.innerHTML = "Chưa xác minh"
+    trangthai.style.color = "red"
+    duyet.style.display = "none"
+    tuchoi.style.display = "none"
+  } else if (trangthai.innerHTML == 1) { // chờ cọc
+    trangthai.innerHTML = "Chờ xác minh"
+    trangthai.style.color = "red"
+    duyet.style.display = "block"
+    tuchoi.style.display = "block"
+
+  } else if (trangthai.innerHTML == 2) { // đã cọc
+    trangthai.innerHTML = "Đã xác minh"
+    duyet.style.display = "none"
+    tuchoi.style.display = "none"
+  } else if (trangthai.innerHTML == 3) { // đang hoạt động
+    trangthai.innerHTML = "Từ chối"
+    duyet.style.display = "none"
+    tuchoi.style.display = "none"
+  }
+
+
+
+
 </script>
-      
-  <!-- Essential javascripts for application to work-->
 
-  <script>
-    let buttonStatus = "Chưa xác minh";
-
-    // Tạo một hàm để xử lý sự kiện click của nút
-    function handleClick() {
-      // Thay đổi trạng thái của nút
-      buttonStatus = "Đã xác minh";
-
-      // Thay đổi văn bản của nút
-      this.textContent = buttonStatus;
-    }
-
-    // Thêm sự kiện click cho tất cả các nút
-    for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
-      document.querySelectorAll(".btn-success")[i].addEventListener("click", handleClick);
-    }
-
-  </script>
- 
-  <script src="public/js/jquery-3.2.1.min.js"></script>
-  <script src="public/js/popper.min.js"></script>
-  <script src="/public/js/bootstrap.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="src/jquery.table2excel.js"></script>
-  <script src="/publicjs/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="/public/js/plugins/pace.min.js"></script>
-  <!-- Page specific javascripts-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-  <!-- Data table plugin-->
-  <script type="text/javascript" src="public/js/plugins/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
-  <script>
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-      jQuery(".trash").click(function () {
-        swal({
-          title: "Cảnh báo",
-
-          text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
-          buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Đã xóa thành công.!", {
-
-              });
-            }
-          });
-      });
-    });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-      $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-      e.stopImmediatePropagation();
-    });
-
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
+<!-- Essential javascripts for application to work-->
 
 
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
+<script src="public/js/jquery-3.2.1.min.js"></script>
+<script src="public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script>
+  // Hàm xử lý sự kiện nhấp vào nút duyệt
+  function onSubmit(id, trangthai) {
+    fetch(`/api/user/duyet/${id}/${trangthai}`, { method: "POST" })
+      .then((response) => {
 
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
+        if (response.ok) {
+          checkResult(true);
+          location.reload(); // Reload lại trang
+
+        } else {
+          checkResult(false);
         }
-        return i;
-      }
+      })
+  }
+  // Hàm để kiểm tra kết quả của việc duyệt
+  function checkResult(result) {
+    if (result === true) {
+      // Hiển thị thông báo thành công
+      alert("Duyệt thành công");
+
+    } else {
+      // Hiển thị thông báo thất bại
+      alert("Duyệt thất bại");
     }
-    //In dữ liệu
-    var myApp = new function () {
-      this.printTable = function () {
-        var tab = document.getElementById('sampleTable');
-        var win = window.open('', '', 'height=700,width=700');
-        win.document.write(tab.outerHTML);
-        win.document.close();
-        win.print();
-      }
-    }
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
 
 
-    //Modal
-    $("#show-emp").on("click", function () {
-      $("#ModalUP").modal({ backdrop: false, keyboard: false })
-    });
-  </script>
-  </body>
+  }
+
+
+  //Modal
+  $("#show-emp").on("click", function () {
+    $("#ModalUP").modal({ backdrop: false, keyboard: false })
+  });
+</script>
+</body>

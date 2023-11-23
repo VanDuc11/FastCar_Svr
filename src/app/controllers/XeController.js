@@ -111,7 +111,6 @@ class XeController {
     }
     async duyetxe(req, res) {
         const id = req.params.id;
-        console.log(id);
         await Xe.updateOne({ _id: id },
             {
                 $set: {
