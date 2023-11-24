@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { boolean } = require('webidl-conversions');
 const Schema = mongoose.Schema;
 const User = new Schema({
     UserName: { type: String },

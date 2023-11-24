@@ -2,22 +2,16 @@ const lsgd = require('../models/LichSuGiaoDich.model');
 const User = require('../models/user.model');
 
 class LSGDController {
-    async thanhtoan(req, res) {
-        await lsgd.find().sort({_id: -1})
+    async index(req, res) {
+        await lsgd.find().populate({ path: 'User', model: 'User' }).sort({_id: -1})
         .then((result) => {
+            console.log(result);
             res.status(200).render('ThanhToan',{
                 data:  result.map(res => res.toJSON())
             })
         });
     }
-    // async Lichsugiaodich(req, res) {
-    //     await lsgd.find().sort({_id: -1})
-    //     .then((result) => {
-    //         res.status(200).render('Lichsugiaodich',{
-    //             data:  result.map(res => res.toJSON())
-    //         })
-    //     });
-    // }
+    
    
     async chitietthanhtoan(req, res) {
         await lsgd.find({ _id: req.params.id }).populate({ path: 'User', model: 'LichSuGiaoDich' }).sort({ _id: -1 })
