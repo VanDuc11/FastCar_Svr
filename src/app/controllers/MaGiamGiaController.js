@@ -16,7 +16,7 @@ class MaGiamGiaController {
             end_date != undefined &&
             TrangThai == undefined) {
             query = {
-                "NgayBD": {
+                "createdAt": {
                     $gte: new Date(start_date),
                     $lte: new Date(end_date),
                 },
@@ -25,11 +25,11 @@ class MaGiamGiaController {
             start_date != undefined &&
             end_date != undefined) {
             query = {
-                "NgayBD": {
+                "createdAt": {
                     $gte: new Date(start_date),
                     $lte: new Date(end_date),
                 },
-                "TrangThai": TrangThai
+                "TrangThai": TrangThai.split(',')
             }
 
 
@@ -37,7 +37,7 @@ class MaGiamGiaController {
             start_date == undefined &&
             end_date == undefined) {
             query = {
-                TrangThai: TrangThai
+                TrangThai: TrangThai.split(',')
             }
 
         }
@@ -89,6 +89,14 @@ class MaGiamGiaController {
         let check = null;
         if (typeof (req.query.MaGiamGia) != 'undefined') {
             check = { MaGiamGia: req.query.MaGiamGia };
+        }
+        if (req.query.start_date != undefined && req.query.end_date) {
+            check = {
+                "createdAt": {
+                    $gte: new Date(req.query.start_date),
+                    $lte: new Date(req.query.end_date),
+                }
+            };
         }
         try {
             await MaGiamGia.find(check).sort({ _id: -1 })
@@ -213,15 +221,16 @@ class MaGiamGiaController {
     }
     async UpdateTrangThai(req, res) {
         try {
-            MaGiamGia.updateOne({ _id: req.body.id }, {
+            MaGiamGia.updateOne({ HSD: req.query.HSD }, {
                 $set: {
-                    TrangThai: req.body.TrangThai,
+                    TrangThai: false,
                 }
             }).then((result) => {
                 res.status(201).json({
                     success: true,
                     messages: 'Yêu cầu thành công'
                 })
+                console.log(result)
             }).catch((error) => {
                 res.status(400).json({
                     success: false,
