@@ -57,9 +57,9 @@
             {{#each data}}
               <tr >
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.UserName}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoDu}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoTienGD}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD">{{this.User.SoDu}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD" >{{this.SoTienGD}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;"  class="HSD">{{this.ThoiGian}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" >   <span class="TrangThai"
@@ -102,6 +102,30 @@
               <p><b id="User"></b></p>
             </div>
           </div>
+             <div class="form-group col-md-6">
+            <label class="control-label">Số điện thoại</label>
+            <div class="form-control">
+              <p><b id="SDT"></b></p>
+            </div>
+          </div>
+             <div class="form-group col-md-6">
+            <label class="control-label">Tên chủ tài khoản</label>
+            <div class="form-control">
+              <p><b id="User"></b></p>
+            </div>
+          </div>
+             <div class="form-group col-md-6">
+            <label class="control-label">Số tài khoản</label>
+            <div class="form-control">
+              <p><b id="User"></b></p>
+            </div>
+          </div>
+             <div class="form-group col-md-6">
+            <label class="control-label">Ngân hàng</label>
+            <div class="form-control">
+              <p><b id="User"></b></p>
+            </div>
+          </div>
           <div class="form-group col-md-6">
             <label class="control-label">Số tiền đã rút</label>
             <div class="form-control">
@@ -120,12 +144,12 @@
               <p><b id="NoiDung"></b></p>
             </div>
           </div>
-          <div class="form-group col-md-6">
+          {{!-- <div class="form-group col-md-6">
             <label class="control-label">Trạng thái</label>
             <div class="form-control">
               <p><b class="TrangThai" ></b></p>
             </div>
-          </div>
+          </div> --}}
          
         </div>
         <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left: 400px;">Đóng</a>
@@ -158,25 +182,47 @@ load_data()
     i.innerHTML = formattedDate
   })
   TrangThai.forEach((i) => {
-            if (i.innerHTML == 0) {
+           if (i.innerHTML == 0) {
                 i.innerHTML = "Chờ thanh toán"
-                i.style.background = "#F9BABA"
+                i.style.background = "#FDE1C3"
             } else if (i.innerHTML == 1 ) { 
                 i.innerHTML = "Đã thanh toán"
-                i.style.background = "#02790C"
+                i.style.background = "#B9FFD3"
             } else if (i.innerHTML == 2) { 
-                i.innerHTML = "Tù chối"
-                i.style.background = "#A90312"
+                i.innerHTML = "Từ chối"
+                i.style.background = "#F9BABA"
             }
         })
   }
 
 </script>
+  <script>
+        const SoTienGD = document.querySelectorAll(".SoTienGD");
 
+for (const soTienElement of SoTienGD) {
+  const soTienString = soTienElement.textContent.trim();
+  if (!isNaN(soTienString)) {
+    const soTienNumber = parseFloat(soTienString);
+    if (soTienNumber >= 0) {
+      const formattedPrice = new Intl.NumberFormat('vi-VN').format(soTienNumber, {
+        minimumFractionDigits: 2,
+        decimal: ',',
+        thousandsSeparator: '.',
+      });
+      soTienElement.textContent = formattedPrice + " đ";
+    } else {
+      console.error("Invalid transaction amount:", soTienString);
+    }
+  } else {
+    console.error("Invalid transaction amount format:", soTienString);
+  }
+}
+      </script>
 <script>
     async function chitiet(id) {
     const response = await fetch(`/api/lsgd/find/${id}`).then(response => response.json());
-    document.getElementById("User").innerHTML = response.User
+    document.getElementById("User").innerHTML = response.User.UserName
+   document.getElementById("SDT").innerHTML = response.User.SDT
     document.getElementById("NoiDung").innerHTML = response.NoiDung
     document.getElementById("SoTienGD").innerHTML = response.SoTienGD
       document.getElementById("ThoiGian").innerHTML = response.ThoiGian
@@ -201,10 +247,17 @@ load_data()
    SoTienGD.innerHTML = formattedPrice + " đ"
     // validate trạng thái
     const TrangThai = document.querySelector('#TrangThai');
-   TrangThai.innerHTML == 1 
-      TrangThai.innerHTML = "Đã thanh toán"
-      TrangThai.style.color = "#02790C"
-   
+    
+  if (TrangThai.innerHTML == 0) {
+                TrangThai.innerHTML = "Chờ thanh toán"
+                TrangThai.style.background = "#F9BABA"
+            } else if (TrangThai.innerHTML == 1 ) { 
+                TrangThai.innerHTML = "Đã thanh toán"
+                TrangThai.style.background = "#02790C"
+            } else if (TrangThai.innerHTML == 2) { 
+                TrangThai.innerHTML = "Tù chối"
+                TrangThai.style.background = "#A90312"
+            }
   }
  
 </script>

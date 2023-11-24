@@ -20,6 +20,7 @@ router.get('/ChiTietThanhToan/:id',controller.chitietthanhtoan);
 router.get('/Lichsugiaodich',controller.Lichsugiaodich);
 router.get('/find/:id',controller.find_id);
 router.get('/list' , controller.getLSGD);
+router.post('/duyet/:id/:trangthai',controller.duyetthanhtoan);
 router.post('/create', controller.createLSGD);
 
 module.exports = router;
