@@ -1,20 +1,66 @@
 const lsgd = require('../models/LichSuGiaoDich.model');
 const User = require('../models/user.model');
+
 class LSGDController {
-    thanhtoan(req, res) {
-        res.render('ThanhToan')
-    }
-
-    async chitietthanhtoan(req, res) {
-        var id = req.params.id;
-        await User.find({ _id: id })
-            .then((result) => {
-                res.render('ChiTietThanhToan',
-                    {
-                        data: result.map((res) => res.toJSON())
-                    })
-
+    async thanhtoan(req, res) {
+        await lsgd.find().sort({_id: -1})
+        .then((result) => {
+            res.status(200).render('ThanhToan',{
+                data:  result.map(res => res.toJSON())
             })
+        });
+    }
+    // async Lichsugiaodich(req, res) {
+    //     await lsgd.find().sort({_id: -1})
+    //     .then((result) => {
+    //         res.status(200).render('Lichsugiaodich',{
+    //             data:  result.map(res => res.toJSON())
+    //         })
+    //     });
+    // }
+   
+    async chitietthanhtoan(req, res) {
+        await lsgd.find({ _id: req.params.id }).populate({ path: 'User', model: 'LichSuGiaoDich' }).sort({ _id: -1 })
+            .then((result) => {
+                console.log(result);
+
+                res.status(200).render('ChiTietThanhToan', {
+                    data: result.map(res => res.toJSON())
+                })
+            })
+            
+    }
+   
+ 
+
+    async Lichsugiaodich(req, res) {
+        await lsgd.find({})
+            .populate({ path: "User", model: "LichSuGiaoDich" })
+            .sort({ _id: -1 })
+            .then((result) => {
+
+                res.status(200).render("Lichsugiaodich", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
+    async find_id(req,res){
+        await lsgd.findById(req.params.id)
+        .then((result)=>{
+            console.log(result);
+            res.status(200).json(result)
+        }).catch((error) => {
+            res.status(400).json({
+                success: false,
+                message: 'Không thành công',
+            })
+        })
     }
     async getLSGD(req, res, next) {
         let check = null;
