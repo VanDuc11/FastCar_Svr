@@ -14,7 +14,7 @@ class LSGDController {
     
    
     async chitietthanhtoan(req, res) {
-        await lsgd.find({ _id: req.params.id }).populate({ path: 'User', model: 'LichSuGiaoDich' }).sort({ _id: -1 })
+        await lsgd.find({ _id: req.params.id }).populate({ path: 'User', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
                 console.log(result);
 
@@ -28,8 +28,8 @@ class LSGDController {
  
 
     async Lichsugiaodich(req, res) {
-        await lsgd.find({})
-            .populate({ path: "User", model: "LichSuGiaoDich" })
+        await lsgd.find({ TrangThai :1})
+            .populate({ path: "User", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
 
@@ -44,8 +44,29 @@ class LSGDController {
                 });
             });
     }
+    async duyetthanhtoan(req, res) {
+        const id = req.params.id;
+        await lsgd.updateOne({ _id: id },
+            {
+                $set: {
+                    TrangThai: req.params.trangthai
+                }
+            }
+        ).then(() => {
+            res.status(200).json({
+                success: true,
+                messages: "Yêu cầu cập nhât thành công"
+            })
+        }).catch((err) => {
+            res.status(400).json({
+                success: false,
+                messages: err.messages
+            });
+        })
+    }
+
     async find_id(req,res){
-        await lsgd.findById(req.params.id)
+        await lsgd.findById(req.params.id).populate({ path: 'User', model: 'User' }).sort({ _id: -1 })
         .then((result)=>{
             console.log(result);
             res.status(200).json(result)

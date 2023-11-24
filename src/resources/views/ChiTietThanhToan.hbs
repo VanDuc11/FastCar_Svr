@@ -16,13 +16,38 @@
               <div class="form-group col-md-3">
         <label class="control-label">Khách hàng</label>
         <div class="form-control">
-          <p><b>{{this.User}}</b></p>
+          <p><b>{{this.User.UserName}}</b></p>
+        </div>
+      </div>
+      
+             <div class="form-group col-md-3">
+        <label class="control-label">Số điện thoại</label>
+        <div class="form-control">
+          <p><b >{{this.User.SDT}}</b></p>
+        </div>
+      </div>
+            <div class="form-group col-md-3">
+        <label class="control-label">Tên chủ tài khoản</label>
+        <div class="form-control">
+          <p><b >{{this.User.SDT}}</b></p>
+        </div>
+      </div>
+             <div class="form-group col-md-3">
+        <label class="control-label">Số Tk ngân hàng</label>
+        <div class="form-control">
+          <p><b >{{this.User}}</b></p>
+        </div>
+      </div>
+             <div class="form-group col-md-3">
+        <label class="control-label">Ngân hàng</label>
+        <div class="form-control">
+          <p><b >{{this.User}}</b></p>
         </div>
       </div>
               <div class="form-group col-md-3">
         <label class="control-label">Số dư ví</label>
         <div class="form-control">
-          <p><b class="SoTienGD">{{this.SoTienGD}}</b></p>
+          <p><b class="SoTienGD">{{this.User.SoDu}}</b></p>
         </div>
       </div>
                  <div class="form-group col-md-3">
@@ -53,9 +78,9 @@
         </div>
 
      <div class="form-group col-md-12">
-        <a class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
-          onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
-        <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
+         <a style="margin-left: 40%;" class="btn bg-success" 
+                    onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
+                  <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
       </div>
                  
     {{/each}}        
@@ -95,7 +120,7 @@
                 i.innerHTML = "Đã thanh toán"
               
             } else if (i.innerHTML == 2) { 
-                i.innerHTML = "Tù chối"
+                i.innerHTML = "Từ chối"
                
             }
         })
@@ -127,25 +152,7 @@ for (const soTienElement of SoTienGD) {
       </script>
   <!-- Essential javascripts for application to work-->
 
-  <script>
-    let buttonStatus = "Chưa duyệt";
 
-    // Tạo một hàm để xử lý sự kiện click của nút
-    function handleClick() {
-      // Thay đổi trạng thái của nút
-      buttonStatus = "Đã duyệt";
-
-      // Thay đổi văn bản của nút
-      this.textContent = buttonStatus;
-    }
-
-    // Thêm sự kiện click cho tất cả các nút
-    for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
-      document.querySelectorAll(".btn-success")[i].addEventListener("click", handleClick);
-    }
-
-  </script>
- 
   <script src="public/js/jquery-3.2.1.min.js"></script>
   <script src="public/js/popper.min.js"></script>
   <script src="/public/js/bootstrap.min.js"></script>
@@ -160,6 +167,35 @@ for (const soTienElement of SoTienGD) {
   <script type="text/javascript" src="public/js/plugins/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript">$('#sampleTable').DataTable();</script>
+  <script>
+    // Hàm xử lý sự kiện nhấp vào nút duyệt
+  function onSubmit(id, trangthai) {
+    fetch(`/api/lsgd/duyet/${id}/${trangthai}`, { method: "POST" })
+      .then((response) => {
+
+        if (response.ok) {
+          checkResult(true);
+          location.reload(); // Reload lại trang
+
+        } else {
+          checkResult(false);
+        }
+      })
+  }
+  // Hàm để kiểm tra kết quả của việc duyệt
+  function checkResult(result) {
+    if (result === true) {
+      // Hiển thị thông báo thành công
+      alert("Duyệt thành công");
+
+    } else {
+      // Hiển thị thông báo thất bại
+      alert("Duyệt thất bại");
+    }
+
+
+  }
+  </script>
   <script>
     function deleteRow(r) {
       var i = r.parentNode.parentNode.rowIndex;
