@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { boolean } = require('webidl-conversions');
 const Schema = mongoose.Schema;
 const User = new Schema({
     UserName: { type: String },
@@ -20,6 +21,7 @@ const User = new Schema({
     Avatar: { type: String },
     NgayThamGia: { type: Date },
     SoDu: { type: Number},
-    TokenFCM: { type: String}
+    TokenFCM: { type: String},
+    DangXe: {type: Boolean}
 }, { timestamps: true });
 module.exports = mongoose.model('User', User);

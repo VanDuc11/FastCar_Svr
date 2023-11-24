@@ -12,37 +12,59 @@
         <div class="tile-body">
 
           <div class="row element-button">
-            <div class="col-sm-2" style="margin-left: 92%;">
-              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
-            </div>
+            <div class="col-md-6"></div>
+
+
+            <form action="/khachhang" method="get" class="row">
+              <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
+                <label class="control-label1">Từ ngày</label>
+                <input class="form-control1" type="date" name="start_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+                <label class="control-label1">Đến ngày</label>
+                <input class="form-control1" type="date" name="end_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;  ">
+                <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
+                                     display: flex; justify-content: center; align-items: center;">Tìm kiếm</button>
+              </div>
+            </form>
           </div>
           <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <a class="col-md-6 col-lg-3" id="all">
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
                   <h4>Tổng khách hàng</h4>
-                  <p><b>100</b></p>
+                  <p><b id="tong"> </b></p>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
+            </a>
+            <a class="col-md-6 col-lg-3" id="chothue">
               <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
                   <h4>Khách hàng cho thuê xe</h4>
-                  <p><b>20 </b></p>
+                  <p><b id="thue">  </b></p>
 
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
+            </a>
+            <a class="col-md-6 col-lg-3" id="khahthue">
               <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
                 <div class="info">
                   <h4> Khách hàng thuê</h4>
-                  <p><b>80</b></p>
+                  <p><b id="khach"> </b></p>
                 </div>
               </div>
-            </div>
+            </a>
+            <a class="col-md-6 col-lg-3" id="yc">
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
+                <div class="info">
+                  <h4> Yêu cầu xác minh</h4>
+                  <p><b id="xacminh"> </b></p>
+                </div>
+              </div>
+            </a>
+
 
           </div>
           <div class="row element-button">
@@ -96,13 +118,62 @@
   </div>
 </main>
 <script>
-  // số tứ tự
-  var stt = 0
-  const stt1 = document.querySelectorAll(".stt");
-  stt1.forEach((i) => {
-    stt++;
-    i.innerText = stt
-  })
+  load()
+  async function load() {
+    // số tứ tự
+    var stt = 0
+    const stt1 = document.querySelectorAll(".stt");
+    for (let i = 0; i < stt1.length; i++) {
+      stt1[i].innerText = i + 1;
+    }
+
+    var response = null;
+    var tt0 = 0;
+    var tt1 = 0;
+    var tt2 = 0;
+    var tt3 = 0;
+    var tt4 = 0;
+
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const startDate = urlParams.get('start_date');
+    const endDate = urlParams.get('end_date');
+    if (urlParams.has('start_date') && urlParams.has('end_date')) {
+
+      document.getElementById('chothue').href = `khachhang?start_date=${startDate}&end_date=${endDate}&TrangThai=${true}`;
+      document.getElementById('khahthue').href = `khachhang?start_date=${startDate}&end_date=${endDate}&TrangThai=${false}`;
+      document.getElementById('yc').href = `khachhang?start_date=${startDate}&end_date=${endDate}&status=${1}`;
+      document.getElementById('all').href = `khachhang?start_date=${startDate}&end_date=${endDate}&TrangThai=${"true,false"}`;
+      response = await fetch(`/api/user/list?start_date=${startDate}&end_date=${endDate}`).then(response => response.json());
+    } else {
+      document.getElementById('chothue').href = `khachhang?TrangThai=${true}`;
+      document.getElementById('khahthue').href = `khachhang?TrangThai=${false}`;
+      document.getElementById('yc').href = `khachhang?status=${1}`;
+      document.getElementById('all').href = `khachhang?TrangThai=${"true,false"}`;
+      response = await fetch('/api/user/list').then(response => response.json());
+
+    }
+
+    response.forEach(hd => {
+      // hd chờ duyệt
+      if (hd.DangXe == true) {
+        tt0++;
+
+      }
+      if (hd.DangXe == false) {
+        tt1++;
+      }
+      if(hd.TrangThai_GPLX == 1)
+        tt2++
+    });
+
+    document.getElementById('xacminh').innerText = tt2 + " yêu cầu";
+    document.getElementById('khach').innerText = tt1 + " User";
+    document.getElementById('thue').innerText = tt0 + " User";
+    document.getElementById('tong').innerText = response.length + " User";
+
+  }
   function load_data() {
     var Ngay = document.querySelectorAll('.Ngay');
     var TrangThai = document.querySelectorAll('.TrangThai');

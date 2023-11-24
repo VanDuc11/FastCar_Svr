@@ -4,13 +4,66 @@ const path = require('path');
 const moment = require('moment');
 
 class UserControlles {
-    async index(req, res) {
+    async index(req, res) { 
+        var query = null
+        const start_date = req.query.start_date;
+        const end_date = req.query.end_date;
+        const TrangThai = req.query.TrangThai;
+        const status = req.query.status;
+        if (start_date != undefined &&
+            end_date != undefined &&
+            TrangThai == undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+            }
+        } else if (TrangThai != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                "DangXe": TrangThai.split(',')
+            }
 
-        await User.find().sort({ _id: -1 })
+        } else if (status != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                "TrangThai_GPLX": status.split(',')
+            }
+
+
+        
+        } else if (TrangThai != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                DangXe: TrangThai.split(',')
+            }
+
+        } else if (status != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                TrangThai_GPLX: status.split(',')
+            }
+
+        }
+
+        await User.find(query).sort({ _id: -1 })
             .then((result) => {
-                
+
                 res.status(200).render('Khachhang', {
-                    data: result.map((res)=> res.toJSON())
+                    data: result.map((res) => res.toJSON())
                 })
             });
     }
@@ -51,6 +104,14 @@ class UserControlles {
         if (typeof (req.query.Email) != 'undefined') {
             check = { Email: req.query.Email };
         }
+        if (req.query.start_date != undefined && req.query.end_date) {
+            check = {
+                "NgayThamGia": {
+                    $gte: new Date(req.query.start_date),
+                    $lte: new Date(req.query.end_date),
+                }
+            };
+        }
 
         await User.find(check).sort({ _id: -1 })
             .then((result) => {
@@ -89,7 +150,8 @@ class UserControlles {
                 NgayCap_CCCD: '',
                 NoiCap_CCCD: '',
                 SoDu: 0,
-                TokenFCM: user.tokenFCM
+                TokenFCM: user.tokenFCM,
+                DangXe: false
             });
 
             console.log(userModel);
@@ -250,7 +312,7 @@ class UserControlles {
         const user = req.body;
 
         try {
-            if(img.length == 0) {
+            if (img.length == 0) {
                 await User.updateOne({ Email: email }, {
                     $set: {
                         HoTen_GPLX: user.HoTen_GPLX,
@@ -259,7 +321,7 @@ class UserControlles {
                         DiaChi_GPLX: user.DiaChi_GPLX,
                         TrangThai_GPLX: 1
                     }
-    
+
                 }, { new: true }).then((result) => {
                     res.status(201).json({
                         success: true,
@@ -282,7 +344,7 @@ class UserControlles {
                         HinhAnh_GPLX: img,
                         TrangThai_GPLX: 1
                     }
-    
+
                 }, { new: true }).then((result) => {
                     res.status(201).json({
                         success: true,
@@ -297,7 +359,7 @@ class UserControlles {
                     })
             }
 
-            
+
         } catch (error) {
             res.status(500).json({
                 success: false,
