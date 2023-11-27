@@ -11,25 +11,24 @@
 
                 <div class="tile-body">
                     <div class="row element-button">
+                        <div class="col-md-6"></div>
 
-                        <div class="end" style="margin-left: 840px;">
-                            <form action="/chuyenxe" method="get" class="row">
-                                <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
-                                    <label class="control-label1">Từ ngày</label>
-                                    <input class="form-control1" type="date" name="start_date" required>
-                                </div>
-                                <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
-                                    <label class="control-label1">Đến ngày</label>
-                                    <input class="form-control1" type="date" name="end_date" required>
-                                </div>
-                                <div class="col-sm-22" style="margin-left: 20px;  ">
-                                    <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
+                        <form action="/chuyenxe" method="get" class="row">
+                            <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
+                                <label class="control-label1">Từ ngày</label>
+                                <input class="form-control1" type="date" name="start_date" required>
+                            </div>
+                            <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+                                <label class="control-label1">Đến ngày</label>
+                                <input class="form-control1" type="date" name="end_date" required>
+                            </div>
+                            <div class="col-sm-22" style="margin-left: 20px;  ">
+                                <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
                                      display: flex; justify-content: center; align-items: center;">Tìm kiếm</button>
-                                </div>
-                            </form>
+                            </div>
+                        </form>
 
 
-                        </div>
                     </div>
                     <div class="row">
                         <a class="col-md-6 col-lg-3" href="" id="all">
@@ -180,7 +179,7 @@
         var tt3 = 0;
         var tt4 = 0;
 
-       
+
 
 
         const queryString = window.location.search;
@@ -207,7 +206,7 @@
 
         }
 
-         response.forEach(hd => {
+        response.forEach(hd => {
             // hd chờ duyệt
             if (hd.TrangThaiHD == 0) {
                 tt0++;
