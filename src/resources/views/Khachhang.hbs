@@ -6,44 +6,65 @@
     <div id="clock"></div>
   </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="tile-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
 
           <div class="row element-button">
-            <div class="col-sm-2" style="margin-left: 92%;">
-              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
-            </div>
+            <div class="col-md-6"></div>
+
+
+            <form action="/khachhang" method="get" class="row">
+              <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
+                <label class="control-label1">Từ ngày</label>
+                <input class="form-control1" type="date" name="start_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+                <label class="control-label1">Đến ngày</label>
+                <input class="form-control1" type="date" name="end_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;  ">
+                <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
+                                     display: flex; justify-content: center; align-items: center;">Tìm kiếm</button>
+              </div>
+            </form>
           </div>
-            <div class="row">
-            <div class="col-md-6 col-lg-3">
+          <div class="row">
+            <a class="col-md-6 col-lg-3" id="all">
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
                   <h4>Tổng khách hàng</h4>
-                  <p><b>100</b></p>
+                  <p><b id="tong"> </b></p>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
+            </a>
+            <a class="col-md-6 col-lg-3" id="chothue">
               <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
                   <h4>Khách hàng cho thuê xe</h4>
-                  <p><b >20 </b></p>
-                 
+                  <p><b id="thue">  </b></p>
+
                 </div>
               </div>
-            </div>
-         <div class="col-md-6 col-lg-3">
-           <div class="widget-small info coloured-icon"><i
-            class='icon fa-3x bx bxs-user-badge'></i>
-            <div class="info">
-            <h4> Khách hàng thuê</h4>
-          <p><b>80</b></p>
-            </div>
-            </div>
-             </div>
+            </a>
+            <a class="col-md-6 col-lg-3" id="khahthue">
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
+                <div class="info">
+                  <h4> Khách hàng thuê</h4>
+                  <p><b id="khach"> </b></p>
+                </div>
+              </div>
+            </a>
+            <a class="col-md-6 col-lg-3" id="yc">
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
+                <div class="info">
+                  <h4> Yêu cầu xác minh</h4>
+                  <p><b id="xacminh"> </b></p>
+                </div>
+              </div>
+            </a>
+
 
           </div>
           <div class="row element-button">
@@ -52,106 +73,163 @@
             id="sampleTable">
             <thead>
               <tr>
-                <th style="text-align: center;"width="10">STT</th>
-                <th style="text-align: center;"width="150">User Name</th>
-                <th style="text-align: center;"width="20">Ảnh </th>
-                <th style="text-align: center;"width="150">Địa chỉ</th>
-                <th  style="text-align: center;"width="50">Giới tính</th>
-                <th  style="text-align: center;"width="80">Ngày sinh</th>
-                <th  style="text-align: center;"width="80">SĐT</th>
-                <th style="text-align: center;"width="100">Ngày tham gia</th>
-                <th style="text-align: center;"width="100">Trạng thái GPLX</th>
-                <th style="text-align: center;"width="100">Trạng thái CMND</th>
-                <th style="text-align: center;"width="100">Chức năng</th>
+                <th style="text-align: center;" width="10">STT</th>
+                <th style="text-align: center;" width="150">User Name</th>
+                <th style="text-align: center;" width="20">Ảnh </th>
+                <th style="text-align: center;" width="150">Địa chỉ</th>
+                <th style="text-align: center;" width="50">Giới tính</th>
+                <th style="text-align: center;" width="80">Ngày sinh</th>
+                <th style="text-align: center;" width="80">SĐT</th>
+                <th style="text-align: center;" width="100">Ngày tham gia</th>
+                <th style="text-align: center;" width="100">GPLX</th>
+                <th style="text-align: center;" width="100">Chức năng</th>
 
               </tr>
             </thead>
             <tbody>
               {{#each data}}
-              <tr >
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{@index}}</td>
+              <tr>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}
+                </td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.UserName}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img class="img-card-person" src="{{this.Avatar}}" alt=""></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img
+                    class="img-card-person" src="{{this.Avatar}}" alt=""></td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.DiaChi_GPLX}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.GioiTinh}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NgaySinh}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SDT}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NgayThamGia}}</td>
-                 <td style="text-align: center; word-break: break-word;vertical-align: middle; color: red;">Chưa xác minh</td>
-                 <td style="text-align: center; word-break: break-word;vertical-align: middle; color: red;">Chưa xác minh</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info " href="/khachhang/ChiTietKhachHang/{{this._id}}"> Xem chi tiết</a></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="Ngay">
+                  {{this.NgayThamGia}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
+                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai_GPLX}}</span>
+                </td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info "
+                    href="/khachhang/ChiTietKhachHang/{{this._id}}"> Xem chi tiết</a></td>
 
 
               </tr>
               {{/each}}
 
-              </tbody>
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-  </main>
-
-  <!--
-  MODAL
--->
- 
-
- 
-  <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+  </div>
+</main>
 <script>
- 
- 
+  load()
+  async function load() {
+    // số tứ tự
+    var stt = 0
+    const stt1 = document.querySelectorAll(".stt");
+    for (let i = 0; i < stt1.length; i++) {
+      stt1[i].innerText = i + 1;
+    }
 
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
-    
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
+    var response = null;
+    var tt0 = 0;
+    var tt1 = 0;
+    var tt2 = 0;
+    var tt3 = 0;
+    var tt4 = 0;
 
 
-    //Modal
-    $("#show-emp").on("click", function () {
-      $("#ModalUP").modal({ backdrop: false, keyboard: false })
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const startDate = urlParams.get('start_date');
+    const endDate = urlParams.get('end_date');
+    if (urlParams.has('start_date') && urlParams.has('end_date')) {
+
+      document.getElementById('chothue').href = `khachhang?start_date=${startDate}&end_date=${endDate}&TrangThai=${true}`;
+      document.getElementById('khahthue').href = `khachhang?start_date=${startDate}&end_date=${endDate}&TrangThai=${false}`;
+      document.getElementById('yc').href = `khachhang?start_date=${startDate}&end_date=${endDate}&status=${1}`;
+      document.getElementById('all').href = `khachhang?start_date=${startDate}&end_date=${endDate}&TrangThai=${"true,false"}`;
+      response = await fetch(`/api/user/list?start_date=${startDate}&end_date=${endDate}`).then(response => response.json());
+    } else {
+      document.getElementById('chothue').href = `khachhang?TrangThai=${true}`;
+      document.getElementById('khahthue').href = `khachhang?TrangThai=${false}`;
+      document.getElementById('yc').href = `khachhang?status=${1}`;
+      document.getElementById('all').href = `khachhang?TrangThai=${"true,false"}`;
+      response = await fetch('/api/user/list').then(response => response.json());
+
+    }
+
+    response.forEach(hd => {
+      // hd chờ duyệt
+      if (hd.DangXe == true) {
+        tt0++;
+
+      }
+      if (hd.DangXe == false) {
+        tt1++;
+      }
+      if(hd.TrangThai_GPLX == 1)
+        tt2++
     });
-  </script>
-</body>
 
-</html>
+    document.getElementById('xacminh').innerText = tt2 + " yêu cầu";
+    document.getElementById('khach').innerText = tt1 + " User";
+    document.getElementById('thue').innerText = tt0 + " User";
+    document.getElementById('tong').innerText = response.length + " User";
+
+  }
+  function load_data() {
+    var Ngay = document.querySelectorAll('.Ngay');
+    var TrangThai = document.querySelectorAll('.TrangThai');
+    TrangThai.forEach((i) => {
+      // bị hủy
+      if (i.innerHTML == 0 || i.innerHTML == "") {
+        i.innerHTML = "Chưa xác minh"
+        i.style.background = "#FDE1C3"
+      } else if (i.innerHTML == 1) { // chờ cọc
+        i.innerHTML = "Chờ xác minh"
+        i.style.background = "#FDE1C3"
+      } else if (i.innerHTML == 2) { // đã cọc
+        i.innerHTML = "Đã xác minh"
+        i.style.background = "#B9FFD3"
+      } else if (i.innerHTML == 3) { // đang hoạt động
+        i.innerHTML = "thất bại"
+        i.style.background = "#ADCBF3"
+      }
+    })
+    Ngay.forEach((i) => {
+      if (i.innerHTML.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+        return i.innerHTML
+      }
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      if (month < 10) {
+        month = "0" + date.getMonth() + 1;
+      }
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+
+
+    })
+
+
+
+  }
+  load_data()
+
+  setInterval(load_data, 1000);
+</script>
+
+
+
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>

@@ -8,9 +8,41 @@ const { log } = require('console');
 
 class MaGiamGiaController {
     async index(req, res) {
+        var query = null;
+        const start_date = req.query.start_date;
+        const end_date = req.query.end_date;
+        const TrangThai = req.query.TrangThai;
+        if (start_date != undefined &&
+            end_date != undefined &&
+            TrangThai == undefined) {
+            query = {
+                "createdAt": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+            }
+        } else if (TrangThai != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "createdAt": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                "TrangThai": TrangThai.split(',')
+            }
 
+
+        } else if (TrangThai != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                TrangThai: TrangThai.split(',')
+            }
+
+        }
         try {
-            await MaGiamGia.find().sort({ _id: -1 })
+            await MaGiamGia.find(query).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).render('KhuyenMai',
                         {
@@ -58,6 +90,14 @@ class MaGiamGiaController {
         if (typeof (req.query.MaGiamGia) != 'undefined') {
             check = { MaGiamGia: req.query.MaGiamGia };
         }
+        if (req.query.start_date != undefined && req.query.end_date) {
+            check = {
+                "createdAt": {
+                    $gte: new Date(req.query.start_date),
+                    $lte: new Date(req.query.end_date),
+                }
+            };
+        }
         try {
             await MaGiamGia.find(check).sort({ _id: -1 })
                 .then((result) => {
@@ -93,8 +133,6 @@ class MaGiamGiaController {
     async CreateMaGiamGia(req, res) {
         const img = path.basename(req.file.path);
         const randomBytes = crypto.randomBytes(6);
-
-
         const maGiamGia = new MaGiamGia({
             TieuDe: req.body.TieuDe,
             MaGiamGia: req.body.MaGiamGia,
@@ -106,8 +144,6 @@ class MaGiamGiaController {
             HSD: req.body.HSD,
             TrangThai: dateNow > new Date(req.body.HSD) ? false : true
         });
-
-
         try {
             const check = await MaGiamGia.findOne({ MaGiamGia: req.body.MaGiamGia });
             if (check == null) {
@@ -185,15 +221,16 @@ class MaGiamGiaController {
     }
     async UpdateTrangThai(req, res) {
         try {
-            MaGiamGia.updateOne({ _id: req.body.id }, {
+            MaGiamGia.updateOne({ HSD: req.query.HSD }, {
                 $set: {
-                    TrangThai: req.body.TrangThai,
+                    TrangThai: false,
                 }
             }).then((result) => {
                 res.status(201).json({
                     success: true,
                     messages: 'Yêu cầu thành công'
                 })
+                console.log(result)
             }).catch((error) => {
                 res.status(400).json({
                     success: false,

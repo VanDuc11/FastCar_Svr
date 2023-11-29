@@ -17,13 +17,14 @@ const router = (app) =>{
         extended:true
     }))
 
-    app.use('/login',loginRouter);
-    app.use('/Home', Home);  
+    app.use('/',loginRouter);
+    app.use('/home', Home);  
     app.use('/quanlyxe', Xe);
     app.use('/chuyenxe',Hoadon_);
     app.use('/thongbao', ThongBao);
     app.use('/khuyenmai',MaGiaGia);
     app.use('/thongke', ThongKe);
+    app.use('/thanhtoan', LSGD);
     app.use('/khachhang', user);
  
 

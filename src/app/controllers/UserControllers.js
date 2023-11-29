@@ -4,37 +4,89 @@ const path = require('path');
 const moment = require('moment');
 
 class UserControlles {
-    async index(req, res) {
-        const data = [];
+    async index(req, res) { 
+        var query = null
+        const start_date = req.query.start_date;
+        const end_date = req.query.end_date;
+        const TrangThai = req.query.TrangThai;
+        const status = req.query.status;
+        if (start_date != undefined &&
+            end_date != undefined &&
+            TrangThai == undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+            }
+        } else if (TrangThai != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                "DangXe": TrangThai.split(',')
+            }
 
-        await User.find().sort({ _id: -1 })
+        } else if (status != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                "TrangThai_GPLX": status.split(',')
+            }
+
+
+        
+        } else if (TrangThai != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                DangXe: TrangThai.split(',')
+            }
+
+        } else if (status != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                TrangThai_GPLX: status.split(',')
+            }
+
+        }
+
+        await User.find(query).sort({ _id: -1 })
             .then((result) => {
-                result.forEach(item => {
-                    const NgayThamGia = moment(item.NgayThamGia).format('DD/MM/YYYY', { locale: 'vi' });
-                    const NgaySinh = moment(item.NgaySinh).format('DD/MM/YYYY', { locale: 'vi' });
 
-                    const arr = {
-                        _id: item._id,
-                        UserName: item.UserName,
-                        SDT: item.SDT,
-                        NgaySinh: NgaySinh,
-                        GioiTinh: item.GioiTinh,
-                        Email: item.Email,
-                        UID: item.UID,
-                        DiaChi_GPLX: item.DiaChi_GPLX,
-                        Avatar: item.Avatar,
-                        NgayThamGia: NgayThamGia,
-                        __v: item.__v,
-                    }
-                    console.log(item);
-                    data.push(arr)
-                });
                 res.status(200).render('Khachhang', {
-                    data: data
+                    data: result.map((res) => res.toJSON())
                 })
             });
     }
-
+    async duyetGPLX(req, res) {
+        const id = req.params.id;
+        await User.updateOne({ _id: id },
+            {
+                $set: {
+                    TrangThai_GPLX: req.params.trangthai
+                }
+            }
+        ).then(() => {
+            res.status(200).json({
+                success: true,
+                messages: "Yêu cầu cập nhât thành công"
+            })
+        }).catch((err) => {
+            res.status(400).json({
+                success: false,
+                messages: err.messages
+            });
+        })
+    }
     async chitietkhachhang(req, res) {
         var id = req.params.id;
         await User.find({ _id: id })
@@ -51,6 +103,14 @@ class UserControlles {
 
         if (typeof (req.query.Email) != 'undefined') {
             check = { Email: req.query.Email };
+        }
+        if (req.query.start_date != undefined && req.query.end_date) {
+            check = {
+                "NgayThamGia": {
+                    $gte: new Date(req.query.start_date),
+                    $lte: new Date(req.query.end_date),
+                }
+            };
         }
 
         await User.find(check).sort({ _id: -1 })
@@ -90,7 +150,8 @@ class UserControlles {
                 NgayCap_CCCD: '',
                 NoiCap_CCCD: '',
                 SoDu: 0,
-                TokenFCM: user.tokenFCM
+                TokenFCM: user.tokenFCM,
+                DangXe: false
             });
 
             console.log(userModel);
@@ -251,7 +312,7 @@ class UserControlles {
         const user = req.body;
 
         try {
-            if(img.length == 0) {
+            if (img.length == 0) {
                 await User.updateOne({ Email: email }, {
                     $set: {
                         HoTen_GPLX: user.HoTen_GPLX,
@@ -260,7 +321,7 @@ class UserControlles {
                         DiaChi_GPLX: user.DiaChi_GPLX,
                         TrangThai_GPLX: 1
                     }
-    
+
                 }, { new: true }).then((result) => {
                     res.status(201).json({
                         success: true,
@@ -283,7 +344,7 @@ class UserControlles {
                         HinhAnh_GPLX: img,
                         TrangThai_GPLX: 1
                     }
-    
+
                 }, { new: true }).then((result) => {
                     res.status(201).json({
                         success: true,
@@ -298,7 +359,7 @@ class UserControlles {
                     })
             }
 
-            
+
         } catch (error) {
             res.status(500).json({
                 success: false,

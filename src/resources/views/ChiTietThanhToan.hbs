@@ -1,0 +1,321 @@
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active"><a href="#"><b>Thông tin Giao Dịch</b></a></li>
+    </ul>
+    <div id="clock"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          
+   <BR>
+              {{#each data}}
+              <h1 style="font-size: 22px; ">Thông tin khách hàng</h1>
+              <BR>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên khách hàng:</span> {{this.User.UserName}} </label>
+                </div>
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số điện thoại:</span> {{this.User.User.SDT}}</label>
+                </div>
+            </div>
+          
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Email:</span> {{this.User.Email}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Địa chỉ:</span> {{this.User.DiaChi_GPLX}}</label>
+                </div>
+            </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                    <label  style="font-size: 18px;" ><span style="font-weight: bold;"> Số dư ví: </span> <span class="SoTienGD">{{this.User.SoDu}} </span></label>
+                </div>
+               
+            </div>
+        </div>
+
+
+        <div class="row element-button">
+        </div>
+           <BR>
+        <h1 style="font-size: 22px; ">Nôi dung giao dịch</h1>
+   <BR>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên chủ tài khoản:</span> {{this.User.SDT}}</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số Tk ngân hàng:</span> {{this.Xe.BKS}}</label>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ngân hàng:</span> {{this.NganHang.TenNH}} </label>
+                </div>
+
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số tiền rút:</span> <span class="SoTienGD" > {{this.SoTienGD}}</span></label>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Thời gian:</span> <span class="HSD"> {{this.ThoiGian}}</span></label>
+                </div>
+                 <div class="col-md-12">
+                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Trạng thái:</span> <span class="TrangThai"> {{this.TrangThai}}</span></label>
+                </div>
+
+                
+            </div>
+            <div class="col-md-4">  
+               
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Nội dung:</span> {{this.NoiDung}}</label>
+                </div>
+            </div>
+        </div>
+       
+         <div class="row element-button">
+        </div>
+        
+
+     <div class="form-group col-md-12">
+         <a style="margin-left: 40%;" class="btn bg-success" 
+                    onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
+                  <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
+      </div>
+                 
+    {{/each}}        
+
+
+
+   
+ 
+ 
+</main>
+
+ 
+  
+ 
+
+
+<script>
+   load_data()
+  async function load_data() {
+  var TrangThai = document.querySelectorAll('.TrangThai');
+  var HSD = document.querySelectorAll(".HSD");
+  HSD.forEach((i) => {
+    const date = new Date(i.innerHTML);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = day + '/' + month + '/' + year
+    i.innerHTML = formattedDate
+  })
+  TrangThai.forEach((i) => {
+            if (i.innerHTML == 0) {
+                i.innerHTML = "Chờ thanh toán"
+                
+            } else if (i.innerHTML == 1 ) { 
+                i.innerHTML = "Đã thanh toán"
+              
+            } else if (i.innerHTML == 2) { 
+                i.innerHTML = "Từ chối"
+               
+            }
+        })
+
+  }
+ 
+</script>
+      <script>
+        const SoTienGD = document.querySelectorAll(".SoTienGD");
+
+for (const soTienElement of SoTienGD) {
+  const soTienString = soTienElement.textContent.trim();
+  if (!isNaN(soTienString)) {
+    const soTienNumber = parseFloat(soTienString);
+    if (soTienNumber >= 0) {
+      const formattedPrice = new Intl.NumberFormat('vi-VN').format(soTienNumber, {
+        minimumFractionDigits: 2,
+        decimal: ',',
+        thousandsSeparator: '.',
+      });
+      soTienElement.textContent = formattedPrice + " đ";
+    } else {
+      console.error("Invalid transaction amount:", soTienString);
+    }
+  } else {
+    console.error("Invalid transaction amount format:", soTienString);
+  }
+}
+      </script>
+  <!-- Essential javascripts for application to work-->
+
+
+  <script src="public/js/jquery-3.2.1.min.js"></script>
+  <script src="public/js/popper.min.js"></script>
+  <script src="/public/js/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="src/jquery.table2excel.js"></script>
+  <script src="/publicjs/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="/public/js/plugins/pace.min.js"></script>
+  <!-- Page specific javascripts-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <!-- Data table plugin-->
+  <script type="text/javascript" src="public/js/plugins/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+  <script>
+    // Hàm xử lý sự kiện nhấp vào nút duyệt
+  function onSubmit(id, trangthai) {
+    fetch(`/api/lsgd/duyet/${id}/${trangthai}`, { method: "POST" })
+      .then((response) => {
+
+        if (response.ok) {
+          checkResult(true);
+          location.reload(); // Reload lại trang
+
+        } else {
+          checkResult(false);
+        }
+      })
+  }
+  // Hàm để kiểm tra kết quả của việc duyệt
+  function checkResult(result) {
+    if (result === true) {
+      // Hiển thị thông báo thành công
+      alert("Thành công");
+
+    } else {
+      // Hiển thị thông báo thất bại
+      alert("Thất bại");
+    }
+
+
+  }
+  </script>
+  <script>
+    function deleteRow(r) {
+      var i = r.parentNode.parentNode.rowIndex;
+      document.getElementById("myTable").deleteRow(i);
+    }
+    jQuery(function () {
+      jQuery(".trash").click(function () {
+        swal({
+          title: "Cảnh báo",
+
+          text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
+          buttons: ["Hủy bỏ", "Đồng ý"],
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Đã xóa thành công.!", {
+
+              });
+            }
+          });
+      });
+    });
+    oTable = $('#sampleTable').dataTable();
+    $('#all').click(function (e) {
+      $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
+      e.stopImmediatePropagation();
+    });
+
+    //EXCEL
+    // $(document).ready(function () {
+    //   $('#').DataTable({
+
+    //     dom: 'Bfrtip',
+    //     "buttons": [
+    //       'excel'
+    //     ]
+    //   });
+    // });
+
+
+    //Thời Gian
+    function time() {
+      var today = new Date();
+      var weekday = new Array(7);
+      weekday[0] = "Chủ Nhật";
+      weekday[1] = "Thứ Hai";
+      weekday[2] = "Thứ Ba";
+      weekday[3] = "Thứ Tư";
+      weekday[4] = "Thứ Năm";
+      weekday[5] = "Thứ Sáu";
+      weekday[6] = "Thứ Bảy";
+      var day = weekday[today.getDay()];
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      nowTime = h + " giờ " + m + " phút " + s + " giây";
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+        '</span>';
+      document.getElementById("clock").innerHTML = tmp;
+      clocktime = setTimeout("time()", "1000", "Javascript");
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
+    //In dữ liệu
+    var myApp = new function () {
+      this.printTable = function () {
+        var tab = document.getElementById('sampleTable');
+        var win = window.open('', '', 'height=700,width=700');
+        win.document.write(tab.outerHTML);
+        win.document.close();
+        win.print();
+      }
+    }
+    //     //Sao chép dữ liệu
+    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+    // copyTextareaBtn.addEventListener('click', function(event) {
+    //   var copyTextarea = document.querySelector('.js-copytextarea');
+    //   copyTextarea.focus();
+    //   copyTextarea.select();
+
+    //   try {
+    //     var successful = document.execCommand('copy');
+    //     var msg = successful ? 'successful' : 'unsuccessful';
+    //     console.log('Copying text command was ' + msg);
+    //   } catch (err) {
+    //     console.log('Oops, unable to copy');
+    //   }
+    // });
+
+
+    //Modal
+    $("#show-emp").on("click", function () {
+      $("#ModalUP").modal({ backdrop: false, keyboard: false })
+    });
+  </script>
+

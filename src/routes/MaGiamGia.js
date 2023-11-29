@@ -22,7 +22,7 @@ router.get('/list',MaGiamGiaController.findMaGiaGia);
 router.get('/find/:id',MaGiamGiaController.find_id);
 router.post('/create',upload.single('HinhAnh'),MaGiamGiaController.CreateMaGiamGia);
 router.post('/update/:id',upload.single('HinhAnh'),MaGiamGiaController.updateMaGiamGia);
-router.post('/update_TrangThai',MaGiamGiaController.UpdateTrangThai);
+router.get('/update_TrangThai',MaGiamGiaController.UpdateTrangThai);
  
 
 
