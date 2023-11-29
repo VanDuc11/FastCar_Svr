@@ -90,9 +90,8 @@
                   <td>{{this.BKS}}</td>
                   <td>{{this.MauXe}} </td>
                   <td>{{this.SoChuyen}} chuyến</td>
-                  <td > <a class="badge bg-info"
-                  href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
-                  chi tiết</a></td>
+                  <td> <a class="badge bg-info" href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
+                      chi tiết</a></td>
                 </tr>
                 {{/each}}
 
@@ -159,9 +158,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 {{!-- doanh thu --}}
 <script>
-    const selectElement = document.getElementById('exampleSelect1'); 
+  const selectElement = document.getElementById('exampleSelect1');
   function submitForm() {
-    
+
 
     // Submit the form using JavaScript
     const formElement = document.getElementById('formid'); // Replace 'yourFormId' with the actual form's ID
@@ -187,7 +186,10 @@
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const startDate = urlParams.get('start_date');
-     selectElement.value = startDate;
+    if (startDate) {
+
+      selectElement.value = startDate;
+    }
     console.log(startDate)
     const fetchChartData = async () => {
       try {
@@ -416,8 +418,22 @@
       options: {
         title: {
           display: true,
-          text: "World Wide Wine Production 2018"
-        }
+        },
+        plugins: {
+          tooltip: {
+            titleFont: {
+              size: 15,
+            },
+            bodyFont: {
+              size: 15,
+            },
+            callbacks: {
+              label: (context) => `${context.formattedValue} %`,
+            },
+          },
+          
+        },
+
       }
     });
 
