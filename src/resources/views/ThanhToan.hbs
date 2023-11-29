@@ -18,7 +18,7 @@
                Lịch sử giao dịch</a>
             </div>
              <div class="end" style="margin-left: 700px;">
-                            <form action="/chuyenxe" method="get" class="row">
+                            <form action="/thanhtoan" method="get" class="row">
                                 <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
                                     <label class="control-label1">Từ ngày</label>
                                     <input class="form-control1" type="date" name="start_date" required>
@@ -33,36 +33,35 @@
                                 </div>
                             </form>
 
-
                         </div>
           </div>
+
             <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <a class="col-md-6 col-lg-3" id="all">
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
                   <h4>Tổng Yêu cầu</h4>
-                  <p><b>100</b></p>
+                  <p><b id="tong"></b></p>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
+          </a>
+             <a class="col-md-6 col-lg-3" id="ctt">
               <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x'></i>
                 <div class="info">
                   <h4>Chờ thanh toán</h4>
-                  <p><b >20 </b></p>
-                 
+                     <p><b id="chothanhtoan"></b></p>
                 </div>
               </div>
-            </div>
-         <div class="col-md-6 col-lg-3">
+           </a>
+         <a class="col-md-6 col-lg-3" id="ht">
            <div class="widget-small info coloured-icon"><i
             class='icon fa-3x bx bxs-user'></i>
             <div class="info">
             <h4> Đã thanh toán</h4>
-          <p><b>80</b></p>
-            </div>
+           <p><b id="hoanthanh"></b></p>
             </div>
              </div>
+             </a>
 
           </div>
           <div class="row element-button">
@@ -72,13 +71,15 @@
             <thead>
               <tr>
                 <th style="text-align: center;"width="10">STT</th>
-                <th style="text-align: center;"width="150">Tên khách hàng</th>   
-                <th style="text-align: center;"width="150">Số dư ví</th>
-                <th  style="text-align: center;"width="50">Số tiền rút</th>
-                <th  style="text-align: center;"width="80">Nôi dung giao dịch</th>
+                <th style="text-align: center;"width="100">Tên khách hàng</th>   
+                <th style="text-align: center;"width="100">Tên chủ TK</th>
+                <th style="text-align: center;"width="100">Ngân hàng</th>
+                <th style="text-align: center;"width="100">Số tài khoản</th>
+                <th  style="text-align: center;"width="80">Số tiền </th>
+                <th  style="text-align: center;"width="100">Nôi dung giao dịch</th>
                 <th  style="text-align: center;"width="80">Thời gian</th>
-                <th style="text-align: center;"width="100">Trạng thái</th>
-                <th style="text-align: center;"width="100">Chức năng</th>
+                <th style="text-align: center;"width="80">Trạng thái</th>
+                <th style="text-align: center;"width="80">Chức năng</th>
 
               </tr>
             </thead>
@@ -86,13 +87,15 @@
             {{#each data}}
               <tr >
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD">{{this.User.SoDu}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD">{{this.SoTienGD}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}</td>                       
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{this.NganHang.TenChuTK}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{this.NganHang.TenNH}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> {{this.NganHang.SoTK}}</td>
+                <td style="text-align: center; word-break: break-word;verticalrd;vertical-align: middle;" class="SoTienGD">{{this.SoTienGD}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;"  class="HSD">{{this.ThoiGian}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle; " >   <span class="TrangThai"
-                                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle; " ><span class="TrangThai"
+                                    style="border-radius: 5px; font-align: middle;" >{{this.TrangThai}}</td>
              
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info " href="/thanhtoan/ChiTietThanhToan/{{this._id}}"> Xem chi tiết</a></td>
 
@@ -107,6 +110,62 @@
       </div>
     </div>
   </main>
+  <script>
+  
+
+  load()
+  async function load() {
+    // số tứ tự
+    var stt = 0
+    const stt1 = document.querySelectorAll(".stt");
+    for (let i = 0; i < stt1.length; i++) {
+      stt1[i].innerText = i + 1;
+    }
+
+    var response = null;
+    var tt0 = 0;
+    var tt1 = 0;
+    var tt2 = 0;
+   
+
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const startDate = urlParams.get('start_date');
+    const endDate = urlParams.get('end_date');
+    if (urlParams.has('start_date') && urlParams.has('end_date')) {
+
+      document.getElementById('ctt').href = `thanhtoan?start_date=${startDate}&end_date=${endDate}&TrangThai=${"0"}`;
+      document.getElementById('ht').href = `thanhtoan?start_date=${startDate}&end_date=${endDate}&TrangThai=${"1"}`;
+      document.getElementById('all').href = `thanhtoan?start_date=${startDate}&end_date=${endDate}&TrangThai=${"0,1,2"}`;
+      response = await fetch(`/api/lsgd/loc?start_date=${startDate}&end_date=${endDate}`).then(response => response.json());
+    } else {
+      document.getElementById('ctt').href = `thanhtoan?TrangThai=${"0"}`;
+      document.getElementById('ht').href = `thanhtoan?TrangThai=${"1"}`;
+      document.getElementById('all').href = `thanhtoan?TrangThai=${"0,1,2"}`;
+      response = await fetch('/api/lsgd/loc').then(response => response.json());
+
+    }
+
+    response.forEach(hd => {
+      // hd chờ duyệt
+       if (hd.TrangThai == 0) {
+                tt0++;
+            }
+            if (hd.TrangThai == 1 ) {
+                tt1++;
+            }
+            if (hd.TrangThaiHD == 2) {
+                tt2++;
+            }
+      
+    });
+    document.getElementById('chothanhtoan').innerText = tt0 + " Yêu cầu";
+    document.getElementById('hoanthanh').innerText = tt1 + " Khách hàng";
+    document.getElementById('tong').innerText = response.length + " Yêu cầu";
+
+  }
+  </script>
 <script>
     // số tứ tự
   var stt = 0

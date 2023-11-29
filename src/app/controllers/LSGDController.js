@@ -1,5 +1,6 @@
 const lsgd = require('../models/LichSuGiaoDich.model');
 const User = require('../models/user.model');
+const NganHang = require('../models/NganHang.model');
 
 class LSGDController {
     async index(req, res) {
@@ -64,6 +65,28 @@ class LSGDController {
             });
         })
     }
+    async findthanhtoan(req, res) {
+        let check = null;
+        if (typeof (req.query.TrangThai) != 'undefined') {
+            check = { TrangThai: req.query.TrangThai.split(',')};
+        }
+        if (req.query.start_date != undefined && req.query.end_date) {
+            check = {
+                "ThoiGian": {
+                    $gte: new Date(req.query.start_date),
+                    $lte: new Date(req.query.end_date),
+                }
+            };
+        }
+
+        await lsgd.find(check).sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).json(result);
+                console.log(result)
+            });
+              
+    }
+    
 
     async find_id(req,res){
         await lsgd.findById(req.params.id).populate({ path: 'User', model: 'User' }).sort({ _id: -1 })

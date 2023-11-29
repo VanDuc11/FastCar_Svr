@@ -17,8 +17,8 @@ const router = (app) =>{
         extended:true
     }))
 
-    app.use('/login',loginRouter);
-    app.use('/Home', Home);  
+    app.use('/',loginRouter);
+    app.use('/home', Home);  
     app.use('/quanlyxe', Xe);
     app.use('/chuyenxe',Hoadon_);
     app.use('/thongbao', ThongBao);

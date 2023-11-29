@@ -43,13 +43,15 @@
             <thead>
               <tr>
                 <th style="text-align: center;"width="10">STT</th>
-                <th style="text-align: center;"width="150">Tên khách hàng</th>   
-                <th style="text-align: center;"width="150">Số dư ví</th>
-                <th  style="text-align: center;"width="50">Số tiền rút</th>
-                <th  style="text-align: center;"width="80">Nôi dung giao dịch</th>
+                <th style="text-align: center;"width="100">Tên khách hàng</th>   
+              <th style="text-align: center;"width="100">Tên chủ TK</th>
+                <th style="text-align: center;"width="100">Ngân hàng</th>
+                <th style="text-align: center;"width="100">Số tài khoản</th>
+                <th  style="text-align: center;"width="80">Số tiền rút</th>
+                <th  style="text-align: center;"width="100">Nôi dung giao dịch</th>
                 <th  style="text-align: center;"width="80">Thời gian</th>
-                <th style="text-align: center;"width="100">Trạng thái</th>
-                <th style="text-align: center;"width="100">Chức năng</th>
+                <th style="text-align: center;"width="80">Trạng thái</th>
+                <th style="text-align: center;"width="80">Chức năng</th>
 
               </tr>
             </thead>
@@ -58,7 +60,9 @@
               <tr >
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD">{{this.User.SoDu}}</td>
+                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{this.NganHang.TenChuTK}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{this.NganHang.TenNH}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> {{this.NganHang.SoTK}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD" >{{this.SoTienGD}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;"  class="HSD">{{this.ThoiGian}}</td>

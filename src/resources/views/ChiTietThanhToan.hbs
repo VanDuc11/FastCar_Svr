@@ -10,72 +10,83 @@
       <div class="tile">
         <div class="tile-body">
           
-
+   <BR>
               {{#each data}}
+              <h1 style="font-size: 22px; ">Thông tin khách hàng</h1>
+              <BR>
         <div class="row">
-              <div class="form-group col-md-3">
-        <label class="control-label">Khách hàng</label>
-        <div class="form-control">
-          <p><b>{{this.User.UserName}}</b></p>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên khách hàng:</span> {{this.User.UserName}} </label>
+                </div>
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số điện thoại:</span> {{this.User.User.SDT}}</label>
+                </div>
+            </div>
+          
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Email:</span> {{this.User.Email}}</label>
+                </div>
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Địa chỉ:</span> {{this.User.DiaChi_GPLX}}</label>
+                </div>
+            </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                    <label  style="font-size: 18px;" ><span style="font-weight: bold;"> Số dư ví: </span> <span class="SoTienGD">{{this.User.SoDu}} </span></label>
+                </div>
+               
+            </div>
         </div>
-      </div>
-      
-             <div class="form-group col-md-3">
-        <label class="control-label">Số điện thoại</label>
-        <div class="form-control">
-          <p><b >{{this.User.SDT}}</b></p>
+
+
+        <div class="row element-button">
         </div>
-      </div>
-            <div class="form-group col-md-3">
-        <label class="control-label">Tên chủ tài khoản</label>
-        <div class="form-control">
-          <p><b >{{this.User.SDT}}</b></p>
+           <BR>
+        <h1 style="font-size: 22px; ">Nôi dung giao dịch</h1>
+   <BR>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Tên chủ tài khoản:</span> {{this.User.SDT}}</label>
+                </div>
+
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số Tk ngân hàng:</span> {{this.Xe.BKS}}</label>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Ngân hàng:</span> {{this.NganHang.TenNH}} </label>
+                </div>
+
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Số tiền rút:</span> <span class="SoTienGD" > {{this.SoTienGD}}</span></label>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Thời gian:</span> <span class="HSD"> {{this.ThoiGian}}</span></label>
+                </div>
+                 <div class="col-md-12">
+                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Trạng thái:</span> <span class="TrangThai"> {{this.TrangThai}}</span></label>
+                </div>
+
+                
+            </div>
+            <div class="col-md-4">  
+               
+                <div class="col-md-12">
+                    <label style="font-size: 18px;"><span style="font-weight: bold;">Nội dung:</span> {{this.NoiDung}}</label>
+                </div>
+            </div>
         </div>
-      </div>
-             <div class="form-group col-md-3">
-        <label class="control-label">Số Tk ngân hàng</label>
-        <div class="form-control">
-          <p><b >{{this.User}}</b></p>
+       
+         <div class="row element-button">
         </div>
-      </div>
-             <div class="form-group col-md-3">
-        <label class="control-label">Ngân hàng</label>
-        <div class="form-control">
-          <p><b >{{this.User}}</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-3">
-        <label class="control-label">Số dư ví</label>
-        <div class="form-control">
-          <p><b class="SoTienGD">{{this.User.SoDu}}</b></p>
-        </div>
-      </div>
-                 <div class="form-group col-md-3">
-        <label class="control-label">Số tiền rút</label>
-        <div class="form-control">
-          <p><b class="SoTienGD">{{this.SoTienGD}}</b></p>
-        </div>
-      </div>
-             <div class="form-group col-md-3">
-        <label class="control-label">Nội dung</label>
-        <div class="form-control">
-          <p><b>{{this.NoiDung}}</b></p>
-        </div>
-      </div>
-              <div class="form-group col-md-3">
-        <label class="control-label">Thời gian</label>
-        <div class="form-control">
-          <p><b class="HSD">{{this.ThoiGian}}</b></p>
-        </div>
-      </div>
-             <div class="form-group col-md-3">
-        <label class="control-label">Trạng thái</label>
-        <div class="form-control">
-          <p><b class="TrangThai">{{this.TrangThai}}</b></p>
-        </div>
-      </div>
-     
-        </div>
+        
 
      <div class="form-group col-md-12">
          <a style="margin-left: 40%;" class="btn bg-success" 
@@ -110,8 +121,6 @@
     const formattedDate = day + '/' + month + '/' + year
     i.innerHTML = formattedDate
   })
- 
-
   TrangThai.forEach((i) => {
             if (i.innerHTML == 0) {
                 i.innerHTML = "Chờ thanh toán"
@@ -186,11 +195,11 @@ for (const soTienElement of SoTienGD) {
   function checkResult(result) {
     if (result === true) {
       // Hiển thị thông báo thành công
-      alert("Duyệt thành công");
+      alert("Thành công");
 
     } else {
       // Hiển thị thông báo thất bại
-      alert("Duyệt thất bại");
+      alert("Thất bại");
     }
 
 
