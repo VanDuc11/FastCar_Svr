@@ -6,7 +6,6 @@ var path = require('path');
 const { log } = require('console');
 const { parse } = require('querystring');
 const admin = require('firebase-admin');
-const ISODate = require('isodate')
 
 var serviceAccount = require("../../../myotp-76cf9-firebase-adminsdk-pgy17-f4b5071351.json");
 
@@ -203,7 +202,7 @@ class HoaDonController_ {
             populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
         }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 res.render('ChuyenXe', {
                     data: result.map((res) => res.toJSON())
                 })
@@ -226,7 +225,7 @@ class HoaDonController_ {
                 populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
             }).populate('User')
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 res.status(200).render('ChiTietChuyen',
                     {
                         data: result.map((res) => res.toJSON())
@@ -235,9 +234,7 @@ class HoaDonController_ {
 
     }
     async find_hoadon(req, res) {
-        let check = null;
-        let trangThaiValues = [];
-        let xeValues = [];
+        let check = {};
 
         if (typeof (req.query.Xe) != 'undefined') {
             check = { Xe: req.query.Xe };
@@ -252,23 +249,34 @@ class HoaDonController_ {
         }
 
         if (typeof (req.query.TrangThaiHD) !== 'undefined') {
-            trangThaiValues = req.query.TrangThaiHD.split(',').map(item => parseInt(item));
+            const trangthaiArray = req.query.TrangThaiHD.split(',');
+            check = { TrangThaiHD: trangthaiArray };
         }
 
         if (typeof (req.query.Xe) !== 'undefined') {
-            xeValues = req.query.Xe.split(',').map(item => parse(item));
+            const xeArray = req.query.Xe.split(',');
+            check = { Xe: xeArray }
         }
 
-        if (trangThaiValues.length > 0) {
-            check = { TrangThaiHD: { $in: trangThaiValues } };
+        if (typeof (req.query.TrangThaiHD) !== 'undefined' && typeof (req.query.User) != 'undefined') {
+            const trangthaiArray = req.query.TrangThaiHD.split(',');
+            check = { TrangThaiHD: trangthaiArray, User: req.query.User };
         }
 
-        if (trangThaiValues.length > 0 && typeof (req.query.User) != 'undefined') {
-            check = { TrangThaiHD: { $in: trangThaiValues }, User: req.query.User };
+        if (typeof (req.query.TrangThaiHD) !== 'undefined' && typeof (req.query.Xe) != 'undefined') {
+            const xeArray = req.query.Xe.split(',');
+            const trangthaiArray = req.query.TrangThaiHD.split(',');
+            check = { TrangThaiHD: trangthaiArray, Xe: xeArray };
         }
 
-        if (trangThaiValues.length > 0 && typeof (req.query.Xe) != 'undefined') {
-            check = { TrangThaiHD: { $in: trangThaiValues }, Xe: req.query.Xe };
+        if (typeof req.query.startDate !== 'undefined' && typeof req.query.endDate !== 'undefined') {
+            const startDate = new Date(req.query.startDate);
+            const endDate = new Date(req.query.endDate);
+            check = {
+                ...check,
+                NgayThue: { $lte: endDate },
+                NgayTra: { $gte: startDate }
+            }
         }
 
         try {
@@ -314,7 +322,8 @@ class HoaDonController_ {
             GioTaoHD: req.body.GioTaoHD,
             TimeChuXeXN: req.body.TimeChuXeXN,
             TrangThaiHD: 1,
-            LyDo: ""
+            LyDo: "",
+            HaveFeedback: false
         })
         try {
             const car = await Xe.findOne({ _id: hoadon.Xe });
@@ -387,7 +396,8 @@ class HoaDonController_ {
                 TrangThaiHD: trangthai,
                 LyDo: req.body.LyDo,
                 User: req.body.User,
-                Xe: req.body.Xe
+                Xe: req.body.Xe,
+                HaveFeedback: req.body.HaveFeedback
             }
         }).then((result) => {
             if (trangthai == 3) {
@@ -410,7 +420,7 @@ class HoaDonController_ {
     }
 
     async deleteItem(req, res) {
-        await HoaDon.deleteOne({_id: req.params.id});
+        await HoaDon.deleteOne({ _id: req.params.id });
         return res.status(200).json('Success');
     }
 }

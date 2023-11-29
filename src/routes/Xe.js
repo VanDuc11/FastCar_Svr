@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-router.get('/danhsachxe', XeController.show);
+// router.get('/danhsachxe', XeController.show);
 
 router.get('/', XeController.index);
 router.get('/Addxe',XeController.add);

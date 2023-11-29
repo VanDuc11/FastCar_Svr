@@ -5,8 +5,8 @@ const HoaDon = new Schema({
     MaHD: { type: String },
     User: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     Xe: { type: mongoose.Schema.Types.ObjectId, ref: 'Xe'},
-    NgayThue: { type: String },
-    NgayTra: { type: String },
+    NgayThue: { type: Date },
+    NgayTra: { type: Date },
     TongSoNgayThue: { type: Number },
     PhiDV: { type: Number },
     MaGiamGia: { type: String },
@@ -19,7 +19,8 @@ const HoaDon = new Schema({
     GioTaoHD: { type: Date },
     TimeChuXeXN:  { type: Date },
     TrangThaiHD: { type: Number},
-    LyDo: { type: String }
+    LyDo: { type: String },
+    HaveFeedback: { type: Boolean}
 }, { timestamps: true });
 
 module.exports = mongoose.model("HoaDon", HoaDon);

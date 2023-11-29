@@ -16,6 +16,8 @@ const Xe = new Schema({
     DangKiem: { type: String},
     BaoHiem: { type: String},
     DiaChiXe: { type: String },
+    Latitude: { type: String },
+    Longitude: { type: String },
     GiaThue1Ngay: { type: Number },
     ChuSH: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     TrangThai: { type: Number },

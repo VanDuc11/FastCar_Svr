@@ -24,7 +24,7 @@ class XeController {
     // xe hoạt động
 
     async xe_Hd(req, res) {
-        await Xe.find({TrangThai: 1})
+        await Xe.find({ TrangThai: 1 })
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -42,7 +42,7 @@ class XeController {
     // xe chờ không hđ
 
     async xe_KHD(req, res) {
-        await Xe.find({TrangThai: 3})
+        await Xe.find({ TrangThai: 3 })
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -60,7 +60,7 @@ class XeController {
     // xe chờ từ chối
 
     async xe_TC(req, res) {
-        await Xe.find({TrangThai: 2})
+        await Xe.find({ TrangThai: 2 })
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -77,7 +77,7 @@ class XeController {
     }
     // xe chờ duyệt
     async xe_CD(req, res) {
-        await Xe.find({TrangThai: 0})
+        await Xe.find({ TrangThai: 0 })
             .populate({ path: "ChuSH", model: "User" })
             .sort({ _id: -1 })
             .then((result) => {
@@ -96,7 +96,7 @@ class XeController {
     async chitietxe(req, res) {
         await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
-                console.log(result);
+                // console.log(result);
 
                 res.status(200).render('ChiTietXe', {
                     data: result.map(res => res.toJSON())
@@ -111,7 +111,7 @@ class XeController {
     }
     async duyetxe(req, res) {
         const id = req.params.id;
-        console.log(id);
+        // console.log(id);
         await Xe.updateOne({ _id: id },
             {
                 $set: {
@@ -130,12 +130,12 @@ class XeController {
             });
         })
     }
-     
+
 
     async chitietxe(req, res) {
         await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
-                console.log(result);
+                // console.log(result);
 
                 res.status(200).render('ChiTietXe', {
                     data: result.map(res => res.toJSON())
@@ -149,8 +149,8 @@ class XeController {
             })
     }
     async Thongtin(req, res) {
-         
-        await HoaDon.find({ Xe: req.params.id, TrangThaiHD:[3,4,5,6] }).populate('Xe')
+
+        await HoaDon.find({ Xe: req.params.id, TrangThaiHD: [3, 4, 5, 6] }).populate('Xe')
             .populate({
                 path: 'Xe',
                 populate: { path: 'ChuSH', model: 'User' }
@@ -163,8 +163,8 @@ class XeController {
             })
     }
     async dem_hoa_don_HD(req, res) {
-         
-        await HoaDon.find({ Xe: req.params.id, TrangThaiHD:[3,4,5,6] }).populate('Xe')
+
+        await HoaDon.find({ Xe: req.params.id, TrangThaiHD: [3, 4, 5, 6] }).populate('Xe')
             .populate({
                 path: 'Xe',
                 populate: { path: 'ChuSH', model: 'User' }
@@ -177,24 +177,72 @@ class XeController {
     add(req, res) {
         res.render('AddXe')
     }
-    
+
     async findXe_id(req, res) {
         let id = req.params.id;
         await Xe.findById(id)
             .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
             .then((result) => {
                 res.json(result)
-                console.log('findXe_id',result)
+                // console.log('findXe_id',result)
             })
     }
     async findXe(req, res) {
-        let check = null;
+        let check = {};
         if (typeof (req.query.ChuSH) != 'undefined') {
             check = { User: req.query.ChuSH };
         }
 
         if (typeof (req.query.TrangThai) != 'undefined') {
             check = { TrangThai: req.query.TrangThai };
+        }
+
+        if (typeof (req.query.HangXe) != 'undefined') {
+            const hangXeArray = req.query.HangXe.split(',');
+            check = { HangXe: hangXeArray };
+        }
+
+        if (typeof (req.query.ChuyenDong) != 'undefined') {
+            check = { ChuyenDong: req.query.ChuyenDong };
+        }
+
+        if (typeof (req.query.LoaiNhienLieu) != 'undefined') {
+            check = { LoaiNhienLieu: req.query.LoaiNhienLieu };
+        }
+
+        if (typeof (req.query.TrungBinhSao) != 'undefined') {
+            check = { TrungBinhSao: req.query.TrungBinhSao };
+        }
+
+        // giá thuê
+        if (typeof req.query.priceFrom !== 'undefined' && typeof req.query.priceTo !== 'undefined') {
+            // Xử lý truy vấn theo khoảng giá trị
+            const priceFrom = parseFloat(req.query.priceFrom);
+            const priceTo = parseFloat(req.query.priceTo);
+
+            if (!isNaN(priceFrom) && !isNaN(priceTo)) {
+                check.GiaThue1Ngay = { $gte: priceFrom, $lte: priceTo };
+            } else {
+                return res.status(400).json({ error: 'Giá trị không hợp lệ' });
+            }
+        }
+
+        // số ghế
+        if (typeof req.query.soGheFrom !== 'undefined' && typeof req.query.soGheTo !== 'undefined') {
+            // Xử lý truy vấn theo khoảng giá trị
+            const soGheFrom = parseFloat(req.query.soGheFrom);
+            const soGheTo = parseFloat(req.query.soGheTo);
+
+            if (!isNaN(soGheFrom) && !isNaN(soGheTo)) {
+                check.SoGhe = { $gte: soGheFrom, $lte: soGheTo };
+            } else {
+                return res.status(400).json({ error: 'Giá trị không hợp lệ' });
+            }
+        }
+
+        // năm sản xuất
+        if (typeof req.query.yearFrom !== 'undefined' && typeof req.query.yearTo !== 'undefined') {
+            check.NSX = { $gte: req.query.yearFrom, $lte: req.query.yearTo };
         }
 
         try {
@@ -220,7 +268,7 @@ class XeController {
     async findXe_byID(req, res) {
         let idXe = req.params.id;
         try {
-            await Xe.findOne({_id: idXe}).populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+            await Xe.findOne({ _id: idXe }).populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
                 .then((result) => {
                     res.status(200).json(result)
                 })
@@ -241,10 +289,67 @@ class XeController {
     async find_Xe_Not_User(req, res) {
         // get list xe không thuộc user login
         const emailUser = req.params.email;
-        let check = null;
-        if (typeof req.query.DiaChiXe !== 'undefined' && typeof (req.query.TrangThai) != 'undefined') {
-            const regex = new RegExp(req.query.DiaChiXe, 'i'); // 'i' để không phân biệt chữ hoa chữ thường
-            check = { DiaChiXe: regex, TrangThai: req.query.TrangThai };
+        let check = {};
+
+        if (typeof (req.query.TrangThai) != 'undefined') {
+            check = { TrangThai: req.query.TrangThai };
+        }
+
+        if (typeof (req.query.HangXe) != 'undefined') {
+            const hangXeArray = req.query.HangXe.split(',');
+            check = { HangXe: hangXeArray };
+        }
+
+        if (typeof (req.query.ChuyenDong) != 'undefined') {
+            check = { ChuyenDong: req.query.ChuyenDong };
+        }
+
+        if (typeof (req.query.LoaiNhienLieu) != 'undefined') {
+            check = { LoaiNhienLieu: req.query.LoaiNhienLieu };
+        }
+
+        if (typeof (req.query.TrungBinhSao) != 'undefined') {
+            check = { TrungBinhSao: req.query.TrungBinhSao };
+        }
+
+        // giá thuê
+        if (typeof req.query.priceFrom !== 'undefined' && typeof req.query.priceTo !== 'undefined') {
+            // Xử lý truy vấn theo khoảng giá trị
+            const priceFrom = parseFloat(req.query.priceFrom);
+            const priceTo = parseFloat(req.query.priceTo);
+
+            if (!isNaN(priceFrom) && !isNaN(priceTo)) {
+                check.GiaThue1Ngay = { $gte: priceFrom, $lte: priceTo };
+            } else {
+                return res.status(400).json({ error: 'Giá trị không hợp lệ' });
+            }
+        }
+
+        if (typeof req.query.priceFrom !== 'undefined') {
+            const priceFrom = parseFloat(req.query.priceFrom);
+            if (!isNaN(priceFrom)) {
+                check.GiaThue1Ngay = { $gte: priceFrom };
+            } else {
+                return res.status(400).json({ error: 'Giá trị không hợp lệ' });
+            }
+        }
+
+        // số ghế
+        if (typeof req.query.soGheFrom !== 'undefined' && typeof req.query.soGheTo !== 'undefined') {
+            // Xử lý truy vấn theo khoảng giá trị
+            const soGheFrom = parseFloat(req.query.soGheFrom);
+            const soGheTo = parseFloat(req.query.soGheTo);
+
+            if (!isNaN(soGheFrom) && !isNaN(soGheTo)) {
+                check.SoGhe = { $gte: soGheFrom, $lte: soGheTo };
+            } else {
+                return res.status(400).json({ error: 'Giá trị không hợp lệ' });
+            }
+        }
+
+        // năm sản xuất
+        if (typeof req.query.yearFrom !== 'undefined' && typeof req.query.yearTo !== 'undefined') {
+            check.NSX = { $gte: req.query.yearFrom, $lte: req.query.yearTo };
         }
 
         try {
@@ -252,22 +357,16 @@ class XeController {
 
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
 
-            if (filteredList.length !== 0) {
-                return res.status(200).json(filteredList);
-            } else {
-                return res.status(400).json({
-                    success: true,
-                    message: "Không có dữ liệu",
-                })
-            }
+            console.log("data: " + filteredList.length);
+            return res.status(200).json(filteredList);
         } catch (error) {
             res.status(500).json({
                 success: false,
                 message: error.message,
             })
+            console.log("error: " + error);
         }
     }
-
 
     async find_Xe_User(req, res) {
         let check = null;
@@ -278,8 +377,8 @@ class XeController {
             trangThaiValues = req.query.TrangThai.split(',').map(item => parseInt(item));
         }
 
-        if (trangThaiValues.length > 0 ) {
-            check = { TrangThai: { $in: trangThaiValues }};
+        if (trangThaiValues.length > 0) {
+            check = { TrangThai: { $in: trangThaiValues } };
         }
 
 
@@ -358,19 +457,19 @@ class XeController {
             DangKiem: req.files['DangKiem'][0].filename,
             BaoHiem: req.files['BaoHiem'][0].filename,
             DiaChiXe: req.body.DiaChiXe,
+            Latitude: req.body.Latitude,
+            Longitude: req.body.Longitude,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
-            TrangThai: 0,
+            TrangThai: 1,
             SoChuyen: 0,
             TrungBinhSao: 0
         });
-        
+
         try {
             await xe.save()
                 .then((result) => {
-                    res.status(201)
-                    .send('<script>alert("Thêm mã khuyến mãi thành công"); window.location.href="/quanlyxe";</script>');
-                    console.log(result);
+                    res.status(201).json({ success: true, message: 'Thêm xe thành công' });
                 })
                 .catch((err) => {
                     res.status(400).json({

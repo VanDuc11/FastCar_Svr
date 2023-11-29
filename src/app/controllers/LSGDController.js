@@ -7,13 +7,28 @@ class LSGDController {
             check = { User: req.query.User };
         }
 
-        await lsgd.find(check).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+        await lsgd.find(check).populate('User', ('_id UserName Email UID SDT Avatar'))
+            .populate({
+                path: 'NganHang',
+                populate: { path: 'User', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+            })
+            .populate({
+                path: 'HoaDon',
+                populate: {
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                }
+            })
+            .populate({
+                path: 'HoaDon',
+                populate: { path: 'User', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+            }).sort({ _id: -1 })
             .then((result) => {
                 res.status(200).json(result);
             });
 
     }
-    
+
     async createLSGD(req, res, next) {
         try {
             const model = new lsgd(req.body);
