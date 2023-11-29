@@ -4,7 +4,19 @@ const NganHang = require('../models/NganHang.model');
 
 class LSGDController {
     async index(req, res) {
-        await lsgd.find().populate({ path: 'User', model: 'User' }).sort({_id: -1})
+        let check = null;
+        if (typeof (req.query.TrangThai) != 'undefined') {
+            check = { TrangThai: req.query.TrangThai.split(',')};
+        }
+        if (req.query.start_date != undefined && req.query.end_date) {
+            check = {
+                "ThoiGian": {
+                    $gte: new Date(req.query.start_date),
+                    $lte: new Date(req.query.end_date),
+                }
+            };
+        }
+        await lsgd.find(check).populate({ path: 'User', model: 'User' }).sort({_id: -1})
         .then((result) => {
             console.log(result);
             res.status(200).render('ThanhToan',{
@@ -82,7 +94,6 @@ class LSGDController {
         await lsgd.find(check).sort({ _id: -1 })
             .then((result) => {
                 res.status(200).json(result);
-                console.log(result)
             });
               
     }
