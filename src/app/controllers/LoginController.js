@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+
 var path = require('path');
 
 
@@ -10,14 +11,14 @@ class LoginController {
         res.render('login', { layout: 'temple_login' });
     }
     login(req, res, next) {
-        let user = req.body.username;
-        let pass = req.body.password;
+        let email  = req.body.Email;
+        let pass = req.body.MatKhau;
         // lấy dữ liệu từ server
-        User.findOne({ name: user, password: pass })
+        User.findOne({ Email:  email, MatKhau: pass })
             .then((result) => {
                 if (result) {
-                    req.session.user = {result};
-                    console.log(req.session.user);
+                    req.session.email = {result};
+                    console.log(req.session.email);
                     // Nếu tìm thấy user và password trong cơ sở dữ liệu
                     res.redirect('/home');
                 } else {

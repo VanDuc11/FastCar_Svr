@@ -105,7 +105,7 @@
               </div>
               <div class="col-md-4" style="margin-top: 10px;">
                 <label for="price" class="form-label">Ngày kết thúc:</label>
-                <input type="date" id="price" name="HSD" class="form-control" required>
+                <input type="date" id="price1" name="HSD" class="form-control" required>
               </div>
               <div class="col-md-4" style="margin-top: 10px;">
                 <label for="image" class="form-label">Hình ảnh:</label>
@@ -250,6 +250,36 @@
     </div>
   </div>
 </div>
+<script>
+   document.getElementById('price').addEventListener('change', function () {
+        var selectedDate = new Date(this.value + 'T00:00:00Z'); // Thêm 'Z' để đảm bảo UTC
+        var currentDate = new Date();
+
+        // Chuyển đổi ngày hiện tại sang UTC để so sánh
+        currentDate.setUTCHours(0, 0, 0, 0);
+
+        // Kiểm tra xem ngày chọn có phải là ngày trong quá khứ hay không
+        if (selectedDate < currentDate) {
+            alert('Vui lòng chọn ngày trong tương lai hoặc ngày hiện tại.');
+            this.value = ''; // Xoá giá trị nếu là ngày trong quá khứ
+        }
+    });
+</script>
+<script>
+   document.getElementById('price1').addEventListener('change', function () {
+        var selectedDate = new Date(this.value + 'T00:00:00Z'); // Thêm 'Z' để đảm bảo UTC
+        var currentDate = new Date();
+
+        // Chuyển đổi ngày hiện tại sang UTC để so sánh
+        currentDate.setUTCHours(0, 0, 0, 0);
+
+        // Kiểm tra xem ngày chọn có phải là ngày trong quá khứ hay không
+        if (selectedDate < currentDate) {
+            alert('Vui lòng chọn ngày trong tương lai hoặc ngày hiện tại.');
+            this.value = ''; // Xoá giá trị nếu là ngày trong quá khứ
+        }
+    });
+</script>
 <script>
   const textarea = document.querySelector("textarea");
 textarea.setAttribute("readonly", true);
