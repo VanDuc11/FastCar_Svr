@@ -58,7 +58,7 @@
                         </a>
                         <a href="" id="tc" class="col-md-6 col-lg-3">
                             <div class="widget-small primary coloured-icon"><i
-                                    class='icon fa-3x bx bxs-select-multiple'></i>
+                                    class='icon fa-3x bx bxs-check-square'></i>
                                 <div class="info">
                                     <h4>Chuyến Thành công</h4>
                                     <p><b id="thanhcong"> </b></p>
@@ -122,7 +122,7 @@
                                 {{this.Xe.MauXe}}</td>
                             <td style="text-align: center; word-break: break-word;vertical-align: middle;">
                                 {{this.Xe.BKS}}</td>
-                            <td style="text-align: center; word-break: break-word;vertical-align: middle;">
+                            <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="NgayDang">
                                 {{this.NgayThue}}</td>
                             <td style="text-align: center; word-break: break-word;vertical-align: middle;">
                                 <span class="thanhtien">{{this.TongTien}}</span>
@@ -146,7 +146,18 @@
     </div>
 </main>
 <script>
-
+    load()
+    async function load() {
+     var HSD = document.querySelectorAll(".NgayDang");
+    HSD.forEach((i) => {
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+    })
+    }
 </script>
 <!-- Essential javascripts for application to work-->
 <script src="/public/js/jquery-3.2.1.min.js"></script>

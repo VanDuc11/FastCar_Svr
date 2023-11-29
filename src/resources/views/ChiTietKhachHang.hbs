@@ -106,7 +106,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="col-md-12">
-                <label style="font-size: 18px;"><span style="font-weight: bold;">Avata </span></label> <BR>
+                <label style="font-size: 18px;"><span style="font-weight: bold;">Avatar </span></label> <BR>
                 <img src="{{this.Avatar}}" alt="" height="100px" width="150px" type="button" id="show-emp"
                   data-toggle="modal" data-target="#ModalUP3">
               </div>
@@ -204,7 +204,10 @@
 
 </main>
 
-
+<script>
+  const textarea = document.querySelector("textarea");
+textarea.setAttribute("readonly", true);
+</script>
 <script>
   const HSD = document.querySelectorAll(".HSD");
   HSD.forEach((i) => {
