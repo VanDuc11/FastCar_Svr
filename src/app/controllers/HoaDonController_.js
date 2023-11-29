@@ -19,12 +19,7 @@ const socket = io("http://localhost:9001");
 
 class HoaDonController_ {
 
-    thongke(req, res) {
-        res.render('Thongke')
-    }
-    top(req, res) {
-        res.render('ThongKeTopXe')
-    }
+   
 
     async index(req, res) {
         var query = null;

@@ -1,279 +1,430 @@
-
-    <main class="app-content">
+<main class="app-content">
+  <div class="row">
+    <div class="col-md-12">
       <div class="app-title">
-        <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item active"><a href="#"><b>Thống kê</b></a></li>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><a href="#"><b>Thống kê</b></a></li>
         </ul>
         <div id="clock"></div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <!--Left-->
+    <div class="col-md-12 col-lg-6">
       <div class="row">
-        <div class="col-md-12">
-          <div class="tile">
-            <div class="tile-body">
-              <div class="row element-button"  >
-                <div class="col-sm-2">
-  
-                  <a class="btn btn-add btn-sm" href="/thongke/ThongKeTopXe" title="Thêm"><i class=""></i>
-                  Thống kê Top Xe</a>
-                </div>
-                 
-              
-                <div class="end" style="margin-left: 720px;  " >
-                <div class="row">
-                  <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;" >
-                    <label class="control-label1">Từ ngày</label>
-                    <input class="form-control1"  type="date" required>
-                  </div>
-                  <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
-                    <label class="control-label1" >Đến ngày</label>
-                    <input class="form-control1"  type="date" required>
-                  </div>
-                  <div class="col-sm-22" style="margin-left: 20px;  ">
-                    <a class="btn btn-tim-kiem" href="" title="button" style="color: #fff; background-color: #38a927; width: 80px; height: 30px; display: flex; justify-content: center;
-                    align-items: center;">Tìm kiếm</a>
-                  </div>
-              </div>
-            </div>
-          </div>
-           
-              <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
-                        <div class="info">
-                            <h4>Tổng Chuyến</h4>
-                            <p><b>100 Chuyến</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x' ></i>
-                        <div class="info">
-                            <h4>Chuyến Thành công</h4>
-                            <p><b>68 chuyến</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                  <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle' ></i>
-                        <div class="info">
-                            <h4>Chuyến đã hủy</h4>
-                            <p><b>4 Chuyến</b></p>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="col-md-6 col-lg-3">
-                  
-                  <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-receipt' ></i>
-                        <div class="info">
-                            <h4>Chuyến Chờ cọc</h4>
-                            <p><b>10 chuyến</b></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 col-lg-3">
-                <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge' ></i>
-                    <div class="info">
-                        <h4> Chuyến Đang hoạt động</h4>
-                        <p><b>20 chuyến</b></p>
-                    </div>
-                </div>
-            </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge' ></i>
-                        <div class="info">
-                            <h4> Chuyến Đã cọc</h4>
-                            <p><b>20 chuyến</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                  <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-chart' ></i>
-                      <div class="info">
-                          <h4>Doanh thu</h4>
-                          <p><b>104.890.000 đ</b></p>
-                      </div>
-                  </div>
-              </div>
-               
-                </div>
-            </div>
-            <div class="row element-button">
-            </div>
-              <table class="table table-hover table-bordered" id="sampleTable">
-                <thead>
-                  <tr>
-                      <th style="text-align: center;" width="10">STT</th>
-                    <th style="text-align: center;">Mã hóa đơn</th>
-                    <th style="text-align: center;">Tên Chủ xe</th>
-                    <th style="text-align: center;">Tên xe</th>
-                    <th style="text-align: center;">Biển số xe</th>
-                    <th style="text-align: center;">Giá thuê</th>
-                    <th style="text-align: center;">Lượt Thuê</th>
-                    <th style="text-align: center;">Trạng thái</th>
-                    <th style="text-align: center;">Tiền cọc</th>
-                    <th style="text-align: center;">Tổng tiền</th>
-                    <th style="text-align: center;"> Tiền Hoa hồng</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                
-                    {{#each data}}
-          <tr>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{@index}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MaHD}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MauXe}}</td>
-            <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.BKS}}</td>
-             <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.GiaThue1Ngay}}</td> 
-              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoChuyen}}</td>
-              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TrangThaiHD}}</td>
-               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TienCoc}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TongTien}}</td>
-                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
-
-         
-          </tr>
-          {{/each }}
-                 
-                </tbody>
-              </table>
+        <!-- col-6 -->
+        <div class="col-md-6">
+          <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+            <div class="info">
+              <h4>Tổng Chuyến</h4>
+              <p><b id="tongdonhang"> </b></p>
+              <p class="info-tong">Tổng số chuyến.</p>
             </div>
           </div>
         </div>
+        <!-- col-6 -->
+        <div class="col-md-6">
+          <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
+            <div class="info">
+              <h4>Tổng doanh thu</h4>
+              <p><b id="tongdoanhthu"></b></p>
+              <p class="info-tong">Tổng doanh thu .</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="tile">
+            <h3 class="tile-title">📊 Biểu đồ doanh thu</h3>
+            <div class="embed-responsive embed-responsive-16by9" style="padding-bottom: 80px; margin-top: 30px;">
+              <div class="embed-responsive-item">
+
+                <canvas data-type="line" class="doanhthu" data-color-datalabels="#2e2a2a"
+                  style="text-align: center;"></canvas>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- col-12 -->
+
+
+        <div class="col-md-12">
+          <div class="tile">
+            <h3 class="tile-title">📊 Biểu đồ hóa đơn</h3>
+            <div class="embed-responsive embed-responsive-16by9" style="height: 380px;">
+              <div class="embed-responsive-item">
+                <canvas data-type="bar" class="hoadon" data-color-datalabels="#fffff"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- / col-12 -->
+        <!-- col-12 -->
+
+        <!-- / col-12 -->
       </div>
-    </main>
-  <!-- Essential javascripts for application to work-->
-   <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
-  <script>
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-      jQuery(".trash").click(function () {
-        swal({
-          title: "Cảnh báo",
-         
-          text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
-          buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Đã xóa thành công.!", {
-                
-              });
+    </div>
+    <!--END left-->
+    <!--Right-->
+    <div class="col-md-12 col-lg-6">
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">Top 10 xe </h3>
+          <div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>BKS</th>
+                  <th>Tên xe</th>
+                  <th>Số chuyến</th>
+                  <th>Chi tiết</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each data}}
+                <tr>
+                  <td>{{this.BKS}}</td>
+                  <td>{{this.MauXe}} </td>
+                  <td>{{this.SoChuyen}} chuyến</td>
+                  <td > <a class="badge bg-info"
+                  href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
+                  chi tiết</a></td>
+                </tr>
+                {{/each}}
+
+              </tbody>
+            </table>
+          </div>
+          <!-- / div trống-->
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">📊 Biểu đồ hóa đơn</h3>
+
+          <div class="embed-responsive embed-responsive-16by9">
+            <div class="embed-responsive-item">
+              <canvas data-type="pie" id="hoadonphamtram" data-color-datalabels="#fffff"></canvas>
+
+            </div>
+          </div>
+          <form action="/thongke" method="get" id="formid">
+            <select class="form-control" id="exampleSelect1" name="start_date" onchange="submitForm()"
+              style="width: 200px; font-size: 15px; height: 40px;">
+              <option>-- Chọn tháng --</option>
+              <option value="1">Tháng 1</option>
+              <option value="2">Tháng 2</option>
+              <option value="3">Tháng 3</option>
+              <option value="4">Tháng 4</option>
+              <option value="5">Tháng 5</option>
+              <option value="6">Tháng 6</option>
+              <option value="7">Tháng 7</option>
+              <option value="8">Tháng 8</option>
+              <option value="9">Tháng 9</option>
+              <option value="10">Tháng 10</option>
+              <option value="11">Tháng 11</option>
+              <option value="12">Tháng 12</option>
+            </select>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--END right-->
+  </div>
+  </div>
+</main>
+<!-- Essential javascripts for application to work-->
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+{{!-- doanh thu --}}
+<script>
+    const selectElement = document.getElementById('exampleSelect1'); 
+  function submitForm() {
+    
+
+    // Submit the form using JavaScript
+    const formElement = document.getElementById('formid'); // Replace 'yourFormId' with the actual form's ID
+    formElement.submit();
+  }
+
+  async function load() {
+    const MONTHS = [
+      "T 1",
+      "T 2",
+      "T 3",
+      "T 4",
+      "T 5",
+      "T 6",
+      "T 6",
+      "T 7",
+      "T 9",
+      "T 10",
+      "T 11",
+      "T 12",
+      "",
+    ];
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const startDate = urlParams.get('start_date');
+     selectElement.value = startDate;
+    console.log(startDate)
+    const fetchChartData = async () => {
+      try {
+        const response = await fetch("/thongke/thongketheoThang");
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    };
+
+    Chart.register(ChartDataLabels);
+
+    const labels = MONTHS.slice(0, 13);
+
+    const allCanvas = document.querySelectorAll(".doanhthu");
+
+    allCanvas.forEach(async (el) => {
+      const { type, colorDatalabels } = el.dataset;
+
+      const chartData = await fetchChartData();
+
+      const config = {
+        type: el.dataset.type,
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Doanh thu",
+              fillColor: "rgba(9, 109, 239, 0.651)",
+              pointColor: "rgb(9, 109, 239)",
+              strokeColor: "rgb(9, 109, 239)",
+              pointStrokeColor: "rgb(9, 109, 239)",
+              pointHighlightFill: "rgb(9, 109, 239)",
+              pointHighlightStroke: "rgb(9, 109, 239)",
+              data: chartData.map((item, index) => item.doanh_thu),
+              tension: 0.2,
+            },
+            {
+              label: "Lợi nhuận",
+
+              fillColor: "rgba(9, 109, 239, 0.651)  ",
+              pointColor: "rgb(9, 109, 239)",
+              strokeColor: "rgb(9, 109, 239)",
+              pointStrokeColor: "rgb(9, 109, 239)",
+              pointHighlightFill: "rgb(9, 109, 239)",
+              pointHighlightStroke: "rgb(9, 109, 239)",
+              data: chartData.map((item, index) => item.loi_nhuan),
             }
-          });
-      });
+          ],
+        },
+        options: {
+          aspectRatio: 16 / 9,
+          layout: {
+            padding: 20,
+          },
+          plugins: {
+            tooltip: {
+              titleFont: {
+                size: 22,
+              },
+              bodyFont: {
+                size: 22,
+              },
+              callbacks: {
+                label: (context) => `Total: ${context.formattedValue} đ`,
+              },
+            },
+            datalabels: {
+              color: colorDatalabels,
+              font: { size: 11 },
+              formatter: function (value, context) {
+                return value == 0 ? "" : value;
+
+              },
+              display: function (context) {
+                if (type === "line")
+                  return (
+                    context.dataIndex > 0 && context.dataIndex < labels.length - 1
+                  );
+
+                return true;
+              },
+            },
+          },
+        },
+      };
+
+      new Chart(el, config);
     });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-      $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-      e.stopImmediatePropagation();
+
+    const fetchChartDataHD = async () => {
+      try {
+        const response = await fetch("/thongke/thongkeHDtheoThang");
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    };
+
+
+    const Canvas = document.querySelectorAll(".hoadon");
+
+    Canvas.forEach(async (el) => {
+      const { type, colorDatalabels } = el.dataset;
+
+      const chartData = await fetchChartDataHD();
+
+      const config = {
+        type: el.dataset.type,
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Tổng đơn",
+              backgroundColor: "#ADCBF3",
+              data: chartData.map((item, index) => item.tong_don),
+              tension: 0.1,
+            },
+            {
+              label: "Đơn thành công",
+              backgroundColor: "#B9FFD3",
+              data: chartData.map((item, index) => item.don_thanh_cong),
+              tension: 0.1,
+            },
+            {
+              label: "Đơn hủy",
+              backgroundColor: "red",
+              data: chartData.map((item, index) => item.don_huy),
+              tension: 0.1,
+
+            },
+            {
+              label: "Khác",
+              backgroundColor: "#FDE1C3",
+              data: chartData.map((item, index) => item.khac),
+              tension: 0.1,
+
+            }
+          ],
+        },
+        options: {
+          aspectRatio: 16 / 9,
+          layout: {
+            padding: 20,
+          },
+          plugins: {
+            tooltip: {
+              titleFont: {
+                size: 22,
+              },
+              bodyFont: {
+                size: 22,
+              },
+              callbacks: {
+                label: (context) => `Total: ${context.formattedValue} đơn`,
+              },
+            },
+            datalabels: {
+              color: colorDatalabels,
+              font: { size: 11 },
+              formatter: function (value, context) {
+                return value == 0 ? "" : value;
+              },
+              display: function (context) {
+                if (type === "line")
+                  return (
+                    context.dataIndex > 0 && context.dataIndex < labels.length - 1
+                  );
+
+                return true;
+              },
+            },
+          },
+        },
+      };
+
+      new Chart(el, config);
     });
+    const response1 = await fetch(`/thongke/donhang`).then(response => response.json());
+    document.getElementById('tongdonhang').innerHTML = response1.totalOrders + " Chuyến";
 
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
+    const response = await fetch(`/thongke/doanhthu`).then(response => response.json());
+    document.getElementById('tongdoanhthu').innerHTML = new Intl.NumberFormat('vi-VN').format(response[0].tong_doanh_thu_nam, {
+      minimumFractionDigits: 2,
+      decimal: ',',
+      thousandsSeparator: '.',
+    }) + " đ";
 
 
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
+
+    // Submit the form using JavaScript
+
+    const fetchChartDataHDPT = async () => {
+      try {
+        const response = await fetch(startDate ? `/thongke/hoadonphamtram?start_date=${startDate}` : "thongke/hoadonphamtram");
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+        return [];
       }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
+    };
+    const xValues = ["Thành công", "Đơn hủy", "Khác"];
+    const data = await fetchChartDataHDPT();
+    console.log(data)
+    const yValues = [data.don_thanh_cong, data.don_huy, data.khac];
+    const barColors = [
+      "#8EFFB8",
+      "#F9BABA",
+      "#FFCC95"
+    ];
 
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
+    new Chart("hoadonphamtram", {
+      type: "pie",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "World Wide Wine Production 2018"
         }
-        return i;
       }
-    }
-    //In dữ liệu
-    var myApp = new function () {
-      this.printTable = function () {
-        var tab = document.getElementById('sampleTable');
-        var win = window.open('', '', 'height=700,width=700');
-        win.document.write(tab.outerHTML);
-        win.document.close();
-        win.print();
-      }
-    }
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
-
-
-    //Modal
-    $("#show-emp").on("click", function () {
-      $("#ModalUP").modal({ backdrop: false, keyboard: false })
     });
-  </script>
-</body>
 
-</html>
+  }
+  load()
+
+
+
+
+</script>
