@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 
 
 router.get('/',ThongBaoController.index);
-router.get('/find/:id',ThongBaoController.find_id);
+router.get('/list',ThongBaoController.find_id);
 router.post('/create',upload.single('HinhAnh'),ThongBaoController.CreateThongBao);
 
 module.exports = router; 
