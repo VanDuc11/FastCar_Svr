@@ -16,7 +16,9 @@ class LSGDController {
                 }
             };
         }
-        await lsgd.find(check).populate({ path: 'User', model: 'User' }).sort({_id: -1})
+        await lsgd.find(check)
+        .populate({ path: 'User', model: 'User' })
+        .populate({ path: 'NganHang', model: 'NganHang' }).sort({_id: -1})
         .then((result) => {
             console.log(result);
             res.status(200).render('ThanhToan',{
@@ -27,7 +29,10 @@ class LSGDController {
     
    
     async chitietthanhtoan(req, res) {
-        await lsgd.find({ _id: req.params.id }).populate({ path: 'User', model: 'User' }).sort({ _id: -1 })
+        await lsgd.find({ _id: req.params.id })
+        .populate({ path: 'User', model: 'User' })
+        .populate({ path: 'NganHang', model: 'NganHang' })
+        .sort({ _id: -1 })
             .then((result) => {
                 console.log(result);
 
