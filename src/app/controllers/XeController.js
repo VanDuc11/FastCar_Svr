@@ -435,12 +435,55 @@ class XeController {
         }
 
     }
+    async CreateXeForm(req, res) {
+         
+        const xe = new Xe({
+            BKS: req.body.BKS,
+            HangXe: req.body.HangXe,
+            MauXe: req.body.MauXe,
+            NSX: req.body.NSX,
+            SoGhe: req.body.SoGhe,
+            ChuyenDong: req.body.ChuyenDong,
+            LoaiNhienLieu: req.body.LoaiNhienLieu,
+            TieuHao: req.body.TieuHao,
+            MoTa: req.body.MoTa,
+            HinhAnh: req.files['HinhAnh'].map(file => file.filename),
+            DangKyXe: req.files['DangKyXe'][0].filename,
+            DangKiem: req.files['DangKiem'][0].filename,
+            BaoHiem: req.files['BaoHiem'][0].filename,
+            DiaChiXe: req.body.DiaChiXe,
+            GiaThue1Ngay: req.body.GiaThue1Ngay,
+            ChuSH: req.body.ChuSH || await User.findById("6513ad0281cfc8cdaaa6f728"),
+            TrangThai: 0,
+            SoChuyen: 0,
+            TrungBinhSao: 0,
+            Latitude: req.body.Latitude || "21.017295",
+            Longitude: req.body.Longitude|| "105.783983",
+        });
 
+        try {
+            await xe.save()
+                .then((result) => {
+                    res.status(201)
+                        .send('<script>alert("Thêm xe thành công"); window.location.href="/quanlyxe";</script>');
+                    console.log(result);
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: err.messages
+                    });
+                })
+
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                messages: error.messages
+            });
+        }
+    }
     async CreateXe(req, res) {
-        // const img = [];
-        // for (var i = 0; i < req.files['HinhAnh'].length; i++) {
-        //     img.push(path.basename(req.files['HinhAnh'].get[i].path));
-        // }
+       
 
         const xe = new Xe({
             BKS: req.body.BKS,
