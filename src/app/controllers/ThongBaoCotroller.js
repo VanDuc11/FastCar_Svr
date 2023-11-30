@@ -38,11 +38,19 @@ class ThongBaoController {
       });
   }
   async find_id(req, res) {
-    await ThongBao.findById(req.params.id)
+    var check = {};
+    if (req.query.user != undefined && req.query.start_date != undefined) {
+      check = {
+        User: [req.query.user, null], createdAt: {
+          $gte: new Date(req.query.start_date)
+        }
+      }
+    }
+    await ThongBao.find(check)
       .then((result) => {
-        console.log(result);
         res.status(200).json(result)
       }).catch((error) => {
+        console.log(error);
         res.status(400).json({
           success: false,
           message: 'Không thành công',
@@ -59,9 +67,7 @@ class ThongBaoController {
     });
 
     try {
-      const check = await ThongBao.findOne({ TieuDe: req.body.TieuDe });
 
-      if (check == null) {
         const kq = await thongbao.save();
         console.log("Thong Bao", kq);
         res.status(201).send('<script>alert("Thêm thông báo thành công"); window.location.href="/thongbao";</script>');
@@ -69,14 +75,10 @@ class ThongBaoController {
           TieuDe: req.body.TieuDe,
           NoiDung: req.body.NoiDung,
           HinhAnh: img,
+          User: null
         });
 
-      } else {
-        res.status(400).json({
-          success: false,
-          messages: "Tiêu đề thông báo đã tồn tại",
-        });
-      }
+      
     } catch (error) {
       console.error(error);
       res.status(500).json({

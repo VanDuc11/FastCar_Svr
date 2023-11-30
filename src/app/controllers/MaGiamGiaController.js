@@ -87,17 +87,10 @@ class MaGiamGiaController {
     }
     async findMaGiaGia(req, res) {
         let check = null;
-        if (typeof (req.query.MaGiamGia) != 'undefined') {
-            check = { MaGiamGia: req.query.MaGiamGia };
+        if (typeof (req.query.TrangThai) != 'undefined') {
+            check = { TrangThai: true };
         }
-        if (req.query.start_date != undefined && req.query.end_date) {
-            check = {
-                "createdAt": {
-                    $gte: new Date(req.query.start_date),
-                    $lte: new Date(req.query.end_date),
-                }
-            };
-        }
+        
         try {
             await MaGiamGia.find(check).sort({ _id: -1 })
                 .then((result) => {
