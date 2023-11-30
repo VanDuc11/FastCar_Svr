@@ -160,8 +160,6 @@
       <div class="form-group col-md-12">
         <a class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
           onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
-        <a class="btn btn-success" href="#" id="button-sua" data-status="Chưa duyệt" data-toggle="modal"
-          data-target="#ModalUP3">Sửa</a>
         <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue/{{this._id}}" id="button-xem-tt">Xem thông tin
           thuê</a>
         <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
@@ -408,7 +406,6 @@ textarea.setAttribute("readonly", true);
     var TrangThaiTitlle = document.getElementById('trangthaititlle');
 
     var duyet = document.getElementById('button-duyet4');
-    var sua = document.getElementById('button-sua');
     var xemTT = document.getElementById('button-xem-tt');
     var tuchoi = document.getElementById('button-tuchoi');
     
@@ -439,7 +436,6 @@ textarea.setAttribute("readonly", true);
       TrangThai.innerHTML = "Đang chờ duyệt"
       TrangThaiTitlle.innerHTML = "Đang chờ duyệt"
       TrangThaiTitlle.style.background = "#F9BABA"; //#F9BABA
-      sua.style.display = "none"
       xemTT.style.display = 'none'
     } else if (TrangThai.innerHTML == 1) {
       TrangThai.innerHTML = "Đang hoạt động"
@@ -453,7 +449,6 @@ textarea.setAttribute("readonly", true);
       TrangThaiTitlle.style.background = "#e24a4a";
       duyet.style.display = "none"
       tuchoi.style.display = 'none'
-      sua.style.display = "none"
       xemTT.style.display = 'none'
     }
     NgayDang.innerHTML = formattedDate;

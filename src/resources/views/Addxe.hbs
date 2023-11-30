@@ -112,7 +112,7 @@
 
             <div class="row element-button">
 
-              <form class="row" action="/api/xe/create" method="post" enctype="multipart/form-data">
+              <form class="row" action="/api/xe/createform" method="post" enctype="multipart/form-data">
                 <div class="form-group col-md-3">
                   <label class="control-label">Biển số xe</label>
                   <input class="form-control" type="text" name="BKS" placeholder="Nhập biển số xe" required>
@@ -194,23 +194,23 @@
                 <div class="col-md-5">
                   <label for="img1" class="control-label">Đăng ký:</label>
  
-                  <input type="file" class="form-control" id="img1" placeholder="" name="DangKyXe" accept="Image/*"multiple required>
+                  <input type="file" class="form-control" id="img1" placeholder="" name="DangKyXe" accept="Image/*" required>
  
-                  <p id="file-error1" style="display:none; color:red;">Bạn chỉ được chọn tối đa 2 ảnh</p>
+                  <p id="file-error1" style="display:none; color:red;">Bạn chỉ được chọn tối đa 1 ảnh</p>
                 </div>
                 <div class="col-md-5">
                   <label for="img2" class="control-label">Đăng kiểm:</label>
  
-                  <input type="file" class="form-control" id="img2" placeholder="" name="DangKiem" accept="Image/*"multiple required>
+                  <input type="file" class="form-control" id="img2" placeholder="" name="DangKiem" accept="Image/*" required>
  
-                  <p id="file-error2" style="display:none; color:red;">Bạn chỉ được chọn tối đa 2 ảnh</p>
+                  <p id="file-error2" style="display:none; color:red;">Bạn chỉ được chọn tối đa 1 ảnh</p>
                 </div>
                 <div class="col-md-5">
                   <label for="img3" class="control-label">Bảo hiểm:</label>
  
-                  <input type="file" class="form-control" id="img3" placeholder="" name="BaoHiem" accept="Image/*"multiple required>
+                  <input type="file" class="form-control" id="img3" placeholder="" name="BaoHiem" accept="Image/*" required>
  
-                  <p id="file-error3" style="display:none; color:red;">Bạn chỉ được chọn tối đa 2 ảnh</p>
+                  <p id="file-error3" style="display:none; color:red;">Bạn chỉ được chọn tối đa 1 ảnh</p>
                 </div>
                 <div class="col-md-5" style="margin-top: 20px;">
                   <button class="btn btn-save" type="submit">Thêm xe</button>
