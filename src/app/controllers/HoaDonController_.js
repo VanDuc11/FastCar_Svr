@@ -257,7 +257,7 @@ class HoaDonController_ {
         let check = {};
 
         if (typeof (req.query.Xe) != 'undefined') {
-            check = { Xe: req.query.Xe };
+            check.Xe = req.query.Xe;
         }
         if (req.query.start_date != undefined && req.query.end_date) {
             check = {
@@ -270,32 +270,32 @@ class HoaDonController_ {
         }
 
         if (typeof (req.query.User) != 'undefined') {
-            check = { User: req.query.User };
+            check.User = req.query.User;
         }
 
         if (typeof (req.query.MaHD) != 'undefined') {
-            check = { MaHD: req.query.MaHD };
+            check.MaHD = req.query.MaHD;
         }
 
         if (typeof (req.query.TrangThaiHD) !== 'undefined') {
             const trangthaiArray = req.query.TrangThaiHD.split(',');
-            check = { TrangThaiHD: trangthaiArray };
+            check.TrangThaiHD = { $in: trangthaiArray };
         }
 
         if (typeof (req.query.Xe) !== 'undefined') {
             const xeArray = req.query.Xe.split(',');
-            check = { Xe: xeArray }
+            check.Xe = { $in: xeArray }
         }
 
         if (typeof (req.query.TrangThaiHD) !== 'undefined' && typeof (req.query.User) != 'undefined') {
             const trangthaiArray = req.query.TrangThaiHD.split(',');
-            check = { TrangThaiHD: trangthaiArray, User: req.query.User };
+            check = { ...check, TrangThaiHD: trangthaiArray, User: req.query.User };
         }
 
         if (typeof (req.query.TrangThaiHD) !== 'undefined' && typeof (req.query.Xe) != 'undefined') {
             const xeArray = req.query.Xe.split(',');
             const trangthaiArray = req.query.TrangThaiHD.split(',');
-            check = { TrangThaiHD: trangthaiArray, Xe: xeArray };
+            check = { ...check, TrangThaiHD: trangthaiArray, Xe: xeArray };
         }
 
         if (typeof req.query.startDate !== 'undefined' && typeof req.query.endDate !== 'undefined') {

@@ -190,28 +190,28 @@ class XeController {
     async findXe(req, res) {
         let check = {};
         if (typeof (req.query.ChuSH) != 'undefined') {
-            check = { User: req.query.ChuSH };
+            check.User = req.query.ChuSH;
         }
 
         if (typeof (req.query.TrangThai) != 'undefined') {
-            check = { TrangThai: req.query.TrangThai };
+            check.TrangThai = req.query.TrangThai;
         }
 
         if (typeof (req.query.HangXe) != 'undefined') {
             const hangXeArray = req.query.HangXe.split(',');
-            check = { HangXe: hangXeArray };
+            check.HangXe = { $in: hangXeArray };
         }
 
         if (typeof (req.query.ChuyenDong) != 'undefined') {
-            check = { ChuyenDong: req.query.ChuyenDong };
+            check.ChuyenDong = req.query.ChuyenDong;
         }
 
         if (typeof (req.query.LoaiNhienLieu) != 'undefined') {
-            check = { LoaiNhienLieu: req.query.LoaiNhienLieu };
+            check.LoaiNhienLieu = req.query.LoaiNhienLieu;
         }
 
         if (typeof (req.query.TrungBinhSao) != 'undefined') {
-            check = { TrungBinhSao: req.query.TrungBinhSao };
+            check.TrungBinhSao = req.query.TrungBinhSao;
         }
 
         // giá thuê
@@ -290,26 +290,27 @@ class XeController {
         // get list xe không thuộc user login
         const emailUser = req.params.email;
         let check = {};
+        let priceQueryHandled = false;
 
         if (typeof (req.query.TrangThai) != 'undefined') {
-            check = { TrangThai: req.query.TrangThai };
+            check.TrangThai = req.query.TrangThai;
         }
 
         if (typeof (req.query.HangXe) != 'undefined') {
             const hangXeArray = req.query.HangXe.split(',');
-            check = { HangXe: hangXeArray };
+            check.HangXe = { $in: hangXeArray };
         }
 
         if (typeof (req.query.ChuyenDong) != 'undefined') {
-            check = { ChuyenDong: req.query.ChuyenDong };
+            check.ChuyenDong = req.query.ChuyenDong;
         }
 
         if (typeof (req.query.LoaiNhienLieu) != 'undefined') {
-            check = { LoaiNhienLieu: req.query.LoaiNhienLieu };
+            check.LoaiNhienLieu = req.query.LoaiNhienLieu;
         }
 
         if (typeof (req.query.TrungBinhSao) != 'undefined') {
-            check = { TrungBinhSao: req.query.TrungBinhSao };
+            check.TrungBinhSao = req.query.TrungBinhSao;
         }
 
         // giá thuê
@@ -320,12 +321,13 @@ class XeController {
 
             if (!isNaN(priceFrom) && !isNaN(priceTo)) {
                 check.GiaThue1Ngay = { $gte: priceFrom, $lte: priceTo };
+                priceQueryHandled = true;
             } else {
                 return res.status(400).json({ error: 'Giá trị không hợp lệ' });
             }
         }
 
-        if (typeof req.query.priceFrom !== 'undefined') {
+        if (!priceQueryHandled && typeof req.query.priceFrom !== 'undefined') {
             const priceFrom = parseFloat(req.query.priceFrom);
             if (!isNaN(priceFrom)) {
                 check.GiaThue1Ngay = { $gte: priceFrom };
@@ -483,7 +485,6 @@ class XeController {
         }
     }
     async CreateXe(req, res) {
-       
 
         const xe = new Xe({
             BKS: req.body.BKS,
@@ -504,7 +505,7 @@ class XeController {
             Longitude: req.body.Longitude,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             ChuSH: req.body.ChuSH,
-            TrangThai: 1,
+            TrangThai: 0,
             SoChuyen: 0,
             TrungBinhSao: 0
         });
