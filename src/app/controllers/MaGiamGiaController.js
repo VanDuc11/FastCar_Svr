@@ -86,13 +86,10 @@ class MaGiamGiaController {
         }
     }
     async findMaGiaGia(req, res) {
-        let check = null;
-        if (typeof (req.query.TrangThai) != 'undefined') {
-            check = { TrangThai: true };
-        }
+        
         
         try {
-            await MaGiamGia.find(check).sort({ _id: -1 })
+            await MaGiamGia.find({TrangThai: true }).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(result);
 
