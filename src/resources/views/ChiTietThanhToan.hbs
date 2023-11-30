@@ -71,7 +71,7 @@
                     <label style="font-size: 18px;"><span style="font-weight: bold;">Thời gian:</span> <span class="HSD"> {{this.ThoiGian}}</span></label>
                 </div>
                  <div class="col-md-12">
-                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Trạng thái:</span> <span class="TrangThai"> {{this.TrangThai}}</span></label>
+                    <label style="font-size: 18px;"> <span style="font-weight: bold;">Trạng thái:</span> <span id="TrangThai"> {{this.TrangThai}}</span></label>
                 </div>
 
                 
@@ -89,7 +89,7 @@
         
 
      <div class="form-group col-md-12">
-         <a style="margin-left: 40%;" class="btn bg-success" 
+         <a style="margin-left: 40%;" class="btn bg-success" id="button-duyet"
                     onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
                   <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
       </div>
@@ -111,7 +111,6 @@
 <script>
    load_data()
   async function load_data() {
-  var TrangThai = document.querySelectorAll('.TrangThai');
   var HSD = document.querySelectorAll(".HSD");
   HSD.forEach((i) => {
     const date = new Date(i.innerHTML);
@@ -121,20 +120,24 @@
     const formattedDate = day + '/' + month + '/' + year
     i.innerHTML = formattedDate
   })
-  TrangThai.forEach((i) => {
-            if (i.innerHTML == 0) {
-                i.innerHTML = "Chờ thanh toán"
-                
-            } else if (i.innerHTML == 1 ) { 
-                i.innerHTML = "Đã thanh toán"
-              
-            } else if (i.innerHTML == 2) { 
-                i.innerHTML = "Từ chối"
-               
-            }
-        })
+         const trangthai = document.getElementById("TrangThai");
+  const duyet = document.getElementById("button-duyet");
+  const tuchoi = document.getElementById("button-tuchoi");
+
+  if (trangthai.innerHTML == 0 ) {
+    trangthai.innerHTML = "Chờ thanh toán"
+  } else if (trangthai.innerHTML == 1) { // chờ cọc
+    trangthai.innerHTML = "Đã thanh toán"
+    duyet.style.display = "none"
+    tuchoi.style.display = "none"
+  } else if (trangthai.innerHTML == 2) { // đã cọc
+    trangthai.innerHTML = "Từ chối"
+    duyet.style.display = "none"
+    tuchoi.style.display = "none"
+  }
 
   }
+ 
  
 </script>
       <script>
