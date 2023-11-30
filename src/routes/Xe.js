@@ -42,7 +42,7 @@ router.get('/top5xe/:email', XeController.find_top_5);
 router.get('/listXe_NotUser/:email', XeController.find_Xe_Not_User);
 
 // get xe của user
-router.get('/listXe_user/:email', XeController.find_Xe_User);
+router.get('/listXe_User/:email', XeController.find_Xe_User);
 
 // duyệt xe
 router.post('/duyet/:id/:trangthai', XeController.duyetxe);
