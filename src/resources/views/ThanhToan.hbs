@@ -17,36 +17,36 @@
               <a class="btn btn-add btn-sm" href="/thanhtoan/Lichsugiaodich" title="Thêm">
                 Lịch sử giao dịch</a>
             </div>
-            <div class="end" style="margin-left: 700px;">
-              <form action="/thanhtoan" method="get" class="row">
-                <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
-                  <label class="control-label1">Từ ngày</label>
-                  <input class="form-control1" type="date" name="start_date" required>
-                </div>
-                <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
-                  <label class="control-label1">Đến ngày</label>
-                  <input class="form-control1" type="date" name="end_date" required>
-                </div>
-                <div class="col-sm-22" style="margin-left: 20px;  ">
-                  <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
-                                     display: flex; justify-content: center; align-items: center;">Tìm kiếm</button>
-                </div>
-              </form>
+            <div class="col-md-5"></div>
 
-            </div>
+
+            <form action="/Lichsugiaodich" method="get" class="row" style="margin-right:1px;">
+              <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
+                <label class="control-label1">Từ ngày</label>
+                <input class="form-control1" type="date" name="start_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+                <label class="control-label1">Đến ngày</label>
+                <input class="form-control1" type="date" name="end_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;  ">
+                <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
+                                     display: flex; justify-content: center; align-items: center;">Tìm kiếm</button>
+              </div>
+            </form>
           </div>
 
           <div class="row">
-     
-          <a class="col-md-6 col-lg-3" id="ctt">
-               <div class="widget-small info  coloured-icon"><i class='icon fa-3x bx bxs-hourglass-top'></i>
+
+            <a class="col-md-6 col-lg-3" id="ctt">
+              <div class="widget-small info  coloured-icon"><i class='icon fa-3x bx bxs-hourglass-top'></i>
                 <div class="info">
                   <h4>Chờ thanh toán</h4>
-                     <p><b id="chothanhtoan"></b></p>
+                  <p><b id="chothanhtoan"></b></p>
                 </div>
               </div>
-           </a>
-       
+            </a>
+
 
           </div>
           <div class="row element-button">
@@ -133,7 +133,7 @@
       response = await fetch(`/api/lsgd/loc?start_date=${startDate}&end_date=${endDate}`).then(response => response.json());
     } else {
       document.getElementById('ctt').href = `thanhtoan?TrangThai=${"0"}`;
-  
+
       response = await fetch('/api/lsgd/loc').then(response => response.json());
 
     }
@@ -143,7 +143,7 @@
       if (hd.TrangThai == 0) {
         tt0++;
       }
-    
+
     });
     document.getElementById('chothanhtoan').innerText = tt0 + " Yêu cầu";
 
