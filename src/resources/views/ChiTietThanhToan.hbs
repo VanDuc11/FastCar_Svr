@@ -94,15 +94,7 @@
             </div>
            
             </div>
-               <div class="row">
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <label style="font-size: 15px;"><span style="font-weight: bold;">Ảnh giao dịch</span></label>
-                <img src="{{this.Avatar}}" alt="" height="40px" width="40px" type="button" id="show-emp"
-                  data-toggle="modal" data-target="#ModalUP2">
-              </div>
-            </div>
-         </div>
+        
           <div class="row element-button">
         </div>
 
@@ -127,6 +119,7 @@
                       </span>
                     </div>
                   </div>
+                        <form action="/api/lsgd/createthanhtoan" id="product-form" method="post" enctype="multipart/form-data">
                   <div class="row">
                     <div class="form-group col-md-6" style=" margin-left: 200px;
                     flex-direction: column;">                     
@@ -136,6 +129,7 @@
                   </div>
                   <BR>
                     <button style="margin-left: 40%;"  class="btn btn-save" type="submit">Lưu lại</button>
+                    </form>
                  <a class="btn bg-success" id="button-duyet"
                     onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
              
@@ -143,40 +137,13 @@
 
                   <BR>
                 </div>
+                 
                 <div class="modal-footer">
                 </div>
               </div>
             </div>
           </div>       
-<div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-            data-keyboard="false">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
 
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="form-group  col-md-12">
-                      <span class="thong-tin-thanh-toan">
-                        <h5>Ảnh thanh toán thành công</h5>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-md-6" style=" display: flex;
-        flex-direction: column;">
-                      <div class="images" style=" display: flex; ">
-                        <img src="{{this.Avatar}}" alt="" height="280px" width="400px" style="margin-left:290px;">
-                      </div>
-                    </div>
-                    <BR>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-                    <BR>
-                  </div>
-                  <div class="modal-footer">
-                  </div>
-                </div>
-              </div>
-            </div>
     {{/each}}        
 
 

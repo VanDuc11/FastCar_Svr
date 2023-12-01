@@ -71,9 +71,9 @@
               <th style="text-align: center;">Biển số xe</th>
               <th style="text-align: center;">Tên xe</th>
               <th style="text-align: center;">Ảnh</th>
-              <th style="text-align: center;">Số ghế</th>
               <th style="text-align: center;">Năm sản xuất</th>
               <th style="text-align: center;">Giá </th>
+              <th style="text-align: center;">Thế chấp</th>
               <th style="text-align: center;">Tên chủ xe</th>
               <th style="text-align: center;">Trạng thái</th>
               <th style="text-align: center;" width="80">Chức năng</th>
@@ -88,10 +88,12 @@
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <img
                   src="/images/{{this.HinhAnh.[0]}}" alt="" class="img-card-person1">
               </td>
-              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoGhe}} </td>
+      
               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NSX}}</td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="giathue">
                 {{this.GiaThue1Ngay}}</td>
+                 <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span  class="TheChap"
+                 style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TheChap}}</span></td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.ChuSH.UserName}}
               </td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
@@ -109,6 +111,24 @@
     </div>
   </div>
 </main>
+<script>
+  load_data()
+  async function load_data() {
+
+   var TheChap = document.querySelectorAll('.TheChap');
+    TheChap.forEach((i) => {
+       if ( i.innerHTML === "true") {
+      i.innerHTML = "Có thế chấp"
+      i.style.background = "#ADCBF3"
+   
+    } else {
+       i.innerHTML = "Ko thế chấp"
+      i.style.background = "#FDE1C3"
+      
+    }
+    })
+  }
+</script>
 <script>
   // số tứ tự
   var stt = 0
@@ -150,6 +170,7 @@
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
     var GiaThue = document.querySelectorAll('.giathue');
     var TrangThai = document.querySelectorAll('.TrangThai');
+   
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
         i.innerHTML = "Chờ duyệt"
@@ -165,7 +186,7 @@
         i.style.background = "#ADCBF3"
       }
     })
-
+  
 
     GiaThue.forEach((i) => {
       if (!isFinite(i.innerHTML)) {
