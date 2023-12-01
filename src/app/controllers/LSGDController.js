@@ -54,7 +54,7 @@ class LSGDController {
 
     async Lichsugiaodich(req, res) {
         var check = { TrangThai: [1, 2] };
-        if ( req.query.TrangThai != undefined && req.query.start_date == undefined && req.query.end_date == undefined) {
+        if (req.query.TrangThai != undefined && req.query.start_date == undefined && req.query.end_date == undefined) {
             check = { TrangThai: req.query.TrangThai.split(',') };
         } else if (req.query.start_date != undefined && req.query.end_date != undefined && req.query.TrangThai == undefined) {
             check = {
@@ -90,12 +90,12 @@ class LSGDController {
             });
     }
     async CTLichSu(req, res) {
-        await lsgd.find()
+        await lsgd.find({_id: req.params.id})
             .populate({ path: "User", model: "User" })
             .populate({ path: 'NganHang', model: 'NganHang' }).sort({ _id: -1 })
             .then((result) => {
                 res.status(200).render('ChiTietLichSu', {
-                    data: result.map(res => res.toJSON()),
+                    data: result.map((res) => res.toJSON()),
                 })
             })
     }
@@ -120,21 +120,21 @@ class LSGDController {
         })
     }
     async findthanhtoan(req, res) {
-        let check = null;
-        if (typeof (req.query.TrangThai) != 'undefined') {
-            check = { TrangThai: req.query.TrangThai.split(',') };
-        }
+        var check = {};
+
         if (req.query.start_date != undefined && req.query.end_date) {
             check = {
                 "ThoiGian": {
                     $gte: new Date(req.query.start_date),
                     $lte: new Date(req.query.end_date),
-                }
+                },
+
             };
         }
 
         await lsgd.find(check).sort({ _id: -1 })
             .then((result) => {
+
                 res.status(200).json(result);
             });
 

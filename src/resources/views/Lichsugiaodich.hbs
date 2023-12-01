@@ -20,7 +20,7 @@
             <div class="col-md-5"></div>
 
 
-            <form action="/Lichsugiaodich" method="get" class="row" style="margin-right:1px;">
+            <form action="Lichsugiaodich" method="get" class="row" style="margin-right:1px;">
               <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
                 <label class="control-label1">Từ ngày</label>
                 <input class="form-control1" type="date" name="start_date" required>
@@ -228,17 +228,15 @@
       response = await fetch('/api/lsgd/loc').then(response => response.json());
 
     }
-    let tong = 0;
+    var tong = 0;
     response.forEach(hd => {
       // hd chờ duyệt
-      if (hd.TrangThai == 0) {
-        tt0++;
-      }
+      
       if (hd.TrangThai == 1) {
         tt1++;
         tong++;
       }
-      if (hd.TrangThaiHD == 2) {
+      if (hd.TrangThai == 2) {
         tt2++;
         tong++;
       }
