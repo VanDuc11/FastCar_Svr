@@ -14,13 +14,13 @@ class LoginController {
         let email  = req.body.Email;
         let pass = req.body.MatKhau;
         // lấy dữ liệu từ server
-        User.findOne({ Email:  email, MatKhau: pass })
+        User.findOne({ UserName: email, MatKhau: pass })
             .then((result) => {
                 if (result) {
                     req.session.email = {result};
                     console.log(req.session.email);
                     // Nếu tìm thấy user và password trong cơ sở dữ liệu
-                    res.redirect('/home');
+                    res.redirect('/quanlyxe');
                 } else {
                     // Nếu không tìm thấy user và password trong cơ sở dữ liệu
                     res.render('login', { layout: 'temple_login' });

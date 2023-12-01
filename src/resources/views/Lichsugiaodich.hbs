@@ -6,85 +6,119 @@
     <div id="clock"></div>
   </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="tile-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
 
           <div class="row element-button">
             <div class="col-sm-2">
 
               <a class="btn btn-add btn-sm" href="/thanhtoan" title="Thêm">
-               Thanh toán</a>
+                Thanh toán</a>
             </div>
-             <div class="end" style="margin-left: 750px;">
-                            <form action="/chuyenxe" method="get" class="row">
-                                <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
-                                    <label class="control-label1">Từ ngày</label>
-                                    <input class="form-control1" type="date" name="start_date" required>
-                                </div>
-                                <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
-                                    <label class="control-label1">Đến ngày</label>
-                                    <input class="form-control1" type="date" name="end_date" required>
-                                </div>
-                                <div class="col-sm-22" style="margin-left: 20px;  ">
-                                    <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
+            <div class="col-md-5"></div>
+
+
+            <form action="Lichsugiaodich" method="get" class="row" style="margin-right:1px;">
+              <div class="col-sm-22" style="margin-left: 20px; font-weight: bold ;font-size: 15px;">
+                <label class="control-label1">Từ ngày</label>
+                <input class="form-control1" type="date" name="start_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;font-weight: bold; font-size: 15px;">
+                <label class="control-label1">Đến ngày</label>
+                <input class="form-control1" type="date" name="end_date" required>
+              </div>
+              <div class="col-sm-22" style="margin-left: 20px;  ">
+                <button class="btn btn-tim-kiem" type="submit" style="color: #fff; background-color: #38a927; width: 80px; height: 30px;
                                      display: flex; justify-content: center; align-items: center;">Tìm kiếm</button>
-                                </div>
-                            </form>
-
-
-                        </div>
+              </div>
+            </form>
           </div>
-          
-          
+          <div class="row">
+            <a class="col-md-6 col-lg-3" id="all">
+              <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
+                <div class="info">
+                  <h4>Tổng Giao dịch</h4>
+                  <p><b id="tong"></b></p>
+                </div>
+              </div>
+            </a>
+            <a class="col-md-6 col-lg-3" id="hy">
+              <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
+                <div class="info">
+                  <h4>Từ chối</h4>
+                  <p><b id="huy"></b></p>
+                </div>
+              </div>
+            </a>
+            <a class="col-md-6 col-lg-3" id="ht">
+              <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-check-square'></i>
+                <div class="info">
+                  <h4> Đã thanh toán</h4>
+                  <p><b id="hoanthanh"></b></p>
+                </div>
+              </div>
+            </a>
+
+          </div>
+          <div class="row element-button">
+          </div>
+
           <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
             id="sampleTable">
             <thead>
               <tr>
-                <th style="text-align: center;"width="10">STT</th>
-                <th style="text-align: center;"width="100">Tên khách hàng</th>   
-              <th style="text-align: center;"width="100">Tên chủ TK</th>
-                <th style="text-align: center;"width="100">Ngân hàng</th>
-                <th style="text-align: center;"width="100">Số tài khoản</th>
-                <th  style="text-align: center;"width="80">Số tiền rút</th>
-                <th  style="text-align: center;"width="100">Nôi dung giao dịch</th>
-                <th  style="text-align: center;"width="80">Thời gian</th>
-                <th style="text-align: center;"width="80">Trạng thái</th>
-                <th style="text-align: center;"width="80">Chức năng</th>
+                <th style="text-align: center;" width="10">STT</th>
+                <th style="text-align: center;" width="100">Tên khách hàng</th>
+                <th style="text-align: center;" width="100">Tên chủ TK</th>
+                <th style="text-align: center;" width="100">Ngân hàng</th>
+                <th style="text-align: center;" width="100">Số tài khoản</th>
+                <th style="text-align: center;" width="80">Số tiền rút</th>
+                <th style="text-align: center;" width="100">Nôi dung giao dịch</th>
+                <th style="text-align: center;" width="80">Thời gian</th>
+                <th style="text-align: center;" width="80">Trạng thái</th>
+                <th style="text-align: center;" width="80">Chức năng</th>
 
               </tr>
             </thead>
             <tbody>
-            {{#each data}}
-              <tr >
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}</td>
-                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{this.NganHang.TenChuTK}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" >{{this.NganHang.TenNH}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> {{this.NganHang.SoTK}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD" >{{this.SoTienGD}}</td>
+              {{#each data}}
+              <tr>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}
+                </td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}
+                </td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">
+                  {{this.NganHang.TenChuTK}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NganHang.TenNH}}
+                </td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> {{this.NganHang.SoTK}}
+                </td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD">
+                  {{this.SoTienGD}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"  class="HSD">{{this.ThoiGian}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;" >   <span class="TrangThai"
-                                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
-             
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button
-                  class="btn btn-info" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP" onclick="chitiet(`{{this._id}}`)">Xem chi
-                  tiết</button></td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="HSD">
+                  {{this.ThoiGian}}</td>
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <span class="TrangThai"
+                    style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+
+                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info"
+                    href="/thanhtoan/ChiTietLichSu/{{this._id}}">Xem chi
+                    tiết</a></td>
 
 
               </tr>
-               {{/each }}
+              {{/each }}
 
-              </tbody>
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-  </main>
-  
+  </div>
+</main>
+
 <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
   data-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -99,32 +133,32 @@
           </div>
         </div>
         <div class="row">
-          
+
           <div class="form-group col-md-6">
             <label class="control-label">Khách hàng</label>
             <div class="form-control">
               <p><b id="User"></b></p>
             </div>
           </div>
-             <div class="form-group col-md-6">
+          <div class="form-group col-md-6">
             <label class="control-label">Số điện thoại</label>
             <div class="form-control">
               <p><b id="SDT"></b></p>
             </div>
           </div>
-             <div class="form-group col-md-6">
+          <div class="form-group col-md-6">
             <label class="control-label">Tên chủ tài khoản</label>
             <div class="form-control">
               <p><b id="User"></b></p>
             </div>
           </div>
-             <div class="form-group col-md-6">
+          <div class="form-group col-md-6">
             <label class="control-label">Số tài khoản</label>
             <div class="form-control">
               <p><b id="User"></b></p>
             </div>
           </div>
-             <div class="form-group col-md-6">
+          <div class="form-group col-md-6">
             <label class="control-label">Ngân hàng</label>
             <div class="form-control">
               <p><b id="User"></b></p>
@@ -139,7 +173,7 @@
           <div class="form-group col-md-6">
             <label class="control-label">Thời gian</label>
             <div class="form-control">
-              <p><b id="ThoiGian" ></b></p>
+              <p><b id="ThoiGian"></b></p>
             </div>
           </div>
           <div class="form-group col-md-6">
@@ -151,10 +185,10 @@
           {{!-- <div class="form-group col-md-6">
             <label class="control-label">Trạng thái</label>
             <div class="form-control">
-              <p><b class="TrangThai" ></b></p>
+              <p><b class="TrangThai"></b></p>
             </div>
           </div> --}}
-         
+
         </div>
         <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left: 400px;">Đóng</a>
 
@@ -164,7 +198,58 @@
   </div>
 </div>
 <script>
+
+
+  load()
+  async function load() {
     // số tứ tự
+    var stt = 0
+    const stt1 = document.querySelectorAll(".stt");
+    for (let i = 0; i < stt1.length; i++) {
+      stt1[i].innerText = i + 1;
+    }
+    var response = null;
+    var tt0 = 0;
+    var tt1 = 0;
+    var tt2 = 0;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const startDate = urlParams.get('start_date');
+    const endDate = urlParams.get('end_date');
+    if (urlParams.has('start_date') && urlParams.has('end_date')) {
+      document.getElementById('ht').href = `Lichsugiaodich?start_date=${startDate}&end_date=${endDate}&TrangThai=${"1"}`;
+      document.getElementById('hy').href = `Lichsugiaodich?start_date=${startDate}&end_date=${endDate}&TrangThai=${"2"}`;
+      document.getElementById('all').href = `Lichsugiaodich?start_date=${startDate}&end_date=${endDate}&TrangThai=${"1,2"}`;
+      response = await fetch(`/api/lsgd/loc?start_date=${startDate}&end_date=${endDate}`).then(response => response.json());
+    } else {
+      document.getElementById('ht').href = `Lichsugiaodich?TrangThai=${"1"}`;
+      document.getElementById('hy').href = `Lichsugiaodich?TrangThai=${"2"}`;
+      document.getElementById('all').href = `Lichsugiaodich?TrangThai=${"1,2"}`;
+      response = await fetch('/api/lsgd/loc').then(response => response.json());
+
+    }
+    var tong = 0;
+    response.forEach(hd => {
+      // hd chờ duyệt
+      
+      if (hd.TrangThai == 1) {
+        tt1++;
+        tong++;
+      }
+      if (hd.TrangThai == 2) {
+        tt2++;
+        tong++;
+      }
+
+    });
+    document.getElementById('huy').innerText = tt2 + " Yêu cầu";
+    document.getElementById('hoanthanh').innerText = tt1 + " Khách hàng";
+    document.getElementById('tong').innerText = tong + " Giao dịch";
+
+  }
+</script>
+<script>
+  // số tứ tự
   var stt = 0
   const stt1 = document.querySelectorAll(".stt");
   stt1.forEach((i) => {
@@ -173,63 +258,63 @@
   })
   console.log(stt1.length)
 
-load_data()
+  load_data()
   async function load_data() {
-  var TrangThai = document.querySelectorAll('.TrangThai');
-  var HSD = document.querySelectorAll(".HSD");
-  HSD.forEach((i) => {
-    const date = new Date(i.innerHTML);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const formattedDate = day + '/' + month + '/' + year
-    i.innerHTML = formattedDate
-  })
-  TrangThai.forEach((i) => {
-           if (i.innerHTML == 0) {
-                i.innerHTML = "Chờ thanh toán"
-                i.style.background = "#FDE1C3"
-            } else if (i.innerHTML == 1 ) { 
-                i.innerHTML = "Đã thanh toán"
-                i.style.background = "#B9FFD3"
-            } else if (i.innerHTML == 2) { 
-                i.innerHTML = "Từ chối"
-                i.style.background = "#F9BABA"
-            }
-        })
+    var TrangThai = document.querySelectorAll('.TrangThai');
+    var HSD = document.querySelectorAll(".HSD");
+    HSD.forEach((i) => {
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+    })
+    TrangThai.forEach((i) => {
+      if (i.innerHTML == 0) {
+        i.innerHTML = "Chờ thanh toán"
+        i.style.background = "#FDE1C3"
+      } else if (i.innerHTML == 1) {
+        i.innerHTML = "Đã thanh toán"
+        i.style.background = "#B9FFD3"
+      } else if (i.innerHTML == 2) {
+        i.innerHTML = "Từ chối"
+        i.style.background = "#F9BABA"
+      }
+    })
   }
 
 </script>
-  <script>
-        const SoTienGD = document.querySelectorAll(".SoTienGD");
-
-for (const soTienElement of SoTienGD) {
-  const soTienString = soTienElement.textContent.trim();
-  if (!isNaN(soTienString)) {
-    const soTienNumber = parseFloat(soTienString);
-    if (soTienNumber >= 0) {
-      const formattedPrice = new Intl.NumberFormat('vi-VN').format(soTienNumber, {
-        minimumFractionDigits: 2,
-        decimal: ',',
-        thousandsSeparator: '.',
-      });
-      soTienElement.textContent = formattedPrice + " đ";
-    } else {
-      console.error("Invalid transaction amount:", soTienString);
-    }
-  } else {
-    console.error("Invalid transaction amount format:", soTienString);
-  }
-}
-      </script>
 <script>
-    async function chitiet(id) {
+  const SoTienGD = document.querySelectorAll(".SoTienGD");
+
+  for (const soTienElement of SoTienGD) {
+    const soTienString = soTienElement.textContent.trim();
+    if (!isNaN(soTienString)) {
+      const soTienNumber = parseFloat(soTienString);
+      if (soTienNumber >= 0) {
+        const formattedPrice = new Intl.NumberFormat('vi-VN').format(soTienNumber, {
+          minimumFractionDigits: 2,
+          decimal: ',',
+          thousandsSeparator: '.',
+        });
+        soTienElement.textContent = formattedPrice + " đ";
+      } else {
+        console.error("Invalid transaction amount:", soTienString);
+      }
+    } else {
+      console.error("Invalid transaction amount format:", soTienString);
+    }
+  }
+</script>
+<script>
+  async function chitiet(id) {
     const response = await fetch(`/api/lsgd/find/${id}`).then(response => response.json());
     document.getElementById("User").innerHTML = response.User.UserName
-   document.getElementById("SDT").innerHTML = response.User.SDT
+    document.getElementById("SDT").innerHTML = response.User.SDT
     document.getElementById("NoiDung").innerHTML = response.NoiDung
     document.getElementById("SoTienGD").innerHTML = response.SoTienGD
-      document.getElementById("ThoiGian").innerHTML = response.ThoiGian
+    document.getElementById("ThoiGian").innerHTML = response.ThoiGian
 
     // format giá 
     var SoTienGD = document.querySelector('#SoTienGD');
@@ -241,82 +326,85 @@ for (const soTienElement of SoTienGD) {
     SoTienGD.innerHTML = formattedPrice + " đ"
 
     // format Ngày ================
-    var ThoiGian= document.querySelector("#ThoiGian");
+    var ThoiGian = document.querySelector("#ThoiGian");
     const date = new Date(ThoiGian.innerHTML);
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const formattedDate = day + '/' + month + '/' + year
     ThoiGian.innerHTML = formattedDate
-   SoTienGD.innerHTML = formattedPrice + " đ"
+    SoTienGD.innerHTML = formattedPrice + " đ"
     // validate trạng thái
     const TrangThai = document.querySelector('#TrangThai');
-    
-  if (TrangThai.innerHTML == 0) {
-                TrangThai.innerHTML = "Chờ thanh toán"
-                TrangThai.style.background = "#F9BABA"
-            } else if (TrangThai.innerHTML == 1 ) { 
-                TrangThai.innerHTML = "Đã thanh toán"
-                TrangThai.style.background = "#02790C"
-            } else if (TrangThai.innerHTML == 2) { 
-                TrangThai.innerHTML = "Tù chối"
-                TrangThai.style.background = "#A90312"
-            }
+
+    if (TrangThai.innerHTML == 0) {
+      TrangThai.innerHTML = "Chờ thanh toán"
+      TrangThai.style.background = "#F9BABA"
+    } else if (TrangThai.innerHTML == 1) {
+      TrangThai.innerHTML = "Đã thanh toán"
+      TrangThai.style.background = "#02790C"
+    } else if (TrangThai.innerHTML == 2) {
+      TrangThai.innerHTML = "Tù chối"
+      TrangThai.style.background = "#A90312"
+    }
   }
- 
+
 </script>
- 
-  <script src="/public/js/jquery-3.2.1.min.js"></script>
-    <script src="/public/js/popper.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="src/jquery.table2excel.js"></script>
-    <script src="/publicjs/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/public/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
- 
- 
-
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
-    
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
 
 
-    //Modal
-    {{!-- $("#show-emp").on("click", function () {
-      $("#ModalUP").modal({ backdrop: false, keyboard: false })
-    }); --}}
-  </script>
+
+  //EXCEL
+  // $(document).ready(function () {
+  //   $('#').DataTable({
+
+  //     dom: 'Bfrtip',
+  //     "buttons": [
+  //       'excel'
+  //     ]
+  //   });
+  // });
+
+
+  //     //Sao chép dữ liệu
+  //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+  // copyTextareaBtn.addEventListener('click', function(event) {
+  //   var copyTextarea = document.querySelector('.js-copytextarea');
+  //   copyTextarea.focus();
+  //   copyTextarea.select();
+
+  //   try {
+  //     var successful = document.execCommand('copy');
+  //     var msg = successful ? 'successful' : 'unsuccessful';
+  //     console.log('Copying text command was ' + msg);
+  //   } catch (err) {
+  //     console.log('Oops, unable to copy');
+  //   }
+  // });
+
+
+  //Modal
+  {
+    {
+      !--$("#show-emp").on("click", function () {
+        $("#ModalUP").modal({ backdrop: false, keyboard: false })
+      }); --}
+  }
+</script>
 </body>

@@ -14,7 +14,7 @@
                  <form action="/login" method="post" class="login-form">
                     <div class="wrap-input100 validate-input">
                         <input class="input100" type="text" placeholder="Tài khoản quản trị" name="Email"
-                            id="email">
+                            id="Email">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class='bx bx-user'></i>
@@ -22,20 +22,19 @@
                     </div>
                     <div class="wrap-input100 validate-input">
                         <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
-                            name="MatKhau" id="MatKhau">
+                            name="MatKhau" id="MatKhau" required>
                         <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class='bx bx-key'></i>
                         </span>
                     </div>
-
                     <!--=====ĐĂNG NHẬP======-->
                     <div class="container-login100-form-btn">
                         <input  type="submit"  value="Đăng nhập"  />
                         
                     </div>
-                  
+                    <button type="submit">login</button>
                
                 </form>
               
@@ -44,7 +43,37 @@
         </div>
     </div>
 </div>
+<script>
+    // Lấy thẻ HTML của các biểu mẫu đăng nhập và đăng ký
+    const registerForm = document.querySelector('.register-form');
+    const loginForm = document.querySelector('.login-form');
 
+    // Lấy thẻ HTML của các liên kết "Create an account" và "Sign In"
+    const createAccountLink = document.querySelector('.login-form .message a');
+    const signInLink = document.querySelector('.register-form .message a');
+
+    // Ẩn biểu mẫu đăng ký và hiển thị biểu mẫu đăng nhập ban đầu
+    registerForm.style.display = 'none';
+    loginForm.style.display = 'block';
+
+    // Khi người dùng nhấp vào liên kết "Create an account"
+    createAccountLink.addEventListener('click', function (event) {
+        event.preventDefault(); // Ngăn chặn trình duyệt điều hướng đến liên kết
+
+        // Ẩn biểu mẫu đăng nhập và hiển thị biểu mẫu đăng ký
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+    });
+
+    // Khi người dùng nhấp vào liên kết "Sign In"
+    signInLink.addEventListener('click', function (event) {
+        event.preventDefault(); // Ngăn chặn trình duyệt điều hướng đến liên kết
+
+        // Ẩn biểu mẫu đăng ký và hiển thị biểu mẫu đăng nhập
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+    });
+</script>
 <!--Javascript-->
 <script src="/src/vendor/js/main.js"></script>
 <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>

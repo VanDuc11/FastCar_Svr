@@ -79,7 +79,7 @@
               <th style="text-align: center; width: 80px;">Ảnh</th>
               <th style="text-align: center; width: 50px;">Ngày đăng</th>
               <th style="text-align: center; width: 100px;">Nội dung</th>
-              <th style="text-align: center; width: 50px;">Chức năng</th>
+              <th style="text-align: center; width: 10px;">Chức năng</th>
             </tr>
           </thead>
           <tbody>
@@ -176,7 +176,7 @@
 <script>
   async function chitiet(id) {
     const response = await fetch(`/api/thongbao/find/${id}`).then(response => response.json());
-
+    console.log(response)
     document.getElementById("titlemodal").innerHTML = "Thông báo khuyến mãi"
     document.getElementById("MaGiamGia").innerHTML = response.MaGiamGia
     document.getElementById("NoiDung").innerHTML = response.NoiDung

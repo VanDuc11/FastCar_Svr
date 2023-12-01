@@ -57,6 +57,20 @@ class ThongBaoController {
         })
       })
   }
+  async findtheoid(req, res) {
+    await ThongBao.findById( req.params.id)
+      .then((result) => {
+    console.log(result)
+
+        res.status(200).json(result)
+      }).catch((error) => {
+        console.log(error);
+        res.status(400).json({
+          success: false,
+          message: 'Không thành công',
+        })
+      })
+  }
   async CreateThongBao(req, res) {
     const img = path.basename(req.file.path);
     const randomBytes = crypto.randomBytes(6);

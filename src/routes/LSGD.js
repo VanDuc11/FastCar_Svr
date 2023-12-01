@@ -18,6 +18,7 @@ router.get('/', controller.index);
 
 router.get('/ChiTietThanhToan/:id', controller.chitietthanhtoan);
 router.get('/Lichsugiaodich', controller.Lichsugiaodich);
+router.get('/ChiTietLichSu/:id', controller.CTLichSu);
 router.get('/find/:id', controller.find_id);
 router.get('/list', controller.getLSGD);
 router.get('/loc', controller.findthanhtoan);
