@@ -8,8 +8,8 @@ const FavoriteCar = require('./FavoriteCar');
 const LSGD = require('./LSGD');
 const NganHangg = require('./NganHang');
 const ThongKe = require('./ThongKe');
-const Home = require('./Home');
 const loginRouter = require('./login');
+const loginRouter2 = require('./login_copy');
 let bodyparser = require('body-parser');
 
 const router = (app) =>{
@@ -18,7 +18,7 @@ const router = (app) =>{
     }))
 
     app.use('/',loginRouter);
-    app.use('/home', Home);  
+    app.use('/login',loginRouter2);
     app.use('/quanlyxe', Xe);
     app.use('/chuyenxe',Hoadon_);
     app.use('/thongbao', ThongBao);

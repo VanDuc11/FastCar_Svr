@@ -16,7 +16,7 @@ class LSGDController {
                 }
             };
         }
-        await lsgd.find(check)
+        await lsgd.find({ check ,TrangThai :0}) 
         .populate({ path: 'User', model: 'User' })
         .populate({ path: 'NganHang', model: 'NganHang' }).sort({_id: -1})
         .then((result) => {
@@ -46,11 +46,23 @@ class LSGDController {
  
 
     async Lichsugiaodich(req, res) {
-        await lsgd.find({ TrangThai :1})
+        let check = null;
+        if (typeof (req.query.TrangThai) != 'undefined') {
+            check = { TrangThai: req.query.TrangThai.split(',')};
+        }
+        if (req.query.start_date != undefined && req.query.end_date) {
+            check = {
+                "ThoiGian": {
+                    $gte: new Date(req.query.start_date),
+                    $lte: new Date(req.query.end_date),
+                }
+            };
+        }
+        await lsgd.find({check,TrangThai :[1,2]})
             .populate({ path: "User", model: "User" })
+            .populate({ path: 'NganHang', model: 'NganHang' }).sort({_id: -1})
             .sort({ _id: -1 })
             .then((result) => {
-
                 res.status(200).render("Lichsugiaodich", {
                     data: result.map((res) => res.toJSON()),
                 });
@@ -61,6 +73,16 @@ class LSGDController {
                     message: error.message,
                 });
             });
+    }
+    async CTLichSu(req, res) {
+        await lsgd.find()
+            .populate({ path: "User", model: "User" })
+            .populate({ path: 'NganHang', model: 'NganHang' }).sort({_id: -1})
+            .then((result) => {
+                res.status(200).render('ChiTietLichSu', {
+                    data: result.map(res => res.toJSON()),
+                })
+            })
     }
     async duyetthanhtoan(req, res) {
         const id = req.params.id;
