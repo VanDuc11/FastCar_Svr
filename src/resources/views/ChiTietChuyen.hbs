@@ -12,7 +12,8 @@
         <div class="row">
             <h2 class="col-md-8">Thông tin hóa đơn</h2>
             <p class="col-md-2" style="background: #F9BABA; width: 200px; height: 40px; text-align: center; 
-                padding-top: 10px; border-radius: 10px; color: white;margin-left: 120px; font-weight: bold;" id="TinhTrang">
+                padding-top: 10px; border-radius: 10px; color: white;margin-left: 120px; font-weight: bold;"
+                id="TinhTrang">
                 Chưa thanh toán</p>
         </div>
 
@@ -93,7 +94,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label >Ngày thuê: <span class="HSD">{{this.NgayThue}}</span> </label>
+                    <label>Ngày thuê: <span class="HSD">{{this.NgayThue}}</span> </label>
                 </div>
 
                 <div class="col-md-12">
@@ -125,7 +126,12 @@
                             id="TrangThai">{{this.TrangThaiHD}}</span></label>
                 </div>
             </div>
-
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label>Thế chấp: <span
+                            class="TheChap">{{this.TheChap}}</span></label>
+                </div>
+            </div>
         </div>
 
         <div class="row element-button">
@@ -189,29 +195,42 @@
         </form>
         <BR>
 
-  
 
-          <button class="btn btn-excel btn-sm" onclick="window.print()"><i class="fas fa-file-pdf"></i>Xuất PDF</button>
-   
+
+        <button class="btn btn-excel btn-sm" onclick="window.print()"><i class="fas fa-file-pdf"></i>Xuất PDF</button>
+
         <a class="btn btn-cancel" data-dismiss="modal" href="/chuyenxe">Quay lại</a>
     </div>
 
 </main>
 <script>
-  load_data()
-  async function load_data() {
-    var HSD = document.querySelectorAll(".HSD");
-    HSD.forEach((i) => {
-      const date = new Date(i.innerHTML);
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
-      const formattedDate = day + '/' + month + '/' + year
-      i.innerHTML = formattedDate
+    load_data()
+    async function load_data() {
+        var HSD = document.querySelectorAll(".HSD");
+        HSD.forEach((i) => {
+            const date = new Date(i.innerHTML);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const formattedDate = day + '/' + month + '/' + year
+            i.innerHTML = formattedDate
+        })
+    }
+     var TheChap = document.querySelectorAll('.TheChap');
+    TheChap.forEach((i) => {
+       if ( i.innerHTML === "true") {
+      i.innerHTML = "Có thế chấp"
+     
+   
+    } else {
+       i.innerHTML = "Ko thế chấp"
+   
+      
+    }
     })
-  }
 
 </script>
+
 <!-- Essential javascripts for application to work-->
 <script src="/public/js/jquery-3.2.1.min.js"></script>
 <script src="/public/js/popper.min.js"></script>
@@ -277,31 +296,31 @@
 
         TinhTrang.innerHTML = "Đã đặt cọc"
         TinhTrang.style.background = "#B9FFD3"
-        TinhTrang.style.color="#24AE58"
+        TinhTrang.style.color = "#24AE58"
     } else if (TrangThai.innerHTML == 4) {
         TrangThai.innerHTML = "Chủ xe giao xe thành công"
         TrangThai.style.color = '#22AD56'
         TinhTrang.innerHTML = "Đang hoạt động"
         TinhTrang.style.background = "#B9FFD3"
-        TinhTrang.style.color="#24AE58"
+        TinhTrang.style.color = "#24AE58"
     } else if (TrangThai.innerHTML == 5) {
         TrangThai.innerHTML = "Khách hàng trả xe thành công"
         TrangThai.style.color = '#22AD56'
         TinhTrang.innerHTML = "Đang hoạt động"
         TinhTrang.style.background = "#B9FFD3"
-        TinhTrang.style.color="#24AE58"
+        TinhTrang.style.color = "#24AE58"
     } else if (TrangThai.innerHTML == 6) {
         TrangThai.innerHTML = "Chủ xe nhận xe thành công"
         TrangThai.style.color = '#22AD56'
         TinhTrang.innerHTML = "Đang hoạt động"
         TinhTrang.style.background = "#B9FFD3"
-        TinhTrang.style.color="#24AE58"
+        TinhTrang.style.color = "#24AE58"
     } else if (TrangThai.innerHTML == 7) {
         TrangThai.innerHTML = "Đơn hàng đã hoàn thành"
         TrangThai.style.color = '#22AD56'
         TinhTrang.innerHTML = "Hoàn thành"
         TinhTrang.style.background = "#B9FFD3"
-        TinhTrang.style.color="#24AE58"
+        TinhTrang.style.color = "#24AE58"
     }
 
 </script>

@@ -11,31 +11,34 @@
         <div class="tile-body">
 
 
-          <div class="row" style="margin-left: 400px;">
+          <div class="row"  >
             <div class="col-md-4">
-              <div class="col-md-12" style="margin-left: 100px;">
+              <div class="col-md-12" style="margin-left: 110px;">
                 <h2 style="margin-bottom: 0px;">FastCar</h2>
               </div>
-              <p style="margin-bottom: 0px;margin-left: 69px;font-size: 17px;">Công ty cổ phần FastCar</p>
+              <p style="margin-bottom: 0px;margin-left: 85px;font-size: 17px;">Công ty cổ phần FastCar</p>
               <p style="white-space: nowrap;margin-bottom: 0px;font-size: 17px;">Văn phòng số 06,tầng 8,Tòa
                 KeangnamLandmark</p>
-              <p style="white-space: nowrap;margin-bottom: 0px;margin-left: 39px;font-size: 17px;"> 72 Phạm Hùng,Nam Từ
+              <p style="white-space: nowrap;margin-bottom: 0px;margin-left: 44px;font-size: 17px;"> 72 Phạm Hùng,Nam Từ
                 Liêm,Hà Nội</p>
-              <p style="margin-bottom: 0px;margin-left: 69px;font-size: 17px;">Email:fastcar@gmail.com</p>
-              <p style="margin-bottom: 0px;margin-left: 85px;font-size: 17px;">Số ĐT: 0968636892</p>
-              <p style="margin-left: 95px;font-size: 17px;">PHIẾU HÓA ĐƠN</p>
-
+              <p style="margin-bottom: 0px;margin-left: 75px;font-size: 17px;">Email:fastcar@gmail.com</p>
+              <p style="margin-bottom: 0px;margin-left: 95px;font-size: 17px;">Số ĐT: 0968636892</p>
+                <p style="margin-bottom: 0px;margin-left: 110px;font-size: 17px;font-weight: bold;">PHIẾU HÓA ĐƠN</p>
             </div>
           </div>
 
           <div class="row element-button">
           </div>
-          <BR>
+          
           {{#each data}}
-          <div class="end" style="margin-left: 470px;">
+          <div class="end" style="margin-left: 70px;">
+            
             <div class="row">
+              
               <div class="col-md-4">
+                
                 <div class="col-md-12">
+                     
                   <label style="font-size: 17px;">Mã hóa đơn:
                     {{this.MaLSGD}}</label>
 
@@ -44,7 +47,8 @@
                   <label style="font-size: 17px;">Thời gian tạo: <span class="HSD"> {{this.ThoiGian}}</span></label>
                 </div>
 
-
+              </div>
+              <div class="col-md-4">
                 <div class="col-md-12">
                   <label style="white-space: nowrap;font-size: 17px;">Tên khách hàng:
                     {{this.User.UserName}} </label>
@@ -53,56 +57,114 @@
                   <label style="font-size: 17px;">Số điện thoại:
                     {{this.User.User.SDT}}</label>
                 </div>
+              </div>
 
+
+             
+            </div>
+            <div class="row">
+               <div class="col-md-4">
                 <div class="col-md-12">
                   <label style="white-space: nowrap;font-size: 17px;">Email:
                     {{this.User.Email}}</label>
                 </div>
-
-
                 <div class="col-md-12">
                   <label style="font-size: 17px;">Tên chủ tài khoản:
                     {{this.NganHang.TenChuTK}}</label>
                 </div>
-
-            <div class="col-md-12">
-              <label style="font-size: 17px;">Ngân hàng:
-                {{this.NganHang.TenNH}} </label>
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Ngân hàng:
+                    {{this.NganHang.TenNH}} </label>
+                </div>
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Số Tk ngân hàng:
+                    {{this.NganHang.SoTK}}</label>
+                </div>
+              </div>
+             
+          
             </div>
-            <div class="col-md-12">
-              <label style="font-size: 17px;">Số Tk ngân hàng:
-                {{this.NganHang.SoTK}}</label>
-            </div>
-
-
-            <div class="col-md-12">
-              <label style="font-size: 17px;">Số tiền: <span class="SoTienGD"> {{this.SoTienGD}}</span></label>
-            </div>
-            <div class="col-md-12">
-              <label style="white-space: nowrap;font-size: 17px;">Nội dung:
-                {{this.NoiDung}}</label>
-            </div>
-            <div class="col-md-12">
-              <label style="font-size: 17px;"> Trạng thái: <span id="TrangThai"> {{this.TrangThai}}</span> </label>
-            </div>
+              <div class="row">
+                    <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 17px;"> Trạng thái: <span id="TrangThai"> {{this.TrangThai}}</span> </label>
+                </div>          
+              </div>
+                 <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Số tiền: <span class="SoTienGD"> {{this.SoTienGD}}</span></label>
+                </div>
+                
+                     </div> 
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+             <div class="col-md-12">
+                  <label style="font-size: 17px;" id="show-emp" data-toggle="modal" data-target="#ModalUP2">Ảnh giao
+                    dịch</label>
+                </div>
+                </div>
+        <div class="col-md-4">
+           <div class="col-md-12">
+                  <label style="white-space: nowrap;font-size: 17px;">Nội dung:
+                    {{this.NoiDung}}</label>
+                </div>
+              </div>
+             
+      </div>
           </div>
-  </div>
 
-  </div>
 
-       
+
+
 
         {{/each}}
 
         <div class="row element-button">
         </div>
         <BR>
-        <div style="margin-left: 500px;">
+        <div style="margin-left: 10px;">
 
           <button class="btn btn-excel btn-sm" onclick="window.print()"><i class="fas fa-file-pdf"></i>Xuất PDF</button>
-            <a class="btn btn-cancel" data-dismiss="modal" href="/ChiTietLichSu">Quay lại</a>
+          <a class="btn btn-cancel" href="/thanhtoan/Lichsugiaodich">Quay lại</a>
         </div>
-        
+
+
+              {{!-- ẢNH GIAO DỊCH --}}
+        <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+          data-keyboard="false">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <div class="row">
+                  <div class="form-group  col-md-12">
+                    <span class="thong-tin-thanh-toan">
+                      <h5>Ảnh thanh toán thành công</h5>
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6" style=" display: flex;
+                 flex-direction: column;">
+                    <div class="images" style=" display: flex; ">
+                      <img src="{{this.Avatar}}" alt="" height="280px" width="400px" style="margin-left:290px;">
+                    </div>
+                  </div>
+                  <BR>
+                  <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+                  <BR>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
 </main>
 <script>
   const btnExportPDF = document.querySelector('a.btn-excel.btn-sm');
@@ -138,8 +200,11 @@
       i.innerHTML = formattedDate
     })
     const trangthai = document.getElementById("TrangThai");
-    const duyet = document.getElementById("button-duyet");
-    const tuchoi = document.getElementById("button-tuchoi");
+    const yeucau = document.getElementById("yeucau");
+    const thanhtoan = document.getElementById("thanhtoanhoadon");
+
+  
+
 
     if (trangthai.innerHTML == 0) {
       trangthai.innerHTML = "Chờ thanh toán"
@@ -152,7 +217,6 @@
       duyet.style.display = "none"
       tuchoi.style.display = "none"
     }
-
   }
 
 

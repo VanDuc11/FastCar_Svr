@@ -115,18 +115,21 @@
           <p><b id="dangHD"></b></p>
         </div>
       </div>
-      
+            <div class="form-group col-md-3">
+        <label class="control-label">Thế chấp</label>
+        <div class="form-control">
+          <p><b class="TheChap">{{this.TheChap}}</b></p>
+        </div>
+      </div>
       <div class="form-group col-md-3">
         <label class="control-label">Địa chỉ Xe</label>
         <textarea class="form-control">{{this.DiaChiXe}}</textarea>
       </div>
       <div class="form-group col-md-4">
         <label class="control-label">Mô tả</label>
-        <textarea class="form-control" style=" width: 750px;"readonly >{{this.MoTa}}</textarea>
+        <textarea class="form-control" style=" width: 600px;"readonly >{{this.MoTa}}</textarea>
       </div>
-      <div class="form-group col-md-3">
-
-      </div>
+   
 
       <div class="end"  >
         
@@ -153,10 +156,7 @@
         </div>
       </div>
 
-      <div class="form-group col-md-12">
-
-
-      </div>
+   
       <div class="form-group col-md-12">
         <a class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
           onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
@@ -362,7 +362,24 @@
 
   </div>
 </main>
+<script>
+  load_data()
+  async function load_data() {
 
+   var TheChap = document.querySelectorAll('.TheChap');
+    TheChap.forEach((i) => {
+       if ( i.innerHTML === "true") {
+      i.innerHTML = "Có thế chấp"
+   
+   
+    } else {
+       i.innerHTML = "Ko thế chấp"
+   
+      
+    }
+    })
+  }
+</script>
 <script>
   const textarea = document.querySelector("textarea");
 textarea.setAttribute("readonly", true);
