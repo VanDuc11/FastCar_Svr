@@ -6,6 +6,7 @@ var path = require('path');
 const { log } = require('console');
 const { parse } = require('querystring');
 const admin = require('firebase-admin');
+const ThongBao = require('../models/ThongBao');
 
 var serviceAccount = require("../../../myotp-76cf9-firebase-adminsdk-pgy17-f4b5071351.json");
 
@@ -19,7 +20,6 @@ const socket = io("http://localhost:9001");
 
 class HoaDonController_ {
 
-   
 
     async index(req, res) {
         var query = null;
@@ -315,7 +315,8 @@ class HoaDonController_ {
                     populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
                 }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
                 .then((result) => {
-                    res.status(200).json(result)
+                    console.log("data: " + result.length);
+                    return res.status(200).json(result);
                 })
                 .catch((error) => {
                     res.status(400).json({
@@ -350,6 +351,8 @@ class HoaDonController_ {
             LoiNhan: req.body.LoiNhan,
             GioTaoHD: req.body.GioTaoHD,
             TimeChuXeXN: req.body.TimeChuXeXN,
+            HinhAnhChuXeGiaoXe: [],
+            HinhAnhKhachHangTraXe: [],
             TrangThaiHD: 1,
             LyDo: "",
             HaveFeedback: false
@@ -361,9 +364,15 @@ class HoaDonController_ {
             let title = 'Yêu cầu thuê xe mới';
             let contentNotify = "Xe " + car.MauXe + " của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!"
             // let url_image = "https:///fastcar-ulwr.onrender.com/public/images/" + car.HinhAnh[0];
-            await hoadon.save().then((result) => {
+            await hoadon.save().then(async (result) => {
 
                 sendNotificationToUser(chuSH.TokenFCM, title, contentNotify);
+                const thongBao = new ThongBao({
+                    TieuDe: "Yêu cầu thuê xe thành công!",
+                    NoiDung: "Chủ xe " + car.MauXe + " đã chấp nhận yêu cầu thuê xe của bạn. Bạn vui lòng đặt cọc trước 1 tiếng để không bỏ lỡ chuyến đi này.",
+                    User: chuSH,
+                });
+                await thongBao.save();
 
                 res.status(201).json({
                     success: true,
@@ -395,12 +404,19 @@ class HoaDonController_ {
                 User: req.body.User,
                 Xe: req.body.Xe
             }
-        }).then((result) => {
+        }).then(async (result) => {
             if (trangthai == 2) {
                 let title = 'Thông báo mới';
                 let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất"
                 // let url_image = "https://fastcar-ulwr.onrender.com/public/images/" + car.HinhAnh[0];
                 sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
+
+                const thongBao = new ThongBao({
+                    TieuDe: "Yêu cầu thuê xe thành công!",
+                    NoiDung: "Chủ xe " + car.MauXe + " đã chấp nhận yêu cầu thuê xe của bạn. Bạn vui lòng đặt cọc trước 1 tiếng để không bỏ lỡ chuyến đi này.",
+                    User: khachhang,
+                });
+                await thongBao.save();
             }
 
             res.status(200).json("Sửa trạng thái HD thành công"
@@ -441,6 +457,58 @@ class HoaDonController_ {
                 res.status(400).json(err);
                 log(err);
             })
+    }
+
+    async update_HinhAnhChuXeGiaoXe(req, res) {
+        try {
+            await HoaDon.findByIdAndUpdate({ maHD: req.params.maHD },
+                {
+                    $set: {
+                        HinhAnhChuXeGiaoXe: req.files['HinhAnhChuXeGiaoXe'].map(file => file.filename)
+                    }
+                }
+            )
+                .then((result) => {
+                    res.status(200).json({
+                        success: true,
+                        messages: "Yêu cầu cập nhât thành công"
+                    });
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: err.messages
+                    });
+                })
+        } catch (error) {
+            return res.status(500).json({ success: false, error: error });
+        }
+    }
+
+    async update_HinhAnhKhachHangTraXe(req, res) {
+        try {
+            await HoaDon.findByIdAndUpdate({ maHD: req.params.maHD },
+                {
+                    $set: {
+                        HinhAnhKhachHangTraXe: req.files['HinhAnhKhachHangTraXe'].map(file => file.filename)
+                    }
+                }
+            )
+                .then((result) => {
+                    res.status(200).json({
+                        success: true,
+                        messages: "Yêu cầu cập nhât thành công"
+                    });
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: err.messages
+                    });
+                })
+        } catch (error) {
+            return res.status(500).json({ success: false, error: error });
+        }
     }
 
     async delete_allHD(req, res) {

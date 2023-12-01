@@ -64,10 +64,12 @@ class LSGDController {
     }
     async duyetthanhtoan(req, res) {
         const id = req.params.id;
+        const img = path.basename(req.file.path);
         await lsgd.updateOne({ _id: id },
             {
                 $set: {
-                    TrangThai: req.params.trangthai
+                    TrangThai: req.params.trangthai,
+                    HinhAnh: img
                 }
             }
         ).then(() => {

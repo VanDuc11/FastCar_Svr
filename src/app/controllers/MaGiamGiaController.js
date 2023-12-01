@@ -86,8 +86,6 @@ class MaGiamGiaController {
         }
     }
     async findMaGiaGia(req, res) {
-        
-        
         try {
             await MaGiamGia.find({TrangThai: true }).sort({ _id: -1 })
                 .then((result) => {

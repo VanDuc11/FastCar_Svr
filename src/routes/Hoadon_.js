@@ -22,7 +22,13 @@ router.get('/list',HoaDonController_.find_hoadon);
 router.post('/create',HoaDonController_.create_Hoadon);
 // router.post('/find_user_hoadon',HoaDonController_.find_HoaDon_User);
 router.post('/update_trangthaiHD/:maHD',HoaDonController_.update_trangthaiDH);
+
 router.post('/update_timeXNHD/:maHD',HoaDonController_.update_TimeChuSHXN);
+
+router.post('/update/hinhAnhGiaoXe/:maHD', upload.fields({ name: 'HinhAnhChuXeGiaoXe', maxCount: 2 }) ,HoaDonController_.update_HinhAnhChuXeGiaoXe);
+
+router.post('/update/hinhAnhTraXe/:maHD', upload.fields({ name: 'HinhAnhKhachHangTraXe', maxCount: 2 }) ,HoaDonController_.update_HinhAnhKhachHangTraXe);
+
 router.delete('/deleteAll', HoaDonController_.delete_allHD);
 router.delete('/delete/:id', HoaDonController_.deleteItem);
 

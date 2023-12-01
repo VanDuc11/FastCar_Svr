@@ -12,17 +12,20 @@ const Xe = new Schema({
     TieuHao: { type: Number },
     MoTa: { type: String },
     HinhAnh: { type: Array },
-    DangKyXe: { type: String},
-    DangKiem: { type: String},
-    BaoHiem: { type: String},
+    DangKyXe: { type: String },
+    DangKiem: { type: String },
+    BaoHiem: { type: String },
     DiaChiXe: { type: String },
     Latitude: { type: String },
     Longitude: { type: String },
     GiaThue1Ngay: { type: Number },
+    TheChap: { type: Boolean },
+    ThoiGianGiaoXe: { type: String },
+    ThoiGianNhanXe: { type: String },
     ChuSH: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     TrangThai: { type: Number },
     SoChuyen: { type: Number },
-    TrungBinhSao: {type: Number}
+    TrungBinhSao: { type: Number }
 }, { timestamps: true });
 
 

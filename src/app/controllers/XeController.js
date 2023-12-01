@@ -455,6 +455,7 @@ class XeController {
             BaoHiem: req.files['BaoHiem'][0].filename,
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
+            TheChap: false,
             ChuSH: req.body.ChuSH || await User.findById("6513ad0281cfc8cdaaa6f728"),
             TrangThai: 0,
             SoChuyen: 0,
@@ -485,7 +486,6 @@ class XeController {
         }
     }
     async CreateXe(req, res) {
-
         const xe = new Xe({
             BKS: req.body.BKS,
             HangXe: req.body.HangXe,
@@ -504,6 +504,9 @@ class XeController {
             Latitude: req.body.Latitude,
             Longitude: req.body.Longitude,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
+            TheChap: false,
+            ThoiGianGiaoXe: "",
+            ThoiGianNhanXe: "",
             ChuSH: req.body.ChuSH,
             TrangThai: 0,
             SoChuyen: 0,
@@ -537,7 +540,10 @@ class XeController {
                 {
                     $set: {
                         SoChuyen: req.body.SoChuyen,
-                        TrungBinhSao: req.body.TrungBinhSao
+                        TrungBinhSao: req.body.TrungBinhSao,
+                        TheChap: req.body.TheChap,
+                        ThoiGianGiaoXe: req.body.ThoiGianGiaoXe,
+                        ThoiGianNhanXe: req.body.ThoiGianNhanXe
                     }
                 }
             )
