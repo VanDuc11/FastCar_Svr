@@ -11,7 +11,7 @@
         <div class="tile-body">
 
 
-          <div class="row"  >
+          <div class="row">
             <div class="col-md-4">
               <div class="col-md-12" style="margin-left: 110px;">
                 <h2 style="margin-bottom: 0px;">FastCar</h2>
@@ -23,22 +23,22 @@
                 Liêm,Hà Nội</p>
               <p style="margin-bottom: 0px;margin-left: 75px;font-size: 17px;">Email:fastcar@gmail.com</p>
               <p style="margin-bottom: 0px;margin-left: 95px;font-size: 17px;">Số ĐT: 0968636892</p>
-                <p style="margin-bottom: 0px;margin-left: 110px;font-size: 17px;font-weight: bold;">PHIẾU HÓA ĐƠN</p>
+              <p style="margin-bottom: 0px;margin-left: 110px;font-size: 17px;font-weight: bold;">PHIẾU HÓA ĐƠN</p>
             </div>
           </div>
 
           <div class="row element-button">
           </div>
-          
+
           {{#each data}}
           <div class="end" style="margin-left: 70px;">
-            
+
             <div class="row">
-              
+
               <div class="col-md-4">
-                
+
                 <div class="col-md-12">
-                     
+
                   <label style="font-size: 17px;">Mã hóa đơn:
                     {{this.MaLSGD}}</label>
 
@@ -55,15 +55,15 @@
                 </div>
                 <div class="col-md-12">
                   <label style="font-size: 17px;">Số điện thoại:
-                    {{this.User.User.SDT}}</label>
+                    {{this.User.SDT}}</label>
                 </div>
               </div>
 
 
-             
+
             </div>
             <div class="row">
-               <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="col-md-12">
                   <label style="white-space: nowrap;font-size: 17px;">Email:
                     {{this.User.Email}}</label>
@@ -83,85 +83,93 @@
                     {{this.NganHang.SoTK}}</label>
                 </div>
               </div>
-             
-          
+
+
             </div>
-              <div class="row">
-                    <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-4">
                 <div class="col-md-12">
                   <label style="font-size: 17px;"> Trạng thái: <span id="TrangThai"> {{this.TrangThai}}</span> </label>
-                </div>          
+                </div>
               </div>
-                 <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="col-md-12">
                   <label style="font-size: 17px;">Số tiền: <span class="SoTienGD"> {{this.SoTienGD}}</span></label>
                 </div>
-                
-                     </div> 
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-             <div class="col-md-12">
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="col-md-12">
                   <label style="font-size: 17px;" id="show-emp" data-toggle="modal" data-target="#ModalUP2">Ảnh giao
                     dịch</label>
                 </div>
-                </div>
-        <div class="col-md-4">
-           <div class="col-md-12">
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
                   <label style="white-space: nowrap;font-size: 17px;">Nội dung:
                     {{this.NoiDung}}</label>
                 </div>
               </div>
-             
-      </div>
+
+            </div>
           </div>
+          {{!-- ẢNH GIAO DỊCH --}}
+          <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
 
-
-
-
-
-        {{/each}}
-
-        <div class="row element-button">
-        </div>
-        <BR>
-        <div style="margin-left: 10px;">
-
-          <button class="btn btn-excel btn-sm" onclick="window.print()"><i class="fas fa-file-pdf"></i>Xuất PDF</button>
-          <a class="btn btn-cancel" href="/thanhtoan/Lichsugiaodich">Quay lại</a>
-        </div>
-
-
-              {{!-- ẢNH GIAO DỊCH --}}
-        <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-          data-keyboard="false">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-
-              <div class="modal-body">
-                <div class="row">
-                  <div class="form-group  col-md-12">
-                    <span class="thong-tin-thanh-toan">
-                      <h5>Ảnh thanh toán thành công</h5>
-                    </span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-6" style=" display: flex;
-                 flex-direction: column;">
-                    <div class="images" style=" display: flex; ">
-                      <img src="{{this.Avatar}}" alt="" height="280px" width="400px" style="margin-left:290px;">
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group  col-md-12">
+                      <span class="thong-tin-thanh-toan">
+                        <h5>Ảnh thanh toán thành công</h5>
+                      </span>
                     </div>
                   </div>
-                  <BR>
-                  <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
-                  <BR>
-                </div>
-                <div class="modal-footer">
+                  <div class="row">
+                    <div class="form-group col-md-6" style=" display: flex;
+                 flex-direction: column;">
+                      <div class="images" style=" display: flex; ">
+                        <img src="/images/{{this.HinhAnh}}" alt="" height="280px" width="400px"
+                          style="margin-left:290px;">
+                      </div>
+                    </div>
+                    <BR>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+                    <BR>
+                  </div>
+                  <div class="modal-footer">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+
+
+          {{/each}}
+
+          <div class="row element-button">
+          </div>
+          <BR>
+          <div style="margin-left: 10px;">
+
+            <button class="btn btn-excel btn-sm" onclick="window.print()"><i class="fas fa-file-pdf"></i>Xuất
+              PDF</button>
+            <a class="btn btn-cancel" href="/thanhtoan/Lichsugiaodich">Quay lại</a>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 
@@ -203,7 +211,7 @@
     const yeucau = document.getElementById("yeucau");
     const thanhtoan = document.getElementById("thanhtoanhoadon");
 
-  
+
 
 
     if (trangthai.innerHTML == 0) {

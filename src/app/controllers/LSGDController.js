@@ -111,10 +111,8 @@ class LSGDController {
                 }
             }
         ).then(() => {
-            res.status(200).json({
-                success: true,
-                messages: "Yêu cầu cập nhât thành công"
-            })
+            res.status(201).send(`<script>alert("Thanh toán thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);  
+
         }).catch((err) => {
             res.status(400).json({
                 success: false,
@@ -143,23 +141,6 @@ class LSGDController {
 
     }
 
-    async Createthanhtoan(req, res) {
-        const img = path.basename(req.file.path);
-        const lsgd = new LichSuGiaoDichModel({   
-          HinhAnh: img,
-        });
-        try {   
-            const kq = await lsgd.save();
-            console.log("thanhtoan", kq);
-            res.status(201).send('<script>alert("Thêm ảnh thành công"); window.location.href="/thanhtoan";</script>');  
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({
-            success: false,
-            messages: error.message,
-          });
-        }
-      }
     async find_id(req, res) {
         await lsgd.findById(req.params.id).populate({ path: 'User', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
