@@ -23,6 +23,7 @@ router.get('/find/:id', controller.find_id);
 router.get('/list', controller.getLSGD);
 router.get('/loc', controller.findthanhtoan);
 router.post('/duyet/:id/:trangthai', upload.single('HinhAnh'), controller.duyetthanhtoan);
+router.post('/tuchoi/:id/:trangthai',  controller.TuChoithanhtoan);
 router.post('/create', controller.createLSGD);
 
 module.exports = router;
