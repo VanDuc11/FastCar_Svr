@@ -1,6 +1,7 @@
 const Xe = require('../models/Xe.model');
 const User = require('../models/user.model');
 const HoaDon = require('../models/HoaDon.model');
+const ThongBao = require('../models/ThongBao');
 var path = require('path');
 const { log } = require('console');
 
@@ -313,6 +314,10 @@ class XeController {
             check.TrungBinhSao = req.query.TrungBinhSao;
         }
 
+        if (typeof (req.query.TheChap) != 'undefined') {
+            check.TheChap = req.query.TheChap;
+        }
+
         // giá thuê
         if (typeof req.query.priceFrom !== 'undefined' && typeof req.query.priceTo !== 'undefined') {
             // Xử lý truy vấn theo khoảng giá trị
@@ -438,7 +443,7 @@ class XeController {
 
     }
     async CreateXeForm(req, res) {
-         
+
         const xe = new Xe({
             BKS: req.body.BKS,
             HangXe: req.body.HangXe,
@@ -461,7 +466,7 @@ class XeController {
             SoChuyen: 0,
             TrungBinhSao: 0,
             Latitude: req.body.Latitude || "21.017295",
-            Longitude: req.body.Longitude|| "105.783983",
+            Longitude: req.body.Longitude || "105.783983",
         });
 
         try {
@@ -505,8 +510,8 @@ class XeController {
             Longitude: req.body.Longitude,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             TheChap: false,
-            ThoiGianGiaoXe: "",
-            ThoiGianNhanXe: "",
+            ThoiGianGiaoXe: req.body.ThoiGianGiaoXe,
+            ThoiGianNhanXe: req.body.ThoiGianNhanXe,
             ChuSH: req.body.ChuSH,
             TrangThai: 0,
             SoChuyen: 0,
@@ -515,8 +520,23 @@ class XeController {
 
         try {
             await xe.save()
-                .then((result) => {
+                .then(async (result) => {
+                    const chush = await User.findOne({ _id: xe.ChuSH._id });
                     res.status(201).json({ success: true, message: 'Thêm xe thành công' });
+                    const tieude = "Yêu cầu đăng kí xe đã được gửi!";
+                    const noidung = "Chào thành viên " + chush.UserName + ", \n\n" +
+                        "Yêu cầu đăng kí xe " + req.body.MauXe + " - " + req.body.BKS + " đã được gửi đến Ban quản lí ứng dụng FastCar.\n\n" +
+                        "Thông tin xe sẽ được hiển thị trên ứng dụng sau khi được Ban quản lí kiểm duyệt.\n\n" +
+                        "Chúng tôi sẽ thông báo kết quả đến bạn trong thời gian sớm nhất.\n\n" +
+                        "Xin cảm ơn!";
+                    const hinhanh = req.files['HinhAnh'][0].filename;
+                    const thongBaoNew = new ThongBao({
+                        TieuDe: tieude,
+                        NoiDung: noidung,
+                        HinhAnh: hinhanh,
+                        User: chush
+                    });
+                    await thongBaoNew.save();
                 })
                 .catch((err) => {
                     res.status(400).json({

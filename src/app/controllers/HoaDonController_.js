@@ -2,6 +2,8 @@ const { message } = require('statuses');
 const HoaDon = require('../models/HoaDon.model');
 const User = require('../models/user.model');
 const Xe = require('../models/Xe.model');
+const LSGD = require('../models/LichSuGiaoDich.model');
+const NganHang = require('../models/NganHang.model');
 var path = require('path');
 const { log } = require('console');
 const { parse } = require('querystring');
@@ -360,17 +362,37 @@ class HoaDonController_ {
         try {
             const car = await Xe.findOne({ _id: hoadon.Xe });
             const chuSH = await User.findOne({ _id: car.ChuSH });
+            const khachhang = await User.findOne({ _id: req.body.User });
 
             let title = 'Yêu cầu thuê xe mới';
             let contentNotify = "Xe " + car.MauXe + " của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!"
-            // let url_image = "https:///fastcar-ulwr.onrender.com/public/images/" + car.HinhAnh[0];
             await hoadon.save().then(async (result) => {
 
                 sendNotificationToUser(chuSH.TokenFCM, title, contentNotify);
+                const currentDateNgayNhan = new Date(req.body.NgayThue);
+                const day = currentDateNgayNhan.getDate().toString().padStart(2, '0');
+                const month = (currentDateNgayNhan.getMonth() + 1).toString().padStart(2, '0');
+                const year = currentDateNgayNhan.getFullYear();
+                const formattedDateNgayNhan = `${day}/${month}/${year}`;
+
+                const currentDateNgayTra = new Date(req.body.NgayTra);
+                const day1 = currentDateNgayTra.getDate().toString().padStart(2, '0');
+                const month1 = (currentDateNgayTra.getMonth() + 1).toString().padStart(2, '0');
+                const year1 = currentDateNgayTra.getFullYear();
+                const formattedDateNgayTra = `${day1}/${month1}/${year1}`;
+
+                const noidungNotify = "🚗 Xin chào chủ xe " + chuSH.UserName + ",\n\n" +
+                    "Xe " + car.MauXe + ", " + car.BKS + " của bạn mới được khách hàng " + khachhang.UserName +
+                    " gửi yêu cầu thuê trong " + req.body.TongSoNgayThue + " ngày, từ " + formattedDateNgayNhan + " đến " + formattedDateNgayTra + ".\n\n" +
+                    "Bạn vui lòng xác nhận hoặc có thể huỷ chuyến nếu như xe của bạn đang có sự cố không mong muốn.\n\n" +
+                    "Vui lòng bỏ qua thông báo này nếu bạn đã xác nhận/từ chối.\n\n" +
+                    "Chúc bạn một ngày tốt lành.\n\n" +
+                    "FastCar Team 🚘"
                 const thongBao = new ThongBao({
-                    TieuDe: "Yêu cầu thuê xe thành công!",
-                    NoiDung: "Chủ xe " + car.MauXe + " đã chấp nhận yêu cầu thuê xe của bạn. Bạn vui lòng đặt cọc trước 1 tiếng để không bỏ lỡ chuyến đi này.",
+                    TieuDe: "Yêu cầu thuê xe mới",
+                    NoiDung: noidungNotify,
                     User: chuSH,
+                    HinhAnh: car.HinhAnh[0]
                 });
                 await thongBao.save();
 
@@ -407,20 +429,24 @@ class HoaDonController_ {
         }).then(async (result) => {
             if (trangthai == 2) {
                 let title = 'Thông báo mới';
-                let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất"
-                // let url_image = "https://fastcar-ulwr.onrender.com/public/images/" + car.HinhAnh[0];
+                let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất";
                 sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
-
+                const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n\n" +
+                    "Yêu cầu thuê xe " + car.MauXe + " của quý khách đã được chủ xe chấp nhận.\n\n" +
+                    "Quý khách vui lòng thanh toán tiền cọc cho chuyến xe trước 1 tiếng kể từ thời gian thông báo này được gửi.\n\n" +
+                    "Vui lòng bỏ qua thông báo này nếu quý khách đã thanh toán/từ chối.\n\n" +
+                    "Chúc quý khách một ngày tốt lành.\n\n" +
+                    "FastCar Team 🚘"
                 const thongBao = new ThongBao({
                     TieuDe: "Yêu cầu thuê xe thành công!",
-                    NoiDung: "Chủ xe " + car.MauXe + " đã chấp nhận yêu cầu thuê xe của bạn. Bạn vui lòng đặt cọc trước 1 tiếng để không bỏ lỡ chuyến đi này.",
+                    NoiDung: noidungNotify,
                     User: khachhang,
+                    HinhAnh: car.HinhAnh[0]
                 });
                 await thongBao.save();
             }
 
-            res.status(200).json("Sửa trạng thái HD thành công"
-            );
+            return res.status(200).json("Sửa trạng thái HD thành công");
         })
             .catch((err) => {
                 res.status(400).json(err);
@@ -431,9 +457,10 @@ class HoaDonController_ {
     async update_trangthaiDH(req, res) {
         const maHD = req.params.maHD;
         const car = await Xe.findOne({ _id: req.body.Xe });
-        // const chuSH = await User.findOne({ _id: car.ChuSH });
+        const chuSH = await User.findOne({ _id: car.ChuSH });
         const khachhang = await User.findOne({ _id: req.body.User });
-
+        const hoadon = await HoaDon.findOne({ MaHD: maHD });
+        const trangThaiHD_old = hoadon.TrangThaiHD;
         let trangthai = req.body.TrangThaiHD;
 
         await HoaDon.updateOne({ MaHD: maHD }, {
@@ -444,14 +471,88 @@ class HoaDonController_ {
                 Xe: req.body.Xe,
                 HaveFeedback: req.body.HaveFeedback
             }
-        }).then((result) => {
-            if (trangthai == 3) {
+        }).then(async (result) => {
+            if (trangthai == 0) {
+                if (trangThaiHD_old == 3) {
+                    // gửi yêu cầu hoàn tiền
+                    const noidungLSGD = "Yêu cầu hoàn tiền cọc cho chuyến xe " + req.body.MaHD;
+                    const nganHangKhachThue = await NganHang.findOne({ User: khachhang });
+                    const lsgd = new LSGD({
+                        MaLSGD: randomString(8),
+                        User: khachhang,
+                        SoTienGD: req.body.TienCoc,
+                        ThoiGian: new Date(),
+                        NoiDung: noidungLSGD,
+                        TrangThai: 0,
+                        HoaDon: hoadon,
+                        NganHang: nganHangKhachThue,
+                        title: 2,
+                        HinhAnh: ""
+                    });
+                    await lsgd.save();
+                    // send notifications
+                    let title = 'Yêu cầu hoàn tiền cọc';
+                    let contentNotify = "Yêu cầu hoàn tiền cọc";
+                    sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
+
+                    const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n\n" +
+                        "Yêu cầu thuê xe " + car.MauXe + "(" + hoadon.MaHD + ")" + " của quý khách đã đã bị huỷ bởi chủ xe.\n\n" +
+                        "Vì quý khách đã thanh toán  tiền cọc rồi, nên toàn bộ số tiền đó sẽ được hoàn trả vào tài khoản ngân hàng của quý khách trong 1-2 ngày làm việc.\n\n" +
+                        "Rất mong quý khách thông cảm về lần phục vụ không tốt này.\n\n" +
+                        "Chúc quý khách một ngày tốt lành.\n\n" +
+                        "FastCar Team 🚘"
+
+                    const thongBao = new ThongBao({
+                        TieuDe: "Huỷ đặt xe - Hoàn lại tiền",
+                        NoiDung: noidungNotify,
+                        User: khachhang,
+                        HinhAnh: car.HinhAnh[0]
+                    });
+                    await thongBao.save();
+                }
+            } else if (trangthai == 3) {
                 // gửi socket đến ChuSH
                 // socket.emit("payment_success", );
+
+            } else if (trangthai == 4) {
+                // gửi thông báo cho khách hàng
+
+            } else if (trangthai == 5) {
+                // gửi thông báo cho chủ xe
+
+            } else if (trangthai == 6) {
+                const sochuyen = car.SoChuyen;
+                const soDu_old = chuSH.SoDu;
+                const sotien = Math.ceil(req.body.TienCoc * 0.67);
+                const nganHangChuXe = await NganHang.findOne({ User: chuSH });
+                const noidungLSGD = "Thanh toán số tiền giao dịch từ chuyến đi " + req.body.MaHD;
+
+                await Xe.updateOne({ _id: car._id }, {
+                    $set: {
+                        SoChuyen: sochuyen + 1
+                    }
+                });
+
+                const lsgd = new LSGD({
+                    MaLSGD: randomString(8),
+                    User: chuSH,
+                    SoTienGD: sotien,
+                    ThoiGian: new Date(),
+                    NoiDung: noidungLSGD,
+                    TrangThai: 1,
+                    HoaDon: hoadon,
+                    NganHang: nganHangChuXe,
+                    title: 1,
+                    HinhAnh: ""
+                });
+                await lsgd.save();
+                await User.updateOne({ _id: chuSH }, {
+                    SoDu: soDu_old + sotien
+                })
+
             }
 
-            res.status(200).json("Sửa trạng thái HD thành công"
-            );
+            return res.status(200).json("Sửa trạng thái HD thành công");
         })
             .catch((err) => {
                 res.status(400).json(err);
@@ -460,14 +561,14 @@ class HoaDonController_ {
     }
 
     async update_HinhAnhChuXeGiaoXe(req, res) {
+        const maHD = req.params.maHD;
         try {
-            await HoaDon.findByIdAndUpdate({ maHD: req.params.maHD },
-                {
-                    $set: {
-                        HinhAnhChuXeGiaoXe: req.files['HinhAnhChuXeGiaoXe'].map(file => file.filename)
-                    }
+            await HoaDon.updateOne({ MaHD: maHD }, {
+                $set: {
+                    TrangThaiHD: 4,
+                    HinhAnhChuXeGiaoXe: req.files['HinhAnhChuXeGiaoXe'].map(file => file.filename),
                 }
-            )
+            })
                 .then((result) => {
                     res.status(200).json({
                         success: true,
@@ -477,7 +578,7 @@ class HoaDonController_ {
                 .catch((err) => {
                     res.status(400).json({
                         success: false,
-                        messages: err.messages
+                        messages: err
                     });
                 })
         } catch (error) {
@@ -486,14 +587,14 @@ class HoaDonController_ {
     }
 
     async update_HinhAnhKhachHangTraXe(req, res) {
+        const maHD = req.params.maHD;
         try {
-            await HoaDon.findByIdAndUpdate({ maHD: req.params.maHD },
-                {
-                    $set: {
-                        HinhAnhKhachHangTraXe: req.files['HinhAnhKhachHangTraXe'].map(file => file.filename)
-                    }
+            await HoaDon.updateOne({ MaHD: maHD }, {
+                $set: {
+                    TrangThaiHD: 5,
+                    HinhAnhKhachHangTraXe: req.files['HinhAnhKhachHangTraXe'].map(file => file.filename),
                 }
-            )
+            })
                 .then((result) => {
                     res.status(200).json({
                         success: true,
@@ -503,7 +604,7 @@ class HoaDonController_ {
                 .catch((err) => {
                     res.status(400).json({
                         success: false,
-                        messages: err.messages
+                        messages: err
                     });
                 })
         } catch (error) {
@@ -539,6 +640,18 @@ async function sendNotificationToUser(tokenFCM, title, body, image) {
     } catch (error) {
         console.error('Gửi thông báo thất bại:', error);
     }
+}
+
+function randomString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+    }
+    return result;
 }
 
 

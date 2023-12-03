@@ -217,10 +217,18 @@ class LSGDController {
     async createLSGD(req, res, next) {
         try {
             const model = new lsgd(req.body);
-            await model.save();
-            return res.status(201).send({ success: true, message: 'Yêu cầu tạo mới thành công' });
+            await model.save().then((result) => {
+                return res.status(201).send({ success: true, message: 'Yêu cầu tạo mới thành công' });
+            }).catch((err) => {
+                res.status(400).json({
+                    success: false,
+                    messages: err.messages
+                });
+            })
+
         } catch (error) {
-            return res.status(400).send(error);
+            console.log(error);
+            return res.status(500).send(error);
         }
     }
 
