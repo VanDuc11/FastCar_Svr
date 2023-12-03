@@ -1,7 +1,8 @@
 const lsgd = require('../models/LichSuGiaoDich.model');
 const User = require('../models/user.model');
 const NganHang = require('../models/NganHang.model');
-
+var path = require('path');
+const LichSuGiaoDichModel = require('../models/LichSuGiaoDich.model');
 class LSGDController {
     async index(req, res) {
         let check = { TrangThai: 0 };
@@ -110,10 +111,8 @@ class LSGDController {
                 }
             }
         ).then(() => {
-            res.status(200).json({
-                success: true,
-                messages: "Yêu cầu cập nhât thành công"
-            })
+            res.status(201).send(`<script>alert("Thanh toán thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);  
+
         }).catch((err) => {
             res.status(400).json({
                 success: false,
@@ -141,7 +140,6 @@ class LSGDController {
             });
 
     }
-
 
     async find_id(req, res) {
         await lsgd.findById(req.params.id).populate({ path: 'User', model: 'User' }).sort({ _id: -1 })

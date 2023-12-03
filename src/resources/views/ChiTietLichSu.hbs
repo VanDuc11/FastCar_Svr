@@ -7,226 +7,313 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="tile">
+      <div class="tile2">
         <div class="tile-body">
-          
 
-    <div class="row">
-            <h2 class="col-md-8">Thông tin Hóa đơn</h2>
-           
-        </div>
 
-        <div class="row element-button">
-        </div>
-              {{#each data}}
-              <h1 style="font-size: 19px; ">Thông tin khách hàng</h1>
-               <br>
-        <div class="row">
-           <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Mã hóa đơn: </span> {{this.MaLSGD}}</label>
-                </div>
-
-                  <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Thời gian tạo: </span> <span class="HSD"> {{this.ThoiGian}}</span></label>
-                </div>
-
-            </div>
+          <div class="row">
             <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Tên khách hàng: </span> {{this.User.UserName}} </label>
-                </div>
-                <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Số điện thoại: </span> {{this.User.User.SDT}}</label>
-                </div>
+              <div class="col-md-12" style="margin-left: 110px;">
+                <h2 style="margin-bottom: 0px;">FastCar</h2>
+              </div>
+              <p style="margin-bottom: 0px;margin-left: 85px;font-size: 17px;">Công ty cổ phần FastCar</p>
+              <p style="white-space: nowrap;margin-bottom: 0px;font-size: 17px;">Văn phòng số 06,tầng 8,Tòa
+                KeangnamLandmark</p>
+              <p style="white-space: nowrap;margin-bottom: 0px;margin-left: 44px;font-size: 17px;"> 72 Phạm Hùng,Nam Từ
+                Liêm,Hà Nội</p>
+              <p style="margin-bottom: 0px;margin-left: 75px;font-size: 17px;">Email:fastcar@gmail.com</p>
+              <p style="margin-bottom: 0px;margin-left: 95px;font-size: 17px;">Số ĐT: 0968636892</p>
+              <p style="margin-bottom: 0px;margin-left: 110px;font-size: 17px;font-weight: bold;">PHIẾU HÓA ĐƠN</p>
             </div>
-          
-            <div class="col-md-4">
+          </div>
+
+          <div class="row element-button">
+          </div>
+
+          {{#each data}}
+          <div class="end" style="margin-left: 70px;">
+
+            <div class="row">
+
+              <div class="col-md-4">
+
                 <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Email: </span> {{this.User.Email}}</label>
+
+                  <label style="font-size: 17px;">Mã hóa đơn:
+                    {{this.MaLSGD}}</label>
+
                 </div>
                 <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Địa chỉ: </span> {{this.User.DiaChi_GPLX}}</label>
+                  <label style="font-size: 17px;">Thời gian tạo: <span class="HSD"> {{this.ThoiGian}}</span></label>
                 </div>
+
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="white-space: nowrap;font-size: 17px;">Tên khách hàng:
+                    {{this.User.UserName}} </label>
+                </div>
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Số điện thoại:
+                    {{this.User.SDT}}</label>
+                </div>
+              </div>
+
+
+
             </div>
-            
+            <div class="row">
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="white-space: nowrap;font-size: 17px;">Email:
+                    {{this.User.Email}}</label>
+                </div>
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Tên chủ tài khoản:
+                    {{this.NganHang.TenChuTK}}</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Ngân hàng:
+                    {{this.NganHang.TenNH}} </label>
+                </div>
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Số Tk ngân hàng:
+                    {{this.NganHang.SoTK}}</label>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 17px;"> Trạng thái: <span id="TrangThai"> {{this.TrangThai}}</span> </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 17px;">Số tiền: <span class="SoTienGD"> {{this.SoTienGD}}</span></label>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="font-size: 17px;" id="show-emp" data-toggle="modal" data-target="#ModalUP2">Ảnh giao
+                    dịch</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <label style="white-space: nowrap;font-size: 17px;">Nội dung:
+                    {{this.NoiDung}}</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          {{!-- ẢNH GIAO DỊCH --}}
+          <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group  col-md-12">
+                      <span class="thong-tin-thanh-toan">
+                        <h5>Ảnh thanh toán thành công</h5>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-6" style=" display: flex;
+                 flex-direction: column;">
+                      <div class="images" style=" display: flex; ">
+                        <img src="/images/{{this.HinhAnh}}" alt="" height="280px" width="400px"
+                          style="margin-left:290px;">
+                      </div>
+                    </div>
+                    <BR>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
+                    <BR>
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          {{/each}}
+
+          <div class="row element-button">
+          </div>
+          <BR>
+          <div style="margin-left: 10px;">
+
+            <button class="btn btn-excel btn-sm" onclick="window.print()"><i class="fas fa-file-pdf"></i>Xuất
+              PDF</button>
+            <a class="btn btn-cancel" href="/thanhtoan/Lichsugiaodich">Quay lại</a>
+          </div>
+
+
+
         </div>
+      </div>
+    </div>
+  </div>
 
 
-        <div class="row element-button">
-        </div>
-          
-        <h1 style="font-size: 19px; ">Chi tiết  giao dịch</h1>
-  <br>
-        <div class="row">
-           
-            <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Tên chủ tài khoản: </span> {{this.NganHang.TenChuTK}}</label>
-                </div>
 
-                <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Số Tk ngân hàng: </span> {{this.NganHang.SoTK}}</label>
-                </div>
 
-            </div>
-            <div class="col-md-4">
-                <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Ngân hàng: </span> {{this.NganHang.TenNH}} </label>
-                </div>
-
-                <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Số tiền: </span> <span class="SoTienGD" > {{this.SoTienGD}}</span></label>
-                </div>
-            </div>
-          
-       
-          <div class="col-md-4">
-            <div class="col-md-12">
-                    <label style="font-size: 17px;"> <span style="font-weight: bold;">Trạng thái: </span> <span id="TrangThai"> {{this.TrangThai}}</span></label>
-                </div>
-                 
-             <div class="col-md-12">
-                    <label style="font-size: 17px;"><span style="font-weight: bold;">Nội dung: </span> {{this.NoiDung}}</label>
-                </div>
-                
-            </div>
-           
-            </div>
-       
-
-    
-                 
-    {{/each}}        
-
- 
- 
- 
 </main>
+<script>
+  const btnExportPDF = document.querySelector('a.btn-excel.btn-sm');
 
- 
-  
- 
+  btnExportPDF.addEventListener('click', () => {
+    const doc = new jsPDF();
+    const content = document.querySelector('main.app-content');
+    const contentHtml = content.innerHTML;
+
+    doc.fromHTML(contentHtml, 15, 15, {
+      elementStyles: true,
+      pagebreak: 'avoid',
+    });
+
+    doc.save('data.pdf');
+  });
+</script>
+
+
+
 
 
 <script>
-   load_data()
+  load_data()
   async function load_data() {
-  var HSD = document.querySelectorAll(".HSD");
-  HSD.forEach((i) => {
-    const date = new Date(i.innerHTML);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const formattedDate = day + '/' + month + '/' + year
-    i.innerHTML = formattedDate
-  })
-         const trangthai = document.getElementById("TrangThai");
-  const duyet = document.getElementById("button-duyet");
-  const tuchoi = document.getElementById("button-tuchoi");
+    var HSD = document.querySelectorAll(".HSD");
+    HSD.forEach((i) => {
+      const date = new Date(i.innerHTML);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const formattedDate = day + '/' + month + '/' + year
+      i.innerHTML = formattedDate
+    })
+    const trangthai = document.getElementById("TrangThai");
+    const yeucau = document.getElementById("yeucau");
+    const thanhtoan = document.getElementById("thanhtoanhoadon");
 
-  if (trangthai.innerHTML == 0 ) {
-    trangthai.innerHTML = "Chờ thanh toán"
-  } else if (trangthai.innerHTML == 1) { // chờ cọc
-    trangthai.innerHTML = "Đã thanh toán"
-    duyet.style.display = "none"
-    tuchoi.style.display = "none"
-  } else if (trangthai.innerHTML == 2) { // đã cọc
-    trangthai.innerHTML = "Từ chối"
-    duyet.style.display = "none"
-    tuchoi.style.display = "none"
+
+
+
+    if (trangthai.innerHTML == 0) {
+      trangthai.innerHTML = "Chờ thanh toán"
+    } else if (trangthai.innerHTML == 1) { // chờ cọc
+      trangthai.innerHTML = "Đã thanh toán"
+      duyet.style.display = "none"
+      tuchoi.style.display = "none"
+    } else if (trangthai.innerHTML == 2) { // đã cọc
+      trangthai.innerHTML = "Từ chối"
+      duyet.style.display = "none"
+      tuchoi.style.display = "none"
+    }
   }
 
-  }
- 
- 
+
 </script>
-      <script>
-        const SoTienGD = document.querySelectorAll(".SoTienGD");
+<script>
+  const SoTienGD = document.querySelectorAll(".SoTienGD");
 
-for (const soTienElement of SoTienGD) {
-  const soTienString = soTienElement.textContent.trim();
-  if (!isNaN(soTienString)) {
-    const soTienNumber = parseFloat(soTienString);
-    if (soTienNumber >= 0) {
-      const formattedPrice = new Intl.NumberFormat('vi-VN').format(soTienNumber, {
-        minimumFractionDigits: 2,
-        decimal: ',',
-        thousandsSeparator: '.',
-      });
-      soTienElement.textContent = formattedPrice + " đ";
+  for (const soTienElement of SoTienGD) {
+    const soTienString = soTienElement.textContent.trim();
+    if (!isNaN(soTienString)) {
+      const soTienNumber = parseFloat(soTienString);
+      if (soTienNumber >= 0) {
+        const formattedPrice = new Intl.NumberFormat('vi-VN').format(soTienNumber, {
+          minimumFractionDigits: 2,
+          decimal: ',',
+          thousandsSeparator: '.',
+        });
+        soTienElement.textContent = formattedPrice + " đ";
+      } else {
+        console.error("Invalid transaction amount:", soTienString);
+      }
     } else {
-      console.error("Invalid transaction amount:", soTienString);
+      console.error("Invalid transaction amount format:", soTienString);
     }
-  } else {
-    console.error("Invalid transaction amount format:", soTienString);
   }
-}
-      </script>
-  <!-- Essential javascripts for application to work-->
+</script>
+<!-- Essential javascripts for application to work-->
+
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "> </script>
+<script src="public/js/jquery-3.2.1.min.js"></script>
+<script src="public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+
+<script>
 
 
-  <script src="public/js/jquery-3.2.1.min.js"></script>
-  <script src="public/js/popper.min.js"></script>
-  <script src="/public/js/bootstrap.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="src/jquery.table2excel.js"></script>
-  <script src="/publicjs/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="/public/js/plugins/pace.min.js"></script>
-  <!-- Page specific javascripts-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-  <!-- Data table plugin-->
-  <script type="text/javascript" src="public/js/plugins/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
- 
-  <script>
-   
 
-
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
-
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
+  //Thời Gian
+  function time() {
+    var today = new Date();
+    var weekday = new Array(7);
+    weekday[0] = "Chủ Nhật";
+    weekday[1] = "Thứ Hai";
+    weekday[2] = "Thứ Ba";
+    weekday[3] = "Thứ Tư";
+    weekday[4] = "Thứ Năm";
+    weekday[5] = "Thứ Sáu";
+    weekday[6] = "Thứ Bảy";
+    var day = weekday[today.getDay()];
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    nowTime = h + " giờ " + m + " phút " + s + " giây";
+    if (dd < 10) {
+      dd = '0' + dd
     }
-   
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+      '</span>';
+    document.getElementById("clock").innerHTML = tmp;
+    clocktime = setTimeout("time()", "1000", "Javascript");
 
-  
-  </script>
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+  }
 
+
+
+</script>

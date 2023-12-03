@@ -70,11 +70,9 @@
             <thead>
               <tr>
                 <th style="text-align: center;" width="10">STT</th>
+                    <th style="text-align: center;" width="100">Mã hóa đơn</th>
                 <th style="text-align: center;" width="100">Tên khách hàng</th>
-                <th style="text-align: center;" width="100">Tên chủ TK</th>
-                <th style="text-align: center;" width="100">Ngân hàng</th>
-                <th style="text-align: center;" width="100">Số tài khoản</th>
-                <th style="text-align: center;" width="80">Số tiền rút</th>
+                <th style="text-align: center;" width="80">Số tiền</th>
                 <th style="text-align: center;" width="100">Nôi dung giao dịch</th>
                 <th style="text-align: center;" width="80">Thời gian</th>
                 <th style="text-align: center;" width="80">Trạng thái</th>
@@ -87,14 +85,11 @@
               <tr>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="stt">{{@index}}
                 </td>
+                    <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MaLSGD}}
+                </td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.User.UserName}}
                 </td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">
-                  {{this.NganHang.TenChuTK}}</td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NganHang.TenNH}}
-                </td>
-                <td style="text-align: center; word-break: break-word;vertical-align: middle;"> {{this.NganHang.SoTK}}
-                </td>
+      
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="SoTienGD">
                   {{this.SoTienGD}}</td>
                 <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
