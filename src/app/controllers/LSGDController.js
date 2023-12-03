@@ -42,7 +42,6 @@ class LSGDController {
             .populate({ path: 'NganHang', model: 'NganHang' })
             .sort({ _id: -1 })
             .then((result) => {
-                console.log(result);
 
                 res.status(200).render('ChiTietThanhToan', {
                     data: result.map(res => res.toJSON())
@@ -110,15 +109,49 @@ class LSGDController {
                     HinhAnh: img
                 }
             }
-        ).then(() => {
-            res.status(201).send(`<script>alert("Thanh toán thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);  
-
+        ).then((result) => {
+            res.status(201).send(`<script>alert("Thanh toán thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);
         }).catch((err) => {
             res.status(400).json({
                 success: false,
                 messages: err.messages
             });
         })
+    }
+    async TuChoithanhtoan(req, res) {
+        const id = req.params.id;
+        await lsgd.findById(id)
+            .then((result) => {
+                if (req.params.trangthai == 2 && result.title == 0) {
+                    User.findOne({ _id: result.User._id }).then((result0) => {
+
+                        User.updateOne({ _id: result.User._id },
+                            {
+                                $set: {
+                                    SoDu: result0.SoDu + result.SoTienGD
+                                }
+                            }).then(() => {
+                                console.log("từ chối thành công")
+                            })
+                    })
+
+                }
+                lsgd.updateOne({ _id: id },
+                    {
+                        $set: {
+                            TrangThai: req.params.trangthai,
+                        }
+                    }
+                ).then(() => {
+                    res.status(201).send(`<script>alert("từ chối thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);
+                })
+            }).catch((err) => {
+                res.status(400).json({
+                    success: false,
+                    messages: err.messages
+                });
+            })
+
     }
     async findthanhtoan(req, res) {
         var check = {};
