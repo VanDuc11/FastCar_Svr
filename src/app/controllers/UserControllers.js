@@ -1,6 +1,10 @@
 const { log } = require('console');
 const User = require('../models/user.model');
+
+const Xe = require('../models/Xe.model');
+
 const ThongBao = require('../models/ThongBao');
+
 const path = require('path');
 const moment = require('moment');
 
@@ -98,6 +102,38 @@ class UserControlles {
                     })
 
             })
+    }
+    async chitietxekh(req,res){
+        var query ={};
+        var id = req.query.id;
+        const TrangThai = req.query.TrangThai;
+
+        if (TrangThai != undefined ) {
+            query= {ChuSH: id,TrangThai: TrangThai.split(",")}
+            
+        }else{
+            query= {ChuSH: id}
+        }
+
+        Xe.find(query)
+        .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+        .sort({ _id: -1 }).then((result) => {
+            
+            res.render('ThongTinXe',
+                {
+                    data: result.map((res) => res.toJSON())
+                })
+
+        })
+    }
+    async listXeKhachHang(req,res){
+        var id = req.query.id;
+        Xe.find({ChuSH: id})
+        .sort({ _id: -1 }).then((result) => {
+            
+           res.json(result)
+
+        })
     }
     async user(req, res, next) {
         let check = null;
