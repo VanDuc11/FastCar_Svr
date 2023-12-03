@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const LichSuGiaoDich = new Schema({
     MaLSGD: { type: String },
     User: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    title:{type: Number},
     SoTienGD: { type: Number },
     ThoiGian: { type: Date },
     NoiDung: { type: String },
