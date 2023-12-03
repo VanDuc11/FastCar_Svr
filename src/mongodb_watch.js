@@ -34,14 +34,18 @@ const updateExpiredPromotionalOffers = async () => {
             const xes = await Xe.find({ ChuSH: u._id });
             if (xes.length > 0) {
                 // Sửa trạng thái đăng thành true
-                if (u.DangXe == false) {
                     await User.updateOne({ _id: u._id }, {
                         $set: {
                             DangXe: true,
                         },
                     });
-                }
 
+            }else{
+                    await User.updateOne({ _id: u._id }, {
+                        $set: {
+                            DangXe: false,
+                        },
+                    });
             }
         }
 

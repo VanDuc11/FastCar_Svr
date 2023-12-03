@@ -15,7 +15,21 @@ class UserControlles {
         const end_date = req.query.end_date;
         const TrangThai = req.query.TrangThai;
         const status = req.query.status;
-        if (start_date != undefined &&
+        
+         if (status != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                TrangThai_GPLX: status.split(',')
+            }
+
+
+
+        }else if (start_date != undefined &&
             end_date != undefined &&
             TrangThai == undefined) {
             query = {
@@ -35,20 +49,7 @@ class UserControlles {
                 "DangXe": TrangThai.split(',')
             }
 
-        } else if (status != undefined &&
-            start_date != undefined &&
-            end_date != undefined) {
-            query = {
-                "NgayThamGia": {
-                    $gte: new Date(start_date),
-                    $lte: new Date(end_date),
-                },
-                "TrangThai_GPLX": status.split(',')
-            }
-
-
-
-        } else if (TrangThai != undefined &&
+        }  else if (TrangThai != undefined &&
             start_date == undefined &&
             end_date == undefined) {
             query = {
@@ -59,7 +60,7 @@ class UserControlles {
             start_date == undefined &&
             end_date == undefined) {
             query = {
-                TrangThai_GPLX: status.split(',')
+                TrangThai_GPLX: status.split
             }
 
         }
@@ -93,7 +94,7 @@ class UserControlles {
         })
     }
     async chitietkhachhang(req, res) {
-        var id = req.params.id;
+        var id = req.query.id;
         await User.find({ _id: id })
             .then((result) => {
                 res.render('ChiTietKhachHang',
@@ -140,6 +141,9 @@ class UserControlles {
 
         if (typeof (req.query.Email) != 'undefined') {
             check = { Email: req.query.Email };
+        }
+        if (typeof (req.query.id) != 'undefined') {
+            check = { _id: req.query.id };
         }
         if (req.query.start_date != undefined && req.query.end_date) {
             check = {

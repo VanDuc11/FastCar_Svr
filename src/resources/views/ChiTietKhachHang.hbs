@@ -121,7 +121,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group col-md-12">
+          <div class="form-group col-md-2">
 
             <a class="btn btn-success" href="/khachhang/ChiTietXeKH?id={{this._id}}" id="button-xem-tt">Xem thông tin xe</a>
           </div>
@@ -268,7 +268,21 @@
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
+  onload()
   // Hàm xử lý sự kiện nhấp vào nút duyệt
+  async function onload(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
+    const data = await fetch(`/api/user/list?id=${id}`).then((response) =>response.json())
+    if(data[0].DangXe == true){
+      document.getElementById('button-xem-tt').style.display='block'
+    }else{
+      document.getElementById('button-xem-tt').style.display='none'
+      console.log("abc")
+      
+    }
+  }
   function onSubmit(id, trangthai) {
     fetch(`/api/user/duyet/${id}/${trangthai}`, { method: "POST" })
       .then((response) => {

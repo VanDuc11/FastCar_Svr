@@ -151,7 +151,7 @@ class XeController {
     }
     async Thongtin(req, res) {
 
-        await HoaDon.find({ Xe: req.params.id, TrangThaiHD: [3, 4, 5, 6] }).populate('Xe')
+        await HoaDon.find({ Xe: req.query.id, TrangThaiHD: [3, 4, 5, 6] }).populate('Xe')
             .populate({
                 path: 'Xe',
                 populate: { path: 'ChuSH', model: 'User' }
