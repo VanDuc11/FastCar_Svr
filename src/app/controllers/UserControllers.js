@@ -1,10 +1,11 @@
 const { log } = require('console');
 const User = require('../models/user.model');
+const ThongBao = require('../models/ThongBao');
 const path = require('path');
 const moment = require('moment');
 
 class UserControlles {
-    async index(req, res) { 
+    async index(req, res) {
         var query = null
         const start_date = req.query.start_date;
         const end_date = req.query.end_date;
@@ -42,7 +43,7 @@ class UserControlles {
             }
 
 
-        
+
         } else if (TrangThai != undefined &&
             start_date == undefined &&
             end_date == undefined) {
@@ -154,9 +155,27 @@ class UserControlles {
                 DangXe: false
             });
 
-            console.log(userModel);
             await userModel.save()
-                .then(() => {
+                .then(async () => {
+                    const tieude = "🎁 Chào mừng bạn tham gia cộng đồng FastCar. 🎁";
+                    const noidung = "🎁 Thân tặng bạn mã code BANMOI, giảm giá 500,000đ cho chuyến đi đầu tiên trên FastCar. \n\n" +
+                        "Mời bạn cùng xem qua các kinh nghiệm hữu ích và hướng dẫn các bước thuê xe trên FastCar nhé. \n\n" +
+                        "Kinh nghiệm thuê xe hữu ích: \n\n" +
+                        "Lựa chọn xe có đánh giá cao và nhiều chuyến đi \n\n" +
+                        "Lựa chọn chủ xe có nhận xét tốt và phản hồi nhanh \n\n" +
+                        "Lựa chọn xe có biểu tượng Đặt xe nhanh để tiết kiệm thời gian đợi duyệt \n\n" +
+                        "Gửi nhiều yêu cầu thuê xe cùng lúc đến các chủ xe khác nhau \n\n" +
+                        "Sử dụng mã khuyến mãi. Thanh toán đặt cọc sớm nhất để hoàn tất đặt xe \n\n" +
+                        "Hy vọng bạn sẽ có những trải nghiệm thật tuyệt vời cùng chúng tôi.\n\n" +
+                        "FastCar Team. 🎁";
+                    const hinhanh = "khuyenmai_banmoi.png";
+                    const ThongBaoNew = new ThongBao({
+                        TieuDe: tieude,
+                        NoiDung: noidung,
+                        HinhAnh: hinhanh,
+                        User: userModel
+                    });
+                    await ThongBaoNew.save();
                     res.status(200).json({
                         success: true,
                         message: "Yêu cầu đăng ký thành công",

@@ -46,9 +46,9 @@ class ThongBaoController {
         }
       }
     }
-    await ThongBao.find(check)
-      .then((result) => {
-        res.status(200).json(result)
+    await ThongBao.find(check).populate('User', ('_id UserName Email UID SDT Avatar'))
+      .sort({ _id: -1 }).then((result) => {
+        res.status(200).json(result);
       }).catch((error) => {
         console.log(error);
         res.status(400).json({
@@ -58,9 +58,9 @@ class ThongBaoController {
       })
   }
   async findtheoid(req, res) {
-    await ThongBao.findById( req.params.id)
+    await ThongBao.findById(req.params.id)
       .then((result) => {
-    console.log(result)
+        console.log(result)
 
         res.status(200).json(result)
       }).catch((error) => {
@@ -82,17 +82,17 @@ class ThongBaoController {
 
     try {
 
-        const kq = await thongbao.save();
-        console.log("Thong Bao", kq);
-        res.status(201).send('<script>alert("Thêm thông báo thành công"); window.location.href="/thongbao";</script>');
-        const tb = new ThongBao({
-          TieuDe: req.body.TieuDe,
-          NoiDung: req.body.NoiDung,
-          HinhAnh: img,
-          User: null
-        });
+      const kq = await thongbao.save();
+      console.log("Thong Bao", kq);
+      res.status(201).send('<script>alert("Thêm thông báo thành công"); window.location.href="/thongbao";</script>');
+      const tb = new ThongBao({
+        TieuDe: req.body.TieuDe,
+        NoiDung: req.body.NoiDung,
+        HinhAnh: img,
+        User: null
+      });
 
-      
+
     } catch (error) {
       console.error(error);
       res.status(500).json({

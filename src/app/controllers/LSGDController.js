@@ -90,7 +90,7 @@ class LSGDController {
             });
     }
     async CTLichSu(req, res) {
-        await lsgd.find({_id: req.params.id})
+        await lsgd.find({ _id: req.params.id })
             .populate({ path: "User", model: "User" })
             .populate({ path: 'NganHang', model: 'NganHang' }).sort({ _id: -1 })
             .then((result) => {
@@ -186,10 +186,18 @@ class LSGDController {
     async createLSGD(req, res, next) {
         try {
             const model = new lsgd(req.body);
-            await model.save();
-            return res.status(201).send({ success: true, message: 'Yêu cầu tạo mới thành công' });
+            await model.save().then((result) => {
+                return res.status(201).send({ success: true, message: 'Yêu cầu tạo mới thành công' });
+            }).catch((err) => {
+                res.status(400).json({
+                    success: false,
+                    messages: err.messages
+                });
+            })
+
         } catch (error) {
-            return res.status(400).send(error);
+            console.log(error);
+            return res.status(500).send(error);
         }
     }
 

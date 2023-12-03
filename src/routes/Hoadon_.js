@@ -25,9 +25,9 @@ router.post('/update_trangthaiHD/:maHD',HoaDonController_.update_trangthaiDH);
 
 router.post('/update_timeXNHD/:maHD',HoaDonController_.update_TimeChuSHXN);
 
-router.post('/update/hinhAnhGiaoXe/:maHD', upload.fields({ name: 'HinhAnhChuXeGiaoXe', maxCount: 2 }) ,HoaDonController_.update_HinhAnhChuXeGiaoXe);
+router.post('/update_hinhAnhGiaoXe/:maHD', upload.fields([{ name: 'HinhAnhChuXeGiaoXe', maxCount: 2 }]) ,HoaDonController_.update_HinhAnhChuXeGiaoXe);
 
-router.post('/update/hinhAnhTraXe/:maHD', upload.fields({ name: 'HinhAnhKhachHangTraXe', maxCount: 2 }) ,HoaDonController_.update_HinhAnhKhachHangTraXe);
+router.post('/update_hinhAnhTraXe/:maHD', upload.fields([{ name: 'HinhAnhKhachHangTraXe', maxCount: 2 }]) ,HoaDonController_.update_HinhAnhKhachHangTraXe);
 
 router.delete('/deleteAll', HoaDonController_.delete_allHD);
 router.delete('/delete/:id', HoaDonController_.deleteItem);
