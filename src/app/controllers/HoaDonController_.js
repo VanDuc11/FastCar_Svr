@@ -486,6 +486,7 @@ class HoaDonController_ {
                         TrangThai: 0,
                         HoaDon: hoadon,
                         NganHang: nganHangKhachThue,
+                        title: 2,
                         HinhAnh: ""
                     });
                     await lsgd.save();
@@ -541,6 +542,7 @@ class HoaDonController_ {
                     TrangThai: 1,
                     HoaDon: hoadon,
                     NganHang: nganHangChuXe,
+                    title: 1,
                     HinhAnh: ""
                 });
                 await lsgd.save();

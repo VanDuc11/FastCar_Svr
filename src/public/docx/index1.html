@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style>
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p><strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong></p>
+<p><strong>Độc lập – Tự do – Hạnh phúc</strong></p>
+<p><strong>HỢP ĐỒNG CHO THUÊ XE Ô TÔ TỰ LÁI</strong></p>
+<p><strong>(Số:……/HĐCTXTL)</strong></p>
+<p><em>- Căn cứ Bộ Luật Dân sự số 91/2015/QH13 ngày 24/11/2015;</em></p>
+<p><em>- Căn cứ Luật Thương mại số 36/2005/QH11 ngày 14/06/2005;</em></p>
+<p><em>- Căn cứ Chính sách và quy định ứng dụng FastCar;</em></p>
+<p><em>- Căn cứ theo nhu cầu và khả năng cung ứng của hai Bên.</em></p>
+<p>Hôm nay, ngày …/…./……, tại .………………………………………………………………….......</p>
+<p>Chúng tôi gồm có:</p>
+<p><strong>BÊN CHO THUÊ XE (BÊN A):</strong></p>
+<p>CMND/CCCD số: cấp ngày …/…/……. tại</p>
+<p>Địa chỉ thường trú:</p>
+<p>Địa chỉ liên hệ:</p>
+<p>Điện thoại:</p>
+<p><strong>BÊN THUÊ XE (BÊN B):</strong></p>
+<p>CMND/CCCD số: ………cấp ngày …/…/……. tại</p>
+<p>Passport số: ………cấp ngày …/…/……. tại</p>
+<p>GPLX số: ……....cấp ngày …/…/……. tại</p>
+<p>Địa chỉ thường trú:</p>
+<p>Địa chỉ liên hệ:</p>
+<p>Điện thoại:</p>
+<p>Đối với tổ chức</p>
+<p><strong>BÊN THUÊ XE (BÊN B):</strong></p>
+<p>GPĐKKD số: cấp ngày …/…/……. tại</p>
+<p>Trụ sở:</p>
+<p>Người đại diện theo pháp luật: Chức danh:</p>
+<p>Điện thoại:</p>
+<p>Sau khi bàn bạc, hai Bên cùng tiến hành thống nhất ký kết Hợp đồng cho thuê xe ô tô tự lái với các điều khoản sau:</p>
+<p><strong>ĐIỀU 1: ĐỐI TƯỢNG HỢP ĐỒNG</strong></p>
+<p>Bên A đồng ý cho Bên B thuê 01 (một) chiếc xe ô tô có thông tin sau đây:</p>
+<ul>
+<li><p>Biển số xe: ……………………………. Nhãn hiệu: ……………………………………………</p></li>
+<li><p>Sản xuất năm: ………………. Màu:…………………………………………………………….</p></li>
+<li><p>Giấy đăng ký xe ô tô số: ……………………………… Ngày cấp:………………………………</p></li>
+</ul>
+<p>Tại ……………………………………………………………………………………………….</p>
+<ul>
+<li><p>Tên chủ xe: ………………………………………………………………………………………</p></li>
+</ul>
+<p><strong>ĐIỀU 2: MỤC ĐÍCH THUÊ XE</strong></p>
+<p>Bên B thuê xe nêu trên vào mục đích: Thuê xe ô tô tự lái.</p>
+<p><strong>ĐIỀU 3: GIÁ TRỊ HỢP ĐỒNG, HÌNH THỨC THANH TOÁN, ĐỊA ĐIỂM BÀN GIAO XE</strong></p>
+<ol type="1">
+<li><p>Đơn giá thuê: VNĐ/ngày</p></li>
+<li><p>Khống chế quãng đường: km/ngày</p></li>
+</ol>
+<p>Phụ trội: VNĐ/km</p>
+<ol start="3" type="1">
+<li><p>Thời gian thuê</p></li>
+</ol>
+<ul>
+<li><p>Từ ….giờ….phút, ngày…………………….</p></li>
+<li><p>Đến ….giờ….phút, ngày: ………………….</p></li>
+<li><p>Phụ trội: ………VNĐ/giờ</p></li>
+<li><p>Quá thời gian thuê .…. giờ nêu trên mà Bên B chưa bàn giao xe cho Bên A thì tính thêm 01 (một) ngày thuê xe.</p></li>
+</ul>
+<ol start="4" type="1">
+<li><p><strong>Tổng giá trị thuê xe là: ……………………………VNĐ</strong></p></li>
+<li><p>Hình thức thanh toán:</p></li>
+</ol>
+<ul>
+<li><p>Bên B thanh toán trước <strong>30% giá trị Hợp đồng tại Điều 3.4</strong> sau khi kết nối thành công với Bên A thông qua ứng dụng FastCar.</p></li>
+<li><p>Bên B thanh toán <strong>70% giá trị Hợp đồng tại Điều 3.4</strong> cho Bên A bằng hình thức tiền mặt hoặc chuyển khoản <strong>sau khi ký hợp đồng này</strong>.</p></li>
+</ul>
+<ol start="6" type="1">
+<li><p>Địa điểm bàn giao xe: …………………………………………………………………………..</p></li>
+</ol>
+<p><strong>ĐIỀU 4: QUYỀN VÀ NGHĨA VỤ CỦA BÊN A</strong></p>
+<ol type="1">
+<li><p><strong>Quyền của Bên A</strong></p></li>
+</ol>
+<ul>
+<li><p>Nhận đủ tiền thuê theo phương thức đã thỏa thuận;</p></li>
+</ul>
+<ul>
+<li><p>Khi hết hạn Hợp đồng có quyền nhận lại tài sản thuê như tình trạng thỏa thuận ban đầu, trừ hao mòn tự nhiên, trường hợp giá trị tài sản giảm sút so với giá trị ban đầu được xác định do lỗi của Bên B thì Bên B có nghĩa vụ bồi thường thiệt hại đã gây ra;</p></li>
+<li><p>Trường hợp xe có phát sinh sự cố trong chuyến đi dẫn đến phải đưa xe đi kiểm tra, sửa chữa, Bên A có quyền yêu cầu Bên B cùng tham gia vào quá trình bao gồm nhưng không giới hạn: liên hệ bảo hiểm, cùng đi giám định,… Trường hợp các Bên có thỏa thuận khác, phải ghi nhận thông tin ở Biên bản bàn giao xe;</p></li>
+<li><p>Có quyền đơn phương chấm dứt Hợp đồng và yêu cầu bồi thường thiệt hại nếu Bên B có các hành vi sử dụng tài sản thuê không đúng mục đích như đã thỏa thuận, làm hư hỏng, mất mát tài sản thuê, sửa chữa, đổi cho người khác thuê lại mà không có sự đồng ý của Bên A;</p></li>
+<li><p>Báo cho cơ quan công an và FastCar khi Bên A không liên lạc được với Bên B hoặc Bên B tắt/tháo thiết bị định vị trên xe hoặc quá thời hạn thuê tại khoản 3.3 Điều 3 Hợp đồng này Bên B không giao xe cho Bên A;</p></li>
+<li><p>Yêu cầu Bên B thanh toán tiền phạt nguội/ đi thanh toán tiền phạt nguội trong trường hợp có thông báo phát nguội trong thời gian Bên B sử dụng xe thuê. Trường hợp Bên B không thể đi thanh toán thì phải cung cấp bằng lái xe của Bên B cho Bên A để Bên A thực hiện nghĩa vụ.</p></li>
+<li><p>Đối với trường hợp các bên có thỏa thuận về việc thế chấp tài sản, Bên A có quyền giữ tài sản thế chấp của Bên B từ lúc nhận xe đến khi Bên B hoàn tất việc trả xe và các khoản chi phí phát sinh (nếu có).</p></li>
+</ul>
+<ol start="2" type="1">
+<li><p><strong>Nghĩa vụ của Bên A</strong></p></li>
+</ol>
+<ul>
+<li><p>Trước khi giao xe cho Bên B, phải kiểm tra, đối chiếu thông tin khách thuê, sao chụp lại các giấy tờ nhân thân cần thiết để phục vụ nhu cầu liên hệ sau này;</p></li>
+<li><p>Chịu trách nhiệm pháp lý về nguồn gốc và quyền sở hữu của xe;</p></li>
+<li><p>Giao đúng xe và toàn bộ giấy tờ liên quan đến xe trong tình trạng xe an toàn, vệ sinh sạch sẽ nhằm đảm bảo chất lượng dịch vụ khi Bên B sử dụng. Các giấy tờ xe liên quan bao gồm: giấy đăng ký xe ô tô (bản photo sao y trong thời hạn 06 tháng), giấy kiểm định xe ô tô (bản chính), giấy bảo hiểm xe ô tô bắt buộc (bản chính);</p></li>
+<li><p>Giao xe tại địa điểm bàn giao xe và đúng thời gian theo Hợp đồng này;</p></li>
+</ul>
+<ul>
+<li><p>Tự chịu trách nhiệm trong trường hợp ký Hợp đồng và giao xe cho khách thuê không đúng với thông tin đã giao kết trên Ứng dụng;</p></li>
+<li><p>Đối với trường hợp các bên có thỏa thuận về việc thế chấp tài sản: (i) Bên A chịu mọi trách nhiệm chi trả hoặc đền bù trong trường hợp tài sản thế chấp của Bên B bị thiệt hại do lỗi Bên A; và (ii) Bên A có trách nhiệm hoàn trả đầy đủ tài sản thế chấp của Bên B khi 2 Bên đã hoàn tất Hợp đồng và Bên B đã thanh toán đầy đủ các chi phí phát sinh (trường hợp có nghĩa vụ chưa hoàn thành, các Bên ghi nhận sự việc phát sinh vào Biên bản bàn giao để làm căn cứ);</p></li>
+<li><p>Báo trước cho Bên B trong vòng 24 tiếng nếu xe cho thuê không thể thuê được vì xe bị hư hỏng buộc phải sửa chữa hoặc vì lý do khác không thể khắc phục được và phải giao xe ô tô khác tương tự như xe đã cho thuê.</p></li>
+</ul>
+<p><strong>ĐIỀU 5: QUYỀN VÀ NGHĨA VỤ CỦA BÊN B</strong></p>
+<ol type="1">
+<li><p><strong>Quyền của Bên B</strong></p></li>
+</ol>
+<ul>
+<li><p>Nhận đúng xe và các giấy tờ liên quan đến xe theo Hợp đồng này;</p></li>
+<li><p>Sửa chữa xe trong trường hợp cấp thiết và yêu cầu Bên A thanh toán chi phí hợp lý làm gia tăng giá trị của xe thuê. Trong trường hợp này, Bên B phải thông báo trước cho Bên A về tình trạng xe đang gặp phải và những vấn đề cần khắc phục trước khi tiến hành sửa chữa</p></li>
+<li><p>Yêu cầu Bên A đổi xe nếu giao xe không đúng như thỏa thuận, sửa chữa nếu xe có hư hỏng do lỗi của Bên A và bồi thường thiệt hại nếu Bên A chậm giao hoặc giao xe không đúng như thỏa thuận;</p></li>
+<li><p>Yêu cầu Bên A cung cấp hóa đơn, giấy tờ thể hiện chi phí sửa chữa trong trường hợp Bên B gây ra sự cố làm giảm giá trị của xe và Bên A thay mặt làm việc với nhà bảo hiểm, gara;</p></li>
+<li><p>Đơn phương chấm dứt Hợp đồng và yêu cầu bồi thường thiệt hại nếu Bên A thực hiện các hành vi sau:</p></li>
+</ul>
+<ul>
+<li><p>Bên A giao xe không đúng thời hạn như thỏa thuận, trừ trường hợp bất khả kháng (Trường hợp bất khả kháng được hiểu là một Bên cố gắng thực hiện bằng mọi biện pháp để thực hiện nghĩa vụ của mình nhưng không thể thực hiện được vì trở ngại khách quan: mưa bão, dịch bệnh…). Bên nào viện dẫn trường hợp bất khả kháng thì Bên đó có nghĩa vụ chứng minh. Trường hợp giao xe chậm gây thiệt hại cho Bên B thì phải bồi thường.</p></li>
+<li><p>Xe có khuyết tật dẫn đến Bên B không đạt được mục đích thuê mà Bên B không biết.</p></li>
+<li><p>Xe có tranh chấp về quyền sở hữu giữa Bên A với Bên thứ ba mà Bên B không biết dẫn đến Bên B không xác lập được mục đích sử dụng xe trong quá trình thuê như đã thỏa thuận.</p></li>
+</ul>
+<ol start="2" type="1">
+<li><p><strong>Nghĩa vụ của Bên B</strong></p>
+<ul>
+<li><p>Cung cấp và tự chịu trách nhiệm về các thông tin nhân thân cần thiết theo nội dung ở phần đầu Hợp đồng và Giấy phép lái xe của mình.</p></li>
+<li><p>Kiểm tra kỹ xe trước khi nhận và trước khi hoàn trả xe. Quay chụp tình trạng xe để làm căn cứ đồng thời ký xác nhận biên bản bàn giao về tình trạng xe khi nhận và khi hoàn trả.</p></li>
+<li><p>Thanh toán đầy đủ tiền thuê xe cho Bên A khi nhận xe.</p></li>
+<li><p>Kiểm tra kỹ tư trang, tài sản cá nhân của mình trước khi trả xe, đảm bảo không để quên, thất lạc đồ trên xe. Có nghĩa vụ chứng minh khi yêu cầu FastCar hỗ trợ làm việc với chủ xe.</p></li>
+<li><p>Đối với trường hợp các bên thỏa thuận về thế chấp tài sản, Bên B cung cấp tài sản thế chấp trước khi nhận xe và chịu trách nhiệm pháp lý về nguồn gốc, quyền sở hữu của tài sản thế chấp bao gồm: CCCD gắn chip (đối chiếu) /Passport và tiền mặt 15 triệu đồng/xe máy kèm giấy đăng ký xe hoặc theo thỏa thuận giữa 2 Bên được ghi nhận vào Biên bản bàn giao xe.</p></li>
+</ul></li>
+</ol>
+<ul>
+<li><p>Tuân thủ quy định trả xe như đã được ký kết trong Hợp đồng. Thời gian thuê xe được tính từ lúc Bên B nhận xe đến khi Bên B trả xe và ký xong Biên bản Bàn giao. Nếu trả xe không đúng thời hạn, Bên B sẽ phải trả thêm tiền phụ trội, và số tiền trả thêm sẽ được tính theo giờ như quy định tại Điều 3 Hợp đồng này.</p></li>
+<li><p>Bên B chịu trách nhiệm đền bù mọi thất thoát về phụ tùng, phụ kiện của xe: đền bù 100% theo giá phụ tùng chính hãng nếu tráo đổi linh kiện, phụ tùng; Chịu 100% chi phí sửa chữa xe nếu có xảy ra hỏng hóc tùy theo mức độ hư tổn của chiếc xe đó, địa điểm sữa chữa theo sự chỉ định của Bên A hoặc 2 Bên tự thỏa thuận. Các ngày xe nghỉ không chạy được do lỗi của Bên B thì Bên B phải trả tiền hoàn toàn trong các ngày đó, giá được tính bằng giá thuê trong Hợp đồng (hoặc các bên có thỏa thuận khác). Ngoài ra, nếu xe trong tình trạng không được sạch sẽ, Bên B sẽ phải chịu thêm khoản phí vệ sinh xe (hoặc tùy 2 Bên tự thỏa thuận).</p></li>
+<li><p>Đặt cọc một khoản tiền khi tiến hành trả xe nếu chủ xe yêu cầu để khắc phục: hư hỏng, trầy xước xe trong chuyến đi. Các bên ghi nhận nội dung trong Biên bản bàn giao để làm căn cứ.</p></li>
+<li><p>Mọi chi phí đi lại, ăn ở của Bên A để giải quyết việc do lỗi của Bên B gây ra, Bên B phải chịu hoàn toàn.</p></li>
+<li><p>Nghiêm túc chấp hành đúng lệ luật giao thông đường bộ. Tự chịu trách nhiệm dân sự, hình sự trong suốt thời gian thuê xe. Có nghĩa vụ thanh toán chi phí xăng dầu, cầu phà, bến bãi, tiền phạt nóng, tiền phạt nguội theo các lỗi mà luật pháp Việt Nam quy định. Nếu có phát sinh bất cứ chi phí nào tại thời điểm Bên B thuê xe, Bên B vẫn phải chịu chi phí đó mặc dù Hợp đồng đã thanh lý. Bên A sẽ căn cứ vào giờ đi và ngày đi trong Hợp đồng đã ký cùng với giấy phạt nguội làm bằng chứng để giải quyết sai phạm.</p></li>
+<li><p>Tuyệt đối không sử dụng xe cho các hành vi trái pháp luật: cầm cố, đua xe, chở hàng lậu, hàng cấm, cho người khác thuê lại… Không giao tay lái cho người không đủ năng lực hành vi, không có GPLX từ B1 trở lên. Trường hợp Bên A có căn cứ thấy rằng Bên B có dấu hiệu vi phạm thì Bên A có quyền đơn phương chấm dứt Hợp đồng, đồng thời sẽ thông báo với cơ quan công an để truy tìm xe. Bên B phải hoàn toàn chịu trách nhiệm hình sự trước pháp luật và chịu các phí tổn phát sinh khác.</p></li>
+</ul>
+<p><strong>ĐIỀU 6: CHÍNH SÁCH BẢO HIỂM THEO CHUYẾN ĐI</strong></p>
+<ol type="1">
+<li><p><strong>Đối tượng bảo hiểm và thời gian bảo hiểm:</strong></p></li>
+</ol>
+<ul>
+<li><p>Chỉ áp dụng với chuyến đi có mua bảo hiểm chuyến trên ứng dụng đặt xe FastCar.</p></li>
+<li><p>Thời gian bảo hiểm tính từ thời gian Bên B bắt đầu và hết hiệu lực theo thời gian Bên B kết thúc chuyến đi đã đăng ký trên ứng dụng FastCar.</p>
+<ol type="1">
+<li><p><strong>Phạm vi bảo hiểm:</strong></p></li>
+</ol></li>
+<li><p>Nhà bảo hiểm chịu trách nhiệm bồi thường cho Bên A những thiệt hại vật chất do thiên tai, tai nạn bất ngờ, va chạm xe, không lường trước được trong những trường hợp sau:</p></li>
+</ul>
+<ul>
+<li><p>Đâm, va (bao gồm cả va chạm với vật thể khác ngoài xe cơ giới)</p></li>
+<li><p>Hỏa hoạn, cháy, nổ.</p></li>
+<li><p>Mất cắp, mất nguyên chiếc</p></li>
+<li><p>Thủy kích (khấu trừ 20% số tiền bảo hiểm, tối thiểu 3.000.000 VNĐ)</p></li>
+</ul>
+<p>Mức khấu trừ: 2.000.000 VNĐ/vụ (không bao gồm trường hợp giảm trừ bồi thường theo quy định của Nhà bảo hiểm).</p>
+<p><strong>6.3 Quyền và nghĩa vụ:</strong></p>
+<ul>
+<li><p>Trường hợp chuyến đi được hỗ trợ bảo hiểm chuyến do FastCar cung cấp, khi xảy ra sự cố va chạm trong quá trình di chuyển, Bên B có trách nhiệm báo ngay cho Bên A. Bên B phải chụp hình ảnh hiện trường sự cố và liên hệ ngay tổng đài bảo hiểm để khai báo sự cố và làm theo hướng dẫn xử lý.</p></li>
+<li><p>Bên B có trách nhiệm thanh toán chi phí sửa chữa theo điều khoản bảo hiểm được quy định rõ trong chi tiết chuyến đi trên ứng dụng FastCar.</p></li>
+<li><p>Bên B có nghĩa vụ phối hợp với Bên A để xử lý sự cố theo hướng dẫn của nhà bảo hiểm.</p></li>
+<li><p>Trường hợp Bên B báo sự cố phát sinh ngoài thời gian của chuyến thuê xe trên ứng dụng FastCar và không được bảo hiểm bồi thường sự cố, Bên B phải có nghĩa vụ thực hiện đền bù theo Điều khoản 5.2.</p></li>
+<li><p>Các Bên có nghĩa vụ thực hiện theo những điều khoản về chính sách, quy định của nhà bảo hiểm: về chế tài, phạm vi bồi thường, mức bồi thường, trường hợp giảm trừ bồi thường và loại trừ bảo hiểm,…</p></li>
+</ul>
+<p><strong>ĐIỀU 7: ĐIỀU KHOẢN CHUNG</strong></p>
+<ol type="1">
+<li><p>Hợp đồng này, Biên bản bàn giao và các phụ lục bổ sung Hợp đồng (nếu có) là bộ phận không tách rời của Hợp đồng, các Bên phải có nghĩa vụ thực hiện, cam kết thi hành đúng các điều khoản của Hợp đồng, không Bên nào tự ý đơn phương sửa đổi, đình chỉ hoặc hủy bỏ Hợp đồng. Mọi sự vi phạm phải được xử lý theo pháp luật.</p></li>
+<li><p>Hai Bên nghiêm chỉnh thực hiện các điều khoản của Hợp đồng này. Trong trường hợp có sự thay đổi, phải thông báo cho nhau bằng văn bản trước ít nhất 03 (ba) ngày kể từ ngày dự kiến giao xe.</p></li>
+<li><p>Trong quá trình thực hiện Hợp đồng, nếu có vấn đề phát sinh các Bên sẽ cùng bàn bạc giải quyết trên tinh thần hợp tác và tôn trọng lợi ích của cả hai Bên và được thể hiện bằng văn bản. Nếu không giải quyết được thì đưa ra Tòa án nhân dân có thẩm quyền để giải quyết. Bên thua kiện sẽ chịu toàn bộ chi phí.</p></li>
+<li><p>Hợp đồng này được chấm dứt khi Bên B hoàn trả xe cho Bên A, được Bên A chấp nhận và thanh toán các chi phí liên quan. Hai Bên đồng ý ký vào Biên bản bàn giao xe.</p></li>
+<li><p>Hợp đồng có hiệu lực kể từ ngày hai Bên ký Hợp đồng.</p></li>
+<li><p>Hợp đồng được lập thành 02 (hai) bản, mỗi Bên giữ một bản và có giá trị như nhau.</p></li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><p><strong>Bên A – Chủ xe</strong></p>
+<p>(Ký, ghi rõ họ tên)</p></th>
+<th><p><strong>Bên B – Khách thuê xe</strong></p>
+<p>(Ký, ghi rõ họ tên)</p></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</body>
+</html>
