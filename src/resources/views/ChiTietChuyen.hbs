@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <label id="LyDo" style="display: none;">Lý do: {{this.LyDo}}</label>
+                    <label id="LyDo" style="margin-bottom: 0px;">Lý do: {{this.LyDo}}</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -128,8 +128,17 @@
             </div>
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <label>Thế chấp: <span
-                            class="TheChap">{{this.TheChap}}</span></label>
+                    <label>Thế chấp: <span class="TheChap">{{this.TheChap}}</span></label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label id="Giaoxe" data-toggle="modal" data-target="#ModalUP2">Ảnh Xe khi giao</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <label id="Traxe" data-toggle="modal" data-target="#ModalUP3">Ảnh xe khi trả</label>
                 </div>
             </div>
         </div>
@@ -191,6 +200,74 @@
             </div>
 
         </div>
+
+        {{!-- ảnh xe khi giao --}}
+        <div class="modal fade" id="ModalUP2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group  col-md-12">
+                                <span class="thong-tin-thanh-toan">
+                                    <h5>Ảnh xe khi giao xe</h5>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" style=" display: flex;
+                    flex-direction: column;">
+                                <div class="images" style=" display: flex;">
+                                    <img src="/images/{{this.HinhAnhChuXeGiaoXe.[0]}}" alt="" height="280px"
+                                        width="400px" style="margin-left:120px;">
+                                    <img src="/images/{{this.HinhAnhChuXeGiaoXe.[1]}}" alt="" height="280px"
+                                        width="400px" style="margin-left:40px;">
+                                </div>
+                                <BR>
+                            </div>
+                        </div>
+                        <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:400px;">Đóng</a>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- ảnh xe khi giao --}}
+        <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group  col-md-12">
+                                <span class="thong-tin-thanh-toan">
+                                    <h5>Ảnh xe khi trả xe</h5>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" style=" display: flex;
+                    flex-direction: column;">
+                                <div class="images" style=" display: flex;">
+                                    <img src="/images/{{this.HinhAnhKhachHangTraXe.[0]}}" alt="" height="280px"
+                                        width="400px" style="margin-left:100px;">
+                                    <img src="/images/{{this.HinhAnhKhachHangTraXe.[1]}}" alt="" height="280px"
+                                        width="400px" style="margin-left:40px;">
+                                </div>
+                                <BR>
+                            </div>
+                        </div>
+                        <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:400px;">Đóng</a>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
         {{/each}}
         </form>
         <BR>
@@ -216,17 +293,17 @@
             i.innerHTML = formattedDate
         })
     }
-     var TheChap = document.querySelectorAll('.TheChap');
+    var TheChap = document.querySelectorAll('.TheChap');
     TheChap.forEach((i) => {
-       if ( i.innerHTML === "true") {
-      i.innerHTML = "Có thế chấp"
-     
-   
-    } else {
-       i.innerHTML = "Ko thế chấp"
-   
-      
-    }
+        if (i.innerHTML === "true") {
+            i.innerHTML = "Có thế chấp"
+
+
+        } else {
+            i.innerHTML = "Ko thế chấp"
+
+
+        }
     })
 
 </script>
@@ -270,57 +347,67 @@
     const TrangThai = document.getElementById('TrangThai');
     const LyDo = document.getElementById('LyDo');
     const TinhTrang = document.getElementById('TinhTrang');
-
+    const giaoxe = document.getElementById('Giaoxe');
+    const traxe = document.getElementById('Traxe');
     if (TrangThai.innerHTML == 0) {
         TrangThai.innerHTML = "Hóa đơn đã bị hủy"
         TrangThai.style.color = "red"
         LyDo.style.display = "block"
-
         TinhTrang.innerHTML = "Hóa đơn bị hủy"
+        traxe.style.display = "none"
+        giaoxe.style.display = "none"
     } else if (TrangThai.innerHTML == 1) {
         TrangThai.innerHTML = "Chờ duyệt"
         TrangThai.style.color = '#FF8B07'
-
         TinhTrang.innerHTML = "Chờ duyệt"
         TinhTrang.style.background = "#FDE1C3"
-
+        traxe.style.display = "none"
+        giaoxe.style.display = "none"
+        LyDo.style.display = "none"
     } else if (TrangThai.innerHTML == 2) {
         TrangThai.innerHTML = "Chờ đặt cọc"
         TrangThai.style.color = '#FF8B07'
-
         TinhTrang.innerHTML = "Chờ duyệt"
         TinhTrang.style.background = "#FDE1C3"
+        traxe.style.display = "none"
+        giaoxe.style.display = "none"
+        LyDo.style.display = "none"
     } else if (TrangThai.innerHTML == 3) {
         TrangThai.innerHTML = "Đặt cọc thành công"
         TrangThai.style.color = '#22AD56'
-
         TinhTrang.innerHTML = "Đã đặt cọc"
         TinhTrang.style.background = "#B9FFD3"
         TinhTrang.style.color = "#24AE58"
+        traxe.style.display = "none"
+        giaoxe.style.display = "none"
+        LyDo.style.display = "none"
     } else if (TrangThai.innerHTML == 4) {
-        TrangThai.innerHTML = "Chủ xe giao xe thành công"
+        TrangThai.innerHTML = "Khách hàng đã nhận xe"
         TrangThai.style.color = '#22AD56'
         TinhTrang.innerHTML = "Đang hoạt động"
         TinhTrang.style.background = "#B9FFD3"
         TinhTrang.style.color = "#24AE58"
+        traxe.style.display = "none"
+        giaoxe.style.display = "block"
+        LyDo.style.display = "none"
     } else if (TrangThai.innerHTML == 5) {
-        TrangThai.innerHTML = "Khách hàng trả xe thành công"
+        TrangThai.innerHTML = "Khách hàng mang trả xe "
         TrangThai.style.color = '#22AD56'
         TinhTrang.innerHTML = "Đang hoạt động"
         TinhTrang.style.background = "#B9FFD3"
         TinhTrang.style.color = "#24AE58"
+        traxe.style.display = "none"
+        giaoxe.style.display = "block"
+        LyDo.style.display = "none"
     } else if (TrangThai.innerHTML == 6) {
         TrangThai.innerHTML = "Chủ xe nhận xe thành công"
-        TrangThai.style.color = '#22AD56'
-        TinhTrang.innerHTML = "Đang hoạt động"
-        TinhTrang.style.background = "#B9FFD3"
-        TinhTrang.style.color = "#24AE58"
-    } else if (TrangThai.innerHTML == 7) {
-        TrangThai.innerHTML = "Đơn hàng đã hoàn thành"
         TrangThai.style.color = '#22AD56'
         TinhTrang.innerHTML = "Hoàn thành"
         TinhTrang.style.background = "#B9FFD3"
         TinhTrang.style.color = "#24AE58"
+        traxe.style.display = "block"
+        giaoxe.style.display = "block"
+        LyDo.style.display = "none"
     }
 
 </script>
