@@ -94,8 +94,8 @@ class XeController {
             });
     }
 
-    async chitietxe(req, res) {
-        await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
+    async findChiTiet(req, res) {
+        await Xe.find({ _id: req.query.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
                 // console.log(result);
 
@@ -133,7 +133,7 @@ class XeController {
     }
 
 
-    async chitietxe(req, res) {
+    async ChiTietXe(req, res) {
         await Xe.find({ _id: req.params.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
             .then((result) => {
                 // console.log(result);
@@ -165,7 +165,7 @@ class XeController {
     }
     async dem_hoa_don_HD(req, res) {
 
-        await HoaDon.find({ Xe: req.params.id, TrangThaiHD: [3, 4, 5, 6] }).populate('Xe')
+        await HoaDon.find({ Xe: req.query.id, TrangThaiHD: [3, 4, 5, 6] }).populate('Xe')
             .populate({
                 path: 'Xe',
                 populate: { path: 'ChuSH', model: 'User' }

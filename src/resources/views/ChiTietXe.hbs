@@ -115,7 +115,7 @@
           <p><b id="dangHD"></b></p>
         </div>
       </div>
-            <div class="form-group col-md-3">
+      <div class="form-group col-md-3">
         <label class="control-label">Thế chấp</label>
         <div class="form-control">
           <p><b class="TheChap">{{this.TheChap}}</b></p>
@@ -127,12 +127,12 @@
       </div>
       <div class="form-group col-md-4">
         <label class="control-label">Mô tả</label>
-        <textarea class="form-control" style=" width: 550px;"readonly >{{this.MoTa}}</textarea>
+        <textarea class="form-control" style=" width: 550px;" readonly>{{this.MoTa}}</textarea>
       </div>
-   
 
-      <div class="end"  >
-        
+
+      <div class="end">
+
         <div class="form-group1 " style="margin-left:20px; display: inline-block; ">
           <label class="control-label">Ảnh xe</label> <BR>
           <img src="/images/{{this.HinhAnh.[0]}}" alt="" height="100px" width="150px" type="button" id="show-emp"
@@ -140,27 +140,27 @@
         </div>
         <div class="form-group " style="margin-left:20px;display: inline-block;">
           <label class="control-label">Giấy tờ xe</label><BR>
-          <img src="/images/{{this.DangKyXe}}" alt="" height="100px"
-            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP1">
+          <img src="/images/{{this.DangKyXe}}" alt="" height="100px" width="150px" type="button" id="show-emp"
+            data-toggle="modal" data-target="#ModalUP1">
         </div>
-        
+
         <div class="form-group " style="margin-left:20px;display: inline-block;">
           <label class="control-label">Bảo hiểm</label><BR>
-          <img src="/images/{{this.BaoHiem}}" alt="" height="100px"
-            width="150px"  type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP2">
+          <img src="/images/{{this.BaoHiem}}" alt="" height="100px" width="150px" type="button" id="show-emp"
+            data-toggle="modal" data-target="#ModalUP2">
         </div>
-          <div class="form-group " style="margin-left:20px;display: inline-block;">
+        <div class="form-group " style="margin-left:20px;display: inline-block;">
           <label class="control-label">Đăng kiểm</label><BR>
-          <img src="/images/{{this.DangKiem}}" alt="" height="100px"
-            width="150px" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP4">
+          <img src="/images/{{this.DangKiem}}" alt="" height="100px" width="150px" type="button" id="show-emp"
+            data-toggle="modal" data-target="#ModalUP4">
         </div>
       </div>
 
-   
+
       <div class="form-group col-md-12">
         <a class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
           onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
-        <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue?id={{this._id}}" id="button-xem-tt">Xem thông tin
+        <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue?id{{this._id}}" id="button-xem-tt">Xem thông tin
           thuê</a>
         <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
       </div>
@@ -236,7 +236,7 @@
                   </div>
                 </div>
               </div>
-             
+
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -273,7 +273,7 @@
 
                 </div>
               </div>
-            
+
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -305,13 +305,13 @@
                     <img src="/images/{{this.BaoHiem}}" alt="" height="280px" width="400px" style="margin-left:230px;">
 
 
- 
+
                   </div>
                   <BR>
 
                 </div>
               </div>
-             
+
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -320,7 +320,7 @@
           </div>
         </div>
       </div>
-  {{!-- đang kiểm --}}
+      {{!-- đang kiểm --}}
       <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false" height="900px" width="950px">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -346,7 +346,7 @@
 
                 </div>
               </div>
-             
+
               <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:45%;">Đóng</a>
               <BR>
             </div>
@@ -363,26 +363,8 @@
   </div>
 </main>
 <script>
-  load_data()
-  async function load_data() {
-
-   var TheChap = document.querySelectorAll('.TheChap');
-    TheChap.forEach((i) => {
-       if ( i.innerHTML === "true") {
-      i.innerHTML = "Có thế chấp"
-   
-   
-    } else {
-       i.innerHTML = "Ko thế chấp"
-   
-      
-    }
-    })
-  }
-</script>
-<script>
   const textarea = document.querySelector("textarea");
-textarea.setAttribute("readonly", true);
+  textarea.setAttribute("readonly", true);
 </script>
 <!-- Essential javascripts for application to work-->
 
@@ -414,8 +396,19 @@ textarea.setAttribute("readonly", true);
 <script>
   validatePrice()
   async function validatePrice() {
-    
-    
+
+    var TheChap = document.querySelectorAll('.TheChap');
+    TheChap.forEach((i) => {
+      if (i.innerHTML === "true") {
+        i.innerHTML = "Có thế chấp"
+
+
+      } else {
+        i.innerHTML = "Ko thế chấp"
+
+
+      }
+    })
     var GiaThue = document.querySelector('#giathue');
     var TieuHao = document.querySelector('#tieuhao');
     var NgayDang = document.querySelector('#ngaydang');
@@ -425,17 +418,13 @@ textarea.setAttribute("readonly", true);
     var duyet = document.getElementById('button-duyet4');
     var xemTT = document.getElementById('button-xem-tt');
     var tuchoi = document.getElementById('button-tuchoi');
-    
-     // Lấy URL hiện tại
-    const url = window.location.href;
 
-    // đến chuỗi url`
-    const idStart = "http://localhost:9000/quanlyxe/ChiTietXe/";
+    // Lấy URL hiện tại
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
 
-    // cắt chuỗi chuỗi :id
-    const id = url.slice(idStart.length, url.length);
-
-    const response = await fetch(`/api/xe/demthoadon/${id}`).then(response => response.json());
+    const response = await fetch(`/api/xe/demthoadon?id=${id}`).then(response => response.json());
     document.getElementById('dangHD').innerHTML = response.length
 
     const formattedPrice = new Intl.NumberFormat('vi-VN').format(GiaThue.innerHTML, {
@@ -507,14 +496,4 @@ textarea.setAttribute("readonly", true);
       })
   }
 
-
-
-
-  //Modal
-  $("#show-emp").on("click", function () {
-    $("#ModalUP").modal({ backdrop: false, keyboard: false })
-  });
 </script>
-</body>
-
-</html>
