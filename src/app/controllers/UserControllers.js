@@ -29,6 +29,13 @@ class UserControlles {
 
 
 
+        }else if (status != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                TrangThai_GPLX: status.split(',')
+            }
+
         }else if (start_date != undefined &&
             end_date != undefined &&
             TrangThai == undefined) {
@@ -56,14 +63,7 @@ class UserControlles {
                 DangXe: TrangThai.split(',')
             }
 
-        } else if (status != undefined &&
-            start_date == undefined &&
-            end_date == undefined) {
-            query = {
-                TrangThai_GPLX: status.split
-            }
-
-        }
+        } 
 
         await User.find(query).sort({ _id: -1 })
             .then((result) => {
