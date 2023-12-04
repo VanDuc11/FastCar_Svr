@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 // router.get('/danhsachxe', XeController.show);
 
 router.get('/', XeController.index);
-router.get('/Addxe',XeController.add);
+router.get('/addxe',XeController.add);
 router.get('/ChiTietXe', XeController.findChiTiet);
 router.get('/ThongTinKhachThue', XeController.Thongtin);
 router.get('/demthoadon', XeController.dem_hoa_don_HD);

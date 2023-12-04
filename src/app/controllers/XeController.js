@@ -176,7 +176,7 @@ class XeController {
             })
     }
     add(req, res) {
-        res.render('AddXe')
+        res.render('addxe')
     }
 
     async findXe_id(req, res) {
