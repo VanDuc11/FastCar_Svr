@@ -11,9 +11,24 @@
                 <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
 
                 <form action="/login" method="post">
-                    <input type="email" name="Email" style="" required>
-                    <input type="password" name="MatKhau" required>
-                    <button type="submit"> đăng nhập</button>
+                    {{!-- <input type="email" name="Email" placeholder="Tài khoản quản trị" required>
+                    <input type="password" placeholder="Mật khẩu" name="MatKhau" required> --}}
+                    <div class="wrap-input100 validate-input">
+                        <input type="email" name="Email" placeholder="Tài khoản quản trị" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class='bx bx-user'></i>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input type="password" placeholder="Mật khẩu" id="password-field" name="MatKhau" required>
+                        <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class='bx bx-key'></i>
+                        </span>
+                    </div>
+                    <button type="submit"> Đăng nhập</button>
                 </form>
 
             </div>
@@ -24,30 +39,55 @@
 </div>
 <style>
     /* Style the form */
-form {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-}
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
 
-/* Style the input fields */
-input {
-    border: 1px;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
+    /* Style the input fields */
+    input {
+        border: 1px;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        padding-left: 30px;
+    }
 
-/* Style the submit button */
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-}
+    /* Style the submit button */
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
 </style>
+<script type="text/javascript">
+function myFunction() {
+  var x = document.getElementById("password-field");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+$(".click-eye").click(function () {
+  $(this).toggleClass("bx-show bx-hide");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
+$("#password-field").click(function () {
+  myFunction();
+});
+</script>

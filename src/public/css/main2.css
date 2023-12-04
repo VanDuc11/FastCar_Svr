@@ -196,7 +196,9 @@ iframe {
   z-index: 1;
   margin-bottom: 10px;
 }
-
+.bx.fa-fw.bx-hide.field-icon.click-eye {
+  top: -4px;
+}
 .input100 {
   font-family: var(--font_family);
   font-size: var(--font_15);
@@ -230,7 +232,8 @@ iframe {
   left: 0;
   width: var(--onehundred_percent);
   height: var(--onehundred_percent);
-  padding-left: 25px;
+  padding-left: 3px;
+  top: -4px;
   pointer-events:var(--none);
   color: var(--black_color);
   -webkit-transition: all 0.4s;
