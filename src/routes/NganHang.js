@@ -6,6 +6,8 @@ router.get('/list/:email', NganHangController.getListNganHang);
 
 router.post('/create', NganHangController.createNganHang);
 
+router.put('/update/:id', NganHangController.updateNganHang);
+
 router.delete('/delete/:id', NganHangController.deleteNganHang);
 
 module.exports = router;

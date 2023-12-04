@@ -14,8 +14,8 @@ class FeedBackController {
         await feedback.find(check)
         .populate({
             path: 'Xe',
-            populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-        }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+            populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+        }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
             .then((result) => {
                 res.status(200).json(result);
             });

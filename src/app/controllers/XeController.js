@@ -182,7 +182,7 @@ class XeController {
     async findXe_id(req, res) {
         let id = req.params.id;
         await Xe.findById(id)
-            .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+            .populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia'))
             .then((result) => {
                 res.json(result)
                 // console.log('findXe_id',result)
@@ -247,7 +247,7 @@ class XeController {
         }
 
         try {
-            await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+            await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
                 .then((result) => {
                     res.status(200).json(result)
                 })
@@ -269,7 +269,7 @@ class XeController {
     async findXe_byID(req, res) {
         let idXe = req.params.id;
         try {
-            await Xe.findOne({ _id: idXe }).populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+            await Xe.findOne({ _id: idXe }).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia'))
                 .then((result) => {
                     res.status(200).json(result)
                 })
@@ -360,7 +360,7 @@ class XeController {
         }
 
         try {
-            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).exec();
+            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).exec();
 
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
 
@@ -390,7 +390,7 @@ class XeController {
 
 
         try {
-            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).exec();
+            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).exec();
 
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() === emailUser);
 
@@ -421,7 +421,7 @@ class XeController {
 
         try {
             // giới hạn 5 xe
-            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).sort({ SoChuyen: -1 }).limit(5).exec();
+            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ SoChuyen: -1 }).limit(5).exec();
 
             // nếu trong 5 xe, user login có 2 xe thì list = 3
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);

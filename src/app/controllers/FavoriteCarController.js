@@ -12,7 +12,7 @@ class favoriteCarController {
 
             let query = { _id: { $in: carIds }};
 
-            const cars = await Xe.find(query).populate('ChuSH', ('_id UserName Email UID SDT Avatar')).sort({_id: -1});
+            const cars = await Xe.find(query).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({_id: -1});
             res.status(200).json(cars);
         } catch (error) {
             console.error('Lỗi khi lấy danh sách xe yêu thích theo userId:', error);
@@ -32,7 +32,7 @@ class favoriteCarController {
 
             let query = { _id: { $in: carIds } };
 
-            const cars = await Xe.find(query).populate('ChuSH', ('_id UserName Email UID SDT Avatar'));
+            const cars = await Xe.find(query).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia'));
             res.status(200).json(cars);
         } catch (error) {
             console.error('Lỗi khi lấy danh sách xe yêu thích theo userId:', error);

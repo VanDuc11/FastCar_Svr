@@ -5,7 +5,7 @@ class NganHangController {
         let email = req.params.email;
 
         try {
-            const list = await NganHang.find().populate('User', ('_id UserName Email UID SDT Avatar')).exec();
+            const list = await NganHang.find().populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).exec();
 
             const filteredList = list.filter(NH => NH.User.Email.toString() === email);
             return res.status(200).json(filteredList);
@@ -46,6 +46,20 @@ class NganHangController {
                     });
                 });
         }
+    }
+
+    async updateNganHang(req, res) {
+        const id_bank = req.params.id;
+        await NganHang.updateOne({ _id: id_bank }, {
+            TenNH: req.body.TenNH,
+            TenChuTK: req.body.TenChuTK,
+            SoTK: req.body.SoTK
+        }).then((result) => {
+            return res.status(200).json({success: true, message: 'Cập nhật thành công'});
+        }).catch((error) => {
+            console.log(error);
+            return res.status(400).json(error);
+        })
     }
 
     async deleteNganHang(req, res) {

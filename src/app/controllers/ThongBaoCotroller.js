@@ -46,7 +46,7 @@ class ThongBaoController {
         }
       }
     }
-    await ThongBao.find(check).populate('User', ('_id UserName Email UID SDT Avatar'))
+    await ThongBao.find(check).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'))
       .sort({ _id: -1 }).then((result) => {
         res.status(200).json(result);
       }).catch((error) => {

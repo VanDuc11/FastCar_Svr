@@ -187,26 +187,30 @@ class LSGDController {
             })
     }
     async getLSGD(req, res, next) {
-        let check = null;
+        const check = {};
         if (typeof (req.query.User) != 'undefined') {
-            check = { User: req.query.User };
+            check.User = req.query.User;
         }
 
-        await lsgd.find(check).populate('User', ('_id UserName Email UID SDT Avatar'))
+        if (typeof (req.query.title) != 'undefined') {
+            check.title = req.query.title;
+        }
+
+        await lsgd.find(check).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'))
             .populate({
                 path: 'NganHang',
-                populate: { path: 'User', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                populate: { path: 'User', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
             })
             .populate({
                 path: 'HoaDon',
                 populate: {
                     path: 'Xe',
-                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
                 }
             })
             .populate({
                 path: 'HoaDon',
-                populate: { path: 'User', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                populate: { path: 'User', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
             }).sort({ _id: -1 })
             .then((result) => {
                 res.status(200).json(result);

@@ -62,8 +62,8 @@ class HoaDonController_ {
             await HoaDon.find(query)
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
                 .then((result) => {
 
                     res.render('ChuyenXe', {
@@ -106,8 +106,8 @@ class HoaDonController_ {
             await HoaDon.find({ TrangThaiHD: 3 })
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
                 .then((result) => {
                     res.render('ChuyenXe', {
                         data: result.map((res) => res.toJSON())
@@ -133,8 +133,8 @@ class HoaDonController_ {
             await HoaDon.find({ TrangThaiHD: 7 })
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
                 .then((result) => {
                     res.render('ChuyenXe', {
                         data: result.map((res) => res.toJSON())
@@ -160,8 +160,8 @@ class HoaDonController_ {
             await HoaDon.find({ TrangThaiHD: [1, 2] })
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
                 .then((result) => {
                     res.render('ChuyenXe', {
                         data: result.map((res) => res.toJSON())
@@ -187,8 +187,8 @@ class HoaDonController_ {
             await HoaDon.find({ TrangThaiHD: 0 })
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
                 .then((result) => {
                     res.render('ChuyenXe', {
                         data: result.map((res) => res.toJSON())
@@ -220,8 +220,8 @@ class HoaDonController_ {
         };
         await HoaDon.find(query).populate({
             path: 'Xe',
-            populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-        }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+            populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+        }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
             .then((result) => {
                 // console.log(result);
                 res.render('ChuyenXe', {
@@ -244,7 +244,7 @@ class HoaDonController_ {
         await HoaDon.find({ _id: id })
             .populate({
                 path: 'Xe',
-                populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
+                populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
             }).populate('User')
             .then((result) => {
                 // console.log(result);
@@ -314,8 +314,8 @@ class HoaDonController_ {
             await HoaDon.find(check)
                 .populate({
                     path: 'Xe',
-                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar', model: 'User' }
-                }).populate('User', ('_id UserName Email UID SDT Avatar')).sort({ _id: -1 })
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ _id: -1 })
                 .then((result) => {
                     console.log("data: " + result.length);
                     return res.status(200).json(result);
@@ -446,7 +446,7 @@ class HoaDonController_ {
                 await thongBao.save();
             }
 
-            return res.status(200).json("Sửa trạng thái HD thành công");
+            return res.status(200).json({ message: "Sửa trạng thái HD thành công" });
         })
             .catch((err) => {
                 res.status(400).json(err);
