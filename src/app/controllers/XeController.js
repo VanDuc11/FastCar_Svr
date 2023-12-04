@@ -462,7 +462,7 @@ class XeController {
             GiaThue1Ngay: req.body.GiaThue1Ngay,
             TheChap: false,
             ChuSH: req.body.ChuSH || await User.findById("6513ad0281cfc8cdaaa6f728"),
-            TrangThai: 0,
+            TrangThai: 1,
             SoChuyen: 0,
             TrungBinhSao: 0,
             Latitude: req.body.Latitude || "21.017295",
