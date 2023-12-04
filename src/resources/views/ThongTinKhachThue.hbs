@@ -301,13 +301,10 @@
   async function load() {
 
     // Lấy URL hiện tại
-    const url = window.location.href;
-
-    // đến chuỗi url`
-    const idStart = "http://localhost:9000/quanlyxe/ThongTinKhachThue/";
-
-    // cắt chuỗi chuỗi :id
-    const id = url.slice(idStart.length, url.length);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
+ 
 
     const response = await fetch(`/api/xe/find_id/${id}`).then(response => response.json());
     document.getElementById('tenxe').innerHTML = response.MauXe

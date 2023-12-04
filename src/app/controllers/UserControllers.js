@@ -1,6 +1,10 @@
 const { log } = require('console');
 const User = require('../models/user.model');
+
+const Xe = require('../models/Xe.model');
+
 const ThongBao = require('../models/ThongBao');
+
 const path = require('path');
 const moment = require('moment');
 
@@ -11,7 +15,28 @@ class UserControlles {
         const end_date = req.query.end_date;
         const TrangThai = req.query.TrangThai;
         const status = req.query.status;
-        if (start_date != undefined &&
+        
+         if (status != undefined &&
+            start_date != undefined &&
+            end_date != undefined) {
+            query = {
+                "NgayThamGia": {
+                    $gte: new Date(start_date),
+                    $lte: new Date(end_date),
+                },
+                TrangThai_GPLX: status.split(',')
+            }
+
+
+
+        }else if (status != undefined &&
+            start_date == undefined &&
+            end_date == undefined) {
+            query = {
+                TrangThai_GPLX: status.split(',')
+            }
+
+        }else if (start_date != undefined &&
             end_date != undefined &&
             TrangThai == undefined) {
             query = {
@@ -31,34 +56,14 @@ class UserControlles {
                 "DangXe": TrangThai.split(',')
             }
 
-        } else if (status != undefined &&
-            start_date != undefined &&
-            end_date != undefined) {
-            query = {
-                "NgayThamGia": {
-                    $gte: new Date(start_date),
-                    $lte: new Date(end_date),
-                },
-                "TrangThai_GPLX": status.split(',')
-            }
-
-
-
-        } else if (TrangThai != undefined &&
+        }  else if (TrangThai != undefined &&
             start_date == undefined &&
             end_date == undefined) {
             query = {
                 DangXe: TrangThai.split(',')
             }
 
-        } else if (status != undefined &&
-            start_date == undefined &&
-            end_date == undefined) {
-            query = {
-                TrangThai_GPLX: status.split(',')
-            }
-
-        }
+        } 
 
         await User.find(query).sort({ _id: -1 })
             .then((result) => {
@@ -89,7 +94,7 @@ class UserControlles {
         })
     }
     async chitietkhachhang(req, res) {
-        var id = req.params.id;
+        var id = req.query.id;
         await User.find({ _id: id })
             .then((result) => {
                 res.render('ChiTietKhachHang',
@@ -99,11 +104,46 @@ class UserControlles {
 
             })
     }
+    async chitietxekh(req,res){
+        var query ={};
+        var id = req.query.id;
+        const TrangThai = req.query.TrangThai;
+
+        if (TrangThai != undefined ) {
+            query= {ChuSH: id,TrangThai: TrangThai.split(",")}
+            
+        }else{
+            query= {ChuSH: id}
+        }
+
+        Xe.find(query)
+        .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+        .sort({ _id: -1 }).then((result) => {
+            
+            res.render('ThongTinXe',
+                {
+                    data: result.map((res) => res.toJSON())
+                })
+
+        })
+    }
+    async listXeKhachHang(req,res){
+        var id = req.query.id;
+        Xe.find({ChuSH: id})
+        .sort({ _id: -1 }).then((result) => {
+            
+           res.json(result)
+
+        })
+    }
     async user(req, res, next) {
         let check = null;
 
         if (typeof (req.query.Email) != 'undefined') {
             check = { Email: req.query.Email };
+        }
+        if (typeof (req.query.id) != 'undefined') {
+            check = { _id: req.query.id };
         }
         if (req.query.start_date != undefined && req.query.end_date) {
             check = {

@@ -74,7 +74,7 @@
             <div class="form-group col-md-3">
               <label class="control-label">Ngày cấp GPLX </label>
               <div class="form-control">
-                <p><b >{{this.NgayCap_GPLX}}</b></p>
+                <p><b>{{this.NgayCap_GPLX}}</b></p>
               </div>
             </div>
             <div class="form-group col-md-3">
@@ -86,7 +86,7 @@
             <div class="form-group col-md-3">
               <label class="control-label"> Ngày cấp CMND</label>
               <div class="form-control">
-                <p><b  >{{this.NgayCap_CCCD}}</b></p>
+                <p><b>{{this.NgayCap_CCCD}}</b></p>
               </div>
             </div>
             <div class="form-group col-md-3">
@@ -106,7 +106,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="col-md-12">
-                <label style="font-size: 18px;"><span style="font-weight: bold;">Avata </span></label> <BR>
+                <label style="font-size: 18px;"><span style="font-weight: bold;">Avatar </span></label> <BR>
                 <img src="{{this.Avatar}}" alt="" height="100px" width="150px" type="button" id="show-emp"
                   data-toggle="modal" data-target="#ModalUP3">
               </div>
@@ -120,6 +120,10 @@
                 <p style="margin-left: 32px;font-size: 12px;" id="trangthaititlle">{{this.TrangThai_GPLX}}</p>
               </div>
             </div>
+          </div>
+          <div class="form-group col-md-2">
+
+            <a class="btn btn-success" href="/khachhang/ChiTietXeKH?id={{this._id}}" id="button-xem-tt">Xem thông tin xe</a>
           </div>
 
           {{!-- ảnh bằng lái --}}
@@ -156,7 +160,7 @@
                     onclick="onSubmit(`{{this._id}}`,2)">Xác minh</a>
                   <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,3)">Từ chối</a>
                   <a class="btn btn-cancel" data-dismiss="modal" href="#" style="margin-left:400px;">Đóng</a>
-
+                  
                   <BR>
                 </div>
                 <div class="modal-footer">
@@ -174,7 +178,7 @@
                   <div class="row">
                     <div class="form-group  col-md-12">
                       <span class="thong-tin-thanh-toan">
-                        <h5>Avata</h5>
+                        <h5>Avatar</h5>
                       </span>
                     </div>
                   </div>
@@ -264,7 +268,21 @@
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
+  onload()
   // Hàm xử lý sự kiện nhấp vào nút duyệt
+  async function onload(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
+    const data = await fetch(`/api/user/list?id=${id}`).then((response) =>response.json())
+    if(data[0].DangXe == true){
+      document.getElementById('button-xem-tt').style.display='block'
+    }else{
+      document.getElementById('button-xem-tt').style.display='none'
+      console.log("abc")
+      
+    }
+  }
   function onSubmit(id, trangthai) {
     fetch(`/api/user/duyet/${id}/${trangthai}`, { method: "POST" })
       .then((response) => {

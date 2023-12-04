@@ -13,12 +13,12 @@
           <div class="row element-button">
             <div class="col-sm-2">
 
-              <a class="btn btn-add btn-sm" href="/quanlyxe/Addxe" title="Thêm"><i class="fas fa-plus"></i>
-                Thêm xe</a>
+              <a class="btn btn-add btn-sm" href="/khachhang" title="Thêm"><i></i>
+                Khách hàng</a>
             </div>
           </div>
           <div class="row">
-            <a href="/quanlyxe" class="col-md-6 col-lg-3">
+            <a id="tong" class="col-md-6 col-lg-3">
               <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                 <div class="info">
                   <h4>Tổng xe</h4>
@@ -26,7 +26,7 @@
                 </div>
               </div>
             </a>
-            <a href="/quanlyxe/hoatdong" class="col-md-6 col-lg-3">
+            <a id="hd" class="col-md-6 col-lg-3">
               <div class="widget-small primary coloured-icon"><i class='icon bx bxs-truck fa-3x'></i>
                 <div class="info">
                   <h4>Xe hoạt động</h4>
@@ -34,7 +34,7 @@
                 </div>
               </div>
             </a>
-            <a href="/quanlyxe/choduyen" class="col-md-6 col-lg-3">
+            <a id="cd" class="col-md-6 col-lg-3">
               <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-comment-error'></i>
                 <div class="info">
                   <h4>Xe chờ duyệt</h4>
@@ -43,7 +43,7 @@
               </div>
             </a>
 
-            <a href="/quanlyxe/khonghoatdong" class="col-md-6 col-lg-3">
+            <a id="Khd" class="col-md-6 col-lg-3">
               <div class="widget-small info  coloured-icon"><i class='icon fa-3x bx bxs-car-mechanic'></i>
                 <div class="info">
                   <h4> Xe không hoạt động</h4>
@@ -51,7 +51,7 @@
                 </div>
               </div>
             </a>
-            <a href="/quanlyxe/tuchoi" class="col-md-6 col-lg-3">
+            <a id="tc" class="col-md-6 col-lg-3">
               <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
                 <div class="info">
                   <h4>Từ chối</h4>
@@ -88,19 +88,20 @@
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <img
                   src="/images/{{this.HinhAnh.[0]}}" alt="" class="img-card-person1">
               </td>
-      
+
               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NSX}}</td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="giathue">
                 {{this.GiaThue1Ngay}}</td>
-                 <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span  class="TheChap"
-                 style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TheChap}}</span></td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TheChap"
+                  style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TheChap}}</span></td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.ChuSH.UserName}}
               </td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
                   style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info "
-                  href="/quanlyxe/ChiTietXe?id={{this._id}}"> Xem
+                  href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
                   chi tiết</a></td>
+              <td id="id" style="display: none;">{{this._id}}</td>
             </tr>
             {{/each}}
 
@@ -115,17 +116,17 @@
   load_data()
   async function load_data() {
 
-   var TheChap = document.querySelectorAll('.TheChap');
+    var TheChap = document.querySelectorAll('.TheChap');
     TheChap.forEach((i) => {
-       if ( i.innerHTML === "true") {
-      i.innerHTML = "Có thế chấp"
-      i.style.background = "#ADCBF3"
-   
-    } else {
-       i.innerHTML = "Ko thế chấp"
-      i.style.background = "#FDE1C3"
-      
-    }
+      if (i.innerHTML === "true") {
+        i.innerHTML = "Có thế chấp"
+        i.style.background = "#ADCBF3"
+
+      } else {
+        i.innerHTML = "Ko thế chấp"
+        i.style.background = "#FDE1C3"
+
+      }
     })
   }
 </script>
@@ -141,8 +142,17 @@
 
   load_data()
   async function load_data() {
-
-    const response = await fetch('/api/xe/list').then(response => response.json());
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
+    if (id) {
+      document.getElementById('tong').href = `/khachhang/ChiTietXeKH?id=${id}&TrangThai=0,1,2,3`;
+      document.getElementById('hd').href = `/khachhang/ChiTietXeKH?id=${id}&TrangThai=1`;
+      document.getElementById('tc').href = `/khachhang/ChiTietXeKH?id=${id}&TrangThai=2`;
+      document.getElementById('Khd').href = `/khachhang/ChiTietXeKH?id=${id}&TrangThai=3`;
+      document.getElementById('cd').href = `/khachhang/ChiTietXeKH?id=${id}&TrangThai=0`;
+    }
+    const response = await fetch(`/api/user/listXeKhachHang?id=${id}`).then(response => response.json());
     var tt0 = 0;
     var tt1 = 0;
     var tt2 = 0;
@@ -170,7 +180,7 @@
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
     var GiaThue = document.querySelectorAll('.giathue');
     var TrangThai = document.querySelectorAll('.TrangThai');
-   
+
     TrangThai.forEach((i) => {
       if (i.innerHTML == 0) {
         i.innerHTML = "Chờ duyệt"
@@ -186,7 +196,7 @@
         i.style.background = "#ADCBF3"
       }
     })
-  
+
 
     GiaThue.forEach((i) => {
       if (!isFinite(i.innerHTML)) {
