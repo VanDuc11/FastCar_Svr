@@ -467,6 +467,9 @@ class XeController {
             TrungBinhSao: 0,
             Latitude: req.body.Latitude || "21.017295",
             Longitude: req.body.Longitude || "105.783983",
+            TheChap: false,
+            ThoiGianGiaoXe:"7:00 - 12:00",
+            ThoiGianNhanXe:"16:00 - 20:00"
         });
 
         try {
