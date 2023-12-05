@@ -55,7 +55,7 @@
               <div class="form-group col-md-3" style="margin-left: 20px">
                 <label for="price" class="control-label">Nôi dung</label>
                 <textarea class="form-control" style=" height: 20px; width: 450px;" name="NoiDung" id="price" cols="30"
-                  class="form-control" rows="10"  placeholder="Nhập nội dung" required></textarea>
+                  class="form-control" rows="10" placeholder="Nhập nội dung" required></textarea>
 
               </div>
             </div>
@@ -74,11 +74,12 @@
         <table class="table table-hover table-bordered" id="sampleTable">
           <thead>
             <tr>
-              <th style="text-align: center;" width="10">STT</th>
+              <th style="text-align: center;  width: 5px;">STT</th>
               <th style="text-align: center;  width: 80px;">Tiêu đề</th>
               <th style="text-align: center; width: 80px;">Ảnh</th>
+              <th style="text-align: center; width: 50px;">Nội dung</th>
               <th style="text-align: center; width: 50px;">Ngày đăng</th>
-              <th style="text-align: center; width: 100px;">Nội dung</th>
+              <th style="text-align: center; width: 200px;">Email</th>
               <th style="text-align: center; width: 10px;">Chức năng</th>
             </tr>
           </thead>
@@ -89,11 +90,19 @@
               <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.TieuDe}}</td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;"><img
                   src="/images/{{this.HinhAnh}}" alt="" class="img-card-person3"></td>
+
+              <td style="text-align: center; word-break: break-word;vertical-align: middle ;
+                max-width: 200px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;">{{this.NoiDung}}</td>
               <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="NgayDang"
                 style="width: 150px;">{{this.createdAt}}</td>
-              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NoiDung}}</td>
-              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <button
-                  class="btn btn-info" type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP"
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;" ><span class="email">{{this.User.Email}}</span
+                </td>
+
+              <td style="text-align: center; word-break: break-word;vertical-align: middle; width: 30px;"> <button
+                  class="btn btn-info"  type="button" id="show-emp" data-toggle="modal" data-target="#ModalUP"
                   onclick="chitiet(`{{this._id}}`)">Xem chi
                   tiết</button></td>
 
@@ -139,24 +148,25 @@
               <p><b id="Ngaydang"></b></p>
             </div>
           </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Mã khuyến mãi</label>
-            <div class="form-control">
-              <p><b id="MaGiamGia"></b></p>
+            <div class="form-group col-md-6" id="khuyenmai1">
+              <label class="control-label">Mã khuyến mãi</label>
+              <div class="form-control">
+                <p><b id="MaGiamGia"></b></p>
+              </div>
             </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Giá trị giảm(%)</label>
-            <div class="form-control">
-              <p><b id="GiaTri"></b></p>
+            <div class="form-group col-md-6" id="khuyenmai2">
+              <label class="control-label">Giá trị giảm(%)</label>
+              <div class="form-control">
+                <p><b id="GiaTri"></b></p>
+              </div>
             </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Giá trị giảm</label>
-            <div class="form-control">
-              <p><b id="GiaTriMax"></b></p>
+            <div class="form-group col-md-6" id="khuyenmai3">
+              <label class="control-label">Giá trị giảm</label>
+              <div class="form-control">
+                <p><b id="GiaTriMax"></b></p>
+              </div>
             </div>
-          </div>
+
           <div class="form-group col-md-6">
             <label class="control-label">Nôi dung</label>
             <textarea class="form-control" style=" height: 10px; width: 420px" id="NoiDung" readonly></textarea>
@@ -211,9 +221,9 @@
       document.getElementById("MaGiamGia").innerHTML = ""
       document.getElementById("GiaTri").innerHTML = ""
       document.getElementById("GiaTriMax").innerHTML = ""
-
-
-
+      document.getElementById("khuyenmai1").style.display = "none"
+      document.getElementById("khuyenmai2").style.display = "none"
+      document.getElementById("khuyenmai3").style.display = "none"
     }
   }
 </script>
@@ -243,6 +253,13 @@
   load_data()
   async function load_data() {
     var HSD = document.querySelectorAll(".NgayDang");
+    var email = document.querySelectorAll(".email");
+    email.forEach((i) => {
+      if (i.innerHTML == '') {
+        i.innerHTML = "Thông báo hệ thống"
+
+      }
+    })
     HSD.forEach((i) => {
       const date = new Date(i.innerHTML);
       const day = date.getDate();
@@ -251,6 +268,7 @@
       const formattedDate = day + '/' + month + '/' + year
       i.innerHTML = formattedDate
     })
+
   }
 
 </script>

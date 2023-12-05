@@ -160,10 +160,51 @@
       <div class="form-group col-md-12">
         <a class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
           onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
+        <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
+
         <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue?id={{this._id}}" id="button-xem-tt">Xem thông tin
           thuê</a>
-        <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
+        <a class="btn btn-cancel" id="show-emp1"  onclick="onSubmit(`{{this._id}}`,4)">Vô hiệu hóa xe</a>
+        <a class="btn bg-success" id="show-emp2"  onclick="onSubmit(`{{this._id}}`,1)">Bỏ vô hiệu hóa</a>
       </div>
+      {{!-- <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Lý do</h5>
+                  </span>
+                </div>
+              </div>
+              <form action="/api/lsgd/duyet/{{this._id}}/1" id="product-form" method="post"
+                enctype="multipart/form-data">
+                <div class="row">
+                  <div class="form-group col-md-6" style=" margin-left: 200px;
+                    flex-direction: column;">
+                    <label for="image" class="control-label">Ảnh </label>
+                    <input type="file" id="image" name="HinhAnh" class="form-control" accept="image/*" required>
+                  </div>
+                </div>
+                <BR>
+                <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save"
+                  type="submit">Lưu</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
+              </form>
+
+
+
+              <BR>
+            </div>
+
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div> --}}
 
       {{!-- sửa trạng thái --}}
       <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
@@ -383,15 +424,7 @@
 <script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
-<script>
 
-
-  // Thêm sự kiện click cho tất cả các nút
-  for (let i = 0; i < document.querySelectorAll(".btn-success").length; i++) {
-    document.querySelectorAll(".btn-success")[i].addEventListener("click", handleClick);
-  }
-
-</script>
 
 <script>
   validatePrice()
@@ -418,6 +451,8 @@
     var duyet = document.getElementById('button-duyet4');
     var xemTT = document.getElementById('button-xem-tt');
     var tuchoi = document.getElementById('button-tuchoi');
+    var vohieuhoa = document.getElementById('show-emp1');
+    var  diss_vohieuhoa = document.getElementById('show-emp2');
 
     // Lấy URL hiện tại
     const queryString = window.location.search;
@@ -443,12 +478,16 @@
       TrangThaiTitlle.innerHTML = "Đang chờ duyệt"
       TrangThaiTitlle.style.background = "#F9BABA"; //#F9BABA
       xemTT.style.display = 'none'
+      vohieuhoa.style.display = 'none'
+      diss_vohieuhoa.style.display = 'none'
     } else if (TrangThai.innerHTML == 1) {
       TrangThai.innerHTML = "Đang hoạt động"
       TrangThaiTitlle.innerHTML = "Đã duyệt"
       TrangThaiTitlle.style.background = "#7cea94";
       duyet.style.display = "none"
       tuchoi.style.display = 'none'
+      diss_vohieuhoa.style.display = 'none'
+
     } else if (TrangThai.innerHTML == 2) {
       TrangThai.innerHTML = "Từ chối"
       TrangThaiTitlle.innerHTML = "Xe bị từ chối"
@@ -456,6 +495,26 @@
       duyet.style.display = "none"
       tuchoi.style.display = 'none'
       xemTT.style.display = 'none'
+      vohieuhoa.style.display = 'none'
+      diss_vohieuhoa.style.display = 'none'
+
+    }else if (TrangThai.innerHTML == 3) {
+      TrangThai.innerHTML = "Không hoạt động"
+      TrangThaiTitlle.innerHTML = "Không hoạt động"
+      TrangThaiTitlle.style.background = "#1D5AAB";
+      duyet.style.display = "none"
+      tuchoi.style.display = 'none'
+      diss_vohieuhoa.style.display = 'none'
+
+    }
+    else if (TrangThai.innerHTML == 4) {
+      TrangThai.innerHTML = "Vô hiệu hóa"
+      TrangThaiTitlle.innerHTML = "Vô hiệu hóa"
+      TrangThaiTitlle.style.background = "#1D5AAB";
+      duyet.style.display = "none"
+      tuchoi.style.display = 'none'
+      vohieuhoa.style.display = 'none'
+
     }
     NgayDang.innerHTML = formattedDate;
     GiaThue.innerHTML = formattedPrice + " đ"
@@ -467,33 +526,31 @@
     document.querySelector(".loading").style.display = "block";
   }
 
-  // Hàm để kiểm tra kết quả của việc duyệt
-  function checkResult(result) {
-    if (result === true) {
-      // Hiển thị thông báo thành công
-      alert("Duyệt thành công");
-
-    } else {
-      // Hiển thị thông báo thất bại
-      alert("Duyệt thất bại");
-    }
-
-
-  }
+  
 
   // Hàm xử lý sự kiện nhấp vào nút duyệt
   function onSubmit(id, trangthai) {
     fetch(`/api/xe/duyet/${id}/${trangthai}`, { method: "POST" })
       .then((response) => {
 
-        if (response.ok) {
-          checkResult(true);
+        if (trangthai == '1') {
+          alert('Thành công')
           location.reload(); // Reload lại trang
 
-        } else {
-          checkResult(false);
+        } else if(trangthai == '2'){
+          alert('Từ chối thành công')
+          location.reload(); // Reload lại trang
+          
+        } else if(trangthai == '4'){
+          alert('Vô hiệu hóa thành công')
+          location.reload(); // Reload lại trang
+          
         }
       })
   }
+  //Modal
+  $("#show-emp").on("click", function () {
+    $("#ModalUP").modal({ backdrop: false, keyboard: false })
+  });
 
 </script>

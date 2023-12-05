@@ -59,6 +59,14 @@
                 </div>
               </div>
             </a>
+            <a href="/quanlyxe/vohieuhoa" class="col-md-6 col-lg-3">
+              <div class="widget-small info  coloured-icon"><i class='icon fa-3x bx bxs-car-mechanic'></i>
+                <div class="info">
+                  <h4>Vô hiệu hóa</h4>
+                  <p><b id="vhh"></b></p>
+                </div>
+              </div>
+            </a>
           </div>
 
         </div>
@@ -147,6 +155,7 @@
     var tt1 = 0;
     var tt2 = 0;
     var tt3 = 0;
+    var tt4 = 0;
     response.forEach(xe => {
       // xe chờ duyệt
       if (xe.TrangThai == 0) {
@@ -161,11 +170,15 @@
       if (xe.TrangThai == 3) {
         tt3 += 1;
       }
+      if (xe.TrangThai == 4) {
+        tt4 += 1;
+      }
     });
     document.getElementById('choduyen').innerText = tt0 + " Xe";
     document.getElementById('daduyen').innerText = tt1 + " Xe";
     document.getElementById('tuchoi').innerText = tt2 + " Xe";
     document.getElementById('khonghd').innerText = tt3 + " Xe";
+    document.getElementById('vhh').innerText = tt4 + " Xe";
 
     var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
     var GiaThue = document.querySelectorAll('.giathue');
@@ -183,6 +196,9 @@
         i.style.background = "#F9BABA"
       } else if (i.innerHTML == 3) {
         i.innerHTML = "không hoạt động"
+        i.style.background = "#ADCBF3"
+      }else if (i.innerHTML == 4) {
+        i.innerHTML = "Vô hiệu hóa"
         i.style.background = "#ADCBF3"
       }
     })
