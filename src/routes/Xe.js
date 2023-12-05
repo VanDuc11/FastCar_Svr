@@ -32,7 +32,7 @@ router.get('/hoatdong', XeController.xe_Hd);
 router.get('/khonghoatdong', XeController.xe_KHD);
 router.get('/tuchoi', XeController.xe_TC);
 router.get('/choduyen', XeController.xe_CD);
-router.get('/vohieuhoa', XeController.xe_CD);
+router.get('/vohieuhoa', XeController.xe_VHD);
 //get xe theo id 
 router.get('/find_id/:id', XeController.findXe_id);
 
