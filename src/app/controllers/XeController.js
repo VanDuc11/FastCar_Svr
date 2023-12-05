@@ -93,6 +93,22 @@ class XeController {
                 });
             });
     }
+    async xe_VHD(req, res) {
+        await Xe.find({ TrangThai: 4 })
+            .populate({ path: "ChuSH", model: "User" })
+            .sort({ _id: -1 })
+            .then((result) => {
+                res.status(200).render("Quanlyxe", {
+                    data: result.map((res) => res.toJSON()),
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            });
+    }
 
     async findChiTiet(req, res) {
         await Xe.find({ _id: req.query.id }).populate({ path: 'ChuSH', model: 'User' }).sort({ _id: -1 })
