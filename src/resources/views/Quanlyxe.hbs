@@ -11,13 +11,13 @@
 
         <div class="tile-body">
           <div class="row element-button">
-            <div class="col-sm-2">
+             <div class="col-sm-2">
               <button type="button" id="add-new-btn" class="btn btn-add btn-sm"> <i class="fas fa-plus"></i> Thêm
                 mới</button>
             </div>
 
          </div>
-            <form class="row" action="/api/xe/createform" id="product-form" method="post" enctype="multipart/form-data">
+            <form action="/api/xe/createform" id="product-form" method="post" enctype="multipart/form-data"style="display: none;">
             <div class="row" >
                 <div class="form-group col-md-3">
                   <label class="control-label">Biển số xe</label>
@@ -229,6 +229,19 @@
   </div>
 </main>
 <script>
+  // ẩn hiện form
+  const addNewBtn = document.getElementById("add-new-btn");
+  let showForm = false;
+
+  addNewBtn.addEventListener("click", () => {
+    showForm = !showForm; // Đảo ngược giá trị của biến showForm
+    const form = document.getElementById("product-form");
+    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
+  });
+
+
+</script>
+<script>
     const imgInputXe = document.querySelector("#img");
     const fileErrorXe = document.querySelector("#file-error");
 
@@ -282,19 +295,7 @@
       }
     });
   </script>
-<script>
-  // ẩn hiện form
-  const addNewBtn = document.getElementById("add-new-btn");
-  let showForm = false;
 
-  addNewBtn.addEventListener("click", () => {
-    showForm = !showForm; // Đảo ngược giá trị của biến showForm
-    const form = document.getElementById("product-form");
-    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
-  });
-
-
-</script>
 <script>
   load_data()
   async function load_data() {
