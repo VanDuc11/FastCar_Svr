@@ -80,7 +80,7 @@ class ThongKeController {
             res.status(200).json({ totalOrders });
         });
     }
-
+    //doanh thu
     thongkeTheoThang(req, res) {
         var arr = [
             { _id: { month: 1 }, doanh_thu: 0, loi_nhuan: 0 },
@@ -180,9 +180,7 @@ class ThongKeController {
                     if (i._id.month == item._id.month) {
                         i.doanh_thu = item.doanh_thu
                         i.loi_nhuan = item.loi_nhuan;
-                        i.don_thanh_cong = item.don_thanh_cong;
-                        i.don_huy = item.don_huy;
-                        i.tong_don = item.tong_don;
+
 
                     }
                 });
@@ -395,7 +393,7 @@ class ThongKeController {
     }
 
     hoadonphanTram(req, res) {
-         
+
         var arr = {
             don_thanh_cong: 0, don_huy: 0, khac: 0
 
@@ -405,7 +403,7 @@ class ThongKeController {
                 $match: {
                     GioTaoHD: {
                         $gte: new Date(req.query.start_date ? `2023-${req.query.start_date}-01` : "2023-01-01"),
-                        $lt: new Date(req.query.start_date ? `2023-${req.query.start_date}-31` :"2023-12-31"),
+                        $lt: new Date(req.query.start_date ? `2023-${req.query.start_date}-31` : "2023-12-31"),
                     }
 
                 },
@@ -576,6 +574,90 @@ class ThongKeController {
 
             res.json(arr)
         })
+
+
+    }
+    doanhThuNgay(req, res) {
+        var arr = [
+            { _id: { day: 1 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 2 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 3 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 4 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 5 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 6 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 7 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 8 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 9 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 10 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 11 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 12 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 13 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 14 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 15 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 16 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 17 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 18 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 19 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 20 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 21 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 22 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 23 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 24 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 25 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 26 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 27 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 28 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 29 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 30 }, doanh_thu: 0, loi_nhuan: 0 },
+            { _id: { day: 31 }, doanh_thu: 0, loi_nhuan: 0 },
+
+        ];
+        HoaDon.aggregate([
+            {
+                $match: {
+                    GioTaoHD: {
+                        $gte: new Date(req.query.start_date ? `2023-${req.query.start_date}-01` : "2023-12-01"),
+                        $lt: new Date(req.query.start_date ? `2023-${req.query.start_date}-31` : "2023-12-31"),
+                    },
+                    TrangThaiHD: {
+                        $in: [3, 4, 5, 6],
+                    },
+                },
+            },
+            {
+                $group: {
+                    _id: {
+                        month: {
+                            $month: "$GioTaoHD",
+                        },
+                        day: {
+                            $dayOfMonth: "$GioTaoHD",
+                        },
+                    },
+                    doanh_thu: {
+                        $sum: "$TongTien",
+                    },
+                    loi_nhuan: {
+                        $sum: {
+                            $multiply: ["$TongTien", 0.1],
+                        },
+                    },
+                },
+            },
+        ]).then((result) => {
+
+            arr.forEach((i) => {
+                result.forEach((item) => {
+                    if (i._id.day == item._id.day) {
+                        i.doanh_thu = item.doanh_thu
+                        i.loi_nhuan = item.loi_nhuan;
+                    }
+                });
+            });
+
+            res.json(arr)
+        });
+          
 
 
     }

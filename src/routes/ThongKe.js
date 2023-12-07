@@ -19,6 +19,7 @@ router.get('/thongkeHDtheoThang',ThongKeController.thongkeHDTheoThang);
 router.get('/doanhthu',ThongKeController.doanhthu);
 router.get('/donhang',ThongKeController.donhang);
 router.get('/hoadonphamtram',ThongKeController.hoadonphanTram);
+router.get('/doanhthungay',ThongKeController.doanhThuNgay);
 
  
 
