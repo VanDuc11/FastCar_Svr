@@ -509,6 +509,7 @@ class XeController {
             });
         }
     }
+
     async CreateXe(req, res) {
         const xe = new Xe({
             BKS: req.body.BKS,
@@ -534,7 +535,8 @@ class XeController {
             ChuSH: req.body.ChuSH,
             TrangThai: 0,
             SoChuyen: 0,
-            TrungBinhSao: 0
+            TrungBinhSao: 0,
+            LichBan: []
         });
 
         try {
@@ -582,7 +584,8 @@ class XeController {
                         TrungBinhSao: req.body.TrungBinhSao,
                         TheChap: req.body.TheChap,
                         ThoiGianGiaoXe: req.body.ThoiGianGiaoXe,
-                        ThoiGianNhanXe: req.body.ThoiGianNhanXe
+                        ThoiGianNhanXe: req.body.ThoiGianNhanXe,
+                        LichBan: req.body.LichBan
                     }
                 }
             )

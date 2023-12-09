@@ -14,6 +14,7 @@ const HoaDon = new Schema({
     PhuPhi: { type: Number },
     TongTien: { type: Number },
     TienCoc: { type: Number },
+    TienCocGoc: { type: Number },
     ThanhToan: { type: Number },
     LoiNhan: { type: String },
     GioTaoHD: { type: Date },

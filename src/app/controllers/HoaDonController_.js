@@ -9,6 +9,7 @@ const { log } = require('console');
 const { parse } = require('querystring');
 const admin = require('firebase-admin');
 const ThongBao = require('../models/ThongBao');
+const moment = require('moment');
 
 var serviceAccount = require("../../../myotp-76cf9-firebase-adminsdk-pgy17-f4b5071351.json");
 
@@ -17,6 +18,7 @@ admin.initializeApp({
 });
 
 const io = require("socket.io-client");
+const { el } = require('date-fns/locale');
 const socket = io("http://localhost:9001");
 
 
@@ -257,6 +259,7 @@ class HoaDonController_ {
     }
     async find_hoadon(req, res) {
         let check = {};
+        let dateQueryHandled = false;
 
         if (typeof (req.query.Xe) != 'undefined') {
             check.Xe = req.query.Xe;
@@ -308,6 +311,21 @@ class HoaDonController_ {
                 NgayThue: { $lte: endDate },
                 NgayTra: { $gte: startDate }
             }
+            dateQueryHandled = true;
+        }
+
+        if (!dateQueryHandled && typeof req.query.startDate !== 'undefined') {
+            const queryDate = req.query.startDate;
+            const parsedDate = moment(queryDate, 'MM/YYYY', true);
+
+            if (parsedDate.isValid()) {
+                const startDate = parsedDate.startOf('month').toDate();
+                const endDate = parsedDate.endOf('month').toDate();
+
+                check.NgayThue = { $gte: startDate, $lt: endDate };
+            } else {
+                return res.status(400).json({ error: "Định dạng ngày tháng không hợp lệ" });
+            }
         }
 
         try {
@@ -349,6 +367,7 @@ class HoaDonController_ {
             PhuPhi: req.body.PhuPhi,
             TongTien: req.body.TongTien,
             TienCoc: req.body.TienCoc,
+            TienCocGoc: req.body.TienCocGoc,
             ThanhToan: req.body.ThanhToan,
             LoiNhan: req.body.LoiNhan,
             GioTaoHD: req.body.GioTaoHD,
@@ -523,7 +542,7 @@ class HoaDonController_ {
             } else if (trangthai == 6) {
                 const sochuyen = car.SoChuyen;
                 const soDu_old = chuSH.SoDu;
-                const sotien = Math.ceil(req.body.TienCoc * 0.67);
+                const sotien = Math.ceil(req.body.TienCocGoc * 0.67);
                 const nganHangChuXe = await NganHang.findOne({ User: chuSH });
                 const noidungLSGD = "Thanh toán số tiền giao dịch từ chuyến đi " + req.body.MaHD;
 

@@ -10,6 +10,7 @@ const { events } = require('./app/models/user.model');
 require('dotenv').config()
 const { createServer } = require("http");
 const { Server } = require("socket.io");
+var session = require('express-session');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
@@ -45,6 +46,14 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 
 app.use(express.static(__dirname, { type: 'text/css' }))
 app.use(express.static(path.join(__dirname, 'public')));// trỏ tới thư mục chứa ảnh
+app.use(express.static(path.join(__dirname, 'resources')));
+
+app.set('trust proxy', 1);
+app.use(session({
+    secret: process.env.KEY_SESSION,
+    resave: false,
+    saveUninitialized: false
+  }));
 
 DB.connect();
 mongo_watch.updateExpiredPromotionalOffers();

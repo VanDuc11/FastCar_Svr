@@ -1,8 +1,11 @@
 const { log } = require('console');
 const User = require('../models/user.model');
-
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const RANDOM_KEY = process.env.TOKEN_SEC_KEY;
 const Xe = require('../models/Xe.model');
-
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client();
 const ThongBao = require('../models/ThongBao');
 
 const path = require('path');
@@ -15,8 +18,8 @@ class UserControlles {
         const end_date = req.query.end_date;
         const TrangThai = req.query.TrangThai;
         const status = req.query.status;
-        
-         if (status != undefined &&
+
+        if (status != undefined &&
             start_date != undefined &&
             end_date != undefined) {
             query = {
@@ -29,14 +32,14 @@ class UserControlles {
 
 
 
-        }else if (status != undefined &&
+        } else if (status != undefined &&
             start_date == undefined &&
             end_date == undefined) {
             query = {
                 TrangThai_GPLX: status.split(',')
             }
 
-        }else if (start_date != undefined &&
+        } else if (start_date != undefined &&
             end_date != undefined &&
             TrangThai == undefined) {
             query = {
@@ -56,14 +59,14 @@ class UserControlles {
                 "DangXe": TrangThai.split(',')
             }
 
-        }  else if (TrangThai != undefined &&
+        } else if (TrangThai != undefined &&
             start_date == undefined &&
             end_date == undefined) {
             query = {
                 DangXe: TrangThai.split(',')
             }
 
-        } 
+        }
 
         await User.find(query).sort({ _id: -1 })
             .then((result) => {
@@ -104,37 +107,37 @@ class UserControlles {
 
             })
     }
-    async chitietxekh(req,res){
-        var query ={};
+    async chitietxekh(req, res) {
+        var query = {};
         var id = req.query.id;
         const TrangThai = req.query.TrangThai;
 
-        if (TrangThai != undefined ) {
-            query= {ChuSH: id,TrangThai: TrangThai.split(",")}
-            
-        }else{
-            query= {ChuSH: id}
+        if (TrangThai != undefined) {
+            query = { ChuSH: id, TrangThai: TrangThai.split(",") }
+
+        } else {
+            query = { ChuSH: id }
         }
 
         Xe.find(query)
-        .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
-        .sort({ _id: -1 }).then((result) => {
-            
-            res.render('ThongTinXe',
-                {
-                    data: result.map((res) => res.toJSON())
-                })
+            .populate('ChuSH', ('_id UserName Email UID SDT Avatar'))
+            .sort({ _id: -1 }).then((result) => {
 
-        })
+                res.render('ThongTinXe',
+                    {
+                        data: result.map((res) => res.toJSON())
+                    })
+
+            })
     }
-    async listXeKhachHang(req,res){
+    async listXeKhachHang(req, res) {
         var id = req.query.id;
-        Xe.find({ChuSH: id})
-        .sort({ _id: -1 }).then((result) => {
-            
-           res.json(result)
+        Xe.find({ ChuSH: id })
+            .sort({ _id: -1 }).then((result) => {
 
-        })
+                res.json(result)
+
+            })
     }
     async user(req, res, next) {
         let check = null;
@@ -171,6 +174,7 @@ class UserControlles {
                 message: "Email đã được sử dụng",
             });
         } else {
+            const token = jwt.sign({ UID: user.UID, Email: user.Email }, RANDOM_KEY, { algorithm: 'HS256' })
             const userModel = new User({
                 UserName: user.UserName,
                 Email: user.Email,
@@ -191,6 +195,8 @@ class UserControlles {
                 NgayCap_CCCD: '',
                 NoiCap_CCCD: '',
                 SoDu: 0,
+                ReadNotify: 0,
+                Token: token,
                 TokenFCM: user.tokenFCM,
                 DangXe: false
             });
@@ -228,18 +234,49 @@ class UserControlles {
                     });
                 });
         }
-
     }
 
-    async login(req, res) {
-        const { email, pass } = req.body;
-        const user = await User.findOne({ Email: email, MatKhau: pass });
-        if (user) {
-            return res.status(200).json('Đăng nhập thành công');
-        } else {
-            return res.status(500).json('Đăng nhập thất bại');
-        }
-    }
+    // async login(req, res) {
+    //     const user = await User.findOne({ Email: req.body.Email, MatKhau: req.body.MatKhau });
+    //     try {
+    //         if (user) {
+    //             const token = jwt.sign({ UID: user.UID, Email: user.Email }, RANDOM_KEY, { algorithm: 'HS256' })
+    //             user.Token = token;
+    //             req.session.userLogin = user;
+    //             await user.save();
+    //             return res.status(200).json('Đăng nhập thành công');
+    //         } else {
+    //             return res.status(400).json('Đăng nhập thất bại');
+    //         }
+    //     } catch (error) {
+    //         return res.status(500).json({ error: error });
+    //     }
+    // }
+
+    // async login_with_google(req, res) {
+    //     const CLIENT_ID = "304235643298-qmoo4uvd04p730tip82nlmcdvu91c7cg.apps.googleusercontent.com";
+    //     const token = req.params.token;
+    //     const ticket = await client.verifyIdToken({
+    //         idToken: token,
+    //         audience: CLIENT_ID
+    //     });
+    //     const payload = ticket.getPayload();
+    //     const email = payload['email'];
+    //     const user = await User.findOne({ Email: email });
+    //     try {
+    //         if (user) {
+    //             const token = jwt.sign({ UID: user.UID, Email: user.Email }, RANDOM_KEY, { algorithm: 'HS256' })
+    //             user.Token = token;
+    //             req.session.userLogin = user;
+    //             await user.save();
+    //             return res.status(200).json({ success: true });
+    //         } else {
+    //             return res.status(400).json({ success: false });
+    //         }
+    //     } catch (error) {
+    //         return res.status(500).json({ error: error });
+    //     }
+    // }
 
     async logout(req, res) {
         let email = req.params.email;
@@ -309,6 +346,35 @@ class UserControlles {
                 {
                     $set: {
                         SoDu: user.SoDu
+                    }
+                })
+                .then((result) => {
+                    res.status(200).json({
+                        success: true,
+                        messages: "Yêu cầu cập nhật thành công"
+                    });
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: 'Không thành công'
+                    });
+                })
+        } catch (error) {
+            res.status(500).send({
+                success: false,
+            });
+        }
+    }
+
+    async updateReadNotify(req, res) {
+        let email = req.params.email;
+
+        try {
+            await User.updateOne({ Email: email },
+                {
+                    $set: {
+                        ReadNotify: req.body.ReadNotify
                     }
                 })
                 .then((result) => {

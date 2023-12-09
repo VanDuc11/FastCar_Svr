@@ -15,27 +15,31 @@ var storage = multer.diskStorage({
 
 
 const upload = multer({ storage: storage });
-router.get('/',UserControlles.index);
-router.get('/ChiTietKhachHang',UserControlles.chitietkhachhang);
-router.get('/ChiTietXeKH',UserControlles.chitietxekh);
-router.get('/listXeKhachHang',UserControlles.listXeKhachHang);
+router.get('/', UserControlles.index);
+router.get('/ChiTietKhachHang', UserControlles.chitietkhachhang);
+router.get('/ChiTietXeKH', UserControlles.chitietxekh);
+router.get('/listXeKhachHang', UserControlles.listXeKhachHang);
 
 
 router.get('/list', UserControlles.user);
 // Duyệt GPLX
 router.post('/duyet/:id/:trangthai', UserControlles.duyetGPLX);
-router.post('/create',UserControlles.createrUser);
+router.post('/create', UserControlles.createrUser);
 
-router.post('/login', UserControlles.login);
+// router.post('/login', UserControlles.login);
+
+// router.post('/loginwithgoogle/:token', UserControlles.login_with_google);
 
 router.post('/logout/:email', UserControllers.logout);
 
-router.put('/updateUser/:email',UserControlles.updateUser);
+router.put('/updateUser/:email', UserControlles.updateUser);
 
-router.put('/updateSoDu/:email',UserControlles.updateSoDu);
+router.put('/updateNumberNotifyRead/:email', UserControlles.updateReadNotify);
 
-router.put('/updateTTGPLX/:email',UserControlles.updateTTGPLX);
+router.put('/updateSoDu/:email', UserControlles.updateSoDu);
 
-router.post('/upGplx/:email',upload.array('HinhAnh_GPLX',2),UserControlles.UpdateGPLX);
+router.put('/updateTTGPLX/:email', UserControlles.updateTTGPLX);
+
+router.post('/upGplx/:email', upload.array('HinhAnh_GPLX', 2), UserControlles.UpdateGPLX);
 
 module.exports = router;

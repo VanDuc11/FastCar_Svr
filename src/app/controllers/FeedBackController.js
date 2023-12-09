@@ -2,13 +2,14 @@ const feedback = require('../models/FeedBack.model');
 
 class FeedBackController {
     async getFeedBack(req, res, next) {
-        let check = null;
+        const check = {};
         if (typeof (req.query.Xe) != 'undefined') {
-            check = { Xe: req.query.Xe };
+            const xeArray = req.query.Xe.split(',');
+            check.Xe = xeArray;
         }
 
         if (typeof (req.query.User) != 'undefined') {
-            check = { User: req.query.User };
+            check.User = req.query.User;
         }
 
         await feedback.find(check)

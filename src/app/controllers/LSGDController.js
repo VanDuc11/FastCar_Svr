@@ -2,7 +2,9 @@ const lsgd = require('../models/LichSuGiaoDich.model');
 const User = require('../models/user.model');
 const NganHang = require('../models/NganHang.model');
 var path = require('path');
+const moment = require('moment');
 const LichSuGiaoDichModel = require('../models/LichSuGiaoDich.model');
+
 class LSGDController {
     async index(req, res) {
         let check = { TrangThai: 0 };
@@ -49,7 +51,6 @@ class LSGDController {
             })
 
     }
-
 
 
     async Lichsugiaodich(req, res) {
@@ -188,15 +189,27 @@ class LSGDController {
     }
     async getLSGD(req, res, next) {
         const check = {};
-        if (typeof (req.query.User) != 'undefined') {
-            check.User = req.query.User;
-        }
+        let email = req.params.email;
 
         if (typeof (req.query.title) != 'undefined') {
             check.title = req.query.title;
         }
 
-        await lsgd.find(check).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'))
+        if (typeof req.query.startDate !== 'undefined') {
+            const queryDate = req.query.startDate;
+            const parsedDate = moment(queryDate, 'MM/YYYY', true);
+
+            if (parsedDate.isValid()) {
+                const startDate = parsedDate.startOf('month').toDate();
+                const endDate = parsedDate.endOf('month').toDate();
+
+                check.ThoiGian = { $gte: startDate, $lt: endDate };
+            } else {
+                return res.status(400).json({ error: "Định dạng ngày tháng không hợp lệ" });
+            }
+        }
+
+        const list = await lsgd.find(check).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'))
             .populate({
                 path: 'NganHang',
                 populate: { path: 'User', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
@@ -211,11 +224,11 @@ class LSGDController {
             .populate({
                 path: 'HoaDon',
                 populate: { path: 'User', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
-            }).sort({ _id: -1 })
-            .then((result) => {
-                res.status(200).json(result);
-            });
+            }).sort({ _id: -1 });
 
+        const filterList = list.filter(lsgd => lsgd.User.Email.toString() === email);
+        
+        return res.status(200).json(filterList);
     }
 
     async createLSGD(req, res, next) {

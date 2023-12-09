@@ -25,7 +25,8 @@ const Xe = new Schema({
     ChuSH: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     TrangThai: { type: Number },
     SoChuyen: { type: Number },
-    TrungBinhSao: { type: Number }
+    TrungBinhSao: { type: Number },
+    LichBan: { type: Array }
 }, { timestamps: true });
 
 
