@@ -4,6 +4,7 @@ const HoaDon = require('../models/HoaDon.model');
 const ThongBao = require('../models/ThongBao');
 var path = require('path');
 const { log } = require('console');
+const admin = require('firebase-admin');
 const io = require("socket.io-client");
 const socket = io("http://localhost:9001");
 
@@ -131,23 +132,63 @@ class XeController {
     async duyetxe(req, res) {
         const id = req.params.id;
         // console.log(id);
-        await Xe.updateOne({ _id: id },
+        await Xe.findOneAndUpdate({ _id: id },
             {
                 $set: {
                     TrangThai: req.params.trangthai
                 }
             }
-        ).then(() => {
-            res.status(200).json({
-                success: true,
-                messages: "Yêu cầu cập nhât thành công"
+        ).populate({ path: 'ChuSH', model: 'User' })
+            .then(async (result) => {
+                console.log(req.params.trangthai);
+
+                if (req.params.trangthai == 1) {
+                    const title = "Thông báo duyệt xe";
+                    const content = "Xe " + result.MauXe + result.BKS + " đã được duyệt";
+                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content);
+                    const thongbao = new ThongBao({
+                        HinhAnh: result.HinhAnh[0],
+                        TieuDe: title,
+                        NoiDung: content,
+                        User: result.ChuSH
+                    });
+                    await thongbao.save();
+                    res.status(201).send(`<script>alert("Duyệt thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
+
+                } else if (req.params.trangthai == 2) {
+                    const title = "Thông báo từ chối xe";
+                    const content = "Xe " + result.MauXe + result.BKS + " đã bị từ chối";
+                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content);
+                    const thongbao = new ThongBao({
+                        HinhAnh: result.HinhAnh[0],
+                        TieuDe: title,
+                        NoiDung: content + ", \n\n" + "Lý do: "+ req.body.NoiDung,
+                        User: result.ChuSH
+                    });
+                    await thongbao.save();
+                    res.status(201).send(`<script>alert("Từ chối thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
+
+                } else if (req.params.trangthai == 4) {
+                    const title = "Thông báo xe bị vô hiệu hóa";
+                    const content = "Xe " + result.MauXe + result.BKS + " đã bị vô hiệu hóa";
+                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content);
+                    const thongbao = new ThongBao({
+                        HinhAnh: result.HinhAnh[0],
+                        TieuDe: title,
+                        NoiDung: content + ", \n\n" + "Lý do: "+ req.body.NoiDung,
+                        User: result.ChuSH
+                    });
+                    await thongbao.save();
+                    res.status(201).send(`<script>alert("Vô hiệu hóa thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
+                }
+
+
+            }).catch((err) => {
+                res.status(400).json({
+                    success: false,
+                    messages: err.messages
+                });
             })
-        }).catch((err) => {
-            res.status(400).json({
-                success: false,
-                messages: err.messages
-            });
-        })
     }
 
 
@@ -486,8 +527,8 @@ class XeController {
             Latitude: req.body.Latitude || "21.017295",
             Longitude: req.body.Longitude || "105.783983",
             TheChap: false,
-            ThoiGianGiaoXe:"7:00 - 12:00",
-            ThoiGianNhanXe:"16:00 - 20:00"
+            ThoiGianGiaoXe: "7:00 - 12:00",
+            ThoiGianNhanXe: "16:00 - 20:00"
         });
 
         try {
@@ -661,5 +702,23 @@ class XeController {
         }
     }
 
+}
+async function sendNotificationToUser(tokenFCM, title, body) {
+
+    const message = {
+        notification: {
+            title: title,
+            body: body
+        },
+        token: tokenFCM,
+    };
+
+    try {
+        // Gửi thông báo
+        await admin.messaging().send(message);
+        console.log('Thông báo đã được gửi đến token:', tokenFCM);
+    } catch (error) {
+        console.error('Gửi thông báo thất bại:', error);
+    }
 }
 module.exports = new XeController;
