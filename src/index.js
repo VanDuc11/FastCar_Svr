@@ -19,17 +19,20 @@ app.use(bodyParser.json())
 const httpServer = createServer(app);
 const io = new Server(httpServer, { /* options */ });
 
-io.on("connect", (socket) => {
+io.on('connect', (socket) => {
     console.log("User connected to socket.io in PORT: " + process.env.PORT_SOCKET);
 
-    socket.on("connect user", function () {
-        console.log("Connected");
+    socket.on('connect user', function () {
         io.emit('connect user', user);
     })
 
-    socket.on("payment_success", (data) => {
-        console.log("Nhan du lieu tu server:", data);
+    socket.on('updateSTT_HD', (data) => {
+        io.emit('updateSTT_HD', data);
     });
+
+    socket.on('updateCar', (data) => {
+        io.emit('updateCar', data);
+    })
 
     socket.on('disconnect', function () {
         console.log("Disconnected");

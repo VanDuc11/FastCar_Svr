@@ -4,6 +4,8 @@ const HoaDon = require('../models/HoaDon.model');
 const ThongBao = require('../models/ThongBao');
 var path = require('path');
 const { log } = require('console');
+const io = require("socket.io-client");
+const socket = io("http://localhost:9001");
 
 class XeController {
     async index(req, res) {
@@ -590,6 +592,7 @@ class XeController {
                 }
             )
                 .then((result) => {
+                    socket.emit('updateCar', id);
                     res.status(200).json({
                         success: true,
                         messages: "Yêu cầu cập nhât thành công"

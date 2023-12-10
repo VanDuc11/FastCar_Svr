@@ -24,7 +24,6 @@ const socket = io("http://localhost:9001");
 
 class HoaDonController_ {
 
-
     async index(req, res) {
         var query = null;
         const start_date = req.query.start_date;
@@ -447,6 +446,8 @@ class HoaDonController_ {
             }
         }).then(async (result) => {
             if (trangthai == 2) {
+                socket.emit("updateSTT_HD", maHD);
+
                 let title = 'Thông báo mới';
                 let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất";
                 sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
@@ -494,6 +495,7 @@ class HoaDonController_ {
             if (trangthai == 0) {
                 if (trangThaiHD_old == 3) {
                     // gửi yêu cầu hoàn tiền
+                    socket.emit("updateSTT_HD", maHD);
                     const noidungLSGD = "Yêu cầu hoàn tiền cọc cho chuyến xe " + req.body.MaHD;
                     const nganHangKhachThue = await NganHang.findOne({ User: khachhang });
                     const lsgd = new LSGD({
@@ -529,17 +531,19 @@ class HoaDonController_ {
                     });
                     await thongBao.save();
                 }
+                socket.emit("updateSTT_HD", maHD);
             } else if (trangthai == 3) {
                 // gửi socket đến ChuSH
-                // socket.emit("payment_success", );
+                socket.emit("updateSTT_HD", maHD);
 
             } else if (trangthai == 4) {
                 // gửi thông báo cho khách hàng
-
+                socket.emit("updateSTT_HD", maHD);
             } else if (trangthai == 5) {
                 // gửi thông báo cho chủ xe
-
+                socket.emit("updateSTT_HD", maHD);
             } else if (trangthai == 6) {
+                socket.emit("updateSTT_HD", maHD);
                 const sochuyen = car.SoChuyen;
                 const soDu_old = chuSH.SoDu;
                 const sotien = Math.ceil(req.body.TienCocGoc * 0.67);
@@ -642,7 +646,7 @@ class HoaDonController_ {
     }
 }
 
-async function sendNotificationToUser(tokenFCM, title, body, image) {
+async function sendNotificationToUser(tokenFCM, title, body) {
 
     const message = {
         notification: {
