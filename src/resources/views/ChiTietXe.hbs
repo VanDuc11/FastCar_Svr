@@ -8,7 +8,7 @@
   <div class="row element-button">
   </div>
   <div class="tile">
-    <form class="row">
+    <div class="row">
       {{#each data}}
       <p class="col-md-2"
         style="border-radius: 5px; font-weight: bold;   height: 40px; text-align: center; padding-top: 10px; color: white; "
@@ -160,88 +160,16 @@
       <div class="form-group col-md-12">
         <a class="btn btn-success" id="button-duyet4" data-status="Chưa duyệt"
           onclick="onSubmit(`{{this._id}}`,1)">Duyệt</a>
-        <a class="btn btn-cancel" id="button-tuchoi" onclick="onSubmit(`{{this._id}}`,2)">Từ chối</a>
+        <a class="btn btn-cancel" id="button-tuchoi" data-toggle="modal" data-target="#ModalUP3">Từ chối</a>
 
         <a class="btn btn-success" href="/quanlyxe/ThongTinKhachThue?id={{this._id}}" id="button-xem-tt">Xem thông tin
           thuê</a>
-        <a class="btn btn-cancel" id="show-emp1"  onclick="onSubmit(`{{this._id}}`,4)">Vô hiệu hóa xe</a>
-        <a class="btn bg-success" id="show-emp2"  onclick="onSubmit(`{{this._id}}`,1)">Bỏ vô hiệu hóa</a>
+        <a class="btn btn-cancel" id="show-emp1" data-toggle="modal" data-target="#ModalUP5">Vô hiệu hóa xe</a>
+        <a class="btn btn-success" id="show-emp2" onclick="onSubmit(`{{this._id}}`,1)">Bỏ vô hiệu hóa</a>
       </div>
-      {{!-- <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group  col-md-12">
-                  <span class="thong-tin-thanh-toan">
-                    <h5>Lý do</h5>
-                  </span>
-                </div>
-              </div>
-              <form action="/api/lsgd/duyet/{{this._id}}/1" id="product-form" method="post"
-                enctype="multipart/form-data">
-                <div class="row">
-                  <div class="form-group col-md-6" style=" margin-left: 200px;
-                    flex-direction: column;">
-                    <label for="image" class="control-label">Ảnh </label>
-                    <input type="file" id="image" name="HinhAnh" class="form-control" accept="image/*" required>
-                  </div>
-                </div>
-                <BR>
-                <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save"
-                  type="submit">Lưu</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
-              </form>
 
 
 
-              <BR>
-            </div>
-
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div> --}}
-
-      {{!-- sửa trạng thái --}}
-      <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false">
-        <div class="modal-dialog1 modal-dialog-centered1" role="document">
-          <div class="modal-content">
-
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group  col-md-12">
-                  <span class="thong-tin-thanh-toan">
-                    <h5>Chỉnh sửa thông tin xe</h5>
-                  </span>
-                </div>
-              </div>
-              <div class="row">
-
-                <div class="form-group col-md-6  " style="margin-left: 30px;">
-                  <label for="exampleSelect1" class="control-label">Trạng thái </label>
-                  <select class="form-control" id="exampleSelect1">
-                    <option>Đang hoạt động</option>
-                    <option>Đã thuê</option>
-                    <option>Đang bảo trì</option>
-                  </select>
-                </div>
-              </div>
-              <BR>
-
-              <a class="btn btn-save" href="#">Lưu lại</a>
-              <a class="btn btn-cancel" href="/quanlyxe/ChiTietXe/{{this._id}}">Hủy bỏ</a>
-              <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
       {{!-- Modal --}}
       <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
         data-keyboard="false">
@@ -397,9 +325,86 @@
         </div>
       </div>
 
+      <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Lý do từ chối</h5>
+                  </span>
+                </div>
+              </div>
+              <form action="/api/xe/duyet/{{this._id}}/2" id="product-form1" method="post" >
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label class="control-label">Lý do từ chối</label>
+                    <textarea class="form-control" name="NoiDung" id="NoiDung" placeholder="Nhập lý do "
+                      required></textarea>
+
+                  </div>
+                </div>
+                <BR>
+                <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save"
+                  type="submit">submit</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
+              </form>
+
+
+
+              <BR>
+            </div>
+
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      {{!-- modal từ chối --}}
+      <div class="modal fade" id="ModalUP5" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group  col-md-12">
+                  <span class="thong-tin-thanh-toan">
+                    <h5>Lý do vô hiệu hóa</h5>
+                  </span>
+                </div>
+              </div>
+              <form action="/api/xe/duyet/{{this._id}}/4" id="product-form2" method="post" >
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label class="control-label">Lý do</label>
+                    <textarea class="form-control" name="NoiDung" id="NoiDung" placeholder="Nhập lý do "
+                      required></textarea>
+
+                  </div>
+                </div>
+                <BR>
+                <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save"
+                  type="submit">submit</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
+              </form>
+
+
+
+              <BR>
+            </div>
+
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
       {{/each}}
 
-    </form>
+    </div>
 
   </div>
 </main>
@@ -452,7 +457,7 @@
     var xemTT = document.getElementById('button-xem-tt');
     var tuchoi = document.getElementById('button-tuchoi');
     var vohieuhoa = document.getElementById('show-emp1');
-    var  diss_vohieuhoa = document.getElementById('show-emp2');
+    var diss_vohieuhoa = document.getElementById('show-emp2');
 
     // Lấy URL hiện tại
     const queryString = window.location.search;
@@ -498,7 +503,7 @@
       vohieuhoa.style.display = 'none'
       diss_vohieuhoa.style.display = 'none'
 
-    }else if (TrangThai.innerHTML == 3) {
+    } else if (TrangThai.innerHTML == 3) {
       TrangThai.innerHTML = "Không hoạt động"
       TrangThaiTitlle.innerHTML = "Không hoạt động"
       TrangThaiTitlle.style.background = "#1D5AAB";
@@ -526,7 +531,7 @@
     document.querySelector(".loading").style.display = "block";
   }
 
-  
+
 
   // Hàm xử lý sự kiện nhấp vào nút duyệt
   function onSubmit(id, trangthai) {
@@ -537,20 +542,24 @@
           alert('Thành công')
           location.reload(); // Reload lại trang
 
-        } else if(trangthai == '2'){
+        } else if (trangthai == '2') {
           alert('Từ chối thành công')
           location.reload(); // Reload lại trang
-          
-        } else if(trangthai == '4'){
+
+        } else if (trangthai == '4') {
           alert('Vô hiệu hóa thành công')
           location.reload(); // Reload lại trang
-          
+
         }
       })
   }
   //Modal
-  $("#show-emp").on("click", function () {
-    $("#ModalUP").modal({ backdrop: false, keyboard: false })
+  $("#show-emp1").on("click", function () {
+    $("#ModalUP5").modal({ backdrop: false, keyboard: false })
+  });
+  //Modal
+  $("#button-tuchoi").on("click", function () {
+    $("#ModalUP3").modal({ backdrop: false, keyboard: false })
   });
 
 </script>

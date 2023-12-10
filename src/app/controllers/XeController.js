@@ -151,6 +151,8 @@ class XeController {
                         User: result.ChuSH
                     });
                     await thongbao.save();
+                    res.status(201).send(`<script>alert("Duyệt thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
+
                 } else if (req.params.trangthai == 2) {
                     const title = "Thông báo từ chối xe";
                     const content = "Xe " + result.MauXe + result.BKS + " đã bị từ chối";
@@ -158,10 +160,12 @@ class XeController {
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
-                        NoiDung: content,
+                        NoiDung: content + ", \n\n" + "Lý do: "+ req.body.NoiDung,
                         User: result.ChuSH
                     });
                     await thongbao.save();
+                    res.status(201).send(`<script>alert("Từ chối thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
+
                 } else if (req.params.trangthai == 4) {
                     const title = "Thông báo xe bị vô hiệu hóa";
                     const content = "Xe " + result.MauXe + result.BKS + " đã bị vô hiệu hóa";
@@ -169,18 +173,14 @@ class XeController {
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
-                        NoiDung: content,
+                        NoiDung: content + ", \n\n" + "Lý do: "+ req.body.NoiDung,
                         User: result.ChuSH
                     });
                     await thongbao.save();
-
+                    res.status(201).send(`<script>alert("Vô hiệu hóa thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
                 }
 
 
-                res.status(200).json({
-                    success: true,
-                    messages: "Yêu cầu cập nhât thành công"
-                })
             }).catch((err) => {
                 res.status(400).json({
                     success: false,
