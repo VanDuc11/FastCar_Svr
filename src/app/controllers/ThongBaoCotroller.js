@@ -49,6 +49,21 @@ class ThongBaoController {
       }
     }
     await ThongBao.find(check).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'))
+      .populate({
+        path: 'Xe',
+        populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+      })
+      .populate({
+        path: 'HoaDon',
+        populate: {
+          path: 'Xe',
+          populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+        }
+      })
+      .populate({
+        path: 'HoaDon',
+        populate: { path: 'User', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+      })
       .sort({ _id: -1 }).then((result) => {
         res.status(200).json(result);
       }).catch((error) => {
@@ -80,6 +95,7 @@ class ThongBaoController {
       TieuDe: req.body.TieuDe,
       NoiDung: req.body.NoiDung,
       HinhAnh: img,
+      Type: 4
     });
 
     try {

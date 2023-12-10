@@ -149,6 +149,7 @@ class MaGiamGiaController {
                         GiaTriMax: req.body.GiaTriMax,
                         NoiDung: req.body.NoiDung,
                         HinhAnh: img,
+                        Type: 4
                     });
 
                     await tb.save().then((res) => {

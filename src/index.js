@@ -59,7 +59,7 @@ app.use(session({
   }));
 
 DB.connect();
-mongo_watch.updateExpiredPromotionalOffers();
+mongo_watch.updateExpiredPromotionalOffers(io);
 
 route(app);
 
