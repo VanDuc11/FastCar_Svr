@@ -104,40 +104,44 @@ class LSGDController {
     async duyetthanhtoan(req, res) {
         const id = req.params.id;
         const img = path.basename(req.file.path);
-        await lsgd.updateOne({ _id: id },
-            {
-                $set: {
-                    TrangThai: req.params.trangthai,
-                    HinhAnh: img
-                }
-            }
-        ).then(async (result) => {
-            // const title = 'Thông báo thanh toán thành công';
-            // const content = 'Yêu cầu thanh toán số tiền ' + result.SoTienGD + " của bạn đã được đồng ý";
-            // sendNotificationToUser(result.User.TokenFCM, title, content);
+        await lsgd.findById(id)
+            .then((result) => {
+                lsgd.updateOne({ _id: id },
+                    {
+                        $set: {
+                            TrangThai: req.params.trangthai,
+                            HinhAnh: img
+                        }
+                    }
+                ).then(async (resultu) => {
+                    console.log(result);
+                    const title = 'Thông báo thanh toán thành công';
+                    const content = 'Yêu cầu thanh toán số tiền ' + result.SoTienGD + " của bạn đã được đồng ý";
+                    sendNotificationToUser(result.User.TokenFCM, title, content);
 
-            // const thongbao = new ThongBao({
-            //     TieuDe: "Duyệt yêu cầu thanh toán thành công",
-            //     NoiDung: content,
-            //     User: result.User,
-            //     Type: 3
-            // })
-            // await thongbao.save();
-            res.status(201).send(`<script>alert("Thanh toán thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);
-        }).catch((err) => {
-            res.status(400).json({
-                success: false,
-                messages: err.messages
-            });
-        })
+                    const thongbao = new ThongBao({
+                        TieuDe: "Duyệt yêu cầu thanh toán thành công",
+                        NoiDung: content,
+                        User: result.User,
+                        Type: 3
+                    })
+                    await thongbao.save();
+                    res.status(201).send(`<script>alert("Thanh toán thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);
+                }).catch((err) => {
+                    res.status(400).json({
+                        success: false,
+                        messages: err.messages
+                    });
+                })
+            })
+
     }
     async TuChoithanhtoan(req, res) {
         const id = req.params.id;
         await lsgd.findById(id)
-            .then(async (result) => {
+            .then((result) => {
                 if (req.params.trangthai == 2 && result.title == 0) {
                     User.findOne({ _id: result.User._id }).then((result0) => {
-
                         User.updateOne({ _id: result.User._id },
                             {
                                 $set: {
@@ -150,24 +154,24 @@ class LSGDController {
 
                 }
 
-                await lsgd.updateOne({ _id: id },
+                lsgd.updateOne({ _id: id },
                     {
                         $set: {
                             TrangThai: req.params.trangthai,
                         }
                     }
-                ).then(async (result) => {
-                    // const title = 'Thông báo thanh toán thất bại';
-                    // const content = 'Yêu cầu thanh toán số tiền ' + result.SoTienGD + " của bạn đã bị từ chối";
-                    // sendNotificationToUser(result.User.TokenFCM, title, content);
+                ).then(async (resultu) => {
+                    const title = 'Thông báo thanh toán thất bại';
+                    const content = 'Yêu cầu thanh toán số tiền ' + result.SoTienGD + " của bạn đã bị từ chối";
+                    sendNotificationToUser(result.User.TokenFCM, title, content);
 
-                    // const thongbao = new ThongBao({
-                    //     TieuDe: "Duyệt yêu cầu thanh toán thất bại",
-                    //     NoiDung: content,
-                    //     User: result.User,
-                    //     Type: 3
-                    // })
-                    // await thongbao.save();
+                    const thongbao = new ThongBao({
+                        TieuDe: "Duyệt yêu cầu thanh toán thất bại",
+                        NoiDung: content,
+                        User: result.User,
+                        Type: 3
+                    })
+                    await thongbao.save();
                     res.status(201).send(`<script>alert("từ chối thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);
                 })
             }).catch((err) => {

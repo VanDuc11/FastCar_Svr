@@ -111,7 +111,7 @@
 
             </div>
           </div>
-          <form action="/thongke" method="get" class="formid">
+          <form action="/thongke" method="get" id="formid">
             <select class="form-control" id="exampleSelect1" name="start_date" onchange="submitForm()"
               style="width: 200px; font-size: 15px; height: 40px;">
               <option>-- Chọn tháng --</option>
@@ -139,8 +139,8 @@
         <h3 class="tile-title">📊 Thống kê doanh thu theo ngày</h3>
         <div class="row">
           <div class="col-md-9"></div>
-          <form action="/thongke" method="get" id="formid">
-            <select class="form-control" id="exampleSelect2" name="start_date" onchange="submitForm()"
+          <form action="/thongke" method="get" id="formid1">
+            <select class="form-control" id="exampleSelect2" name="start_date" onchange="submitForm1()"
               style="width: 200px; font-size: 15px; height: 40px;">
               <option>-- Chọn tháng --</option>
               <option value="1">Tháng 1</option>
@@ -197,6 +197,13 @@
 
     // Submit the form using JavaScript
     const formElement = document.getElementById('formid'); // Replace 'yourFormId' with the actual form's ID
+    formElement.submit();
+  }
+  function submitForm1() {
+
+
+    // Submit the form using JavaScript
+    const formElement = document.getElementById('formid1'); // Replace 'yourFormId' with the actual form's ID
     formElement.submit();
   }
 
