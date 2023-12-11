@@ -188,20 +188,20 @@
         const endDate = urlParams.get('end_date');
         if (urlParams.has('start_date') && urlParams.has('end_date')) {
 
-            document.getElementById('hd').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"4,5,6"}`;
+            document.getElementById('hd').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"4,5"}`;
             document.getElementById('dc').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"3"}`;
-            document.getElementById('tc').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"7"}`;
+            document.getElementById('tc').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"6"}`;
             document.getElementById('cc').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"1,2"}`;
             document.getElementById('dahuy').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"0"}`;
-            document.getElementById('all').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"0,1,2,3,4,5,6,7"}`;
+            document.getElementById('all').href = `chuyenxe?start_date=${startDate}&end_date=${endDate}&TrangThaiHD=${"0,1,2,3,4,5,6"}`;
             response = await fetch(`/api/hoadon/list?start_date=${startDate}&end_date=${endDate}`).then(response => response.json());
         } else {
-            document.getElementById('hd').href = `chuyenxe?TrangThaiHD=${"4,5,6"}`;
+            document.getElementById('hd').href = `chuyenxe?TrangThaiHD=${"4,5"}`;
             document.getElementById('dc').href = `chuyenxe?TrangThaiHD=${"3"}`;
-            document.getElementById('tc').href = `chuyenxe?TrangThaiHD=${"7"}`;
+            document.getElementById('tc').href = `chuyenxe?TrangThaiHD=${"6"}`;
             document.getElementById('cc').href = `chuyenxe?TrangThaiHD=${"1,2"}`;
             document.getElementById('dahuy').href = `chuyenxe?TrangThaiHD=${"0"}`;
-            document.getElementById('all').href = `chuyenxe?TrangThaiHD=${"0,1,2,3,4,5,6,7"}`;
+            document.getElementById('all').href = `chuyenxe?TrangThaiHD=${"0,1,2,3,4,5,6"}`;
             response = await fetch('/api/hoadon/list').then(response => response.json());
 
         }
@@ -218,10 +218,10 @@
             if (hd.TrangThaiHD == 3) {
                 tt2++;
             }
-            if (hd.TrangThaiHD == 4 || hd.TrangThaiHD == 5 || hd.TrangThaiHD == 6) {
+            if (hd.TrangThaiHD == 4 || hd.TrangThaiHD == 5 ) {
                 tt3++;
             }
-            if (hd.TrangThaiHD == 7) {
+            if (hd.TrangThaiHD == 6) {
                 tt4++;
 
             }
