@@ -523,7 +523,6 @@ class XeController {
             BaoHiem: req.files['BaoHiem'][0].filename,
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
-            TheChap: false,
             ChuSH: req.body.ChuSH || await User.findById("6513ad0281cfc8cdaaa6f728"),
             TrangThai: 1,
             SoChuyen: 0,
@@ -532,7 +531,8 @@ class XeController {
             Longitude: req.body.Longitude || "105.783983",
             TheChap: false,
             ThoiGianGiaoXe: "07:00 - 22:00",
-            ThoiGianNhanXe: "07:00 - 22:00"
+            ThoiGianNhanXe: "07:00 - 22:00",
+            LichBan: []
         });
 
         try {
