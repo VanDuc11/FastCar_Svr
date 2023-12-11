@@ -17,13 +17,7 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
-const io = require("socket.io-client");
-const { el } = require('date-fns/locale');
-const socket = io("http://localhost:9001");
-
-
 class HoaDonController_ {
-
 
     async index(req, res) {
         var query = null;
@@ -400,7 +394,7 @@ class HoaDonController_ {
                 const year1 = currentDateNgayTra.getFullYear();
                 const formattedDateNgayTra = `${day1}/${month1}/${year1}`;
 
-                const noidungNotify = "🚗 Xin chào chủ xe " + chuSH.UserName + ",\n\n" +
+                const noidungNotify = "🚗 Xin chào chủ xe " + chuSH.UserName + ",\n" +
                     "Xe " + car.MauXe + ", " + car.BKS + " của bạn mới được khách hàng " + khachhang.UserName +
                     " gửi yêu cầu thuê trong " + req.body.TongSoNgayThue + " ngày, từ " + formattedDateNgayNhan + " đến " + formattedDateNgayTra + ".\n\n" +
                     "Bạn vui lòng xác nhận hoặc có thể huỷ chuyến nếu như xe của bạn đang có sự cố không mong muốn.\n\n" +
@@ -411,7 +405,9 @@ class HoaDonController_ {
                     TieuDe: "Yêu cầu thuê xe mới",
                     NoiDung: noidungNotify,
                     User: chuSH,
-                    HinhAnh: car.HinhAnh[0]
+                    HinhAnh: car.HinhAnh[0],
+                    HoaDon: hoadon,
+                    Type: 1
                 });
                 await thongBao.save();
 
@@ -450,7 +446,7 @@ class HoaDonController_ {
                 let title = 'Thông báo mới';
                 let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất";
                 sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
-                const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n\n" +
+                const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n" +
                     "Yêu cầu thuê xe " + car.MauXe + " của quý khách đã được chủ xe chấp nhận.\n\n" +
                     "Quý khách vui lòng thanh toán tiền cọc cho chuyến xe trước 1 tiếng kể từ thời gian thông báo này được gửi.\n\n" +
                     "Vui lòng bỏ qua thông báo này nếu quý khách đã thanh toán/từ chối.\n\n" +
@@ -460,7 +456,9 @@ class HoaDonController_ {
                     TieuDe: "Yêu cầu thuê xe thành công!",
                     NoiDung: noidungNotify,
                     User: khachhang,
-                    HinhAnh: car.HinhAnh[0]
+                    HinhAnh: car.HinhAnh[0],
+                    HoaDon: req.body._id,
+                    Type: 2
                 });
                 await thongBao.save();
             }
@@ -514,7 +512,7 @@ class HoaDonController_ {
                     let contentNotify = "Yêu cầu hoàn tiền cọc";
                     sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
 
-                    const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n\n" +
+                    const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n" +
                         "Yêu cầu thuê xe " + car.MauXe + "(" + hoadon.MaHD + ")" + " của quý khách đã đã bị huỷ bởi chủ xe.\n\n" +
                         "Vì quý khách đã thanh toán  tiền cọc rồi, nên toàn bộ số tiền đó sẽ được hoàn trả vào tài khoản ngân hàng của quý khách trong 1-2 ngày làm việc.\n\n" +
                         "Rất mong quý khách thông cảm về lần phục vụ không tốt này.\n\n" +
@@ -525,25 +523,23 @@ class HoaDonController_ {
                         TieuDe: "Huỷ đặt xe - Hoàn lại tiền",
                         NoiDung: noidungNotify,
                         User: khachhang,
-                        HinhAnh: car.HinhAnh[0]
+                        HinhAnh: car.HinhAnh[0],
+                        HoaDon: hoadon,
+                        Type: 2
                     });
                     await thongBao.save();
                 }
             } else if (trangthai == 3) {
                 // gửi socket đến ChuSH
-                // socket.emit("payment_success", );
 
             } else if (trangthai == 4) {
                 // gửi thông báo cho khách hàng
-
             } else if (trangthai == 5) {
                 // gửi thông báo cho chủ xe
-
             } else if (trangthai == 6) {
                 const sochuyen = car.SoChuyen;
                 const soDu_old = chuSH.SoDu;
                 const sotien = Math.ceil(req.body.TienCocGoc * 0.67);
-                const nganHangChuXe = await NganHang.findOne({ User: chuSH });
                 const noidungLSGD = "Thanh toán số tiền giao dịch từ chuyến đi " + req.body.MaHD;
 
                 await Xe.updateOne({ _id: car._id }, {
@@ -560,7 +556,6 @@ class HoaDonController_ {
                     NoiDung: noidungLSGD,
                     TrangThai: 1,
                     HoaDon: hoadon,
-                    NganHang: nganHangChuXe,
                     title: 1,
                     HinhAnh: ""
                 });
@@ -642,7 +637,7 @@ class HoaDonController_ {
     }
 }
 
-async function sendNotificationToUser(tokenFCM, title, body, image) {
+async function sendNotificationToUser(tokenFCM, title, body) {
 
     const message = {
         notification: {

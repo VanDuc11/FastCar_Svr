@@ -141,14 +141,16 @@ class XeController {
                 console.log(req.params.trangthai);
 
                 if (req.params.trangthai == 1) {
-                    const title = "Thông báo duyệt xe";
+                    const title = "Thông báo duyệt xe thành công";
                     const content = "Xe " + result.MauXe + result.BKS + " đã được duyệt";
                     sendNotificationToUser(result.ChuSH.TokenFCM, title, content);
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
                         NoiDung: content,
-                        User: result.ChuSH
+                        User: result.ChuSH,
+                        Xe: result,
+                        Type: 0
                     });
                     await thongbao.save();
                     res.status(201).send(`<script>alert("Duyệt thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
@@ -160,8 +162,10 @@ class XeController {
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
-                        NoiDung: content + ", \n\n" + "Lý do: "+ req.body.NoiDung,
-                        User: result.ChuSH
+                        NoiDung: content + ", \n" + "Lý do: "+ req.body.NoiDung,
+                        User: result.ChuSH,
+                        Xe: result,
+                        Type: 0
                     });
                     await thongbao.save();
                     res.status(201).send(`<script>alert("Từ chối thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
@@ -174,7 +178,9 @@ class XeController {
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
                         NoiDung: content + ", \n\n" + "Lý do: "+ req.body.NoiDung,
-                        User: result.ChuSH
+                        User: result.ChuSH,
+                        Xe: result,
+                        Type: 0
                     });
                     await thongbao.save();
                     res.status(201).send(`<script>alert("Vô hiệu hóa thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
@@ -478,7 +484,7 @@ class XeController {
 
         try {
             // giới hạn 5 xe
-            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ SoChuyen: -1 }).limit(5).exec();
+            const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).sort({ SoChuyen: -1 }).limit(10).exec();
 
             // nếu trong 5 xe, user login có 2 xe thì list = 3
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
@@ -525,8 +531,8 @@ class XeController {
             Latitude: req.body.Latitude || "21.017295",
             Longitude: req.body.Longitude || "105.783983",
             TheChap: false,
-            ThoiGianGiaoXe: "7:00 - 12:00",
-            ThoiGianNhanXe: "16:00 - 20:00"
+            ThoiGianGiaoXe: "07:00 - 22:00",
+            ThoiGianNhanXe: "07:00 - 22:00"
         });
 
         try {
@@ -596,7 +602,8 @@ class XeController {
                         TieuDe: tieude,
                         NoiDung: noidung,
                         HinhAnh: hinhanh,
-                        User: chush
+                        User: chush,
+                        Type: 0
                     });
                     await thongBaoNew.save();
                 })

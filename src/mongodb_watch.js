@@ -8,7 +8,7 @@ const ThongBao = require('./app/models/ThongBao');
 const moment = require('moment');
 const admin = require('firebase-admin');
 
-const updateExpiredPromotionalOffers = async () => {
+const updateExpiredPromotionalOffers = async (io) => {
     // Lấy tất cả các ưu đãi
 
     // Tạo hàm kiểm tra trạng thái của mã giảm giá
@@ -59,12 +59,12 @@ const updateExpiredPromotionalOffers = async () => {
             // nếu còn 15 phút mà user chưa thanh toán -> gửi thông báo
 
             if (hoadon.TrangThaiHD == 2) {
-                if (duration.asSeconds() >= 2700 && duration.asSeconds() < 2703 ) {
+                if (duration.asSeconds() >= 2700 && duration.asSeconds() < 2704 ) {
                     const title = "Thông báo chuẩn bị huỷ chuyến";
                     const content = "Chuyến xe " + hoadon.MaHD + " sắp hết hạn";
                     sendNotificationToUser(user.TokenFCM, title, content);
 
-                    const noidungNotify = "🚗 Xin chào khách hàng " + user.UserName + ",\n\n" +
+                    const noidungNotify = "🚗 Xin chào khách hàng " + user.UserName + ",\n" +
                         "Yêu cầu thuê xe " + car.MauXe + "(" + hoadon.MaHD + ")" + " của quý khách sắp hết thời gian thanh toán.\n\n" +
                         "Quý khách vui lòng thanh toán trước 15 phút kể từ khi thông báo này được gửi.\n\n" +
                         "Xin cảm ơn!\n\n" +
@@ -73,10 +73,12 @@ const updateExpiredPromotionalOffers = async () => {
                         HinhAnh: car.HinhAnh[0],
                         TieuDe: "Sắp hết thời gian đặt cọc",
                         NoiDung: noidungNotify,
-                        User: user
+                        User: user,
+                        HoaDon: hoadon,
+                        Type: 2
                     });
                     await thongbao.save();
-                } else if (duration.asSeconds() >= 3600 && duration.asSeconds() < 3603) {
+                } else if (duration.asSeconds() >= 3600 && duration.asSeconds() < 3604) {
                     // huỷ
                     await HoaDon.findOneAndUpdate({ _id: hoadon._id }, {
                         $set: {
@@ -85,11 +87,13 @@ const updateExpiredPromotionalOffers = async () => {
                         }
                     });
 
+                    io.emit('updateSTT_HD', hoadon.MaHD);
+
                     const title = "Thông báo huỷ chuyến";
                     const content = "Chuyến xe " + hoadon.MaHD + " của bạn đã bị huỷ vì quá hạn đặt cọc";
                     sendNotificationToUser(user.TokenFCM, title, content);
 
-                    const noidungNotify = "🚗 Xin chào khách hàng " + user.UserName + ",\n\n" +
+                    const noidungNotify = "🚗 Xin chào khách hàng " + user.UserName + ",\n" +
                         "Yêu cầu thuê xe " + car.MauXe + " (" + hoadon.MaHD + ")" + " của quý khách đã tự động huỷ bởi hệ thống do hết thời gian thanh toán.\n\n" +
                         "Quý khách có thể tìm kiếm và đặt cho mình một xe khác.\n\n" +
                         "Rất mong được quý khách tin tưởng sử dụng FastCar. Chúng tôi xin cảm ơn!\n\n" +
@@ -98,7 +102,9 @@ const updateExpiredPromotionalOffers = async () => {
                         HinhAnh: car.HinhAnh[0],
                         TieuDe: "Huỷ đặt xe - Quá hạn đặt cọc",
                         NoiDung: noidungNotify,
-                        User: user
+                        User: user,
+                        HoaDon: hoadon,
+                        Type: 2
                     });
                     await thongbao.save();
                     notificationSent60 = true;

@@ -204,7 +204,7 @@ class UserControlles {
             await userModel.save()
                 .then(async () => {
                     const tieude = "🎁 Chào mừng bạn tham gia cộng đồng FastCar. 🎁";
-                    const noidung = "🎁 Thân tặng bạn mã code BANMOI, giảm giá 500,000đ cho chuyến đi đầu tiên trên FastCar. \n\n" +
+                    const noidung = "🎁 Thân tặng bạn mã code BANMOI, giảm giá 500,000đ cho chuyến đi đầu tiên trên FastCar. \n" +
                         "Mời bạn cùng xem qua các kinh nghiệm hữu ích và hướng dẫn các bước thuê xe trên FastCar nhé. \n\n" +
                         "Kinh nghiệm thuê xe hữu ích: \n\n" +
                         "Lựa chọn xe có đánh giá cao và nhiều chuyến đi \n\n" +
@@ -219,7 +219,8 @@ class UserControlles {
                         TieuDe: tieude,
                         NoiDung: noidung,
                         HinhAnh: hinhanh,
-                        User: userModel
+                        User: userModel,
+                        Type: 4
                     });
                     await ThongBaoNew.save();
                     res.status(200).json({
