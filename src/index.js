@@ -11,16 +11,25 @@ require('dotenv').config()
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 var session = require('express-session');
+const port = process.env.PORT || 9000;
 
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
 const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
+const io = new Server(httpServer, {
+    cors: {
+        origin: "https://fast-car-fbfb5db0fb7f.herokuapp.com",
+        methods: ["GET", "POST"],
+        transports: ['websocket', 'polling'],
+        credentials: true
+    },
+    allowEIO3: true
+});
 
 io.on('connect', (socket) => {
-    console.log("User connected to socket.io in PORT: " + process.env.PORT_SOCKET);
+    console.log("Connected");
 
     socket.on('connect user', function () {
         io.emit('connect user', user);
@@ -37,7 +46,6 @@ io.on('connect', (socket) => {
     socket.on('disconnect', function () {
         console.log("Disconnected");
     });
-
 });
 
 app.engine('.hbs', expressHbs.engine({
@@ -56,13 +64,13 @@ app.use(session({
     secret: process.env.KEY_SESSION,
     resave: false,
     saveUninitialized: false
-  }));
+}));
 
 DB.connect();
 mongo_watch.updateExpiredPromotionalOffers(io);
 
 route(app);
 
-app.listen(process.env.PORT, () => { console.log("localhost:" + process.env.PORT) });
+// app.listen(process.env.PORT, () => { console.log("localhost:" + process.env.PORT) });
 
-httpServer.listen(process.env.PORT_SOCKET);
+httpServer.listen(port, () => console.log("Server connected in PORT " + port));

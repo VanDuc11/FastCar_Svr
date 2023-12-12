@@ -95,7 +95,7 @@ class ThongBaoController {
       TieuDe: req.body.TieuDe,
       NoiDung: req.body.NoiDung,
       HinhAnh: img,
-      Type: 4
+      Type: 3
     });
 
     try {

@@ -5,6 +5,7 @@ var path = require('path');
 const moment = require('moment');
 const LichSuGiaoDichModel = require('../models/LichSuGiaoDich.model');
 const ThongBao = require('../models/ThongBao');
+const admin = require('firebase-admin');
 
 class LSGDController {
     async index(req, res) {
@@ -105,7 +106,8 @@ class LSGDController {
         const id = req.params.id;
         const img = path.basename(req.file.path);
         await lsgd.findById(id)
-            .then((result) => {
+            .then(async (result) => {
+                const user = await User.findOne({ _id: result.User});
                 lsgd.updateOne({ _id: id },
                     {
                         $set: {
@@ -116,8 +118,8 @@ class LSGDController {
                 ).then(async (resultu) => {
                     console.log(result);
                     const title = 'Thông báo thanh toán thành công';
-                    const content = 'Yêu cầu thanh toán số tiền ' + result.SoTienGD + " của bạn đã được đồng ý";
-                    sendNotificationToUser(result.User.TokenFCM, title, content);
+                    const content = 'Yêu cầu thanh toán số tiền ' + result.SoTienGD + " VNĐ của bạn đã được đồng ý";
+                    sendNotificationToUser(user.TokenFCM, title, content);
 
                     const thongbao = new ThongBao({
                         TieuDe: "Duyệt yêu cầu thanh toán thành công",
@@ -139,7 +141,8 @@ class LSGDController {
     async TuChoithanhtoan(req, res) {
         const id = req.params.id;
         await lsgd.findById(id)
-            .then((result) => {
+            .then(async (result) => {
+                const user = await User.findOne({ _id: result.User});
                 if (req.params.trangthai == 2 && result.title == 0) {
                     User.findOne({ _id: result.User._id }).then((result0) => {
                         User.updateOne({ _id: result.User._id },
@@ -163,7 +166,7 @@ class LSGDController {
                 ).then(async (resultu) => {
                     const title = 'Thông báo thanh toán thất bại';
                     const content = 'Yêu cầu thanh toán số tiền ' + result.SoTienGD + " của bạn đã bị từ chối";
-                    sendNotificationToUser(result.User.TokenFCM, title, content);
+                    sendNotificationToUser(user.TokenFCM, title, content);
 
                     const thongbao = new ThongBao({
                         TieuDe: "Duyệt yêu cầu thanh toán thất bại",

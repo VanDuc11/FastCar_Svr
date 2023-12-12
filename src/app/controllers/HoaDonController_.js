@@ -443,6 +443,7 @@ class HoaDonController_ {
             }
         }).then(async (result) => {
             if (trangthai == 2) {
+                const hd = await HoaDon.findOne({ MaHD: maHD});
                 let title = 'Thông báo mới';
                 let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất";
                 sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
@@ -457,7 +458,7 @@ class HoaDonController_ {
                     NoiDung: noidungNotify,
                     User: khachhang,
                     HinhAnh: car.HinhAnh[0],
-                    HoaDon: req.body._id,
+                    HoaDon: hd,
                     Type: 2
                 });
                 await thongBao.save();
