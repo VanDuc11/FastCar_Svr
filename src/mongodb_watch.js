@@ -57,12 +57,16 @@ const updateExpiredPromotionalOffers = async (io) => {
             // tính thời gian đã qua
             const duration = moment.duration(now.diff(dateFromDB));
             // nếu còn 15 phút mà user chưa thanh toán -> gửi thông báo
+            const hd = await HoaDon.findOne({ MaHD: hoadon.MaHD }).populate({
+                path: 'Xe',
+                populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+            }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'));
 
             if (hoadon.TrangThaiHD == 2) {
                 if (duration.asSeconds() >= 2700 && duration.asSeconds() < 2704 ) {
                     const title = "Thông báo chuẩn bị huỷ chuyến";
                     const content = "Chuyến xe " + hoadon.MaHD + " sắp hết hạn";
-                    sendNotificationToUser(user.TokenFCM, title, content);
+                    sendNotificationToUser(user.TokenFCM, title, content, hd);
 
                     const noidungNotify = "🚗 Xin chào khách hàng " + user.UserName + ",\n" +
                         "Yêu cầu thuê xe " + car.MauXe + "(" + hoadon.MaHD + ")" + " của quý khách sắp hết thời gian thanh toán.\n\n" +
@@ -91,7 +95,7 @@ const updateExpiredPromotionalOffers = async (io) => {
 
                     const title = "Thông báo huỷ chuyến";
                     const content = "Chuyến xe " + hoadon.MaHD + " của bạn đã bị huỷ vì quá hạn đặt cọc";
-                    sendNotificationToUser(user.TokenFCM, title, content);
+                    sendNotificationToUser(user.TokenFCM, title, content, hd);
 
                     const noidungNotify = "🚗 Xin chào khách hàng " + user.UserName + ",\n" +
                         "Yêu cầu thuê xe " + car.MauXe + " (" + hoadon.MaHD + ")" + " của quý khách đã tự động huỷ bởi hệ thống do hết thời gian thanh toán.\n\n" +
@@ -118,12 +122,13 @@ const updateExpiredPromotionalOffers = async (io) => {
     setInterval(checkExpiredPromotionalOffers, 5000);
 };
 
-async function sendNotificationToUser(tokenFCM, title, body) {
+async function sendNotificationToUser(tokenFCM, title, body, hoaDon) {
 
     const message = {
-        notification: {
-            title: title,
-            body: body
+        data: {
+            title: String(title),
+            body: String(body),
+            hoadonKH: JSON.stringify(hoaDon)
         },
         token: tokenFCM,
     };

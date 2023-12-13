@@ -138,12 +138,12 @@ class XeController {
             }
         ).populate({ path: 'ChuSH', model: 'User' })
             .then(async (result) => {
-                console.log(req.params.trangthai);
+                const xe = await Xe.findOne({ _id: id}).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia'));
 
                 if (req.params.trangthai == 1) {
                     const title = "Thông báo duyệt xe thành công";
                     const content = "Xe " + result.MauXe + result.BKS + " đã được duyệt";
-                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content);
+                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content, xe);
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
@@ -158,11 +158,11 @@ class XeController {
                 } else if (req.params.trangthai == 2) {
                     const title = "Thông báo từ chối xe";
                     const content = "Xe " + result.MauXe + result.BKS + " đã bị từ chối";
-                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content);
+                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content, xe);
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
-                        NoiDung: content + ", \n" + "Lý do: "+ req.body.NoiDung,
+                        NoiDung: content + ", \n" + "Lý do: " + req.body.NoiDung,
                         User: result.ChuSH,
                         Xe: result,
                         Type: 0
@@ -173,11 +173,11 @@ class XeController {
                 } else if (req.params.trangthai == 4) {
                     const title = "Thông báo xe bị vô hiệu hóa";
                     const content = "Xe " + result.MauXe + result.BKS + " đã bị vô hiệu hóa";
-                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content);
+                    sendNotificationToUser(result.ChuSH.TokenFCM, title, content, xe);
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
-                        NoiDung: content + ", \n\n" + "Lý do: "+ req.body.NoiDung,
+                        NoiDung: content + ", \n\n" + "Lý do: " + req.body.NoiDung,
                         User: result.ChuSH,
                         Xe: result,
                         Type: 0
@@ -356,6 +356,8 @@ class XeController {
         let check = {};
         let priceQueryHandled = false;
 
+        const isPaginationRequested = 'page' in req.query && 'pageSize' in req.query;
+
         if (typeof (req.query.TrangThai) != 'undefined') {
             check.TrangThai = req.query.TrangThai;
         }
@@ -424,11 +426,20 @@ class XeController {
 
         try {
             const list = await Xe.find(check).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia')).exec();
-
             const filteredList = list.filter(Xe => Xe.ChuSH.Email.toString() !== emailUser);
 
-            console.log("data: " + filteredList.length);
-            return res.status(200).json(filteredList);
+            if (isPaginationRequested) {
+                const page = parseInt(req.query.page) || 1;
+                const pageSize = parseInt(req.query.pageSize) || 10;
+                const startIndex = (page - 1) * pageSize;
+                const endIndex = page * pageSize;
+                const dataPage = filteredList.slice(startIndex, endIndex);
+                console.log("data: " + dataPage.length);
+                return res.status(200).json(dataPage);
+            } else {
+                console.log("data: " + filteredList.length);
+                return res.status(200).json(filteredList);
+            }
         } catch (error) {
             res.status(500).json({
                 success: false,
@@ -523,6 +534,7 @@ class XeController {
             BaoHiem: req.files['BaoHiem'][0].filename,
             DiaChiXe: req.body.DiaChiXe,
             GiaThue1Ngay: req.body.GiaThue1Ngay,
+            TheChap: false,
             ChuSH: req.body.ChuSH || await User.findById("6513ad0281cfc8cdaaa6f728"),
             TrangThai: 1,
             SoChuyen: 0,
@@ -707,12 +719,13 @@ class XeController {
     }
 
 }
-async function sendNotificationToUser(tokenFCM, title, body) {
+async function sendNotificationToUser(tokenFCM, title, body, xe) {
 
     const message = {
-        notification: {
-            title: title,
-            body: body
+        data: {
+            title: String(title),
+            body: String(body),
+            xe: JSON.stringify(xe)
         },
         token: tokenFCM,
     };

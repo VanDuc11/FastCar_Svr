@@ -1,0 +1,457 @@
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb">Quản lý xe/</li>
+      <li class="breadcrumb-item"><a href="#">Danh sách xe</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+
+        <div class="tile-body">
+          <div class="row element-button">
+           <div class="col-sm-2">
+
+              <a class="btn btn-add btn-sm" href="/quanlyxe/Addxe" title="Thêm"><i class="fas fa-plus"></i>
+                Thêm xe</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-3">
+              <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
+                <div class="info">
+                  <h4>Tổng xe</h4>
+                  <p><b id="info_tong_xe"></b></p>
+                </div>
+              </div>
+            </div>
+           <a href="abc" class="col-md-6 col-lg-3">         
+              <div class="widget-small info coloured-icon"><i class='icon bx bxs-truck fa-3x'></i>
+                <div class="info">
+                  <h4>Xe hoạt động</h4>
+                  <p><b id="daduyen"></b></p>
+                </div>
+              </div>
+           </a>
+           <a href="abc" class="col-md-6 col-lg-3">         
+              <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-comment-error'></i>
+                <div class="info">
+                  <h4>Xe chờ duyệt</h4>
+                  <p><b id="choduyen"></b></p>
+                </div>
+              </div>
+           </a>
+
+           <a href="abc" class="col-md-6 col-lg-3">         
+              <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-car-mechanic'></i>
+                <div class="info">
+                  <h4> Xe không hoạt động</h4>
+                  <p><b id="khonghd"></b></p>
+                </div>
+              </div>
+           </a>
+           <a href="abc" class="col-md-6 col-lg-3">
+             <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
+                <div class="info">
+                  <h4>Từ chối</h4>
+                  <p><b id="tuchoi"></b></p>
+                </div>
+              </div>
+         </a>
+          </div>
+
+        </div>
+        <div class="row element-button">
+        </div>
+        <table class="table table-hover table-bordered" id="sampleTable">
+          <thead>
+            <tr>
+              <th style="text-align: center;">STT</th>
+              <th style="text-align: center;">Biển số xe</th>
+              <th style="text-align: center;">Tên xe</th>
+              <th style="text-align: center;">Ảnh</th>
+              <th style="text-align: center;">Số ghế</th>
+              <th style="text-align: center;">Năm sản xuất</th>
+              <th style="text-align: center;">Giá </th>
+              <th style="text-align: center;">Tên chủ xe</th>
+              <th style="text-align: center;">Trạng thái</th>
+              <th style="text-align: center;"width="80">Chức năng</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each data}}
+            <tr>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"class="stt">{{@index}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.BKS}} </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.MauXe}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <img src="/images/{{this.HinhAnh.[0]}}" alt="" class="img-card-person1">
+              </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.SoGhe}} </td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.NSX}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;" class="giathue">{{this.GiaThue1Ngay}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;">{{this.ChuSH.UserName}}</td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"><span class="TrangThai"
+                  style="border-radius: 5px; font-size: 13px; padding: 3px;">{{this.TrangThai}}</span></td>
+              <td style="text-align: center; word-break: break-word;vertical-align: middle;"> <a class="btn btn-info " href="/quanlyxe/ChiTietXe/{{this._id}}"> Xem
+                  chi tiết</a></td>
+            </tr>
+            {{/each}}
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</main>
+
+<!--
+MODAL
+-->
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group  col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Chỉnh sửa thông tin xe</h5>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label class="control-label">Biển số xe</label>
+            <input class="form-control" type="text" required value="">
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Hãng xe</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Mẫu xe</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Năm sản xuất</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Số Ghế</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>VinFast</option>
+              <option>Toyota</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Truyền động</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Số tự động</option>
+              <option>Số sàn</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Loại nhiêu liệu</label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Xăng</option>
+              <option>Dầu</option>
+              <option>Điện</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label for="exampleSelect1" class="control-label">Tình trạng </label>
+            <select class="form-control" id="exampleSelect1">
+              <option>Đang hoạt động</option>
+              <option>Đã thuê</option>
+              <option>Đang bảo trì</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Giá bán</label>
+            <input class="form-control" type="text" value="5.600.000">
+          </div>
+          <div class="form-group  col-md-6">
+            <label class="control-label">Mô tả</label>
+            <textarea class="form-control" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label class="control-label">Ảnh xe</label>
+          <div id="myfileupload">
+            <input type="file" id="uploadfile" name="ImageUpload" multiple onchange="readURL(this);" />
+          </div>
+
+          <div id="boxchoice">
+            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+            <p style="clear:both"></p>
+
+          </div>
+
+        </div>
+        <button class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        <BR>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+<script>
+   // số tứ tự
+    var stt = 0
+    const stt1 = document.querySelectorAll(".stt");
+    stt1.forEach((i) => {
+      stt++;
+      i.innerText = stt
+    })
+
+  load_data()
+  async function load_data() {
+
+    const response = await fetch('/api/xe/list').then(response => response.json());
+    var tt0 = 0;
+    var tt1 = 0;
+    var tt2 = 0;
+    var tt3 = 0;
+    response.forEach(xe => {
+      // xe chờ duyệt
+      if (xe.TrangThai == 0) {
+        tt0 += 1;
+      }
+      if (xe.TrangThai == 1) {
+        tt1 += 1;
+      }
+      if (xe.TrangThai == 2) {
+        tt2 += 1;
+      }
+      if (xe.TrangThai == 3) {
+        tt3 += 1;
+      }
+    });
+    document.getElementById('choduyen').innerText = tt0 + " Xe";
+    document.getElementById('daduyen').innerText = tt1 + " Xe";
+    document.getElementById('tuchoi').innerText = tt2 + " Xe";
+    document.getElementById('khonghd').innerText = tt3 + " Xe";
+
+    var tongxe = document.getElementById('info_tong_xe').innerText = response.length + " Xe";
+    var GiaThue = document.querySelectorAll('.giathue');
+    var TrangThai = document.querySelectorAll('.TrangThai');
+    TrangThai.forEach((i) => {
+      if (i.innerHTML == 0) {
+        i.innerHTML = "Chờ duyệt"
+        i.style.background = "#F9C9CD"
+      } else if (i.innerHTML == 1) {
+        i.innerHTML = "Hoạt động"
+        i.style.background = "#BFEFC4"
+      } else if (i.innerHTML == 2) {
+        i.innerHTML = "Từ chối"
+        i.style.background = "#e24a4a"
+      } else if (i.innerHTML == 3) {
+        i.innerHTML = "không hoạt động"
+        i.style.background = "#F9BABA"
+      }
+    })
+
+   
+    GiaThue.forEach((i) => {
+      if (!isFinite(i.innerHTML)) {
+        return i.innerHTML;
+      }
+      const formattedPrice = new Intl.NumberFormat('vi-VN').format(i.innerHTML, {
+        minimumFractionDigits: 2,
+        decimal: ',',
+        thousandsSeparator: '.',
+      });
+      i.innerHTML = formattedPrice + " đ"
+    })
+
+
+  }
+  setInterval(load_data, 1000);
+</script>
+
+</body>
+
+</html>
+</div>
+</main>
+
+
+
+
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<script src="/public/js/popper.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="/publicjs/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="/public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script>
+
+
+  boxChoice.addEventListener("click", function () {
+    input.click();
+  });
+
+  input.addEventListener("change", function () {
+    const files = input.files;
+
+    // Kiểm tra xem số lượng tệp được chọn có bằng 4 không.
+    if (files.length !== 4) {
+      alert("Bạn phải chọn 4 ảnh.");
+      return;
+    }
+
+    // Đọc các tệp đã chọn và hiển thị chúng.
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        const imageUrl = reader.result;
+
+        // Hiển thị ảnh đã chọn.
+        const img = document.createElement("img");
+        img.src = imageUrl;
+        boxChoice.appendChild(img);
+      }
+
+      reader.readAsDataURL(files[i]);
+    }
+  });
+
+
+
+</script>
+<style>
+  .Choicefile {
+    display: block;
+    background: #14142B;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px 0px;
+    border-radius: 5px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Choicefile:hover {
+    text-decoration: none;
+    color: white;
+  }
+
+  #uploadfile,
+  .removeimg {
+    display: none;
+  }
+
+  #thumbbox {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .removeimg {
+    height: 25px;
+    position: absolute;
+    background-repeat: no-repeat;
+    top: 5px;
+    left: 5px;
+    background-size: 25px;
+    width: 25px;
+    /* border: 3px solid red; */
+    border-radius: 50%;
+
+  }
+
+  .removeimg::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    content: '';
+    border: 1px solid red;
+    background: red;
+    text-align: center;
+    display: block;
+    margin-top: 11px;
+    transform: rotate(45deg);
+  }
+
+  .removeimg::after {
+    /* color: #FFF; */
+    /* background-color: #DC403B; */
+    content: '';
+    background: red;
+    border: 1px solid red;
+    text-align: center;
+    display: block;
+    transform: rotate(-45deg);
+    margin-top: -2px;
+  }
+</style>
+<script>
+
+  function readURL(input, thumbimage) {
+    if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#thumbimage").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+    else { // Sử dụng cho IE
+      $("#thumbimage").attr('src', input.value);
+
+    }
+    $("#thumbimage").show();
+    $('.filename').text($("#uploadfile").val());
+    $('.Choicefile').css('background', '#14142B');
+    $('.Choicefile').css('cursor', 'default');
+    $(".removeimg").show();
+    $(".Choicefile").unbind('click');
+
+  }
+  $(document).ready(function () {
+    $(".Choicefile").bind('click', function () {
+      $("#uploadfile").click();
+
+    });
+    $(".removeimg").click(function () {
+      $("#thumbimage").attr('src', '').hide();
+      $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+      $(".removeimg").hide();
+      $(".Choicefile").bind('click', function () {
+        $("#uploadfile").click();
+      });
+      $('.Choicefile').css('background', '#14142B');
+      $('.Choicefile').css('cursor', 'pointer');
+      $(".filename").text("");
+    });
+  })
+</script>
