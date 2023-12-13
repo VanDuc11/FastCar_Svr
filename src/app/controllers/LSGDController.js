@@ -284,9 +284,9 @@ class LSGDController {
 
 async function sendNotificationToUser(tokenFCM, title, body) {
     const message = {
-        notification: {
-            title: title,
-            body: body
+        data: {
+            title: String(title),
+            body: String(body)
         },
         token: tokenFCM,
     };

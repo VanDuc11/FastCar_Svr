@@ -379,9 +379,13 @@ class HoaDonController_ {
 
             let title = 'Yêu cầu thuê xe mới';
             let contentNotify = "Xe " + car.MauXe + " của bạn vừa có yêu cầu thuê xe. Vui lòng xác nhận hoặc huỷ!"
-            await hoadon.save().then(async (result) => {
+            await hoadon.save().then(async () => {
+                const hd = await HoaDon.findOne({ MaHD: req.body.MaHD }).populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'));
 
-                sendNotificationToUser(chuSH.TokenFCM, title, contentNotify);
+                sendNotificationToChuXe(chuSH.TokenFCM, title, contentNotify, hd);
                 const currentDateNgayNhan = new Date(req.body.NgayThue);
                 const day = currentDateNgayNhan.getDate().toString().padStart(2, '0');
                 const month = (currentDateNgayNhan.getMonth() + 1).toString().padStart(2, '0');
@@ -443,10 +447,13 @@ class HoaDonController_ {
             }
         }).then(async (result) => {
             if (trangthai == 2) {
-                const hd = await HoaDon.findOne({ MaHD: maHD});
+                const hd = await HoaDon.findOne({ MaHD: maHD }).populate({
+                    path: 'Xe',
+                    populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+                }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'));
                 let title = 'Thông báo mới';
                 let contentNotify = "Yêu cầu thuê xe " + car.MauXe + " của bạn đã được duyệt. Vui lòng đặt cọc để hoàn tất";
-                sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
+                sendNotificationToUser(khachhang.TokenFCM, title, contentNotify, hd);
                 const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n" +
                     "Yêu cầu thuê xe " + car.MauXe + " của quý khách đã được chủ xe chấp nhận.\n\n" +
                     "Quý khách vui lòng thanh toán tiền cọc cho chuyến xe trước 1 tiếng kể từ thời gian thông báo này được gửi.\n\n" +
@@ -477,7 +484,10 @@ class HoaDonController_ {
         const car = await Xe.findOne({ _id: req.body.Xe });
         const chuSH = await User.findOne({ _id: car.ChuSH });
         const khachhang = await User.findOne({ _id: req.body.User });
-        const hoadon = await HoaDon.findOne({ MaHD: maHD });
+        const hoadon = await HoaDon.findOne({ MaHD: maHD }).populate({
+            path: 'Xe',
+            populate: { path: 'ChuSH', select: '_id UserName Email UID SDT Avatar NgayThamGia', model: 'User' }
+        }).populate('User', ('_id UserName Email UID SDT Avatar NgayThamGia'));
         const trangThaiHD_old = hoadon.TrangThaiHD;
         let trangthai = req.body.TrangThaiHD;
 
@@ -511,7 +521,7 @@ class HoaDonController_ {
                     // send notifications
                     let title = 'Yêu cầu hoàn tiền cọc';
                     let contentNotify = "Yêu cầu hoàn tiền cọc";
-                    sendNotificationToUser(khachhang.TokenFCM, title, contentNotify);
+                    sendNotificationToUser(khachhang.TokenFCM, title, contentNotify, hoadon);
 
                     const noidungNotify = "🚗 Xin chào khách hàng " + khachhang.UserName + ",\n" +
                         "Yêu cầu thuê xe " + car.MauXe + "(" + hoadon.MaHD + ")" + " của quý khách đã đã bị huỷ bởi chủ xe.\n\n" +
@@ -638,12 +648,33 @@ class HoaDonController_ {
     }
 }
 
-async function sendNotificationToUser(tokenFCM, title, body) {
+async function sendNotificationToUser(tokenFCM, title, body, hoaDon) {
 
     const message = {
-        notification: {
-            title: title,
-            body: body
+        data: {
+            title: String(title),
+            body: String(body),
+            hoadonKH: JSON.stringify(hoaDon)
+        },
+        token: tokenFCM,
+    };
+
+    try {
+        // Gửi thông báo
+        await admin.messaging().send(message);
+        console.log('Thông báo đã được gửi đến token:', tokenFCM);
+    } catch (error) {
+        console.error('Gửi thông báo thất bại:', error);
+    }
+}
+
+async function sendNotificationToChuXe(tokenFCM, title, body, hoaDon) {
+
+    const message = {
+        data: {
+            title: String(title),
+            body: String(body),
+            hoadonCX: JSON.stringify(hoaDon)
         },
         token: tokenFCM,
     };

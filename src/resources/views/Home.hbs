@@ -1,0 +1,265 @@
+<main class="app-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><a href="#"><b>Trang chủ</b></a></li>
+        </ul>
+        <div id="clock"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!--Left-->
+    <div class="col-md-12 col-lg-6">
+      <div class="row">
+        <!-- col-6 -->
+        <div class="col-md-6">
+          <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+            <div class="info">
+              <h4>Tổng Chuyến</h4>
+              <p><b>686 chuyến</b></p>
+              <p class="info-tong">Tổng số chuyến được quản lý.</p>
+            </div>
+          </div>
+        </div>
+        <!-- col-6 -->
+        <div class="col-md-6">
+          <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
+            <div class="info">
+              <h4>Tổng chuyến thành công</h4>
+              <p><b>185 chuyến</b></p>
+              <p class="info-tong">Tổng số chuyến thành công .</p>
+            </div>
+          </div>
+        </div>
+        <!-- col-6 -->
+        <div class="col-md-6">
+          <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
+            <div class="info">
+              <h4> Chuyến đang hoạt động</h4>
+              <p><b>247 chuyến</b></p>
+              <p class="info-tong">Số Chuyến đang hoạt động .</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+            <div class="info">
+              <h4> Chuyến đã cọc</h4>
+              <p><b>686 chuyến</b></p>
+              <p class="info-tong">Tổng số chuyến đã cọc.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-receipt'></i>
+            <div class="info">
+              <h4>Chuyến chờ cọc</h4>
+              <p><b>65 chuyến</b></p>
+              <p class="info-tong">Chuyến chờ cọc trong ngày.</p>
+            </div>
+          </div>
+        </div>
+        <!-- col-6 -->
+        <div class="col-md-6">
+          <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
+            <div class="info">
+              <h4>CHUYẾN ĐÃ HỦY</h4>
+              <p><b>4 chuyến</b></p>
+              <p class="info-tong">Số đã hủy.</p>
+            </div>
+          </div>
+        </div>
+        <!-- col-12 -->
+        <div class="col-md-12">
+          <div class="tile">
+            <h3 class="tile-title">Tình trạng chuyến</h3>
+            <div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>AL3947</td>
+                    <td>Phạm Thị Ngọc</td>
+                    <td>
+                      770.000 đ
+                    </td>
+                    <td><span class="badge bg-info">Chờ cọc</span></td>
+                  </tr>
+                  <tr>
+                    <td>ER3835</td>
+                    <td>Nguyễn Thị Mỹ Yến</td>
+                    <td>
+                      770.000 đ
+                    </td>
+                    <td><span class="badge bg-warning">Đang hoạt động</span></td>
+                  </tr>
+                  <tr>
+                    <td>MD0837</td>
+                    <td>Triệu Thanh Phú</td>
+                    <td>
+                      400.000 đ
+                    </td>
+                    <td><span class="badge bg-success">Đã hoàn thành</span></td>
+                  </tr>
+                  <tr>
+                    <td>MT9835</td>
+                    <td>Đặng Hoàng Phúc </td>
+                    <td>
+                      650.000 đ
+                    </td>
+                    <td><span class="badge bg-danger">Đã hủy </span></td>
+                  </tr>
+                  <tr>
+                    <td>MT9835</td>
+                    <td>Đặng Hoàng Phúc </td>
+                    <td>
+                      650.000 đ
+                    </td>
+                    <td><span class="badge bg-success">Đã cọc </span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- / div trống-->
+          </div>
+        </div>
+        <!-- / col-12 -->
+        <!-- col-12 -->
+
+        <!-- / col-12 -->
+      </div>
+    </div>
+    <!--END left-->
+    <!--Right-->
+    <div class="col-md-12 col-lg-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="tile">
+              <h3 class="tile-title">📊 Biểu đồ doanh thu</h3>
+              <div class="embed-responsive embed-responsive-16by9">
+                <div class="embed-responsive-item">
+
+                  <canvas data-type="line" class="doanhthu" data-color-datalabels="#2e2a2a"></canvas>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="tile">
+              <h3 class="tile-title">📊 Biểu đồ hóa đơn</h3>
+              <div class="embed-responsive embed-responsive-16by9">
+                <div class="embed-responsive-item">
+                  <canvas data-type="line" class="hoadon" data-color-datalabels="#fffff"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <!--END right-->
+  </div>
+
+
+
+</main>
+<script src="/public/js/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/public/js/popper.min.js"></script>
+<script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+<!--===============================================================================================-->
+<script src="/public/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/public/js/main.js"></script>
+<!--===============================================================================================-->
+<script src="/public/js/plugins/pace.min.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" src="/public/js/plugins/chart.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript">
+  var data = {
+    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+    datasets: [{
+      label: "Dữ liệu đầu tiên",
+      fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
+      strokeColor: "rgb(255, 212, 59)",
+      pointColor: "rgb(255, 212, 59)",
+      pointStrokeColor: "rgb(255, 212, 59)",
+      pointHighlightFill: "rgb(255, 212, 59)",
+      pointHighlightStroke: "rgb(255, 212, 59)",
+      data: [20, 59, 90, 51, 56, 100]
+    },
+    {
+      label: "Dữ liệu kế tiếp",
+      fillColor: "rgba(9, 109, 239, 0.651)  ",
+      pointColor: "rgb(9, 109, 239)",
+      strokeColor: "rgb(9, 109, 239)",
+      pointStrokeColor: "rgb(9, 109, 239)",
+      pointHighlightFill: "rgb(9, 109, 239)",
+      pointHighlightStroke: "rgb(9, 109, 239)",
+      data: [48, 48, 49, 39, 86, 10]
+    }
+    ]
+  };
+  var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+  var lineChart = new Chart(ctxl).Line(data);
+
+  var ctxb = $("#barChartDemo").get(0).getContext("2d");
+  var barChart = new Chart(ctxb).Bar(data);
+</script>
+<script type="text/javascript">
+  //Thời Gian
+  function time() {
+    var today = new Date();
+    var weekday = new Array(7);
+    weekday[0] = "Chủ Nhật";
+    weekday[1] = "Thứ Hai";
+    weekday[2] = "Thứ Ba";
+    weekday[3] = "Thứ Tư";
+    weekday[4] = "Thứ Năm";
+    weekday[5] = "Thứ Sáu";
+    weekday[6] = "Thứ Bảy";
+    var day = weekday[today.getDay()];
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    nowTime = h + " giờ " + m + " phút " + s + " giây";
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+      '</span>';
+    document.getElementById("clock").innerHTML = tmp;
+    clocktime = setTimeout("time()", "1000", "Javascript");
+
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+  }
+</script>
+</body>
+
+</html>
