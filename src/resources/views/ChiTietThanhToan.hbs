@@ -1,24 +1,25 @@
 <style>
-.btn-cancel {
-  background-color: #FF6384;
-  border-radius: 5px;
- 
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-}
-.btn-cancel:hover {
-  background-color: #FF85A1;
-}
-#button-tuchoi {
-  width: 63px;
-  height: 13px;
-  border: none;
-  background-color: transparent;
-  color: inherit;
-  cursor: pointer;
-}
+  .btn-cancel {
+    background-color: #FF6384;
+    border-radius: 5px;
 
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .btn-cancel:hover {
+    background-color: #FF85A1;
+  }
+
+  #button-tuchoi {
+    width: 63px;
+    height: 13px;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
 </style>
 <main class="app-content">
   <div class="app-title">
@@ -133,17 +134,30 @@
           </div>
 
           <div class="form-group col-md-12">
-            <a style="margin-left: 40%;" class="btn bg-success" id="show-emp" data-toggle="modal"
-              data-target="#ModalUP3" >Thanh toán</a>
+            <a style="margin-left: 40%;" class="btn bg-success" id="btnthanhtoan" data-toggle="modal"
+              data-target="#ModalUP3">Thanh toán</a>
 
             <form class="btn btn-cancel" action="/api/lsgd/tuchoi/{{this._id}}/2" method="post">
               <button type="submit" id="button-tuchoi"> Từ chối</button>
             </form>
-              
+
           </div>
 
-          <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-            data-keyboard="false">
+          <form action="/api/lsgd/duyet/{{this._id}}/1" id="product-form" method="post" enctype="multipart/form-data" style="display: none;">
+            <div class="row">
+              <div class="form-group col-md-4" style=" margin-left: 350px;
+                    flex-direction: column;">
+                <label for="image" class="control-label">Ảnh </label>
+                <input type="file" id="image" name="HinhAnh" class="form-control" accept="image/*" required>
+              </div>
+            </div>
+            <BR>
+            <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save" type="submit">Lưu</button>
+            <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
+          </form>
+
+          {{!-- <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true"
+            data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
 
@@ -165,11 +179,12 @@
                       </div>
                     </div>
                     <BR>
-                    <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save" type="submit">Lưu</button>
-                     <a class="btn btn-cancel" data-dismiss="modal" href="#" >Đóng</a>
+                    <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save"
+                      type="submit">Lưu</button>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
                   </form>
 
-                 
+
 
                   <BR>
                 </div>
@@ -178,7 +193,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
 
           {{/each}}
 
@@ -186,7 +201,19 @@
 
 
 </main>
+<script>
+  // ẩn hiện form
+  const addNewBtn = document.getElementById("btnthanhtoan");
+  let showForm = false;
 
+  addNewBtn.addEventListener("click", () => {
+    showForm = !showForm; // Đảo ngược giá trị của biến showForm
+    const form = document.getElementById("product-form");
+    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
+  });
+
+
+</script>
 
 
 
@@ -293,7 +320,7 @@
   }
 </script>
 <script>
- 
+
 
   //Modal
   $("#show-emp").on("click", function () {
