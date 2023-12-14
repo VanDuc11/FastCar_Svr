@@ -134,36 +134,25 @@
           </div>
 
           <div class="form-group col-md-12">
-            <a style="margin-left: 40%;" class="btn bg-success" id="btnthanhtoan" data-toggle="modal"
-              data-target="#ModalUP3">Thanh toán</a>
+            <a style="margin-left: 35%;" class="btn bg-success" data-toggle="modal" data-target="#ModalUP3">Thanh
+              toán</a>
 
-            <form class="btn btn-cancel" action="/api/lsgd/tuchoi/{{this._id}}/2" method="post">
-              <button type="submit" id="button-tuchoi"> Từ chối</button>
-            </form>
+            <a class="btn btn-cancel" data-toggle="modal" data-target="#ModalUP4">Từ chối</a>
+
 
           </div>
 
-          <form action="/api/lsgd/duyet/{{this._id}}/1" id="product-form" method="post" enctype="multipart/form-data" style="display: none;">
-            <div class="row">
-              <div class="form-group col-md-4" style=" margin-left: 350px;
-                    flex-direction: column;">
-                <label for="image" class="control-label">Ảnh </label>
-                <input type="file" id="image" name="HinhAnh" class="form-control" accept="image/*" required>
-              </div>
-            </div>
-            <BR>
-            <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save" type="submit">Lưu</button>
-            <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
-          </form>
 
-          {{!-- <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true"
-            data-backdrop="static" data-keyboard="false">
+
+          {{!-- duyệt --}}
+          <div class="modal fade" id="ModalUP3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
 
                 <div class="modal-body">
                   <div class="row">
-                    <div class="form-group  col-md-12">
+                    <div class="form-group col-md-12">
                       <span class="thong-tin-thanh-toan">
                         <h5>Tải ảnh giao dịch</h5>
                       </span>
@@ -193,7 +182,47 @@
                 </div>
               </div>
             </div>
-          </div> --}}
+          </div>
+
+          {{!-- từ chối --}}
+          <div class="modal fade" id="ModalUP4" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group  col-md-12">
+                      <span class="thong-tin-thanh-toan">
+                        <h5>Lý do từ chối</h5>
+                      </span>
+                    </div>
+                  </div>
+                  <form action="/api/lsgd/tuchoi/{{this._id}}/2" id="product-form1" method="post">
+                    <div class="row">
+                      <div class="form-group col-md-12">
+                        <label class="control-label">Lý do từ chối</label>
+                        <textarea class="form-control" name="NoiDung" id="NoiDung" placeholder="Nhập lý do "
+                          required></textarea>
+
+                      </div>
+                    </div>
+                    <BR>
+                    <button style="width: 80px; height: 40px;margin-left: 35%;" class="btn btn-save"
+                      type="submit">submit</button>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Đóng</a>
+                  </form>
+
+
+
+                  <BR>
+                </div>
+
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+          </div>
 
           {{/each}}
 
@@ -201,19 +230,7 @@
 
 
 </main>
-<script>
-  // ẩn hiện form
-  const addNewBtn = document.getElementById("btnthanhtoan");
-  let showForm = false;
 
-  addNewBtn.addEventListener("click", () => {
-    showForm = !showForm; // Đảo ngược giá trị của biến showForm
-    const form = document.getElementById("product-form");
-    form.style.display = showForm ? "block" : "none"; // Hiện hoặc ẩn form tùy thuộc vào giá trị của biến showForm
-  });
-
-
-</script>
 
 
 
@@ -276,19 +293,19 @@
 <!-- Essential javascripts for application to work-->
 
 
-<script src="public/js/jquery-3.2.1.min.js"></script>
-<script src="public/js/popper.min.js"></script>
-<script src="/public/js/bootstrap.min.js"></script>
+<script src="../../public/js/jquery-3.2.1.min.js"></script>
+<script src="../../public/js/popper.min.js"></script>
+<script src="../../public/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="src/jquery.table2excel.js"></script>
-<script src="/publicjs/main.js"></script>
+<script src="../..//publicjs/main.js"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="/public/js/plugins/pace.min.js"></script>
+<script src="../../public/js/plugins/pace.min.js"></script>
 <!-- Page specific javascripts-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <!-- Data table plugin-->
-<script type="text/javascript" src="public/js/plugins/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="/public/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../public/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../public/js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
   // Hàm xử lý sự kiện nhấp vào nút duyệt
@@ -318,12 +335,4 @@
 
 
   }
-</script>
-<script>
-
-
-  //Modal
-  $("#show-emp").on("click", function () {
-    $("#ModalUP").modal({ backdrop: false, keyboard: false })
-  });
 </script>

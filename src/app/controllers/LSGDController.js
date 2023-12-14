@@ -170,12 +170,12 @@ class LSGDController {
 
                     const thongbao = new ThongBao({
                         TieuDe: "Duyệt yêu cầu thanh toán thất bại",
-                        NoiDung: content,
+                        NoiDung: content + "\n\n Lý do: "+ req.body.NoiDung,
                         User: result.User,
                         Type: 3
                     })
                     await thongbao.save();
-                    res.status(201).send(`<script>alert("từ chối thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);
+                    res.status(201).send(`<script>alert("Từ chối thành công"); window.location.href="/thanhtoan/ChiTietLichSu/${id}";</script>`);
                 })
             }).catch((err) => {
                 res.status(400).json({
