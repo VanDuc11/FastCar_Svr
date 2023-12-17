@@ -48,7 +48,7 @@
             <div class="col-md-3">
               <div class="col-md-12">
                 <label style="font-size:  15px;"><span style="font-weight: bold;">Mã hóa đơn: </span>
-                  {{this.MaLSGD}}</label>
+                 <span id="mahd">{{this.MaLSGD}}</span> </label>
 
               </div>
 
@@ -271,7 +271,7 @@
     var name = document.getElementById('name').innerHTML
     var stk = document.getElementById('stk').innerHTML
     var tien = document.getElementById('tien').innerHTML
-    var noidung = document.getElementById('noidung').innerHTML
+    var noidung = document.getElementById('noidung').innerHTML + " "+ document.getElementById('mahd').innerHTML
     const url = `https://img.vietqr.io/image/${namebank}-${stk}-compact2.jpg?amount=${tien}&addInfo=${noidung}&accountName=${name}`;
 
     const image = await fetch(url);
