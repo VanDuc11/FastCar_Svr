@@ -5,6 +5,9 @@ const ThongBao = require('../models/ThongBao');
 var path = require('path');
 const { log } = require('console');
 const admin = require('firebase-admin');
+const { el } = require('date-fns/locale');
+const io = require("socket.io-client");
+const socket = io("https://fast-car-fbfb5db0fb7f.herokuapp.com");
 
 class XeController {
     async index(req, res) {
@@ -138,7 +141,7 @@ class XeController {
             }
         ).populate({ path: 'ChuSH', model: 'User' })
             .then(async (result) => {
-                const xe = await Xe.findOne({ _id: id}).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia'));
+                const xe = await Xe.findOne({ _id: id }).populate('ChuSH', ('_id UserName Email UID SDT Avatar NgayThamGia'));
 
                 if (req.params.trangthai == 1) {
                     const title = "Thông báo duyệt xe thành công";
@@ -154,7 +157,7 @@ class XeController {
                     });
                     await thongbao.save();
                     res.status(201).send(`<script>alert("Duyệt thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
-
+                    socket.emit('updateCar', id);
                 } else if (req.params.trangthai == 2) {
                     const title = "Thông báo từ chối xe";
                     const content = "Xe " + result.MauXe + result.BKS + " đã bị từ chối";
@@ -162,7 +165,7 @@ class XeController {
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
-                        NoiDung: content + ", \n" + "Lý do: " + req.body.NoiDung,
+                        NoiDung: content + "\nLý do: " + req.body.NoiDung,
                         User: result.ChuSH,
                         Xe: result,
                         Type: 0
@@ -177,13 +180,14 @@ class XeController {
                     const thongbao = new ThongBao({
                         HinhAnh: result.HinhAnh[0],
                         TieuDe: title,
-                        NoiDung: content + ", \n\n" + "Lý do: " + req.body.NoiDung,
+                        NoiDung: content + "\nLý do: " + req.body.NoiDung,
                         User: result.ChuSH,
                         Xe: result,
                         Type: 0
                     });
                     await thongbao.save();
                     res.status(201).send(`<script>alert("Vô hiệu hóa thành công"); window.location.href="/quanlyxe/ChiTietXe?id=${id}";</script>`);
+                    socket.emit('updateCar', id);
                 }
 
 
@@ -516,8 +520,17 @@ class XeController {
         }
 
     }
-    async CreateXeForm(req, res) {
 
+    async CreateXeForm(req, res) {
+        const normalizedBKS = req.body.BKS.replace(/\s/g, '').replace('-', '').toUpperCase();
+        const part1 = normalizedBKS.slice(0, 3);
+        const part2 = normalizedBKS.slice(3);
+        const formattedBKS = `${part1}-${part2.slice(0, 6)}`;
+
+        const xeModel = await Xe.findOne({ BKS: formattedBKS });
+        if (xeModel) {
+            return res.status(303).send('<script>alert("Biển kiểm soát đã được sử dụng"); window.location.href="/quanlyxe";</script>');
+        }
         const xe = new Xe({
             BKS: req.body.BKS,
             HangXe: req.body.HangXe,
@@ -552,7 +565,6 @@ class XeController {
                 .then((result) => {
                     res.status(201)
                         .send('<script>alert("Thêm xe thành công"); window.location.href="/quanlyxe";</script>');
-                    console.log(result);
                 })
                 .catch((err) => {
                     res.status(400).json({
@@ -570,8 +582,18 @@ class XeController {
     }
 
     async CreateXe(req, res) {
+        const normalizedBKS = req.body.BKS.replace(/\s/g, '').replace('-', '').toUpperCase();
+        const part1 = normalizedBKS.slice(0, 3);
+        const part2 = normalizedBKS.slice(3);
+        const formattedBKS = `${part1}-${part2.slice(0, 6)}`;
+
+        const xeModel = await Xe.findOne({ BKS: formattedBKS });
+        if (xeModel) {
+            return res.status(300).json({ success: true, message: 'Biển kiểm soát đã được sử dụng' });
+        }
+
         const xe = new Xe({
-            BKS: req.body.BKS,
+            BKS: formattedBKS,
             HangXe: req.body.HangXe,
             MauXe: req.body.MauXe,
             NSX: req.body.NSX,
@@ -622,15 +644,30 @@ class XeController {
                 .catch((err) => {
                     res.status(400).json({
                         success: false,
-                        messages: err.messages
+                        messages: err
                     });
                 })
 
         } catch (error) {
             res.status(500).json({
                 success: false,
-                messages: error.messages
+                messages: error
             });
+        }
+    }
+
+    async checkBKS_Xe(req, res) {
+        const bks = req.body.BKS;
+        const normalizedBKS = bks.replace(/\s/g, '').replace('-', '').toUpperCase();
+        const part1 = normalizedBKS.slice(0, 3);
+        const part2 = normalizedBKS.slice(3);
+        const formattedBKS = `${part1}-${part2.slice(0, 6)}`;
+
+        const xeModel = await Xe.findOne({ BKS: formattedBKS });
+        if (xeModel) {
+            return res.status(300).json({ success: true, message: 'Biển kiểm soát đã được sử dụng' });
+        } else {
+            return res.status(200).json({ success: true });
         }
     }
 
@@ -719,6 +756,7 @@ class XeController {
     }
 
 }
+
 async function sendNotificationToUser(tokenFCM, title, body, xe) {
 
     const message = {

@@ -25,7 +25,13 @@ class FeedBackController {
     
     async createFeedBack(req, res, next) {
         try {
-            const model = new feedback(req.body);
+            const model = new feedback({
+                User: req.body.User,
+                Xe: req.body.Xe,
+                NoiDung: req.body.NoiDung,
+                SoSao: req.body.SoSao,
+                ThoiGian: new Date()
+            });
             await model.save();
             return res.status(201).send({ model, message: 'Yêu cầu tạo mới thành công' });
         } catch (error) {

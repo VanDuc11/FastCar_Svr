@@ -24,6 +24,6 @@ const HoaDon = new Schema({
     HinhAnhKhachHangTraXe: { type: Array },
     LyDo: { type: String },
     HaveFeedback: { type: Boolean }
-}, { timestamps: true });
+}, { timestamps: true }, { forceServerObjectId: true });
 
 module.exports = mongoose.model("HoaDon", HoaDon);

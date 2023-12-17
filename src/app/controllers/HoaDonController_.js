@@ -268,6 +268,11 @@ class HoaDonController_ {
 
         }
 
+        if(typeof (req.query.MaGiamGia) != 'undefined') {
+            const magiamGiaArray = req.query.MaGiamGia.split(',');
+            check.MaGiamGia = { $in: magiamGiaArray };
+        }
+
         if (typeof (req.query.User) != 'undefined') {
             check.User = req.query.User;
         }
@@ -352,8 +357,8 @@ class HoaDonController_ {
             MaHD: req.body.MaHD,
             User: req.body.User,
             Xe: req.body.Xe,
-            NgayThue: req.body.NgayThue,
-            NgayTra: req.body.NgayTra,
+            NgayThue: new Date(req.body.NgayThue),
+            NgayTra: new Date(req.body.NgayTra),
             TongSoNgayThue: req.body.TongSoNgayThue,
             PhiDV: req.body.PhiDV,
             MaGiamGia: req.body.MaGiamGia,
@@ -364,7 +369,7 @@ class HoaDonController_ {
             TienCocGoc: req.body.TienCocGoc,
             ThanhToan: req.body.ThanhToan,
             LoiNhan: req.body.LoiNhan,
-            GioTaoHD: req.body.GioTaoHD,
+            GioTaoHD: new Date(),
             TimeChuXeXN: req.body.TimeChuXeXN,
             HinhAnhChuXeGiaoXe: [],
             HinhAnhKhachHangTraXe: [],
@@ -441,7 +446,7 @@ class HoaDonController_ {
         await HoaDon.updateOne({ MaHD: maHD }, {
             $set: {
                 TrangThaiHD: trangthai,
-                TimeChuXeXN: req.body.TimeChuXeXN,
+                TimeChuXeXN: new Date(),
                 User: req.body.User,
                 Xe: req.body.Xe
             }
@@ -548,33 +553,34 @@ class HoaDonController_ {
             } else if (trangthai == 5) {
                 // gửi thông báo cho chủ xe
             } else if (trangthai == 6) {
-                const sochuyen = car.SoChuyen;
-                const soDu_old = chuSH.SoDu;
-                const sotien = Math.ceil(req.body.TienCocGoc * 0.67);
-                const noidungLSGD = "Thanh toán số tiền giao dịch từ chuyến đi " + req.body.MaHD;
+                if (hoadon.TrangThaiHD == 5) {
+                    const sochuyen = car.SoChuyen;
+                    const soDu_old = chuSH.SoDu;
+                    const sotien = Math.ceil(req.body.TienCocGoc * 0.67);
+                    const noidungLSGD = "Thanh toán số tiền giao dịch từ chuyến đi " + req.body.MaHD;
 
-                await Xe.updateOne({ _id: car._id }, {
-                    $set: {
-                        SoChuyen: sochuyen + 1
-                    }
-                });
+                    await Xe.updateOne({ _id: car._id }, {
+                        $set: {
+                            SoChuyen: sochuyen + 1
+                        }
+                    });
 
-                const lsgd = new LSGD({
-                    MaLSGD: randomString(8),
-                    User: chuSH,
-                    SoTienGD: sotien,
-                    ThoiGian: new Date(),
-                    NoiDung: noidungLSGD,
-                    TrangThai: 1,
-                    HoaDon: hoadon,
-                    title: 1,
-                    HinhAnh: ""
-                });
-                await lsgd.save();
-                await User.updateOne({ _id: chuSH }, {
-                    SoDu: soDu_old + sotien
-                })
-
+                    const lsgd = new LSGD({
+                        MaLSGD: randomString(8),
+                        User: chuSH,
+                        SoTienGD: sotien,
+                        ThoiGian: new Date(),
+                        NoiDung: noidungLSGD,
+                        TrangThai: 1,
+                        HoaDon: hoadon,
+                        title: 1,
+                        HinhAnh: ""
+                    });
+                    await lsgd.save();
+                    await User.updateOne({ _id: chuSH }, {
+                        SoDu: soDu_old + sotien
+                    })
+                }
             }
 
             return res.status(200).json("Sửa trạng thái HD thành công");

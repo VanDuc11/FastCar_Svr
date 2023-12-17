@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: "https://fast-car-fbfb5db0fb7f.herokuapp.com",
+        origin: "*",
         methods: ["GET", "POST"],
         transports: ['websocket', 'polling'],
         credentials: true
@@ -45,6 +45,10 @@ io.on('connect', (socket) => {
 
     socket.on('disconnect', function () {
         console.log("Disconnected");
+    });
+
+    socket.on('error', (error) => {
+        console.error("Socket error:", error);
     });
 });
 

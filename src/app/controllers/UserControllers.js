@@ -10,6 +10,7 @@ const ThongBao = require('../models/ThongBao');
 
 const path = require('path');
 const moment = require('moment');
+const { el } = require('date-fns/locale');
 
 class UserControlles {
     async index(req, res) {
@@ -174,7 +175,6 @@ class UserControlles {
                 message: "Email đã được sử dụng",
             });
         } else {
-            const token = jwt.sign({ UID: user.UID, Email: user.Email }, RANDOM_KEY, { algorithm: 'HS256' })
             const userModel = new User({
                 UserName: user.UserName,
                 Email: user.Email,
@@ -196,7 +196,6 @@ class UserControlles {
                 NoiCap_CCCD: '',
                 SoDu: 0,
                 ReadNotify: 0,
-                Token: token,
                 TokenFCM: user.tokenFCM,
                 DangXe: false
             });
@@ -438,52 +437,58 @@ class UserControlles {
         const user = req.body;
 
         try {
-            if (img.length == 0) {
-                await User.updateOne({ Email: email }, {
-                    $set: {
-                        HoTen_GPLX: user.HoTen_GPLX,
-                        So_GPLX: user.So_GPLX,
-                        NgayCap_GPLX: user.NgayCap_GPLX,
-                        DiaChi_GPLX: user.DiaChi_GPLX,
-                        TrangThai_GPLX: 1
-                    }
-
-                }, { new: true }).then((result) => {
-                    res.status(201).json({
-                        success: true,
-                        messages: "Update thành công"
-                    });
-                })
-                    .catch((err) => {
-                        res.status(400).json({
-                            success: false,
-                            messages: 'Không thành công'
-                        });
-                    })
+            const userModel = await User.findOne({ So_GPLX: user.So_GPLX, Email: { $ne: email } });
+            if (userModel) {
+                return res.status(303).json({ success: true, message: 'Thông tin GPLX đã được sử dụng' });
             } else {
-                await User.updateOne({ Email: email }, {
-                    $set: {
-                        HoTen_GPLX: user.HoTen_GPLX,
-                        So_GPLX: user.So_GPLX,
-                        NgayCap_GPLX: user.NgayCap_GPLX,
-                        DiaChi_GPLX: user.DiaChi_GPLX,
-                        HinhAnh_GPLX: img,
-                        TrangThai_GPLX: 1
-                    }
+                if (img.length == 0) {
+                    await User.updateOne({ Email: email }, {
+                        $set: {
+                            HoTen_GPLX: user.HoTen_GPLX,
+                            So_GPLX: user.So_GPLX,
+                            NgayCap_GPLX: user.NgayCap_GPLX,
+                            DiaChi_GPLX: user.DiaChi_GPLX,
+                            TrangThai_GPLX: 1
+                        }
 
-                }, { new: true }).then((result) => {
-                    res.status(201).json({
-                        success: true,
-                        messages: "Update thành công"
-                    });
-                })
-                    .catch((err) => {
-                        res.status(400).json({
-                            success: false,
-                            messages: 'Không thành công'
+                    }, { new: true }).then((result) => {
+                        res.status(201).json({
+                            success: true,
+                            messages: "Update thành công"
                         });
                     })
+                        .catch((err) => {
+                            res.status(400).json({
+                                success: false,
+                                messages: 'Không thành công'
+                            });
+                        })
+                } else {
+                    await User.updateOne({ Email: email }, {
+                        $set: {
+                            HoTen_GPLX: user.HoTen_GPLX,
+                            So_GPLX: user.So_GPLX,
+                            NgayCap_GPLX: user.NgayCap_GPLX,
+                            DiaChi_GPLX: user.DiaChi_GPLX,
+                            HinhAnh_GPLX: img,
+                            TrangThai_GPLX: 1
+                        }
+
+                    }, { new: true }).then((result) => {
+                        res.status(201).json({
+                            success: true,
+                            messages: "Update thành công"
+                        });
+                    })
+                        .catch((err) => {
+                            res.status(400).json({
+                                success: false,
+                                messages: 'Không thành công'
+                            });
+                        })
+                }
             }
+
 
 
         } catch (error) {

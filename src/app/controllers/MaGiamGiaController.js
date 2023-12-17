@@ -85,37 +85,35 @@ class MaGiamGiaController {
             })
         }
     }
-    async findMaGiaGia(req, res) {
-        try {
-            await MaGiamGia.find({TrangThai: true }).sort({ _id: -1 })
-                .then((result) => {
-                    res.status(200).json(result);
 
-                }).catch((error) => {
-                    res.status(400).json({
-                        success: false,
-                        message: 'Không thành công',
-                    })
-                })
+    async findMaGiaGia(req, res) {
+        const check = { TrangThai: true };
+        if (typeof (req.query.MaGiamGia) != 'undefined') {
+            const magiamGiaArray = req.query.MaGiamGia.split(',');
+            check.MaGiamGia = { $nin: magiamGiaArray };
+        }
+        try {
+            const result = await MaGiamGia.find(check).sort({ _id: -1 });
+            res.status(200).json(result);
         } catch (error) {
             res.status(500).json({
                 success: false,
                 message: error.message,
-            })
+            });
         }
-
     }
-    async find_id(req,res){
+
+    async find_id(req, res) {
         await MaGiamGia.findById(req.params.id)
-        .then((result)=>{
-            console.log(result);
-            res.status(200).json(result)
-        }).catch((error) => {
-            res.status(400).json({
-                success: false,
-                message: 'Không thành công',
+            .then((result) => {
+                console.log(result);
+                res.status(200).json(result)
+            }).catch((error) => {
+                res.status(400).json({
+                    success: false,
+                    message: 'Không thành công',
+                })
             })
-        })
     }
 
     async CreateMaGiamGia(req, res) {

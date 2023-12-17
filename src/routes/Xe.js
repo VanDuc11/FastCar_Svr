@@ -48,6 +48,7 @@ router.get('/listXe_User/:email', XeController.find_Xe_User);
 // duyệt xe
 router.post('/duyet/:id/:trangthai', XeController.duyetxe);
 
+router.post('/checkBKS', XeController.checkBKS_Xe);
 router.post('/createform', upload.fields([{ name: 'HinhAnh', maxCount: 4 }, { name: 'DangKyXe', maxCount: 1 }, { name: 'DangKiem', maxCount: 1 }, { name: 'BaoHiem', maxCount: 1 }]), XeController.CreateXeForm);
 router.post('/create', upload.fields([{ name: 'HinhAnh', maxCount: 4 }, { name: 'DangKyXe', maxCount: 1 }, { name: 'DangKiem', maxCount: 1 }, { name: 'BaoHiem', maxCount: 1 }]), XeController.CreateXe);
 

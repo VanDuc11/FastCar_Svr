@@ -107,7 +107,7 @@ class LSGDController {
         const img = path.basename(req.file.path);
         await lsgd.findById(id)
             .then(async (result) => {
-                const user = await User.findOne({ _id: result.User});
+                const user = await User.findOne({ _id: result.User });
                 lsgd.updateOne({ _id: id },
                     {
                         $set: {
@@ -142,7 +142,7 @@ class LSGDController {
         const id = req.params.id;
         await lsgd.findById(id)
             .then(async (result) => {
-                const user = await User.findOne({ _id: result.User});
+                const user = await User.findOne({ _id: result.User });
                 if (req.params.trangthai == 2 && result.title == 0) {
                     User.findOne({ _id: result.User._id }).then((result0) => {
                         User.updateOne({ _id: result.User._id },
@@ -170,7 +170,7 @@ class LSGDController {
 
                     const thongbao = new ThongBao({
                         TieuDe: "Duyệt yêu cầu thanh toán thất bại",
-                        NoiDung: content + "\n\n Lý do: "+ req.body.NoiDung,
+                        NoiDung: content + "\n\n Lý do: " + req.body.NoiDung,
                         User: result.User,
                         Type: 3
                     })
@@ -264,8 +264,19 @@ class LSGDController {
 
     async createLSGD(req, res, next) {
         try {
-            const model = new lsgd(req.body);
-            await model.save().then((result) => {
+            const model = new lsgd({
+                MaLSGD: req.body.MaLSGD,
+                User: req.body.User,
+                title: req.body.title,
+                SoTienGD: req.body.SoTienGD,
+                ThoiGian: new Date(),
+                NoiDung: req.body.NoiDung,
+                TrangThai: req.body.TrangThai,
+                HoaDon: req.body.HoaDon,
+                NganHang: req.body.NganHang,
+                HinhAnh: ''
+            });
+            await model.save().then(() => {
                 return res.status(201).send({ success: true, message: 'Yêu cầu tạo mới thành công' });
             }).catch((err) => {
                 res.status(400).json({
