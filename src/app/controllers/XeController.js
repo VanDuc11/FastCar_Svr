@@ -532,7 +532,7 @@ class XeController {
             return res.status(303).send('<script>alert("Biển kiểm soát đã được sử dụng"); window.location.href="/quanlyxe";</script>');
         }
         const xe = new Xe({
-            BKS: req.body.BKS,
+            BKS: formattedBKS,
             HangXe: req.body.HangXe,
             MauXe: req.body.MauXe,
             NSX: req.body.NSX,
